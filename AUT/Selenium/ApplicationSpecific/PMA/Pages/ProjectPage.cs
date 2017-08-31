@@ -41,7 +41,7 @@ namespace AUT.Selenium.ApplicationSpecific.EdgeNet.Pages
         private By bySave = By.XPath("//div[contains(text(),'Configuration Details')]/following::a[@class='tiny button' and text()='Save']");
         private By bySaveAndCopy = By.XPath("//div[contains(text(),'Configuration Details')]/following::a[@class='tiny button' and text()='Save&Copy']");
         #endregion
-
+        //
         private By GetByForProjectItemImages(string text)
         {
             return By.XPath(String.Format("//div[contains(text(),'{0}')]/preceding-sibling::div//img", text));
