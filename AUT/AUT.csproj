@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\TempPage.cs" />
     <Compile Include="Selenium\CommonReUsablePages\AbstractTemplatePage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\ProjectPage.cs" />
   </ItemGroup>
