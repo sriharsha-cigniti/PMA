@@ -42,7 +42,8 @@ namespace AUT.Selenium.ApplicationSpecific.EdgeNet.Pages
         private By bySaveAndCopy = By.XPath("//div[contains(text(),'Configuration Details')]/following::a[@class='tiny button' and text()='Save&Copy']");
         #endregion
         /// <summary>
-        //pyar se push karo
+        //pyar se pu
+        //phir se 
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
