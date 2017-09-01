@@ -16,16 +16,30 @@ namespace AutomatedTest.FunctionalTests.PMA
         {
             this.TESTREPORT.InitTestCase("HM_1", "Verify Drop down value");
             string strMyAccount = homePage.GetMyAccount();
-            strMyAccount = null;
-            if(!String.IsNullOrEmpty(strMyAccount))
+            string strAccount = homePage.MyAccountHeader();
+
+            if (strMyAccount.Equals(strAccount, StringComparison.OrdinalIgnoreCase))
             {
-                this.TESTREPORT.LogSuccess("VALidate MY ACCount", "SUccessfully found MY ACCount");
+                this.TESTREPORT.LogSuccess("Validate My default Account", "Successfully found My Account on the page header");
             }
             else
             {
-                this.TESTREPORT.LogFailure("VALidate MY ACCount", "SUccessfully NOT found MY ACCount", this.SCREENSHOTFILE);
+                this.TESTREPORT.LogFailure("Validate My default Account", "NOT found My Account on the page header", this.SCREENSHOTFILE);
             }
             this.TESTREPORT.UpdateTestCaseStatus();
+
+
+
+
+            /*if (!String.IsNullOrEmpty(strMyAccount))
+            {
+                this.TESTREPORT.LogSuccess("VALidate MY ACCount", "Successfully found MY ACCount");
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("VALidate MY ACCount", "Successfully NOT found MY ACCount", this.SCREENSHOTFILE);
+            }
+            this.TESTREPORT.UpdateTestCaseStatus();*/
         }
     }
 }

@@ -17,6 +17,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         #region UI Objects
 
         private By byMyAccount = By.XPath("//input[@id='MainContent_sppage_gridaccount_I']");
+        private By byAccount = By.XPath("//span[@id='lblAccount1']");
 
 
         #endregion
@@ -30,8 +31,14 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             return accountName;
         }
 
-        #endregion
+       
 
+        public string MyAccountHeader()
+        {
+            string account = this.driver.GetElementText(this.byAccount);
+            return account;
+        }
+        #endregion
 
     }
 }
