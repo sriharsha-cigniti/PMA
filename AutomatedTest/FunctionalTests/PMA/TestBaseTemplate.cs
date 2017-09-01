@@ -14,7 +14,7 @@ using OpenQA.Selenium;
 using StandardUtilities;
 using Engine.Factories;
 
-namespace AutomatedTest.FunctionalTests.EdgeNet
+namespace AutomatedTest.FunctionalTests.PMA
 {
     [TestClass]
     public class TestBaseTemplate
