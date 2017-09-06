@@ -14,6 +14,7 @@ using OpenQA.Selenium.Interactions;
 using Keys = OpenQA.Selenium.Keys;
 using TestReporter;
 using Engine.Setup;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Engine.UIHandlers.Selenium
 {
@@ -1188,7 +1189,78 @@ namespace Engine.UIHandlers.Selenium
             testReport.LogSuccess("RefreshPage", String.Format("Page Was Refreshed - PreRefresh Url - <mark>{0}</mark>, PostRefresh Url - <mark>{1}</mark>", preRefreshUrl, postRefreshUrl));
             return driver;
         }
+
+        /// <summary>
+        /// Assert Tex tEqual
+        /// </summary>
+        /// <param>Locators,text</param>
+        /// <returns></returns>
+        public static void AssertTextMatching(this IWebDriver driver, string actual, string expected)
+        {
+            try
+            {
+                Assert.AreEqual(actual.Trim(), expected.Trim());
+                testReport.LogSuccess("Text Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", actual, expected));
+            }
+            catch (Exception e)
+            {
+                testReport.LogFailure("Text Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> not matching", actual, expected), EngineSetup.GetScreenShotPath());
+            }
+
+        }
+
+        /// <summary>
+        /// Assert Tex tEqual
+        /// </summary>
+        /// <param name="driver">Locators,text</param>
+        /// <returns></returns>
+        public static void AssertTextNotEqual(this IWebDriver driver, By locator, string text)
+        {
+            String actual = "";
+            try
+            {
+                if (driver.IsElementPresent(locator))
+                {
+                    actual = driver.FindElement(locator).Text.Trim();
+                    Assert.AreNotEqual(actual, text.Trim());
+                    testReport.LogSuccess("Verify Not Equal", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are not matching", actual, text));
+                }
+                else
+                {
+                    testReport.LogFailure("Verify Not Equal", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", actual, text), EngineSetup.GetScreenShotPath());
+                }
+            }
+            catch (Exception e)
+            {
+                testReport.LogFailure("Verify Not Equal", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", actual, text), EngineSetup.GetScreenShotPath());
+            }
+
+        }
+
+        public static void AssertTextEqual(this IWebDriver driver, By locator, string text)
+        {
+            String actual = "";
+            try
+            {
+                if (driver.IsElementPresent(locator))
+                {
+                    actual = driver.FindElement(locator).Text.Trim();
+                    Assert.AreEqual(actual, text.Trim());
+                    testReport.LogSuccess("Verify Equal", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", actual, text));
+                }
+                else
+                {
+                    testReport.LogFailure("Verify Equal", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are not matching", actual, text), EngineSetup.GetScreenShotPath());
+                }
+            }
+            catch (Exception e)
+            {
+                testReport.LogFailure("Verify Equal", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are not matching", actual, text), EngineSetup.GetScreenShotPath());
+            }
+
+        }
+
         #endregion
     }
-      
+
 }

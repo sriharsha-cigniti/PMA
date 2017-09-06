@@ -1,7 +1,9 @@
 ﻿//using System;
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 //using AUT.Selenium.ApplicationSpecific.PMA.Pages;
-//namespace AutomatedTest.FunctionalTests.PMA
+//using AutomatedTest.FunctionalTests.PMA;
+
+//namespace AutomatedTest.FunctionalTests.HomeModule
 //{
 //    [TestClass]
 //    public class SmokeTest : TestBaseTemplate
@@ -17,7 +19,7 @@
 //            this.TESTREPORT.InitTestCase("HM_1", "Verify Drop down value");
 //            string strMyAccount = homePage.GetMyAccount();
 //            //string strAccount = homePage.MyAccountHeader();
-//            homePage.GetMyAccount();
+
 
 
 //            /* Default account verification*/
@@ -54,39 +56,37 @@
 //            this.TESTREPORT.UpdateTestCaseStatus();
 //        }
 
-        //[TestMethod]
-        //public void TestHM_2()
-        //{
-        //    this.TESTREPORT.InitTestCase("HM_2", "Verify My Diary and Quick claim search sections");
-        //    homePage.VerifyLoggedUser("ESKODS");
-        //    //string strUserCredntial = homePage.UserName();
-        //    //string strDate = homePage.Date();
-        //    string strMydiary = homePage.MyDiary();
-        //    string strQuickClaimSearch = homePage.QuickClaimSearch();
+//        //[TestMethod]
+//        //public void TestHM_2()
+//        //{
+//        //    this.TESTREPORT.InitTestCase("HM_2", "Verify My Diary and Quick claim search sections");
+//        // homePage.VerifyLoggedUser("ESKODS");
+//        //    //string strUserCredntial = homePage.UserName();
+//        //    //string strDate = homePage.Date();
+//        //    string strMydiary = homePage.MyDiary();
+//        //    string strQuickClaimSearch = homePage.QuickClaimSearch();
+//        //    if (homePage.contains)
+//        //    {
+//        //        this.TESTREPORT.LogSuccess("Verify My Diary on the home page", string.Format("My Diary text is present on the home page "));
+//        //    }
+//        //    else
+//        //    {
+//        //        this.TESTREPORT.LogFailure("Verify My Diary on the home page", string.Format("My Diary text is not present on the home page "));
+//        //    }
 
-        //    this.driver.
-        //    if (strMydiary.Contains(""))
-        //    {
-        //        this.TESTREPORT.LogSuccess("Verify My Diary on the home page", string.Format("My Diary text is present on the home page "));
-        //    }
-        //    else
-        //    {
-        //        this.TESTREPORT.LogFailure("Verify My Diary on the home page", string.Format("My Diary text is not present on the home page "));
-        //    }
+//        //    //if (homePage..contains(strUserCredntial))
+//        //    //{
 
-        //if (homePage..contains(strUserCredntial))
-        //{
-
-        //    this.TESTREPORT.LogSuccess("UserName with date should be displayed", String.Format("UserName with date is displayed on Page Header"));
-        //}
-        //else
-        //{
-        //    this.TESTREPORT.LogFailure("UserName with date should be displayed", String.Format("UserName with date is displayed on Page Header"),this.SCREENSHOTFILEs);
-        //}
-    
-
-
+//        //    //    this.TESTREPORT.LogSuccess("UserName with date should be displayed", String.Format("UserName with date is displayed on Page Header"));
+//        //    //}
+//        //    //else
+//        //    //{
+//        //    //    this.TESTREPORT.LogFailure("UserName with date should be displayed", String.Format("UserName with date is displayed on Page Header"),this.SCREENSHOTFILEs);
+//        //    //}
+//        //}
+        
+        
 
 
-    
-
+//    }
+//}

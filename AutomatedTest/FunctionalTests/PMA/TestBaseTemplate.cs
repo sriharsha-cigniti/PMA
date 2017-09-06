@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
@@ -39,12 +40,12 @@ namespace AutomatedTest.FunctionalTests.PMA
         public static void BeforeAllTestsExecution(TestContext testContext)
         {
            
-            #region WebApplication - EdgeNet
-            EngineSetup.TestReport.InitTestCase("Launch Application", "Verify Application Is Launched Successfully");
+            #region WebApplication - PMA_Cinch
+            //EngineSetup.TestReport.InitTestCase("Launch Application", "Verify Application Is Launched Successfully");
             driver = WebDriverFactory.getWebDriver(EngineSetup.BROWSER);
             driver.Navigate().GoToUrl(EngineSetup.WEBURL);
-            EngineSetup.TestReport.LogSuccess(String.Format("Launch Application On Browser - {0}",EngineSetup.BROWSER), String.Format("Application - {0} Launch Successful", EngineSetup.WEBURL));
-            EngineSetup.TestReport.UpdateTestCaseStatus();
+            //EngineSetup.TestReport.LogSuccess(String.Format("Launch Application On Browser - {0}",EngineSetup.BROWSER), String.Format("Application - {0} Launch Successful", EngineSetup.WEBURL));
+            //EngineSetup.TestReport.UpdateTestCaseStatus();
 
             #endregion
         }

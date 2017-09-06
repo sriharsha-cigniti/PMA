@@ -440,7 +440,7 @@ namespace Engine.UIHandlers.Selenium
                 SeleniumFrameworkExtensions.CompleteAction(
                     () => { WatchSpinner(driver); return driver.FindElement(locator).GetAttribute(attributeName); }, defaultTimeout, driver);
         }
-
+        
         /// <summary>
         /// returns the specified CSS value of the given attribute
         /// </summary>
@@ -725,6 +725,10 @@ namespace Engine.UIHandlers.Selenium
                 , defaultTimeout, driver, String.Format("Element found (locator -> <mark>{0}</mark>)", locator));
         }
 
+        public static string GetPageTitle(this IWebDriver driver)
+            {
+            return driver.Title;
+        }
 
         #endregion
     }

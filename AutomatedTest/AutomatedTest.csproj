@@ -65,6 +65,8 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FunctionalTests\PMA\HomeModule\TC1_HomePage.cs" />
+    <Compile Include="FunctionalTests\PMA\HomeModule\SmokeTest.cs" />
     <Compile Include="FunctionalTests\PMA\TestBaseTemplate.cs" />
     <Compile Include="FunctionalTests\PMA\SmokeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
