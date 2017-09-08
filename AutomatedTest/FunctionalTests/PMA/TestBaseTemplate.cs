@@ -104,7 +104,14 @@ namespace AutomatedTest.FunctionalTests.PMA
 
         protected string DATAFILENAME
         {
-            get { this.dataFileName = String.Format("{0}{1}", this.GetType().Name, ".csv"); return this.dataFileName; }
+            
+                get {
+                    String modulename = this.GetType().Namespace.Substring(this.GetType().Namespace.LastIndexOf('.') + 1);
+                    this.dataFileName = modulename + "\\" + this.GetType().Name + ".csv";
+                    Console.WriteLine("dataFileName " + dataFileName);
+                    return this.dataFileName;
+                
+            }
 
         }
 

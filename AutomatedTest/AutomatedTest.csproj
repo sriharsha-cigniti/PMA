@@ -65,8 +65,8 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FunctionalTests\PMA\HomeModule\TC1_HomePage.cs" />
-    <Compile Include="FunctionalTests\PMA\HomeModule\SmokeTest.cs" />
+    <Compile Include="FunctionalTests\PMA\HomeModule\ClaimInquiryPageTest.cs" />
+    <Compile Include="FunctionalTests\PMA\HomeModule\HomePageTest.cs" />
     <Compile Include="FunctionalTests\PMA\TestBaseTemplate.cs" />
     <Compile Include="FunctionalTests\PMA\SmokeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,16 +95,11 @@
     <None Include="TestConfiguration\TestConfiguration.properties">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\EdgeNet\DebugSmokeTest.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="TestData\EdgeNet\SmokeTest.csv">
+    <None Include="TestData\PMA\HomeModule\HomePageTests.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TestData\PMA\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

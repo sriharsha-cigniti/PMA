@@ -1260,6 +1260,33 @@ namespace Engine.UIHandlers.Selenium
 
         }
 
+        public static void SwitchToChildWindow(this IWebDriver driver)
+        {
+            IReadOnlyCollection<string> handles = driver.WindowHandles;
+            foreach (string handle in handles)
+            {
+                driver.SwitchTo().Window(handle);
+            }
+        }
+
+        public static void SwitchToParentWindow(this IWebDriver driver, string windowName)
+        {
+            driver.SwitchTo().Window(windowName);
+        }
+
+        public static void CloseChildWindow(this IWebDriver driver)
+        {
+            driver.Close();
+        }
+
+        public static String GetCurrentWindowHandles(this IWebDriver driver)
+        {
+            return driver.CurrentWindowHandle;
+        }
+
+
+
+
         #endregion
     }
 
