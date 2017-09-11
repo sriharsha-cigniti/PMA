@@ -37,10 +37,21 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byExportToSpredsheetLink = By.Id("MainContent_ASPxPageControl1_btncsv_CD");
         private By byIncurredfrom = By.XPath("//input[@id='MainContent_ASPxRoundPanel1_pnlContent_txtincurretamount_I']");
         private By byIncurredto = By.XPath("//input[@id='MainContent_ASPxRoundPanel1_pnlContent_txtincurretamountto_I']");
-
+        private By byAccidentDateRangeBeginField = By.XPath("//input[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_I']");
+        private By byAccidentDateRangeBeginArrow = By.XPath("//input[@id='sMainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_B - 1Img']");
+        private By byAccidentDateRangeEndField = By.XPath("//input[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentend_I']");
+        private By byAccidentDateRangeEndArrow = By.XPath("//input[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentend_B-1']");
+        private By byLossLineDescriptionLink = By.LinkText("Loss Line Description");
+        private By byReportDateRangeBeginField = By.XPath("//input[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportbegin_I']");
+        private By byReportDateRangeEndField = By.XPath("//input[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportend_I']");
+        private By byActivityDateRangeBeginField = By.XPath("//input[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivitybegin_I']");
+        private By byActivityDateRangeEndField = By.XPath("//input[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivityend_I']");
+        private By byEmailAdjusterBtn = By.XPath("//div[@id='MainContent_dvclaims_IT0_usrdetail1_0_btnEmailAdjuster_0_CD']");
+        private By byEmailAdjuster = By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_pcemail_0_PWH-1T']");
+        private By byLocationCodeField = By.XPath("//input[@id='gridlocation_DXFREditorcol0_I']");
         #endregion
-       
- 
+
+
 
         #region Public Methods
 
@@ -48,6 +59,24 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         {
             this.driver.ClickElement(byLossLineSummary,"LosslineSummary");
+        }
+        public void ClickEmailAdjuster()
+
+        {
+            this.driver.ClickElement(byEmailAdjusterBtn, "EmailAdjuster");
+        }
+
+        public void VerifyEmailAdjuster()
+        {
+            bool flag = this.driver.IsElementPresent(byEmailAdjuster);
+            if (flag)
+            {
+                this.TESTREPORT.LogSuccess("Verify EmailAdjuster", String.Format(" Successfully verified - <Mark>{0}</Mark> ", "Email Adjuster"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify EmailAdjuster", String.Format("Failed to Verify text"), this.SCREENSHOTFILE);
+            }
         }
 
         public void VerifyLossLineSummary()
@@ -150,6 +179,45 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        public void VerifyExporttoSpreadsheetlink()
+        {
+            bool flag = this.driver.IsElementPresent(byExportToSpredsheetLink);
+            if (flag)
+            {
+                this.TESTREPORT.LogSuccess("Verify ExportToSpredsheet", String.Format(" Successfully verified - <Mark>{0}</Mark> ", "ExportToSpredsheet Link"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify ExportToSpredsheet", String.Format("Failed to Verify Link"), this.SCREENSHOTFILE);
+            }
+        }
+
+        public void VerifyLossLineDescriptionlink()
+        {
+            bool flag = this.driver.IsElementPresent(byLossLineDescriptionLink);
+            if (flag)
+            {
+                this.TESTREPORT.LogSuccess("Verify LossLineDescription", String.Format(" Successfully verified - <Mark>{0}</Mark> ", "LossLineDescription Link"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify LossLineDescription", String.Format("Failed to Verify Link"), this.SCREENSHOTFILE);
+            }
+        }
+
+        public void VerifyLocationIcon()
+        {
+            bool flag = this.driver.IsElementPresent(byLocationIcon);
+            if (flag)
+            {
+                this.TESTREPORT.LogSuccess("Verify Location Icon", String.Format(" Successfully verified - <Mark>{0}</Mark> ", "Location Icon"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify Location Icon", String.Format("Failed to Verify Icon"), this.SCREENSHOTFILE);
+            }
+        }
+
 
         public void ClickReset()
         {
@@ -195,6 +263,42 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         {
             this.driver.SendKeysToElement(byIncurredfrom, IncurredTovalue, "Incurred to");
+        }
+
+        public void EnterAccidentDateRangeBegin(String AccidentDateRangeBeginFieldvalue)
+
+        {
+            this.driver.SendKeysToElement(byAccidentDateRangeBeginField, AccidentDateRangeBeginFieldvalue, "AccidentDateRangeBeginField");
+        }
+
+        public void EnterAccidentDateRangeEnd(String AccidentDateRangeEndFieldvalue)
+
+        {
+            this.driver.SendKeysToElement(byAccidentDateRangeEndField, AccidentDateRangeEndFieldvalue, "AccidentDateRangeEndField");
+        }
+
+        public void EnterReportDateRangeBegin(String ReportDateRangeBeginFieldvalue)
+
+        {
+            this.driver.SendKeysToElement(byReportDateRangeBeginField, ReportDateRangeBeginFieldvalue, "ReportDateRangeBeginField");
+        }
+
+        public void EnterReportDateRangeEnd(String ReportDateRangeEndFieldvalue)
+
+        {
+            this.driver.SendKeysToElement(byReportDateRangeBeginField, ReportDateRangeEndFieldvalue, "ReportDateRangeEndField");
+        }
+
+        public void EnterActivityDateRangeBegin(String ActivityDateRangeBeginFieldvalue)
+
+        {
+            this.driver.SendKeysToElement(byActivityDateRangeBeginField, ActivityDateRangeBeginFieldvalue, "ActivityDateRangeBeginField");
+        }
+
+        public void EnterActivityDateRangeEnd(String ActivityDateRangeEndFieldvalue)
+
+        {
+            this.driver.SendKeysToElement(byActivityDateRangeEndField, ActivityDateRangeEndFieldvalue, "ActivityDateRangeEndField");
         }
 
         public void ClickLocationSearchIcon()
@@ -271,6 +375,63 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             this.driver.AssertTextMatching(this.driver.GetPageTitle(), title);
         }
+
+        public void Pickdays(String datevalue)
+        {
+            IList<IWebElement> columns = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_mt']//td[contains(@class,'dxeCalendarDay')]"));
+            for (int i = 0; i <= columns.Count; i++)
+            {
+                if (columns[i].Enabled && columns[i].Text == datevalue)
+                {
+                    columns[i].Click();
+                }
+            }
+
+
+        }
+
+        public void Pickmonths(String monthvalue)
+        {
+            IList<IWebElement> columns = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_FNP_m']//td"));
+            for (int j = 0; j <= columns.Count; j++)
+            {
+                if (columns[j].Displayed && columns[j].Text == monthvalue)
+                {
+                    columns[j].Click();
+                }
+            }
+
+
+        }
+
+        public void EnterLocationcodeField()
+        {
+            this.driver.SendKeysToElement(bylocationCodeTable, "0000000005", "LocationCodeField");
+
+            
+        }
+
+       
+
+        public void ClickLocationCode()
+
+        {
+            string Locationcodefield = this.driver.GetElementText(bylocationCodeTable);
+           
+            IList<IWebElement> rows = this.driver.FindElements(By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@id,'gridlocation_DXDataRow')]"));
+
+            for(int k=0;k<=rows.Count;k++)
+            {
+                if (rows[k].Displayed && rows[k].Text== Locationcodefield)
+                {
+                    rows[k].Click();
+                }
+               
+            }
+
+
+        }
+
 
 
 
