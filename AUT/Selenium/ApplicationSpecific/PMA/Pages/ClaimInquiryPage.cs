@@ -1,11 +1,14 @@
 ﻿using AUT.Selenium.CommonReUsablePages;
 using Engine.UIHandlers.Selenium;
 using OpenQA.Selenium;
+//using OpenQA.Selenium.Point;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium.Interactions;
 
 namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 {
@@ -20,10 +23,10 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byClaimstatus = By.Id("MainContent_ASPxRoundPanel1_pnlContent_ddstatus_I");
         private By byLastName = By.Id("MainContent_ASPxRoundPanel1_pnlContent_txtclaimantname_I");
         private By byFirstName = By.Id("MainContent_ASPxRoundPanel1_pnlContent_txtclaimantfirstname_I");
-        private By byLocationIcon= By.Id("MainContent_ASPxRoundPanel1_pnlContent_btnlocationlookupImg");
+        private By byLocationIcon = By.Id("MainContent_ASPxRoundPanel1_pnlContent_btnlocationlookupImg");
         private By bylocationCodeTable = By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@id,'gridlocation_DXDataRow')]");
         private By byGeneralTab = By.LinkText("General");
-        private By byWorkerAccidentTab =  By.LinkText("Worker-Accident");
+        private By byWorkerAccidentTab = By.LinkText("Worker-Accident");
         private By byFinancialTab = By.LinkText("Financial");
         private By byPaymentsTab = By.LinkText("Payments");
         private By byDiaryTab = By.LinkText("Diary");
@@ -49,16 +52,26 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byEmailAdjusterBtn = By.XPath("//div[@id='MainContent_dvclaims_IT0_usrdetail1_0_btnEmailAdjuster_0_CD']");
         private By byEmailAdjuster = By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_pcemail_0_PWH-1T']");
         private By byLocationCodeField = By.XPath("//input[@id='gridlocation_DXFREditorcol0_I']");
+        private By byAccidentDateRangeBeginClearBtn = By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C']//td[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_BC']");
+        private By byDragaColoumnheaderSpace = By.XPath("//div[@id='MainContent_ASPxPageControl1_gridresult_grouppanel']");
+        private By bysecondcolumnheader = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@id,'MainContent_ASPxPageControl1_gridresult_DXHeadersRow0')]//th[2]");
+        private By bythirdcolumnheader = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@id,'MainContent_ASPxPageControl1_gridresult_DXHeadersRow0')]/th[3]");
         #endregion
 
 
 
         #region Public Methods
 
+        public void ClickAccidentDateRangeBeginClearBtn()
+
+        {
+            this.driver.ClickElement(byAccidentDateRangeBeginClearBtn, "AccidentDateRangeBeginClearBtn");
+        }
+
         public void ClickLosslineSummary()
 
         {
-            this.driver.ClickElement(byLossLineSummary,"LosslineSummary");
+            this.driver.ClickElement(byLossLineSummary, "LosslineSummary");
         }
         public void ClickEmailAdjuster()
 
@@ -81,12 +94,12 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void VerifyLossLineSummary()
         {
-            bool flag=this.driver.IsElementPresent(byLossLineSummary);
+            bool flag = this.driver.IsElementPresent(byLossLineSummary);
             try
             {
                 if (flag)
                 {
-                    this.TESTREPORT.LogSuccess("Verify Loss Line Summary link", String.Format(" Successfully verified - <Mark>{0}</Mark>","Loss Line Summary"));
+                    this.TESTREPORT.LogSuccess("Verify Loss Line Summary link", String.Format(" Successfully verified - <Mark>{0}</Mark>", "Loss Line Summary"));
                     //this.TESTREPORT.LogSuccess("Verify Default Account Lable", String.Format(" Successfully verified - <Mark>{0}</Mark>"));
                 }
 
@@ -103,7 +116,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void VerifyDetailedClaimList()
         {
-           bool flag= this.driver.IsElementPresent(byDetailedClaimList);
+            bool flag = this.driver.IsElementPresent(byDetailedClaimList);
             if (flag)
             {
                 this.TESTREPORT.LogSuccess("Verify Detailed Claim List", String.Format(" Successfully verified - <Mark>{0}</Mark> ", "Detailed claim list"));
@@ -221,13 +234,13 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void ClickReset()
         {
-            this.driver.ClickElement(byResetButton,"Reset Button");
-            
+            this.driver.ClickElement(byResetButton, "Reset Button");
+
         }
         public void EnterClaimNumber(String ClaimNumbervalue)
-        
+
         {
-            this.driver.SendKeysToElement(byClaimNumber, ClaimNumbervalue,"Claim Number");
+            this.driver.SendKeysToElement(byClaimNumber, ClaimNumbervalue, "Claim Number");
         }
 
         public void EnterLast4SSN(String Last4SSNvalue)
@@ -256,7 +269,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void EnterIncurredfrom(String Incurredfromvalue)
 
         {
-            this.driver.SendKeysToElement(byIncurredfrom, Incurredfromvalue , "Incurred from");
+            this.driver.SendKeysToElement(byIncurredfrom, Incurredfromvalue, "Incurred from");
         }
 
         public void EnterIncurredTo(String IncurredTovalue)
@@ -301,10 +314,16 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.SendKeysToElement(byActivityDateRangeEndField, ActivityDateRangeEndFieldvalue, "ActivityDateRangeEndField");
         }
 
+        public void EnterLocationCodeField(String LocationCodeFieldvalue)
+
+        {
+            this.driver.SendKeysToElement(byLocationCodeField, LocationCodeFieldvalue, "LocationCodeField");
+        }
+
         public void ClickLocationSearchIcon()
         {
-            this.driver.ClickElement(byLocationIcon,"Location Icon");
-           
+            this.driver.ClickElement(byLocationIcon, "Location Icon");
+
         }
 
         public void ClickWorkerAccident()
@@ -349,7 +368,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         }
 
-         public void ClickHideNotesLink()
+        public void ClickHideNotesLink()
         {
             this.driver.ClickElement(byHideNotesLink, "HideNotes");
 
@@ -404,38 +423,52 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         }
 
-        public void EnterLocationcodeField()
-        {
-            this.driver.SendKeysToElement(bylocationCodeTable, "0000000005", "LocationCodeField");
 
-            
-        }
 
-       
 
         public void ClickLocationCode()
 
         {
-            string Locationcodefield = this.driver.GetElementText(bylocationCodeTable);
-           
-            IList<IWebElement> rows = this.driver.FindElements(By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@id,'gridlocation_DXDataRow')]"));
+            //string LocationCodeFieldvalue = this.driver.GetElementText(byLocationCodeField);
 
-            for(int k=0;k<=rows.Count;k++)
+            IList<IWebElement> rows = this.driver.FindElements(By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@id,'gridlocation_DXDataRow')]/td[1]"));
+            foreach (var row in rows)
             {
-                if (rows[k].Displayed && rows[k].Text== Locationcodefield)
-                {
-                    rows[k].Click();
-                }
-               
+                row.Click();
+                break;
             }
-
-
         }
 
+        public void NavigatetoFrame(int framevalue)
+        {
+            this.driver.SwitchTo().Frame(framevalue);
+        }
 
+        public void NavigatetoParentFrame()
+        {
+            this.driver.SwitchTo().DefaultContent();
+        }
 
+        public void Dragthecolumnheaderinspace(string value)
+        {
+            IReadOnlyList< IWebElement> list = this.driver.FindElements(bythirdcolumnheader);
+            IWebElement e2 = this.driver.FindElement(byDragaColoumnheaderSpace);
+            foreach (var WebItem in list)
+            {
+                if(WebItem.Text.ToLower().Equals(value.ToLower()))
+                {
+                    this.driver.DragDrop(WebItem, e2);
+                    break;
+                }
+                    
+            }
 
+            
+        }
 
+         
+
+        
 
 
         #endregion

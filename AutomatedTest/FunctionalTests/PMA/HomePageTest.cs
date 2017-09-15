@@ -4,7 +4,7 @@ using AUT.Selenium.ApplicationSpecific.PMA.Pages;
 using System.Windows.Forms;
 using StandardUtilities;
 
-namespace AutomatedTest.FunctionalTests.PMA.HomeModule
+namespace AutomatedTest.FunctionalTests.PMA
 
 {
     [TestClass]
@@ -14,27 +14,22 @@ namespace AutomatedTest.FunctionalTests.PMA.HomeModule
         //TestCase HM_1
         //TestCase Title : verify Default ACcountm        
         HomePage home = new HomePage();
-        
+
+            
         [TestMethod, Description("Verify Default Account"), TestCategory("Regression")]
         public void HM_01HomePage()
         {
-            //string name = FileUtilities.GetCSVData("", "", 0);
-
-
             this.TESTREPORT.InitTestCase("HM_01", "Verify Default Account");
-
-            string value = readCSV("AccountName");
-
+            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
+            string HomePageTitle = readCSV("HomePageTitle");
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
-            string myAccountName = home.GetMyAccount();
-
+            string myAccountName = home.GetMyAccount();         
             //verify Default User account field
-            home.VerifyDefaultUserAccount(myAccountName);
-            
+            home.VerifyDefaultUserAccount(myAccountName);       
             //verify Account header
-            home.VerifyAccountHeader(myAccountName);
+            home.VerifyAccountHeader(myAccountName);            
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
 
@@ -42,113 +37,109 @@ namespace AutomatedTest.FunctionalTests.PMA.HomeModule
         [TestMethod, Description("Verify My Diary and Quick Claim search"), TestCategory("Regression")]
         public void HM_02HomePage()
         {
-
-            
+                      
             this.TESTREPORT.InitTestCase("HM_02", "Verify My Diary and Quick Claim search");
-
-            //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
-            home.VerifyCinchWelome();
-            home.VerifyWelcomeText("Welcome ESKODS");
-            home.VerifyDate();
+            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
+            string HomePageTitle = readCSV("HomePageTitle");
+            string UserName = readCSV("UserName");
+            //Verify that user lands on Cinch application            
+            home.VerifyPageTitle(HomePageTitle);            
+            home.VerifyCinchWelome();            
+            home.VerifyWelcomeText("Welcome "+ UserName);            
+            home.VerifyDate();            
             home.VerifyMyDairyLabel();
             home.VerifyQuickClaimSearchLabel();
             home.ClickExit();
 
-            this.TESTREPORT.UpdateTestCaseStatus();
-            
-
-
+            this.TESTREPORT.UpdateTestCaseStatus();         
         }
-
         [TestMethod, Description("My Account - Select account from the my accounts pane"), TestCategory("Regression")]
         public void HM_03HomePage()
-        {
-
-            
+        {            
             this.TESTREPORT.InitTestCase("HM_03", "My Account - Select account from the my accounts pane");
-
-            //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
-            home.VerifyCinchWelome();
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            //Verify that user lands on Cinch application         
+            home.VerifyPageTitle(HomePageTitle);            
+            home.VerifyCinchWelome();            
             home.ClickMyAccount();
-            string value=home.SelectACcountDropDown();
-            home.VerifyAccountHeader(value);
+            string value=home.SelectAccountDropDown();
+            home.VerifyAccountHeader(value);            
             home.ClickClaimInquiry();
-            home.VerifyPageTitle("Claim Inquiry");
+            home.VerifyPageTitle(ClaimInquiryPageTitle);           
             home.ClickSearch();
-            //need to implement grid [no data to implement this step]
+            home.ClickOnRandomClaim();
+            home.VerifyClaimNumber();
             home.ClickExit();
-
-            this.TESTREPORT.UpdateTestCaseStatus();
-            
-
+            this.TESTREPORT.UpdateTestCaseStatus();         
 
         }
-        [TestMethod, Description("My Account - search by providing name of account  name"), TestCategory("Regression")]
+        [TestMethod, Description("My Account - search by providing name of account"), TestCategory("Regression")]
         public void HM_04HomePage()
         {
 
             String name = "";
-            this.TESTREPORT.InitTestCase("HM_04", "My Account - search by providing name of account  name");
+            this.TESTREPORT.InitTestCase("HM_04", "My Account - search by providing name of account");
 
-            //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
-            home.VerifyCinchWelome();
-            home.ClickMyAccount();
-            home.SearchMyAccout(name,"Name");
-            home.VerifyAccountHeader(name);
-            home.ClickClaimInquiry();
-            home.VerifyPageTitle("Claim Inquiry");
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+
+            //Verify that user lands on Cinch application           
+            home.VerifyPageTitle(HomePageTitle);           
+            home.VerifyCinchWelome();           
+            home.ClickMyAccount();          
+            home.SearchMyAccout(name,"Name");            
+            home.VerifyAccountHeader(name);           
+            home.ClickClaimInquiry();            
+            home.VerifyPageTitle("ClaimInquiryPageTitle");           
             home.ClickSearch();
-            //need to implement grid [no data to implement this step]
+            //need to implement grid [no data to implement this step]        
             home.ClickExit();
 
-            this.TESTREPORT.UpdateTestCaseStatus();
-            
+            this.TESTREPORT.UpdateTestCaseStatus();           
 
         }
         [TestMethod, Description("My Account -Search Account by providing number of account"), TestCategory("Regression")]
         public void HM_05HomePage()
         {
-
             String number = "";
             this.TESTREPORT.InitTestCase("HM_05", "My Account -Search Account by providing number of account");
 
-            //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
-            home.VerifyCinchWelome();
-            home.ClickMyAccount();
-            home.SearchMyAccout(number,"Number");
-            home.VerifyAccountHeader(number);
-            home.ClickClaimInquiry();
-            home.VerifyPageTitle("Claim Inquiry");
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+
+            //Verify that user lands on Cinch application            
+            home.VerifyPageTitle(HomePageTitle);            
+            home.VerifyCinchWelome();            
+            home.ClickMyAccount();         
+            home.SearchMyAccout(number,"Number");          
+            home.VerifyAccountHeader(number);           
+            home.ClickClaimInquiry();           
+            home.VerifyPageTitle("ClaimInquiryPageTitle");           
             home.ClickSearch();
-            //need to implement grid [no data to implement this step]
+            //need to implement grid [no data to implement this step]           
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
-
-
         }
-        [TestMethod, Description("Home Test- Drag the columns in My Diary Section"), TestCategory("Regression")]
+        [TestMethod, Description("Home Test- Verify the claim from the diary section on homepage"), TestCategory("Regression")]
         public void HM_06HomePage()
         {
 
-           this.TESTREPORT.InitTestCase("HM_06", "Home Test- Drag the columns in My Diary Section");
+           this.TESTREPORT.InitTestCase("HM_06", "Home Test - Verify the claim from the diary section on homepage");
 
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
-            home.VerifyCinchWelome();
-            home.VerifyWelcomeText("Welcome ESKODS");
-            home.VerifyDate();
+            string HomePageTitle = readCSV("HomePageTitle");
+            string UserName = readCSV("UserName");
+            //Verify that user lands on Cinch application            
+            home.VerifyPageTitle(HomePageTitle);           
+            home.VerifyCinchWelome();           
+            home.VerifyWelcomeText("Welcome " + UserName);            
+            home.VerifyDate();           
             home.VerifyMyDairyLabel();
-
-            //need to implement grid [no data to implement this step]
+            //need to implement grid [no data to implement this step]            
             home.ClickExit();
-
-            this.TESTREPORT.UpdateTestCaseStatus();
-
+            this.TESTREPORT.UpdateTestCaseStatus(); 
 
         }
         [TestMethod, Description("Home Test- Drag the columns in My Diary Section"), TestCategory("Regression")]
@@ -156,15 +147,17 @@ namespace AutomatedTest.FunctionalTests.PMA.HomeModule
         {
 
             this.TESTREPORT.InitTestCase("HM_07", "Home Test- Drag the columns in My Diary Section");
-
+            string HomePageTitle = readCSV("HomePageTitle");
+            string UserName = readCSV("UserName");
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
-            home.VerifyWelcomeText("Welcome ESKODS");
+            home.VerifyWelcomeText("Welcome " + UserName);
             home.VerifyDate();
             home.VerifyMyDairyLabel();
-            home.DragColumns("MyDairy");            
-            home.ClickExit();
+            home.DragColumns("My Diary");   
+            
+           //home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
 
 
@@ -174,10 +167,12 @@ namespace AutomatedTest.FunctionalTests.PMA.HomeModule
         {
 
             this.TESTREPORT.InitTestCase("HM_08", "Home Test- Drag the columns in Quick Claim Search");
+            string HomePageTitle = readCSV("HomePageTitle");
+            string UserName = readCSV("UserName");
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
-            home.VerifyWelcomeText("Welcome ESKODS");
+            home.VerifyWelcomeText("Welcome " + UserName);
             home.VerifyDate();
             home.VerifyQuickClaimSearchLabel();
             home.DragColumns("QuickClaimSearch");
@@ -202,7 +197,6 @@ namespace AutomatedTest.FunctionalTests.PMA.HomeModule
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-
         [TestMethod, Description("Quick Claim Search - Open and view an existing claim(Claimant name)"), TestCategory("Regression")]
         public void HM_10HomePage()
         {
@@ -219,7 +213,6 @@ namespace AutomatedTest.FunctionalTests.PMA.HomeModule
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-
         [TestMethod, Description("Quick Claim Search - Selecting an page size option from the drop down loads all claims"), TestCategory("Regression")]
         public void HM_11HomePage()
         {
@@ -254,8 +247,9 @@ namespace AutomatedTest.FunctionalTests.PMA.HomeModule
         {
 
             this.TESTREPORT.InitTestCase("HM_13", "Quick Claim Search - Clicking reset in the Quick Claim Search clears the search fields");
+            string HomePageTitle = readCSV("HomePageTitle");
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
             home.SearchQuickCliamNumber("");
             home.SearchQuickCliamantName("");
@@ -270,27 +264,35 @@ namespace AutomatedTest.FunctionalTests.PMA.HomeModule
         {
 
             this.TESTREPORT.InitTestCase("HM_14", "Home Page Main Navigation - Click on each main menu item navigates the user to that section");
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string ToolsPageTitle = readCSV("ToolsPageTitle");
+            string SettingsPageTitle = readCSV("SettingsPageTitle");
+            string HelpPageTitle = readCSV("HelpPageTitle");
             //Verify that user lands on Cinch application
 
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
             home.ClickClaimInquiry();
-            home.VerifyPageTitle("Claim Inquiry");
-            home.ClickReports();
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
+            //home.ClickReports();
+            //home.VerifyPageTitle("The PMA Group - Risk Management Information System");
             home.ClickNewClaimEntry();
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            
+            home.VerifyPageTitle(HomePageTitle);
+            System.Threading.Thread.Sleep(3000);
+            
             home.VerifySelectLineOfBusinessLable();
             home.ClickOsha();
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             home.ClickTools();
-            home.VerifyPageTitle("PMA Cinch");
+            home.VerifyPageTitle(ToolsPageTitle);
             home.VerifyUserAdministratorLable();
             home.ClickSettings();
-            home.VerifyPageTitle("Settings");
+            home.VerifyPageTitle(SettingsPageTitle);
             home.VerifyDefaultAccountLable();
             home.ClickHelp();
-            home.VerifyPageTitle("Cinch Help Page");
+            home.VerifyPageTitle(HelpPageTitle);
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
             
@@ -304,7 +306,7 @@ namespace AutomatedTest.FunctionalTests.PMA.HomeModule
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
             home.VerifyCinchWelome();
             home.VerifyRecentClaims();
-            home.VerifyRecentClaimRowsCount();
+            home.ClickOnRandomClaim();
             //Need to implement the script
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();

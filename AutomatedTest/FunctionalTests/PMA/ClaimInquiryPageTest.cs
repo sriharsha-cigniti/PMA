@@ -22,7 +22,7 @@ namespace AutomatedTest.FunctionalTests.HomeModule
         {
 
 
-            this.TESTREPORT.InitTestCase("CI.01", "Claim Inquiry-Click search with no search fields filled out");
+            this.TESTREPORT.InitTestCase("CI_01", "Claim Inquiry-Click search with no search fields filled out");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -52,14 +52,12 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
 
         }
-
-
         [TestMethod, Description("Claim Inquiry-Click reset clears all Claim Inquiry fields"), TestCategory("Regression")]
         public void CI_02claimInquiryPage()
         {
 
 
-            this.TESTREPORT.InitTestCase("CI.02","Claim Inquiry-Click reset clears all Claim Inquiry fields");
+            this.TESTREPORT.InitTestCase("CI_02","Claim Inquiry-Click reset clears all Claim Inquiry fields");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -93,13 +91,12 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
 
         }
-
         [TestMethod, Description("Claim Inquiry-Location Code Modal - clicking on a row selects the location"), TestCategory("Regression")]
         public void CI_03claimInquiryPage()
         {
 
 
-            this.TESTREPORT.InitTestCase("CI.03", "Claim Inquiry-Location Code Modal - clicking on a row selects the location");
+            this.TESTREPORT.InitTestCase("CI_03", "Claim Inquiry-Location Code Modal - clicking on a row selects the location");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -113,12 +110,18 @@ namespace AutomatedTest.FunctionalTests.HomeModule
             cInquiry.VerifyLocationIcon();
             //Click on Location search Icon
             cInquiry.ClickLocationSearchIcon();
+            //go to frame
+            cInquiry.NavigatetoFrame(0);
             //Enter the data into the filter columns
-           
-            
-            //Verify table row count- Need to implement
+            cInquiry.EnterLocationCodeField("0000000018");
+
+            //Verify table row count
+            cInquiry.ClickLocationCode();
+            //switch to parentframe
+            cInquiry.NavigatetoParentFrame();
+
           
-            //Need to implement - Loss Line summary CLaim records
+            
             //logout of Application
             home.ClickExit();
 
@@ -127,13 +130,12 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
 
         }
-
         [TestMethod, Description("Claim Inquiry-View all tabs in the claim view(Liability)"), TestCategory("Regression")]
         public void CI_04claimInquiryPage()
         {
            
             
-            this.TESTREPORT.InitTestCase("CI.04", "Claim Inquiry-View all tabs in the claim view(Liability)");
+            this.TESTREPORT.InitTestCase("CI_04", "Claim Inquiry-View all tabs in the claim view(Liability)");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -184,13 +186,12 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
 
         }
-
         [TestMethod, Description("Claim Inquiry-View all tabs in the claim view (Workers compensation)"), TestCategory("Regression")]
         public void CI_05claimInquiryPage()
         {
 
 
-            this.TESTREPORT.InitTestCase("CI.05", "Claim Inquiry-View all tabs in the claim view (Workers compensation)");
+            this.TESTREPORT.InitTestCase("CI_05", "Claim Inquiry-View all tabs in the claim view (Workers compensation)");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -243,13 +244,12 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
 
         }
-
         [TestMethod, Description("Claim Inquiry-Search the data with Total Incurred amount"), TestCategory("Regression")]
         public void CI_06claimInquiryPage()
         {
 
 
-            this.TESTREPORT.InitTestCase("CI.06", "Claim Inquiry-Search the data with Total Incurred amount");
+            this.TESTREPORT.InitTestCase("CI_06", "Claim Inquiry-Search the data with Total Incurred amount");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -285,13 +285,12 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
 
         }
-
         [TestMethod, Description("Claim Inquiry-Search the data with Accident date range"), TestCategory("Regression")]
         public void CI_07claimInquiryPage()
         {
 
 
-            this.TESTREPORT.InitTestCase("CI.07", "Claim Inquiry-Search the data with Accident date range");
+            this.TESTREPORT.InitTestCase("CI_07", "Claim Inquiry-Search the data with Accident date range");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -323,16 +322,38 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
             this.TESTREPORT.UpdateTestCaseStatus();
 
+        }
+        [TestMethod, Description("Claim Inquiry-Clear Data in Accident Date range Date picker"), TestCategory("Regression")]
+        public void CI_08claimInquiryPage()
+        {
 
+            this.TESTREPORT.InitTestCase("CI_08", "Claim Inquiry-Clear Data in Accident Date range Date picker");
+
+            //Verify that user lands on Cinch application
+            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            //Verify  Cinch WElcome Text
+            home.VerifyCinchWelome();
+            //Click on Claiminquiry
+            home.ClickClaimInquiry();
+            //Verify page Title for Claim Inquiry
+            home.VerifyPageTitle("Claim Inquiry");
+            //Enter AccidentDateRange Begin
+            cInquiry.EnterAccidentDateRangeBegin("");
+            //click on Clear button in date picker 
+            cInquiry.ClickAccidentDateRangeBeginClearBtn();
+            
+            //logout of Application
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-
         [TestMethod, Description("Claim Inquiry-Export to spreadsheet-Detailed Claim list"), TestCategory("Regression")]
         public void CI_09claimInquiryPage()
         {
 
 
-            this.TESTREPORT.InitTestCase("CI.09", "Claim Inquiry-Export to spreadsheet-Detailed Claim list");
+            this.TESTREPORT.InitTestCase("CI_09", "Claim Inquiry-Export to spreadsheet-Detailed Claim list");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -364,7 +385,7 @@ namespace AutomatedTest.FunctionalTests.HomeModule
         {
 
 
-            this.TESTREPORT.InitTestCase("CI.10", "Claim Inquiry-Export to spreadsheet-Loss line summary");
+            this.TESTREPORT.InitTestCase("CI_10", "Claim Inquiry-Export to spreadsheet-Loss line summary");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -401,7 +422,7 @@ namespace AutomatedTest.FunctionalTests.HomeModule
         public void CI_11claimInquiryPage()
         {
             
-            this.TESTREPORT.InitTestCase("CI.11", "Claim Inquiry-Search the data with Report date range");
+            this.TESTREPORT.InitTestCase("CI_11", "Claim Inquiry-Search the data with Report date range");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -437,12 +458,11 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
 
         }
-
         [TestMethod, Description("Claim Inquiry-Search the data with Activity date range"), TestCategory("Regression")]
         public void CI_12claimInquiryPage()
         {
             
-            this.TESTREPORT.InitTestCase("CI.12", "Claim Inquiry-Search the data with Activity date range");
+            this.TESTREPORT.InitTestCase("CI_12", "Claim Inquiry-Search the data with Activity date range");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -478,12 +498,11 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
 
         }
-
         [TestMethod, Description("Claim Inquiry-Email to Claim Adjuster-Send"), TestCategory("Regression")]
         public void CI_13claimInquiryPage()
         {
 
-            this.TESTREPORT.InitTestCase("CI.13", "Claim Inquiry-Email to Claim Adjuster-Send");
+            this.TESTREPORT.InitTestCase("CI_13", "Claim Inquiry-Email to Claim Adjuster-Send");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -519,12 +538,11 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
 
         }
-
         [TestMethod, Description("Claim Inquiry-Email to Claim Adjuster Reset"), TestCategory("Regression")]
         public void CI_14claimInquiryPage()
         {
             
-            this.TESTREPORT.InitTestCase("CI.14", "Claim Inquiry-Email to Claim Adjuster Reset");
+            this.TESTREPORT.InitTestCase("CI_14", "Claim Inquiry-Email to Claim Adjuster Reset");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -561,12 +579,11 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
 
         }
-
         [TestMethod, Description("Claim Inquiry-Email to Claim Adjuster -cancel"), TestCategory("Regression")]
         public void CI_15claimInquiryPage()
         {
             
-            this.TESTREPORT.InitTestCase("CI.15", "Claim Inquiry-Email to Claim Adjuster -cancel");
+            this.TESTREPORT.InitTestCase("CI_15", "Claim Inquiry-Email to Claim Adjuster -cancel");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -601,12 +618,11 @@ namespace AutomatedTest.FunctionalTests.HomeModule
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-
         [TestMethod, Description("Claim Inquiry-Verify the Claim List"), TestCategory("Regression")]
         public void CI_16claimInquiryPage()
         {
             
-            this.TESTREPORT.InitTestCase("CI.16", "Verify the Claim List");
+            this.TESTREPORT.InitTestCase("CI_16", "Verify the Claim List");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -634,12 +650,11 @@ namespace AutomatedTest.FunctionalTests.HomeModule
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-
         [TestMethod, Description("Claim Inquiry-Verify the EFR Button on the claim page"), TestCategory("Regression")]
         public void CI_17claimInquiryPage()
         {
             
-            this.TESTREPORT.InitTestCase("CI.17", "Verify the EFR Button on the claim page");
+            this.TESTREPORT.InitTestCase("CI_17", "Verify the EFR Button on the claim page");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -669,6 +684,199 @@ namespace AutomatedTest.FunctionalTests.HomeModule
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
+        [TestMethod, Description("Claim Inquiry-Verify Selecting page size option from the drop down loads all claims"), TestCategory("Regression")]
+        public void CI_18claimInquiryPage()
+        {
 
+            this.TESTREPORT.InitTestCase("CI_18", "Claim Inquiry-Verify Selecting page size option from the drop down loads all claims");
+
+            //Verify that user lands on Cinch application
+            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            //Verify  Cinch WElcome Text
+            home.VerifyCinchWelome();
+            //Click on Claiminquiry
+            home.ClickClaimInquiry();
+            //Verify page Title for Claim Inquiry
+            home.VerifyPageTitle("Claim Inquiry");
+            //CLick on search button
+            home.ClickSearch();
+            //Verify table row count- Need to implement
+
+            //Verify Detailed Claim list
+            cInquiry.VerifyDetailedClaimList();
+            //verify loss Line Summary
+            cInquiry.VerifyLossLineSummary();
+
+            //Need to implement-In the Detailed claim list, select a page size from the drop down menu in the bottom right side(E.g. ALL )
+            //Need to implement-Validate the data grid with all the entries
+           
+            //logout of Application
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+        [TestMethod, Description("Claim Inquiry-Verify to Drag a column in drag column section"), TestCategory("Regression")]
+        public void CI_19claimInquiryPage()
+        {
+
+            this.TESTREPORT.InitTestCase("CI_19", "Claim Inquiry-Verify to Drag a column in drag column section");
+
+            //Verify that user lands on Cinch application
+            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            //Verify  Cinch WElcome Text
+            home.VerifyCinchWelome();
+            //Click on Claiminquiry
+            home.ClickClaimInquiry();
+            //Verify page Title for Claim Inquiry
+            home.VerifyPageTitle("Claim Inquiry");
+            //CLick on search button
+            home.ClickSearch();
+            //Verify table row count- Need to implement
+
+            //Verify Detailed Claim list
+            cInquiry.VerifyDetailedClaimList();
+            //verify loss Line Summary
+            cInquiry.VerifyLossLineSummary();
+
+            //Drag a column header here to group by that column
+            
+            cInquiry.Dragthecolumnheaderinspace("Claimant Name");
+            //Need to implement-Claim number in the section above columns
+
+            //logout of Application
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+        [TestMethod, Description("Claim Inquiry-Verify to Drag a column in drag column section and open a claim"), TestCategory("Regression")]
+        public void CI_20claimInquiryPage()
+        {
+
+            this.TESTREPORT.InitTestCase("CI_20", "Claim Inquiry-Verify to Drag a column in drag column section and open a claim");
+
+            //Verify that user lands on Cinch application
+            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            //Verify  Cinch WElcome Text
+            home.VerifyCinchWelome();
+            //Click on Claiminquiry
+            home.ClickClaimInquiry();
+            //Verify page Title for Claim Inquiry
+            home.VerifyPageTitle("Claim Inquiry");
+            //CLick on search button
+            home.ClickSearch();
+            //Verify table row count- Need to implement
+
+            //Verify Detailed Claim list
+            cInquiry.VerifyDetailedClaimList();
+            //verify loss Line Summary
+            cInquiry.VerifyLossLineSummary();
+
+            //Need to implement-Drag a column header here to group by that column
+            //Need to implement-Click on any random claim number
+
+            //logout of Application
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+        [TestMethod, Description("Claim Inquiry-Verify the Drag column to group by the column and sort the order"), TestCategory("Regression")]
+        public void CI_21claimInquiryPage()
+        {
+
+            this.TESTREPORT.InitTestCase("CI_21", "Claim Inquiry-Verify the Drag column to group by the column and sort the order");
+
+            //Verify that user lands on Cinch application
+            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            //Verify  Cinch WElcome Text
+            home.VerifyCinchWelome();
+            //Click on Claiminquiry
+            home.ClickClaimInquiry();
+            //Verify page Title for Claim Inquiry
+            home.VerifyPageTitle("Claim Inquiry");
+            //CLick on search button
+            home.ClickSearch();
+            //Verify table row count- Need to implement
+
+            //Verify Detailed Claim list
+            cInquiry.VerifyDetailedClaimList();
+            //verify loss Line Summary
+            cInquiry.VerifyLossLineSummary();
+
+            //Need to implement-Drag a column header here to group by that column
+            //Need to implement-Click on the triangle Image to sort the column in alphabetical order
+
+            //logout of Application
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+        [TestMethod, Description("Claim Inquiry-Verify to Drag  multiple columns in drag column section"), TestCategory("Regression")]
+        public void CI_22claimInquiryPage()
+        {
+
+            this.TESTREPORT.InitTestCase("CI_22", "Claim Inquiry-Verify to Drag  multiple columns in drag column section");
+
+            //Verify that user lands on Cinch application
+            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            //Verify  Cinch WElcome Text
+            home.VerifyCinchWelome();
+            //Click on Claiminquiry
+            home.ClickClaimInquiry();
+            //Verify page Title for Claim Inquiry
+            home.VerifyPageTitle("Claim Inquiry");
+            //CLick on search button
+            home.ClickSearch();
+            //Verify table row count- Need to implement
+
+            //Verify Detailed Claim list
+            cInquiry.VerifyDetailedClaimList();
+            //verify loss Line Summary
+            cInquiry.VerifyLossLineSummary();
+
+            //Need to implement-Drag multiple columns(E.G. Claim Number, claimant name and accident date ) into the 'Drag a column header here to group by that column' appears
+            //Need to implement-Expand the first selected Column header to see the detail
+
+            //logout of Application
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+        [TestMethod, Description("Claim Inquiry-Verify to Drag status column in drag column section"), TestCategory("Regression")]
+        public void CI_23claimInquiryPage()
+        {
+
+            this.TESTREPORT.InitTestCase("CI_22", "Claim Inquiry-Verify to Drag status column in drag column section");
+
+            //Verify that user lands on Cinch application
+            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            //Verify  Cinch WElcome Text
+            home.VerifyCinchWelome();
+            //Click on Claiminquiry
+            home.ClickClaimInquiry();
+            //Verify page Title for Claim Inquiry
+            home.VerifyPageTitle("Claim Inquiry");
+            //CLick on search button
+            home.ClickSearch();
+            //Verify table row count- Need to implement
+
+            //Verify Detailed Claim list
+            cInquiry.VerifyDetailedClaimList();
+            //verify loss Line Summary
+            cInquiry.VerifyLossLineSummary();
+
+            //Need to implement-Select and Drag status column into the 'Drag a column header here to group by that column' appears
+            //Need to implement-select random claim 
+
+            //logout of Application
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
     }
 }

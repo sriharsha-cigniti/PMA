@@ -589,11 +589,36 @@ namespace Engine.UIHandlers.Selenium
                 driver.WaitElementExistsAndVisible(elementEnd);
                 SeleniumFrameworkExtensions.activeDriverActions.DragAndDrop(driver.FindElement(elementStart),
                     driver.FindElement(elementEnd)).Perform();
+                
                 return driver;
             }, defaultTimeout, driver,
                 String.Format("Performed action 'DRAG' on element - <mark>{0}</mark>, to element - <mark>{1}</mark>", elementStart, elementEnd));
         }
-
+        public static IWebDriver DragDrop(this IWebDriver driver, IWebElement elementStart, IWebElement elementEnd,
+          int defaultTimeout = EngineSetup.TimeOutConstant)
+        {
+            return SeleniumFrameworkExtensions.CompleteAction(() =>
+            {
+                Actions action = new Actions(driver);                 
+                action.DragAndDrop(elementStart, elementEnd).Build().Perform();
+                return driver;
+            }, defaultTimeout, driver,
+                String.Format("Performed action 'DRAG' on element - <mark>{0}</mark>, to element - <mark>{1}</mark>", elementStart, elementEnd));
+        }
+        public static IWebDriver DragDrop(this IWebDriver driver, By element1, int x, int y)
+        {
+            
+            try
+            {
+                IWebElement e1 = driver.FindElement(element1);
+                Actions a = new Actions(driver);
+                //a.ClickAndHold(e1).MoveByOffset(x, y).Release().Build().Perform();
+                a.DragAndDropToOffset(e1, x, y).Build().Perform();
+            }
+            catch(Exception e)
+            { }
+            return driver;
+        }
         /// <summary>
         /// select an item in the given droipdown by the index
         /// </summary>
@@ -1283,7 +1308,27 @@ namespace Engine.UIHandlers.Selenium
         {
             return driver.CurrentWindowHandle;
         }
+        public static string clickRandomCliamNumber(this IWebDriver driver, By locator)
+        {
+            testReport.LogInfo(" Click on any random claim number");
+            IReadOnlyList<IWebElement> rows = driver.FindElements(locator);
+            Random rd = new Random();
+            int value = rd.Next(0, rows.Count);
+            string rowvalue = null;
 
+            if (rows[value].Displayed)
+            {
+                rowvalue = rows[value].FindElement(By.XPath("//td[3]")).Text;
+                rows[value].Click();
+
+                testReport.LogSuccess("Click on Recent Random ClaimNumber", String.Format(" Successfully Clicked on - <Mark>{0}</Mark> ", rowvalue));
+            }
+            else
+            {
+                testReport.LogFailure("Click on Recent Random ClaimNumber", String.Format("NO Recent Claims Available "), EngineSetup.GetScreenShotPath());
+            }
+            return rowvalue;
+        }
 
 
 

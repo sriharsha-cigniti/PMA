@@ -65,10 +65,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FunctionalTests\PMA\HomeModule\ClaimInquiryPageTest.cs" />
-    <Compile Include="FunctionalTests\PMA\HomeModule\HomePageTest.cs" />
+    <Compile Include="FunctionalTests\PMA\ClaimInquiryPageTest.cs" />
+    <Compile Include="FunctionalTests\PMA\HomePageTest.cs" />
     <Compile Include="FunctionalTests\PMA\TestBaseTemplate.cs" />
-    <Compile Include="FunctionalTests\PMA\SmokeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\UnitTest1.cs" />
   </ItemGroup>
@@ -95,7 +94,7 @@
     <None Include="TestConfiguration\TestConfiguration.properties">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\PMA\HomeModule\HomePageTests.csv">
+    <None Include="TestData\PMA\HomePageTests.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
