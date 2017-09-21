@@ -62,23 +62,29 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         #region Public Methods
 
+        //Click AccidentDateRange Begin ClearBtn in Calendar
         public void ClickAccidentDateRangeBeginClearBtn()
 
         {
             this.driver.ClickElement(byAccidentDateRangeBeginClearBtn, "AccidentDateRangeBeginClearBtn");
         }
 
+
+    //click on LossLine summary
         public void ClickLosslineSummary()
 
         {
             this.driver.ClickElement(byLossLineSummary, "LosslineSummary");
         }
+
+        //click on EmailAdjuster
         public void ClickEmailAdjuster()
 
         {
             this.driver.ClickElement(byEmailAdjusterBtn, "EmailAdjuster");
         }
 
+        //Verify EmailAdjuster
         public void VerifyEmailAdjuster()
         {
             bool flag = this.driver.IsElementPresent(byEmailAdjuster);
@@ -92,6 +98,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        //verify LossLineSummary in the Claiminquiry Page
         public void VerifyLossLineSummary()
         {
             bool flag = this.driver.IsElementPresent(byLossLineSummary);
@@ -114,6 +121,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        //Verify DetailedClaimList
         public void VerifyDetailedClaimList()
         {
             bool flag = this.driver.IsElementPresent(byDetailedClaimList);
@@ -127,6 +135,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        //Verify CreateEntry Link in the
         public void VerifyCreateEntryLink()
         {
             bool flag = this.driver.IsElementPresent(byCreateEntryLink);
@@ -140,6 +149,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        //Verify Wages text
         public void VerifyWagesText()
         {
             bool flag = this.driver.IsElementPresent(byWagesText);
@@ -166,6 +176,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        //Verify ShowNotes link in the logNotes
         public void VerifyShowNoteslink()
         {
             bool flag = this.driver.IsElementPresent(byShowNotesLink);
@@ -179,7 +190,9 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
-        public void VerifyHideNoteslink()
+
+        //Verify HideNotes link in the logNotes
+         public void VerifyHideNoteslink()
         {
             bool flag = this.driver.IsElementPresent(byHideNotesLink);
             if (flag)
@@ -192,6 +205,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        //Verify ExporttoSpreadsheet link in the ClaimInquiry Page
         public void VerifyExporttoSpreadsheetlink()
         {
             bool flag = this.driver.IsElementPresent(byExportToSpredsheetLink);
@@ -205,6 +219,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        //Verify LosslineDescription link in the 
         public void VerifyLossLineDescriptionlink()
         {
             bool flag = this.driver.IsElementPresent(byLossLineDescriptionLink);
@@ -218,6 +233,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        //Verify Location search Icon in the CliamInquiry page
         public void VerifyLocationIcon()
         {
             bool flag = this.driver.IsElementPresent(byLocationIcon);

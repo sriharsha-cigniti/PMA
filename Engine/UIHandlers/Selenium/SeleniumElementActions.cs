@@ -15,6 +15,7 @@ using Keys = OpenQA.Selenium.Keys;
 using TestReporter;
 using Engine.Setup;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections;
 
 namespace Engine.UIHandlers.Selenium
 {
@@ -1308,31 +1309,94 @@ namespace Engine.UIHandlers.Selenium
         {
             return driver.CurrentWindowHandle;
         }
-        public static string clickRandomCliamNumber(this IWebDriver driver, By locator)
+        public static ArrayList ClickRandomCliamNumber(this IWebDriver driver, By locator, int index)
         {
             testReport.LogInfo(" Click on any random claim number");
-            IReadOnlyList<IWebElement> rows = driver.FindElements(locator);
-            Random rd = new Random();
-            int value = rd.Next(0, rows.Count);
-            string rowvalue = null;
-
-            if (rows[value].Displayed)
+            ArrayList listName = new ArrayList();
+            Random rnd = new Random();          
+            int value = rnd.Next(0, 9);
+            int j = 0;
+            IReadOnlyList<IWebElement> rows = driver.FindElements(locator);        
+                  
+            try
             {
-                rowvalue = rows[value].FindElement(By.XPath("//td[3]")).Text;
-                rows[value].Click();
-
-                testReport.LogSuccess("Click on Recent Random ClaimNumber", String.Format(" Successfully Clicked on - <Mark>{0}</Mark> ", rowvalue));
+                foreach (var item in rows)
+                {
+                   if(value==j)
+                    {
+                        IReadOnlyList<IWebElement> data = item.FindElements(By.TagName("td"));
+                        for (int i = 1; i <= index; i++)
+                        {
+                            listName.Add(data[i].Text);
+                        }
+                        
+                        IJavaScriptExecutor ex = (IJavaScriptExecutor)driver;
+                        ex.ExecuteScript("arguments[0].click();", item);
+                        //item.Click();
+                        testReport.LogSuccess("Click on Recent Random ClaimNumber", String.Format(" Successfully Clicked on - <Mark>{0}</Mark> ", listName));
+                        break;
+                    }
+                    else
+                    {
+                        j++;
+                    }                    
+                }
             }
-            else
+            catch (Exception)
             {
                 testReport.LogFailure("Click on Recent Random ClaimNumber", String.Format("NO Recent Claims Available "), EngineSetup.GetScreenShotPath());
+                throw;
             }
-            return rowvalue;
+            
+            return listName;
         }
+
+        public static ArrayList ClickRandomRecentClaimnumber(this IWebDriver driver, By locator, int index)
+        {
+            testReport.LogInfo(" Click on any random claim number");
+            ArrayList listName = new ArrayList();
+            Random rnd = new Random();
+            int value = rnd.Next(0, 4);
+            int j = 0;
+            IReadOnlyList<IWebElement> rows = driver.FindElements(locator);
+
+            try
+            {
+                foreach (var item in rows)
+                {
+                    if (value == j)
+                    {
+                        IReadOnlyList<IWebElement> data = item.FindElements(By.TagName("td"));
+                        for (int i = 1; i <= index; i++)
+                        {
+                            listName.Add(data[i].Text);
+                        }
+                        // data[2].Click();
+                        IJavaScriptExecutor ex = (IJavaScriptExecutor)driver;
+                        ex.ExecuteScript("arguments[0].click();", item);
+                        //item.Click();
+                        testReport.LogSuccess("Click on Recent Random ClaimNumber", String.Format(" Successfully Clicked on - <Mark>{0}</Mark> ", listName));
+                        break;
+                    }
+                    else
+                    {
+                        j++;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                testReport.LogFailure("Click on Recent Random ClaimNumber", String.Format("NO Recent Claims Available "), EngineSetup.GetScreenShotPath());
+                throw;
+            }
+
+            return listName;
+        }
+    }
 
 
 
         #endregion
     }
 
-}
+
