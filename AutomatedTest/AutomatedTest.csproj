@@ -94,6 +94,9 @@
     <None Include="TestConfiguration\TestConfiguration.properties">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="TestData\PMA\ClaimInquiryPageTests.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestData\PMA\HomePageTests.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

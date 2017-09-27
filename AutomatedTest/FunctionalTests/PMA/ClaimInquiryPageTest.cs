@@ -7,11 +7,12 @@ using AUT.Selenium.ApplicationSpecific.PMA.Pages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StandardUtilities;
 using OpenQA.Selenium;
+using System.Collections;
 
-namespace AutomatedTest.FunctionalTests.HomeModule
+namespace AutomatedTest.FunctionalTests.PMA
 {
     [TestClass]
-    public class ClaimInquiryTest : PMA.TestBaseTemplate
+    public class ClaimInquiryPageTests : PMA.TestBaseTemplate
     {
 
         HomePage home = new HomePage();
@@ -24,26 +25,28 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
             this.TESTREPORT.InitTestCase("CI_01", "Claim Inquiry-Click search with no search fields filled out");
 
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch Welcome Text
              home.VerifyCinchWelome();
             //Click on Claiminquiry
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
-
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
             //Click on search button
             home.ClickSearch();
-            //Verify table row count- Need to implement
-
+            //Verify table row count
+            home.ClaimInquiryResultsCount();
             //Verify Loss Line Summary
             cInquiry.VerifyLossLineSummary();
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
             //Click on Loss line Summary
             cInquiry.ClickLosslineSummary();
-            //Need to implement - Loss Line summary CLaim records
+            //Loss Line summary CLaim records
+            cInquiry.VerifyLossLineSummaryResultsCount();
             //logout of Application
              home.ClickExit();
 
@@ -59,23 +62,31 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
             this.TESTREPORT.InitTestCase("CI_02","Claim Inquiry-Click reset clears all Claim Inquiry fields");
 
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string ClaimNumber = readCSV("ClaimNumber");
+            string Claimstatus = readCSV("Claimstatus");
+            string Last4SSN = readCSV("Last4SSN");
+            string FirstName = readCSV("FirstName");
+            string LastName = readCSV("LastName");
+
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
             home.VerifyCinchWelome();
             //Click on Claiminquiry
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
-            //To fill all the fields by  CSV
-            cInquiry.EnterClaimNumber("");
-            cInquiry.EnterClaimstatus("");
-            cInquiry.EnterLast4SSN("");
-            cInquiry.EnterFirstName("");
-            cInquiry.EnterLastName("");
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
+            //Fill all the fields by  CSV
+            string value = cInquiry.EnterClaimNumber(ClaimNumber);
+            string value1 = cInquiry.EnterClaimstatus(Claimstatus);
+            string value2 = cInquiry.EnterLast4SSN(Last4SSN);
+            string value3 = cInquiry.EnterFirstName(FirstName);
+            string value4 = cInquiry.EnterLastName(LastName);
             //CLick on search button
             home.ClickSearch();
-            //Verify table row count- Need to implement
+            
              //Verify Loss Line Summary
             cInquiry.VerifyLossLineSummary();
             //Verify Detailed Claim list
@@ -83,6 +94,12 @@ namespace AutomatedTest.FunctionalTests.HomeModule
             //Click on Loss line Summary
             cInquiry.ClickReset();
             //Need to include the assertion to clear the fields
+            cInquiry.VerifyClaimNumber(value);
+            cInquiry.VerifyClaimstatus(value1);
+            cInquiry.VerifyLast4SSN(value2);
+            cInquiry.VerifyFirstName(value3);
+            cInquiry.VerifyFirstName(value4);
+
             //logout of Application
             home.ClickExit();
 
@@ -98,30 +115,32 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
             this.TESTREPORT.InitTestCase("CI_03", "Claim Inquiry-Location Code Modal - clicking on a row selects the location");
 
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string LocationCodeField = readCSV("LocationCodeField");
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
             home.VerifyCinchWelome();
             //Click on Claiminquiry
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
             //Verify Location Icon
             cInquiry.VerifyLocationIcon();
             //Click on Location search Icon
             cInquiry.ClickLocationSearchIcon();
-            //go to frame
-            cInquiry.NavigatetoFrame(0);
+           
             //Enter the data into the filter columns
-            cInquiry.EnterLocationCodeField("0000000018");
-
+            cInquiry.EnterLocationCodeField(LocationCodeField);
+            //Given characters in search field
+            cInquiry.VerifyLocationCodeFieldTableValue(LocationCodeField);
             //Verify table row count
-            cInquiry.ClickLocationCode();
-            //switch to parentframe
-            cInquiry.NavigatetoParentFrame();
-
-          
-            
+            //cInquiry.ClickLocationCode();
+            //click on any row
+            cInquiry.ClickRandomLocationCode();
+            //Verify pageTitle
+            cInquiry.VerifyPageTitle(ClaimInquiryPageTitle);   
             //logout of Application
             home.ClickExit();
 
@@ -137,6 +156,10 @@ namespace AutomatedTest.FunctionalTests.HomeModule
             
             this.TESTREPORT.InitTestCase("CI_04", "Claim Inquiry-View all tabs in the claim view(Liability)");
 
+            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
+            string ClaimantName = readCSV("ClaimantName");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
             //Verify  Cinch WElcome Text
@@ -144,38 +167,48 @@ namespace AutomatedTest.FunctionalTests.HomeModule
             //Click on Claiminquiry
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
             //CLick on search button
             home.ClickSearch();
-            //Verify table row count- Need to implement
+            //Verify table row count
+            home.ClaimInquiryResultsCount();
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
             //Need to implement a claim in the grid view
-
+            cInquiry.EnterClaimantName(ClaimantName);
+            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
+            home.VerifyClaimNumber(Index[0].ToString());
+            home.VerifyClaimantName(Index[1].ToString());
             //Click on accident tab
-            //Need to implement the Accident Tab
-
-            //Need to implement the Accident information text
-            //Need to implement the loss line Information
-
+            cInquiry.ClickAccidentTab();
+            //Verify Accident information text
+            cInquiry.VerifyAccidentInformationlink();
+            //click on LOsslinetab
+            cInquiry.ClickLossLineTab();
+            //verify LossLineDescription
+            cInquiry.VerifyLossLineDescriptionlink();
             //click on Finanacial tab
-            cInquiry.ClickFinancial();
-            //Need to implement the Claim Financial total for a claim
+            cInquiry.ClickFinancialTab();
+            //Verify Claim Financial total for a claim
+            cInquiry.VerifyClaimFinancialTotallink();
             //click on payments tab
             cInquiry.ClickPayments();
-            //Need to implement - Payment status
+            //Verify Payment status
+            cInquiry.VerifyPaymentStatuslink();
             //click on Diary tab
             cInquiry.ClickDiary();
             //Verify CReate Entry
             cInquiry.VerifyCreateEntryLink();
             //click on LogNotes tab
             cInquiry.ClickLogNotes();
+            //Verify Note
+            cInquiry.VerifyNotelink();
             //click on Documents tab
             cInquiry.ClickDocuments();
             //Verify New window 'PMA CINCH document List' title
-            cInquiry.SwitchtoDocumentswindow("PMA CINCH document List");
+            cInquiry.SwitchtoDocumentswindow(DocumentsWindowPageTitle);
 
 
             //logout of Application
@@ -192,6 +225,9 @@ namespace AutomatedTest.FunctionalTests.HomeModule
 
 
             this.TESTREPORT.InitTestCase("CI_05", "Claim Inquiry-View all tabs in the claim view (Workers compensation)");
+            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
+            string ClaimantName = readCSV("ClaimantName");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -200,43 +236,50 @@ namespace AutomatedTest.FunctionalTests.HomeModule
             //Click on Claiminquiry
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
             //CLick on search button
             home.ClickSearch();
-            //Verify table row count- Need to implement
+            //Verify table row count
+            home.ClaimInquiryResultsCount();
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
-            //Need to implement-To open a claim that starts with M
-            //Need to implement-Assertion on Claim Number
-            //Need to implemnt ASsertion on Claim Name
-            //Click on Worker-accident tab
+            //Enter a claim in the grid view
+            cInquiry.EnterClaimantName(ClaimantName);
+            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
+            home.VerifyClaimNumber(Index[0].ToString());
+            home.VerifyClaimantName(Index[1].ToString());
+            //Click on WorkerAccident tab
             cInquiry.ClickWorkerAccident();
-
+            //Verify Employee information text
+            cInquiry.VerifyEmployeeInformation();
+           
             //click on Finanacial tab
-            cInquiry.ClickFinancial();
-            //verify Wages Text
+            cInquiry.ClickFinancialTab();
+            //Verify WagesText
             cInquiry.VerifyWagesText();
-            //verify BreakDown By Loss Line Text
             cInquiry.VerifyBreakdownByLosslineText();
             //click on payments tab
             cInquiry.ClickPayments();
-            //Need to implement Payments text
+            //Verify Payment text
+            cInquiry.VerifyPayment();
             //click on Diary tab
             cInquiry.ClickDiary();
+            //verify diary text
+            cInquiry.VerifyDiary();
             //Verify CReate Entry
             cInquiry.VerifyCreateEntryLink();
             //click on LogNotes tab
             cInquiry.ClickLogNotes();
-            //verify ShowNotes
-            cInquiry.VerifyShowNoteslink();
-            //verify Hide Notes
+            //Verify Note
+            cInquiry.VerifyNotelink();
             cInquiry.VerifyHideNoteslink();
+            cInquiry.VerifyShowNoteslink();
             //click on Documents tab
             cInquiry.ClickDocuments();
-            //Need to implement to verify the list of documents
-            //logout of Application
+            //Verify New window 'PMA CINCH document List' title
+            cInquiry.SwitchtoDocumentswindow(DocumentsWindowPageTitle);
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -274,7 +317,7 @@ namespace AutomatedTest.FunctionalTests.HomeModule
             //Need to implement-to select random Claim Number
             
             //click on Finanacial tab
-            cInquiry.ClickFinancial();
+            cInquiry.ClickFinancialTab();
             //Need to implement-Assertion on claim number present in the FInancial tab
             //Verify the Incurred column in Breakdown by loss Line 
             //logout of Application

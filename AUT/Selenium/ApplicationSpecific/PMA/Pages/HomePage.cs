@@ -615,6 +615,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //Count ClaimInquiryResults Count
         public void ClaimInquiryResultsCount()
         {
+            Thread.Sleep(6000);
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byClaimInquirySearchResultsTable);
             if (list.Count!=0)
             {
@@ -622,7 +623,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
             else
             {
-                this.TESTREPORT.LogSuccess("Verify ClaimInquiry search results", String.Format(" Table - {0} is not displayed ", this.SCREENSHOTFILE));
+                this.TESTREPORT.LogFailure("Verify ClaimInquiry search results", String.Format(" Table - {0} is not displayed ", this.SCREENSHOTFILE));
             }
 
         }
