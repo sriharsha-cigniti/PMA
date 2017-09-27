@@ -157,6 +157,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //click on Exit link
         public void ClickExit()
         {
+            Thread.Sleep(1000);
             this.TESTREPORT.LogInfo("Click on Exit to close the application");
             this.driver.ClickElement(byExit, "Exit", 60);
         }

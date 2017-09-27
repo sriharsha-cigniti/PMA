@@ -62,6 +62,9 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By bythirdcolumnheader = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@id,'MainContent_ASPxPageControl1_gridresult_DXHeadersRow0')]/th[3]");
         private By byLossLineSummaryResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridlossline_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byLocationIconResultsTable = By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
+        private By byClaimInquirySearchResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
+        private By byClaimTotalIncurred = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalfinancial1_0_lblclaimincurred_0");
+
         //private By byLocationField = By.Id("MainContent_ASPxRoundPanel1_pnlContent_txtlocation_I");
         private By byLocationField = By.XPath("//label[contains(text(),'Location : ')]/../..//input[@type='text']");
         private By byLocationCodeFieldColumn = By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@class,'dxgvDataRow')]//td[1]");
@@ -534,7 +537,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void EnterIncurredTo(String IncurredTovalue)
 
         {
-            this.driver.SendKeysToElement(byIncurredfrom, IncurredTovalue, "Incurred to");
+            this.driver.SendKeysToElement(byIncurredto, IncurredTovalue, "Incurred to");
         }
 
         public void EnterAccidentDateRangeBegin(String AccidentDateRangeBeginFieldvalue)
@@ -830,7 +833,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
-        public void VerifyTotalIncurredTableValue(float value)
+        public void VerifyTotalIncurredTableValue(string value,string value2)
         {
             //string value1 = this.driver.GetElementText(byLocationCodeField);
             Thread.Sleep(3000);
@@ -840,14 +843,17 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             {
                 foreach (var item in column)
                 {
-                    //string value = this.driver.GetElementText(item);                    
-                    if (item.Text.LongCount)
+                    //string value = this.driver.GetElementText(item); 
+                    double actualvalue = Convert.ToDouble(item.Text);
+                        double value1 = Convert.ToDouble(value);
+                    double value3 = Convert.ToDouble(value2);
+                    if (actualvalue <= value1 && actualvalue>=value3)
                     {
-                        this.TESTREPORT.LogSuccess("Verify LocationCode Entered value", string.Format("Entered value matches with the Table Results"));
+                        this.TESTREPORT.LogSuccess("Verify TotalIncurred Result value", string.Format("value - <mark>{0}</mark> is less than MaxIncurredAmount Entered",item.Text));
                     }
                     else
                     {
-                        this.TESTREPORT.LogFailure("Verify LocationCode Entered value", string.Format("Entered value didn't match with the Table Results"), this.SCREENSHOTFILE);
+                        this.TESTREPORT.LogFailure("Verify TotalIncurred Result value", string.Format("value is not less than MaxIncurredAmount Entered"), this.SCREENSHOTFILE);
                     }
                     Thread.Sleep(2000);
                 }
@@ -856,6 +862,26 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             {
                 this.TESTREPORT.LogFailure("Verify filtered results", string.Format("There is no data to display"), this.SCREENSHOTFILE);
             }
+        }
+
+        public ArrayList ClickOnRandomClaiminclaiminquiryResults()
+        {
+            Thread.Sleep(6000);
+            return this.driver.ClickRandomCliamNumber(byClaimInquirySearchResultsTable, 9);
+        }
+
+        public void VerifyTotalIncurredAmount(string IncurredAmount)
+        {
+            string ActualIncurredAmount = this.driver.GetElementText(byClaimTotalIncurred);
+            if (ActualIncurredAmount.Contains(IncurredAmount))
+            {
+                this.TESTREPORT.LogSuccess("Verify Total incurred Amount",String.Format("Incurred Amount -<mark>{0}</mark> matches",ActualIncurredAmount));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify Total incurred Amount", "Incurred Amount not matching");
+            }
+
         }
 
         public void EnterClaimantName(string ClaimantName)

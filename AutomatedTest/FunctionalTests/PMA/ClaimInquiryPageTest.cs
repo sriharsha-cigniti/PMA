@@ -98,7 +98,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.VerifyClaimstatus(value1);
             cInquiry.VerifyLast4SSN(value2);
             cInquiry.VerifyFirstName(value3);
-            cInquiry.VerifyFirstName(value4);
+            cInquiry.VerifyLastName(value4);
 
             //logout of Application
             home.ClickExit();
@@ -156,12 +156,15 @@ namespace AutomatedTest.FunctionalTests.PMA
             
             this.TESTREPORT.InitTestCase("CI_04", "Claim Inquiry-View all tabs in the claim view(Liability)");
 
+
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
             string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
             string ClaimantName = readCSV("ClaimantName");
-            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            
 
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
             home.VerifyCinchWelome();
             //Click on Claiminquiry
@@ -228,9 +231,11 @@ namespace AutomatedTest.FunctionalTests.PMA
             string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
             string ClaimantName = readCSV("ClaimantName");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string HomePageTitle = readCSV("HomePageTitle");
+           // string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
 
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
             home.VerifyCinchWelome();
             //Click on Claiminquiry
@@ -294,32 +299,45 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.InitTestCase("CI_06", "Claim Inquiry-Search the data with Total Incurred amount");
 
+            string HomePageTitle = readCSV("HomePageTitle");
+            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
+            string ClaimantName = readCSV("ClaimantName");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string IncurredFrom = readCSV("IncurredFrom");
+            string IncurredTo = readCSV("IncurredTo");
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
             home.VerifyCinchWelome();
             //Click on Claiminquiry
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
             //Enter Incurred Amount from
-            cInquiry.EnterIncurredfrom("");
+            cInquiry.EnterIncurredfrom(IncurredFrom);
             //Enter Incurred Amount to
-            cInquiry.EnterIncurredTo("");
+            cInquiry.EnterIncurredTo(IncurredTo);
             //CLick on search button
             home.ClickSearch();
             //Verify table row count- Need to implement
+            home.ClaimInquiryResultsCount();
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
-            //Need to implement-Total Incurred column
-            //Need to implement-to select random Claim Number
-            
+            //Total Incurred column
+
+            cInquiry.VerifyTotalIncurredTableValue(IncurredTo,IncurredFrom);
+            //To select random Claim Number
+            ArrayList Index = cInquiry.ClickOnRandomClaiminclaiminquiryResults();
+            home.VerifyClaimNumber(Index[0].ToString());
+
             //click on Finanacial tab
             cInquiry.ClickFinancialTab();
-            //Need to implement-Assertion on claim number present in the FInancial tab
-            //Verify the Incurred column in Breakdown by loss Line 
+            //Need to implement-Assertion on claim number present in the FInancial 
+            home.VerifyClaimNumber(Index[0].ToString());
+            //Verify the Incurred column in Breakdown by loss Line
+            cInquiry.VerifyTotalIncurredAmount(Index[7].ToString());
             //logout of Application
             home.ClickExit();
 
