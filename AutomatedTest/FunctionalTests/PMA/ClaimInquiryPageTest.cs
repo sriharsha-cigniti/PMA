@@ -419,27 +419,44 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Export to spreadsheet-Detailed Claim list"), TestCategory("Regression")]
         public void CI_09claimInquiryPage()
         {
-
-
             this.TESTREPORT.InitTestCase("CI_09", "Claim Inquiry-Export to spreadsheet-Detailed Claim list");
 
-            //Verify that user lands on Cinch application
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+
+            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
-            //Verify  Cinch WElcome Text
+
+            this.TESTREPORT.LogInfo("Verify Cinch Welcome Text");
             home.VerifyCinchWelome();
-            //Click on Claiminquiry
+
+            this.TESTREPORT.LogInfo("Click on Claiminquiry");
             home.ClickClaimInquiry();
-            //Verify page Title for Claim Inquiry
+
+            this.TESTREPORT.LogInfo("Verify page Title for Claim Inquiry");
             home.VerifyPageTitle("Claim Inquiry");
-           //CLick on search button
             home.ClickSearch();
-            //Verify table row count- Need to implement
-            //verify loss Line Summary
-            cInquiry.VerifyLossLineSummary();
-            //Verify Detailed Claim list
+
+            this.TESTREPORT.LogInfo("Verify table row count");
+            home.ClaimInquiryResultsCount();
+
+
+            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
             cInquiry.VerifyDetailedClaimList();
-            //Verify Export to Spreadsheet
+            this.TESTREPORT.LogInfo("Verify Loss line Summary");
+            cInquiry.VerifyLossLineSummary();
+
+            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
+            cInquiry.VerifyDetailedClaimList();
+
+            this.TESTREPORT.LogInfo("Verify Export to Spreadsheet");
             cInquiry.VerifyExporttoSpreadsheetlink();
+            cInquiry.ClickExportToSpredsheetLink();
+
+            this.TESTREPORT.LogInfo("Verify File exists");
+            cInquiry.GetExportFilePath("gridresult.csv");
+            cInquiry.ExportFileExists();
+
             //logout of Application
             home.ClickExit();
 
@@ -449,36 +466,48 @@ namespace AutomatedTest.FunctionalTests.PMA
 
         }
         [TestMethod, Description("Claim Inquiry-Export to spreadsheet-Loss line summary"), TestCategory("Regression")]
+       
         public void CI_10claimInquiryPage()
         {
 
 
             this.TESTREPORT.InitTestCase("CI_10", "Claim Inquiry-Export to spreadsheet-Loss line summary");
 
-            //Verify that user lands on Cinch application
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+
+            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
-            //Verify  Cinch WElcome Text
+
+            this.TESTREPORT.LogInfo("Verify Cinch Welcome Text");
             home.VerifyCinchWelome();
-            //Click on Claiminquiry
+
+            this.TESTREPORT.LogInfo("Click on Claiminquiry");
             home.ClickClaimInquiry();
-            //Verify page Title for Claim Inquiry
+
+            this.TESTREPORT.LogInfo("Verify page Title for Claim Inquiry");
             home.VerifyPageTitle("Claim Inquiry");
-            //CLick on search button
             home.ClickSearch();
-            //Verify table row count- Need to implement
-            //verify loss Line Summary
-            cInquiry.VerifyLossLineSummary();
-            //Verify Detailed Claim list
+
+            this.TESTREPORT.LogInfo("Verify table row count");
+            home.ClaimInquiryResultsCount();
+
+
+            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
             cInquiry.VerifyDetailedClaimList();
-            //click on Loss Line summary
-            cInquiry.ClickLosslineSummary();
-            //Verify Export to Spreadsheet
-            cInquiry.VerifyExporttoSpreadsheetlink();
-            //verify loss line Description
-            cInquiry.VerifyLossLineDescriptionlink();
-            //click on Exporttospreadsheet
-            cInquiry.ClickExportToSpredsheetLink();
-             //logout of Application
+            this.TESTREPORT.LogInfo("Verify Loss line Summary");
+            cInquiry.VerifyLossLineSummary();
+
+            //clicking Loss line description
+            cInquiry.ClickLossLineDescriptionlink();
+
+            this.TESTREPORT.LogInfo("Verify Export to Spreadsheet");
+            cInquiry.ClickandVerifyExporttoSpreadsheetOnLoanSummarylink();
+            cInquiry.GetExportFilePath("gridlossline.csv");
+            cInquiry.ExportFileExists();
+            cInquiry.ExportFileDelete();
+
+            this.TESTREPORT.LogInfo("Logout of Application");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -486,7 +515,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
 
         }
-        [TestMethod, Description("Claim Inquiry-Search the data with Report date range"), TestCategory("Regression")]
         public void CI_11claimInquiryPage()
         {
             
@@ -732,29 +760,45 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Verify the Claim List"), TestCategory("Regression")]
         public void CI_16claimInquiryPage()
         {
-            
             this.TESTREPORT.InitTestCase("CI_16", "Verify the Claim List");
 
-            //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
-            //Verify  Cinch WElcome Text
-            home.VerifyCinchWelome();
-            //Click on Claiminquiry
-            home.ClickClaimInquiry();
-            //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
-            //CLick on search button
-            home.ClickSearch();
-            //Verify table row count- Need to implement
+            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
+            string ClaimantName = readCSV("ClaimantName");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string HomePageTitle = readCSV("HomePageTitle");
 
-            //Verify Detailed Claim list
+
+            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
+            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+
+            this.TESTREPORT.LogInfo("Verify Cinch Welcome Text");
+            home.VerifyCinchWelome();
+
+            this.TESTREPORT.LogInfo("Click on Claiminquiry");
+            home.ClickClaimInquiry();
+
+            this.TESTREPORT.LogInfo("Verify page Title for Claim Inquiry");
+            home.VerifyPageTitle("Claim Inquiry");
+            home.ClickSearch();
+
+            this.TESTREPORT.LogInfo("Verify table row count");
+            home.ClaimInquiryResultsCount();
+
+            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
             cInquiry.VerifyDetailedClaimList();
-            //verify loss Line Summary
+
+            this.TESTREPORT.LogInfo("Verify loss Line Summary");
             cInquiry.VerifyLossLineSummary();
 
-            //Need to implement-to select random Claim Number
-            //Need to implement-Click on Claim list button On the top of Claim Information page 
+            this.TESTREPORT.LogInfo("Click on any random claim");
+            cInquiry.EnterClaimantName(ClaimantName);
+            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
+            home.VerifyClaimNumber(Index[0].ToString());
+            home.VerifyClaimantName(Index[1].ToString());
 
+            this.TESTREPORT.LogInfo("Verify Claim list Button");
+            cInquiry.ClickClaimListbutton();
+            home.VerifyPageTitle("Claim Inquiry");
             //logout of Application
             home.ClickExit();
 
@@ -764,32 +808,54 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Verify the EFR Button on the claim page"), TestCategory("Regression")]
         public void CI_17claimInquiryPage()
         {
-            
+
             this.TESTREPORT.InitTestCase("CI_17", "Verify the EFR Button on the claim page");
 
-            //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
-            //Verify  Cinch WElcome Text
-            home.VerifyCinchWelome();
-            //Click on Claiminquiry
-            home.ClickClaimInquiry();
-            //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
-            //CLick on search button
-            home.ClickSearch();
-            //Verify table row count- Need to implement
 
-            //Verify Detailed Claim list
+            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
+            string ClaimantName = readCSV("ClaimantName");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string HomePageTitle = readCSV("HomePageTitle");
+
+            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
+            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+
+            this.TESTREPORT.LogInfo("Verify Cinch Welcome Text");
+            home.VerifyCinchWelome();
+
+            this.TESTREPORT.LogInfo("Click on Claiminquiry");
+            home.ClickClaimInquiry();
+
+            this.TESTREPORT.LogInfo("Verify page Title for Claim Inquiry");
+            home.VerifyPageTitle("Claim Inquiry");
+            home.ClickSearch();
+
+            this.TESTREPORT.LogInfo("Verify table row count");
+            home.ClaimInquiryResultsCount();
+
+
+            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
             cInquiry.VerifyDetailedClaimList();
-            //verify loss Line Summary
+
+            this.TESTREPORT.LogInfo("Verify loss Line Summary");
             cInquiry.VerifyLossLineSummary();
 
-            //Need to implement-to select random Claim Number
-            //Need to implement-Verify the slected claim number
-            //Need to implement-Verify the View EFR button
-            //Need to implement-Click on View EFR button of the claim page
+            this.TESTREPORT.LogInfo("Click on any random claim");
+            cInquiry.EnterClaimantName(ClaimantName);
+            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
+            home.VerifyClaimNumber(Index[0].ToString());
+            home.VerifyClaimantName(Index[1].ToString());
 
-            //logout of Application
+            this.TESTREPORT.LogInfo("Verify the View EFR button");
+            this.TESTREPORT.LogInfo("Click on View EFR button of the claim page");
+            cInquiry.ClickAndVerifyEFRButton();
+            cInquiry.SwitchToChildWindow();
+            string PageTitle = "PMA CINCH EFR " + "- " + Index[0].ToString();
+            home.VerifyPageTitle(PageTitle);
+            cInquiry.CloseChildWindow();
+            cInquiry.SwitchToParentWindow();
+
+            this.TESTREPORT.LogInfo("Logout from Application");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -826,7 +892,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
 
             //In the Detailed claim list, select a page size from the drop down menu in the bottom right side(E.g. ALL )
-            cInquiry.SelectPageSizefromtheClaimInquiryResults();
+           // cInquiry.SelectPageSizefromtheClaimInquiryResults();
             
             //logout of Application
             home.ClickExit();

@@ -18,6 +18,8 @@ namespace Engine.Factories
     public class WebDriverFactory
     {
         private static IWebDriver uniqueInstanceWebDriver = null;
+        private const string FILETESTCONFIGURATION = "TestConfiguration.properties";
+        public static string downloadPath = StandardUtilities.FileUtilities.readPropertyFile(FILETESTCONFIGURATION, "downloadPath");
 
         /// <summary>
         /// Prevents a default instance of the <see cref="WebDriverFactory"/> class from being created.
@@ -112,6 +114,11 @@ namespace Engine.Factories
         public static void Free()
         {
             WebDriverFactory.uniqueInstanceWebDriver = null;
+        }
+
+        public static string GetDownloadPath()
+        {
+            return downloadPath;
         }
     }
 }

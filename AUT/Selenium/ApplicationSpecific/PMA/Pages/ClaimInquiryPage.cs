@@ -12,6 +12,7 @@ using OpenQA.Selenium.Interactions;
 using System.Collections;
 using System.Threading;
 using System.Windows.Forms;
+using Engine.Factories;
 
 namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 {
@@ -88,11 +89,20 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By bySendButton = By.XPath("//div[@id='btnSend']");
         private By byResetBtn = By.XPath("//div[@id='ASPxButton1']//span[contains(text(),'Reset')]");
         private By byCancelButton = By.XPath("//div[@id='btncancel']");
-
+        //EXport spreadsheet
+        private By byLossSumaarylink = By.XPath(" //span[contains(text(),'Loss Line Summary')]");
+        private By byClaimListButton = By.XPath("//span[contains(text(),'Claim List')]");
+        private By byEFRButton = By.XPath("//span[contains(text(),'View EFR')]");
+        private By byExportToSpredsheetOnLossummaryLink = By.XPath("//div[@id='MainContent_ASPxPageControl1_btnExportLossline']//span[contains(text(),'Export to Spreadsheet')]");
 
         #endregion
 
+        #region Path
 
+        string FilePath = "";
+        string FileName = "";
+
+        #endregion
 
         #region Public Methods
 
@@ -127,31 +137,31 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         }
 
         //select PageSize in the ClaimInquiryResults table
-        public void SelectPageSizefromtheClaimInquiryResults()
-        {
-            this.TESTREPORT.LogInfo("Select PageSize from ClaimInquiryResults dropdown");
-           // string selectedValue = null;
+        //public void SelectPageSizefromtheClaimInquiryResults()
+        //{
+        //    this.TESTREPORT.LogInfo("Select PageSize from ClaimInquiryResults dropdown");
+        //   // string selectedValue = null;
             
-                IReadOnlyList<IWebElement> rows = this.driver.FindElements(byClaimInquirySearchResultsTable);
-            //int value = rnd.Next(0, list.Count);
-            IReadOnlyList<IWebElement> dropdown = this.driver.FindElements(byClaimInquiryPagesizeDropdown);
-                dropdown[3].Click();
+        //        IReadOnlyList<IWebElement> rows = this.driver.FindElements(byClaimInquirySearchResultsTable);
+        //    //int value = rnd.Next(0, list.Count);
+        //    IReadOnlyList<IWebElement> dropdown = this.driver.FindElements(byClaimInquiryPagesizeDropdown);
+        //        dropdown[3].Click();
 
                 
-              string  selectedValue = this.driver.GetElementAttribute(byClaimInquiryPagesize, "value");
+        //      //string  selectedValue = this.driver.GetElementAttribute(byClaimInquiryPagesize, "value");
                
-                     int x = Convert.ToInt32(selectedValue);
-                if (rows.Count == x)
-                { 
-                    this.TESTREPORT.LogSuccess("Verify the count of the results displayed against the pagesize selected in the ClaimInquiry", String.Format("count <mark>{0}</mark> matches", rows[3]));
-                }
-            else
-            {
-                this.TESTREPORT.LogFailure("Verify the count of the results displayed against the pagesize selected in the ClaimInquiry", String.Format("Count not matching", this.SCREENSHOTFILE));
+        //             int x = Convert.ToInt32(selectedValue);
+        //        if (rows.Count == x)
+        //        { 
+        //            this.TESTREPORT.LogSuccess("Verify the count of the results displayed against the pagesize selected in the ClaimInquiry", String.Format("count <mark>{0}</mark> matches", rows[3]));
+        //        }
+        //    else
+        //    {
+        //        this.TESTREPORT.LogFailure("Verify the count of the results displayed against the pagesize selected in the ClaimInquiry", String.Format("Count not matching", this.SCREENSHOTFILE));
                
-            }
+        //    }
             
-        }
+        //}
 
     
 
@@ -1098,7 +1108,87 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             return a;
         }
 
+        public void GetExportFilePath(string Filename1)
+        {
+            string lFilePath = WebDriverFactory.GetDownloadPath();
+            string lFileName = Filename1;
+            FilePath = lFilePath;
+            FileName = lFileName;
 
+        }
+
+        public void ExportFileExists()
+        {
+            bool exists = false;
+            ExportSpreadsheet file = new ExportSpreadsheet(FileName, FilePath);
+            exists = file.FileExists();
+            if (exists)
+            {
+                this.TESTREPORT.LogSuccess("Exported File", String.Format("File:<Mark>{0}</Mark> found and is successfully exported", FileName));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Exported xml doesn't contains", String.Format("File:<Mark>{0}</Mark> not found and is not exported", FileName));
+            }
+        }
+
+        public void ClickLossLineDescriptionlink()
+        {
+            Thread.Sleep(2000);
+            this.driver.IsElementPresent(byLossSumaarylink);
+            this.driver.ClickElement(byLossSumaarylink, "Loss Summary Tab");
+            this.driver.IsElementPresent(byLossLineDescriptionLink);
+
+        }
+
+        public void ExportFileDelete()
+        {
+            bool exists = false;
+            ExportSpreadsheet file = new ExportSpreadsheet(FileName, FilePath);
+            exists = file.FileDelete();
+            if (exists)
+                this.TESTREPORT.LogInfo(String.Format("File:<Mark>{0}</Mark> Deleted", FileName));
+        }
+
+        public void ClickClaimListbutton()
+        {
+            this.driver.IsElementPresent(byClaimListButton);
+            this.driver.ClickElement(byClaimListButton, "CLaim LiSt BUtton");
+
+        }
+
+        public void ClickAndVerifyEFRButton()
+        {
+            this.driver.IsElementPresent(byEFRButton);
+            this.driver.ClickElement(byEFRButton, "EFR Button");
+
+        }
+
+        public void ClickandVerifyExporttoSpreadsheetOnLoanSummarylink()
+        {
+            Thread.Sleep(2000);
+            this.driver.WaitElementPresent(byExportToSpredsheetOnLossummaryLink);
+            this.driver.IsElementPresent(byExportToSpredsheetOnLossummaryLink);
+            this.driver.ClickElement(byExportToSpredsheetOnLossummaryLink, "CLaim LiSt BUtton");
+        }
+
+        public void SwitchToChildWindow()
+        {
+            Thread.Sleep(3000);
+            driver.SwitchTo().Window(driver.WindowHandles.Last());
+
+        }
+        public void SwitchToParentWindow()
+        {
+            Thread.Sleep(3000);
+            driver.SwitchTo().Window(driver.WindowHandles.First());
+
+        }
+
+        public void CloseChildWindow()
+        {
+            this.driver.CloseChildWindow();
+        }
 
 
         #endregion
