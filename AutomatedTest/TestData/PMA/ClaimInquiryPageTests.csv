@@ -1,2 +1,2 @@
-HomePageTitle,ClaimInquiryPageTitle,LocationCodeField,DocumentsWindowPageTitle,ClaimantName,ClaimNumber,Claimstatus,Last4SSN,FirstName,LastName,IncurredFrom,IncurredTo
-The PMA Group - Risk Management Information System,Claim Inquiry,2,PMA CINCH document List,w,L000143092,Closed Only,2235,KELLY,JACK,0,100
+HomePageTitle,ClaimInquiryPageTitle,LocationCodeField,DocumentsWindowPageTitle,ClaimantName,ClaimNumber,Claimstatus,Last4SSN,FirstName,LastName,IncurredFrom,IncurredTo,AccidentDateRangeBegin,AccidentDateRangeEnd,EmailAddress1,EmailAddress2,Message
+The PMA Group - Risk Management Information System,Claim Inquiry,2,PMA CINCH document List,l,L000143092,Closed Only,2235,KELLY,JACK,0,100,07/01/1997,12/01/1997,xyz.alphabets@cigniti.com, 123456.numerics@cigniti.com,CignitiTechnologiesLtd

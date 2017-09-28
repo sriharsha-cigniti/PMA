@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium.Interactions;
 using System.Collections;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 {
@@ -64,7 +65,9 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byLocationIconResultsTable = By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byClaimInquirySearchResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byClaimTotalIncurred = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalfinancial1_0_lblclaimincurred_0");
-
+        private By byClaimInquirypageSize = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult']//input[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_PSI']");
+        private By byClaimInquiryPagesizeDropdown = By.XPath("//ul[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_DXMCC']/li[@class='dxm-item']");
+        private By byClaimInquiryPagesizeDRopdownBtn = By.XPath("");
         //private By byLocationField = By.Id("MainContent_ASPxRoundPanel1_pnlContent_txtlocation_I");
         private By byLocationField = By.XPath("//label[contains(text(),'Location : ')]/../..//input[@type='text']");
         private By byLocationCodeFieldColumn = By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@class,'dxgvDataRow')]//td[1]");
@@ -78,6 +81,14 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byPaymentStatusText = By.LinkText("Payment Status");
         private By byNote = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrnotes1_0_gridNotes_0_DXMainTable']//th[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrnotes1_0_gridNotes_0_col0']");
         private By byClaimantName = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXFREditorcol1']//input[@id='MainContent_ASPxPageControl1_gridresult_DXFREditorcol1_I']");
+        //EmailAdjuster
+        private By byCheckboxEmailAdjuster = By.Id("chkEmail_S_D");
+        private By byEmailAddressField = By.XPath("//table[@id='mememailcc']//textarea[@id='mememailcc_I']");
+        private By byMessageField = By.XPath("//table[@id='memessage']//textarea[@id='memessage_I']");
+        private By bySendButton = By.XPath("//div[@id='btnSend']");
+        private By byResetBtn = By.XPath("//div[@id='ASPxButton1']//span[contains(text(),'Reset')]");
+        private By byCancelButton = By.XPath("//div[@id='btncancel']");
+
 
         #endregion
 
@@ -85,8 +96,67 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         #region Public Methods
 
-        //Click AccidentDateRange Begin ClearBtn in Calendar
-        public void ClickAccidentDateRangeBeginClearBtn()
+        //Click Resetbutton in EmailAdjuster
+        public void clickResetButtoninEmailAdjuster()
+        {
+            this.TESTREPORT.LogInfo("Click Resetbutton in EmailAdjuster");
+            this.driver.ClickElement(byResetBtn, "ResetButtoninEmailAdjuster");
+            if(this.driver.GetElementText(byMessageField).Length==0 || this.driver.GetElementText(byMessageField)=="")
+            {
+                this.TESTREPORT.LogSuccess("Verify Message field after clicking Reset",string.Format("Field <mark>{0}</mark> is set to empty", byMessageField));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify Message field after clicking Reset", "Field is not empty",this.SCREENSHOTFILE);
+            }
+            Thread.Sleep(2000);
+           // By close = By.XPath("//div[@class='dxpc-closeBtn']//span");
+            //this.driver.ClickElement(close,"Close button in EMailAdjuster");
+            //this.driver.SwitchTo().DefaultContent();
+        }
+
+        //Click cancelbutton in EmailAdjuster
+        public void ClickCancelButtoninEmailAdjuster()
+        {
+            this.TESTREPORT.LogInfo("Click Cancelbutton in EmailAdjuster");
+            this.driver.IsElementPresent(byCancelButton);
+            this.driver.ClickElement(byCancelButton,"CancelButton in EmailAdjuster");
+            Thread.Sleep(2000);
+            this.driver.SwitchTo().DefaultContent();
+            
+        }
+
+        //select PageSize in the ClaimInquiryResults table
+        public void SelectPageSizefromtheClaimInquiryResults()
+        {
+            this.TESTREPORT.LogInfo("Select PageSize from ClaimInquiryResults dropdown");
+           // string selectedValue = null;
+            
+                IReadOnlyList<IWebElement> rows = this.driver.FindElements(byClaimInquirySearchResultsTable);
+            //int value = rnd.Next(0, list.Count);
+            IReadOnlyList<IWebElement> dropdown = this.driver.FindElements(byClaimInquiryPagesizeDropdown);
+                dropdown[3].Click();
+
+                
+              string  selectedValue = this.driver.GetElementAttribute(byClaimInquiryPagesize, "value");
+               
+                     int x = Convert.ToInt32(selectedValue);
+                if (rows.Count == x)
+                { 
+                    this.TESTREPORT.LogSuccess("Verify the count of the results displayed against the pagesize selected in the ClaimInquiry", String.Format("count <mark>{0}</mark> matches", rows[3]));
+                }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify the count of the results displayed against the pagesize selected in the ClaimInquiry", String.Format("Count not matching", this.SCREENSHOTFILE));
+               
+            }
+            
+        }
+
+    
+
+    //Click AccidentDateRange Begin ClearBtn in Calendar
+    public void ClickAccidentDateRangeBeginClearBtn()
 
         {
             this.driver.ClickElement(byAccidentDateRangeBeginClearBtn, "AccidentDateRangeBeginClearBtn");
@@ -98,6 +168,17 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         {
             this.driver.ClickElement(byAccidentTab, "AccidentTab");
+        }
+
+        //Check the chaeckbox in EMailAdjuster
+        public void ClickCheckBoxinEmailAdjuster()
+
+        {
+            this.TESTREPORT.LogInfo("Click CheckBox in EmailAdjuster");
+            this.driver.SwitchTo().Frame("MainContent_dvclaims_IT0_usrdetail1_0_pcemail_0_CIF-1");
+            this.driver.IsElementPresent(byCheckboxEmailAdjuster);
+            Thread.Sleep(2000);
+            this.driver.ClickElement(byCheckboxEmailAdjuster, "Checkbox - EmailAdjuster");
         }
 
         //Click LossLineTab in claimInformation
@@ -130,6 +211,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void ClickEmailAdjuster()
 
         {
+            this.TESTREPORT.LogInfo("Click EmailAdjuster");
             this.driver.ClickElement(byEmailAdjusterBtn, "EmailAdjuster");
         }
 
@@ -338,7 +420,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             bool flag = this.driver.IsElementPresent(byAccidentInformationText);
             if (flag)
             {
-                this.TESTREPORT.LogSuccess("Verify AccidentInformation", String.Format(" Successfully verified - <Mark>{0}</Mark> ", "AccidentInformation Link"));
+                this.TESTREPORT.LogSuccess("Verify AccidentInformation", String.Format(" Successfully verified -  - <Mark>{0}</Mark> ", "AccidentInformation link"));
             }
             else
             {
@@ -412,6 +494,14 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(byResetButton, "Reset Button");
 
         }
+
+        public void ClickSendButton()
+        {
+            this.TESTREPORT.LogInfo("Click Send button in EmailAdjuster");
+            this.driver.ClickElement(bySendButton, "Send Button");
+            this.driver.SwitchTo().DefaultContent();
+        }
+
         public string EnterClaimNumber(String ClaimNumbervalue)
 
         {
@@ -419,6 +509,19 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             Thread.Sleep(2000);
             string str = this.driver.GetElementAttribute(byClaimNumber,"value");
             return str;
+        }
+
+        public void EnterEmailAddress(String EMailAddressFieldvalue,string MessageFieldValue)
+
+        {
+            this.TESTREPORT.LogInfo("Enter Multiple Email address and message in the Text box provided");
+            this.driver.IsElementPresent(byEmailAddressField);
+            Thread.Sleep(2000);
+            this.driver.SendKeysToElement(byEmailAddressField, EMailAddressFieldvalue, "EMailAddress");
+            Thread.Sleep(2000);
+            this.driver.SendKeysToElement(byMessageField, MessageFieldValue, "MessageField");
+            
+            
         }
 
         public void VerifyClaimNumber(string value1)
@@ -462,8 +565,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             Thread.Sleep(2000);
             this.driver.SendKeysToElementWithJavascript(byClaimstatus, Claimstatusvalue, "Claimstatus");
             Actions a = new Actions(driver);
-            a.SendKeys(Keys.Down).Build().Perform();
-            a.SendKeys(Keys.Down).Build().Perform();
+            a.SendKeys(OpenQA.Selenium.Keys.Down).Build().Perform();
+            a.SendKeys(OpenQA.Selenium.Keys.Down).Build().Perform();
             Thread.Sleep(2000);
             string str = this.driver.GetElementAttribute(byClaimstatus, "value");
             return str;
@@ -543,13 +646,30 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void EnterAccidentDateRangeBegin(String AccidentDateRangeBeginFieldvalue)
 
         {
-            this.driver.SendKeysToElement(byAccidentDateRangeBeginField, AccidentDateRangeBeginFieldvalue, "AccidentDateRangeBeginField");
+            this.driver.SendKeysToElementWithJavascript(byAccidentDateRangeBeginField, AccidentDateRangeBeginFieldvalue, "AccidentDateRangeBeginField");
+            Thread.Sleep(2000);
+            By calendarDRopdown = By.Id("MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_B-1Img");
+            this.driver.ClickElement(calendarDRopdown,"Calendar dRopDOwn");
+            By selectDAte = By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_mt']//td[contains(text(),'2')]");
+            Thread.Sleep(5000);
+            this.driver.ClickElement(selectDAte, "select dTae");
+
+            
+            Thread.Sleep(5000);
         }
 
         public void EnterAccidentDateRangeEnd(String AccidentDateRangeEndFieldvalue)
 
         {
-            this.driver.SendKeysToElement(byAccidentDateRangeEndField, AccidentDateRangeEndFieldvalue, "AccidentDateRangeEndField");
+            Thread.Sleep(2000);
+            this.driver.SendKeysToElementWithJavascript(byAccidentDateRangeEndField, AccidentDateRangeEndFieldvalue, "AccidentDateRangeEndField");
+            Thread.Sleep(2000);
+            By calendarDRopdown = By.Id("MainContent_ASPxRoundPanel1_pnlContent_dtaccidentend_B-1Img");
+            this.driver.ClickElement(calendarDRopdown, "Calendar dRopDOwn");
+            By selectDate = By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentend_DDD_C_mt']//td[contains(text(),'2')]");
+            this.driver.ClickElement(selectDate,"select dTae");
+            Thread.Sleep(5000);
+            
         }
 
         public void EnterReportDateRangeBegin(String ReportDateRangeBeginFieldvalue)
@@ -864,7 +984,44 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
-        public ArrayList ClickOnRandomClaiminclaiminquiryResults()
+        public void VerifyAccidentDateTableValue(string value, string value1)
+        {
+            //string value1 = this.driver.GetElementText(byLocationCodeField);
+            Thread.Sleep(3000);
+            IReadOnlyList<IWebElement> column = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]//td[4]"));
+
+            if (column.Count != 0)
+            {
+                foreach (var item in column)
+                {
+                    //DateTime dt = new DateTime(2008, 3, 9, 16, 5, 7, 123);
+                    //String.Format("{0:MM/dd/yyyy}", dt); 
+
+                    string iDate = value;
+                    DateTime oDate = Convert.ToDateTime(iDate);
+                    string iDate1 = value1;
+                    DateTime oDate1 = Convert.ToDateTime(iDate1);
+                    string iDate2 = item.Text;
+                    DateTime actualvalue = Convert.ToDateTime(iDate2);
+                   
+                    if (actualvalue <= oDate1 && actualvalue >= oDate)
+                    {
+                        this.TESTREPORT.LogSuccess("Verify AccidentDate Result value", string.Format("Date - <mark>{0}</mark> is within the AccidentDate Range", actualvalue));
+                    }
+                    else
+                    {
+                        this.TESTREPORT.LogFailure("Verify AccidentDate Result value", string.Format("Date is not within the AccidentDate Range"), this.SCREENSHOTFILE);
+                    }
+                    Thread.Sleep(2000);
+                }
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify filtered results", string.Format("There is no data to display"), this.SCREENSHOTFILE);
+            }
+        }
+
+        public ArrayList ClickOnRandomClaimInquiryResults()
         {
             Thread.Sleep(6000);
             return this.driver.ClickRandomCliamNumber(byClaimInquirySearchResultsTable, 9);
@@ -886,7 +1043,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void EnterClaimantName(string ClaimantName)
         {
-            if (ClaimantName.Contains("L"))
+            if (ClaimantName.Contains("l"))
             {
                 this.driver.SendKeysToElementClearFirst(byClaimantName, ClaimantName, "ClaimantName");
             }

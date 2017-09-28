@@ -48,7 +48,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byQuickClaimSearchTable = By.XPath("//table[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byClaimInformationClaimNumber = By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_lblClaimNo_0']");
         private By byClaimNameinformation = By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxLabel1_0']");
-        private By byClaimInquirySearchResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
+        public By byClaimInquirySearchResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byMyDiaryResultsTable = By.XPath("//table[@id='MainContent_sppage_pnlDiary_griddiary_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byQuickClaimPageSizeDropdown = By.XPath("//ul[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXPagerBottom_DXMCC']/li[@class='dxm-item']");
         private By byQuickClaimPageSize = By.XPath("//input[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXPagerBottom_PSI']");
@@ -208,6 +208,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //click on Search
         public void ClickSearch()
         {
+            Thread.Sleep(8000);
             this.TESTREPORT.LogInfo("Click on Search");
             this.driver.ClickElement(bySearchButton, "Search", 60);
         }

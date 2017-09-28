@@ -329,7 +329,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             cInquiry.VerifyTotalIncurredTableValue(IncurredTo,IncurredFrom);
             //To select random Claim Number
-            ArrayList Index = cInquiry.ClickOnRandomClaiminclaiminquiryResults();
+            ArrayList Index = cInquiry.ClickOnRandomClaimInquiryResults();
             home.VerifyClaimNumber(Index[0].ToString());
 
             //click on Finanacial tab
@@ -353,31 +353,38 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.InitTestCase("CI_07", "Claim Inquiry-Search the data with Accident date range");
 
+            string HomePageTitle = readCSV("HomePageTitle");           
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string AccidentDateRangeBegin = readCSV("AccidentDateRangeBegin");
+            string AccidentDateRangeEnd = readCSV("AccidentDateRangeEnd");
+
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
             home.VerifyCinchWelome();
             //Click on Claiminquiry
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
             //Enter AccidentDateRange Begin
-            cInquiry.EnterAccidentDateRangeBegin("");
+            cInquiry.EnterAccidentDateRangeBegin(AccidentDateRangeBegin);
             //Enter AccidentDateRange End
-            cInquiry.EnterAccidentDateRangeEnd("");
+            cInquiry.EnterAccidentDateRangeEnd(AccidentDateRangeEnd);
             //CLick on search button
             home.ClickSearch();
             //Verify table row count- Need to implement
+            home.ClaimInquiryResultsCount();
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
             //Need to implement-accident range Column
+            cInquiry.VerifyAccidentDateTableValue(AccidentDateRangeBegin, AccidentDateRangeEnd);
             //NEed to implement-to select random Claim Number
 
             //need to implement- verify claim Number
             //Need to implement-To  Verify accident date from claim information
-            
+
             //logout of Application
             home.ClickExit();
 
@@ -565,31 +572,44 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.InitTestCase("CI_13", "Claim Inquiry-Email to Claim Adjuster-Send");
 
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string EmailAddress1 = readCSV("EmailAddress1");
+            string EmailAddress2 = readCSV("EmailAddress2");
+            string Message = readCSV("Message");
+            string MultipleEMailAddress = EmailAddress1 + "," + EmailAddress2;
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
             home.VerifyCinchWelome();
             //Click on Claiminquiry
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
             //CLick on search button
             home.ClickSearch();
-            //Verify table row count - Need to implement
-            
+            //Verify table row count 
+            home.ClaimInquiryResultsCount();
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
 
-            //Need to implement-to select random Claim Number
+            //To select random Claim Number
+            ArrayList Index = cInquiry.ClickOnRandomClaimInquiryResults();
+            home.VerifyClaimNumber(Index[0].ToString());
+
             //click on EmailAdjuster
             cInquiry.ClickEmailAdjuster();
             //verify EmailAdjuster on the popup
             cInquiry.VerifyEmailAdjuster();
-            //Need to implement-Click on the checkbox Email copy to sender
-            //Need to implement-Enter Multiple Email address separated by comma
-            //Need to implement-click on send button
+            //Click on the checkbox Email copy to sender
+            cInquiry.ClickCheckBoxinEmailAdjuster();
+            //Enter Multiple Email address separated by comma
+            cInquiry.EnterEmailAddress(MultipleEMailAddress, Message);
+
+            //click on send button
+            cInquiry.ClickSendButton();
 
             //logout of Application
             home.ClickExit();
@@ -605,32 +625,47 @@ namespace AutomatedTest.FunctionalTests.PMA
             
             this.TESTREPORT.InitTestCase("CI_14", "Claim Inquiry-Email to Claim Adjuster Reset");
 
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string EmailAddress1 = readCSV("EmailAddress1");
+            string EmailAddress2 = readCSV("EmailAddress2");
+            string Message = readCSV("Message");
+            string MultipleEMailAddress = EmailAddress1 + "," + EmailAddress2;
+
+
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
             home.VerifyCinchWelome();
             //Click on Claiminquiry
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
             //CLick on search button
             home.ClickSearch();
-            //Verify table row count- Need to implement
-
+            //Verify table row count
+            home.ClaimInquiryResultsCount();
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
 
-            //Need to implement-to select random Claim Number
+            //To select random Claim Number
+            ArrayList Index = cInquiry.ClickOnRandomClaimInquiryResults();
+            home.VerifyClaimNumber(Index[0].ToString());
+
             //click on EmailAdjuster
             cInquiry.ClickEmailAdjuster();
             //verify EmailAdjuster on the popup
             cInquiry.VerifyEmailAdjuster();
-            
-            //Need to implement-Click on the checkbox Email copy to sender
-            //Need to implement-Enter Multiple Email address separated by comma
+
+            //Click on the checkbox Email copy to sender
+            cInquiry.ClickCheckBoxinEmailAdjuster();
+            //Enter Multiple Email address separated by comma
+            cInquiry.EnterEmailAddress(MultipleEMailAddress, Message);
             //Need to implement-click on Reset button
+            cInquiry.clickResetButtoninEmailAdjuster();
+            cInquiry.ClickCancelButtoninEmailAdjuster();
 
             //logout of Application
             home.ClickExit();
@@ -646,32 +681,47 @@ namespace AutomatedTest.FunctionalTests.PMA
             
             this.TESTREPORT.InitTestCase("CI_15", "Claim Inquiry-Email to Claim Adjuster -cancel");
 
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string EmailAddress1 = readCSV("EmailAddress1");
+            string EmailAddress2 = readCSV("EmailAddress2");
+            string Message = readCSV("Message");
+            string MultipleEMailAddress = EmailAddress1 + "," + EmailAddress2;
+
+
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
             home.VerifyCinchWelome();
             //Click on Claiminquiry
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
             //CLick on search button
             home.ClickSearch();
-            //Verify table row count- Need to implement
-
+            //Verify table row count
+            home.ClaimInquiryResultsCount();
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
 
-            //Need to implement-to select random Claim Number
+            //To select random Claim Number
+            ArrayList Index = cInquiry.ClickOnRandomClaimInquiryResults();
+            home.VerifyClaimNumber(Index[0].ToString());
+
             //click on EmailAdjuster
             cInquiry.ClickEmailAdjuster();
             //verify EmailAdjuster on the popup
             cInquiry.VerifyEmailAdjuster();
 
-            //Need to implement-Click on the checkbox Email copy to sender
-            //Need to implement-Enter Multiple Email address separated by comma
-            //Need to implement-click on  Cancel button
+            //Click on the checkbox Email copy to sender
+            cInquiry.ClickCheckBoxinEmailAdjuster();
+            //Enter Multiple Email address separated by comma
+            cInquiry.EnterEmailAddress(MultipleEMailAddress, Message);
+
+            //Click on  Cancel button
+            cInquiry.ClickCancelButtoninEmailAdjuster();
 
             //logout of Application
             home.ClickExit();
@@ -751,26 +801,33 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.InitTestCase("CI_18", "Claim Inquiry-Verify Selecting page size option from the drop down loads all claims");
 
+
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            
+
+
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
             home.VerifyCinchWelome();
             //Click on Claiminquiry
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
             //CLick on search button
             home.ClickSearch();
-            //Verify table row count- Need to implement
-
+            //Verify table row count
+            home.ClaimInquiryResultsCount();
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
 
-            //Need to implement-In the Detailed claim list, select a page size from the drop down menu in the bottom right side(E.g. ALL )
-            //Need to implement-Validate the data grid with all the entries
-           
+
+            //In the Detailed claim list, select a page size from the drop down menu in the bottom right side(E.g. ALL )
+            cInquiry.SelectPageSizefromtheClaimInquiryResults();
+            
             //logout of Application
             home.ClickExit();
 
@@ -783,17 +840,21 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.InitTestCase("CI_19", "Claim Inquiry-Verify to Drag a column in drag column section");
 
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+
             //Verify that user lands on Cinch application
-            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+            home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
             home.VerifyCinchWelome();
             //Click on Claiminquiry
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle("Claim Inquiry");
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
             //CLick on search button
             home.ClickSearch();
-            //Verify table row count- Need to implement
+            //Verify table row count
+            home.ClaimInquiryResultsCount();
 
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
@@ -807,7 +868,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             //logout of Application
             home.ClickExit();
-
+            
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
