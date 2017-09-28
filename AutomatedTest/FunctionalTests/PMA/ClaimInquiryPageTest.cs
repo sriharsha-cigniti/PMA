@@ -14,7 +14,7 @@ namespace AutomatedTest.FunctionalTests.PMA
     [TestClass]
     public class ClaimInquiryPageTests : PMA.TestBaseTemplate
     {
-
+        //Create Page Objectss
         HomePage home = new HomePage();
         ClaimInquiry cInquiry = new ClaimInquiry();
 
