@@ -9,6 +9,7 @@ using System.Collections;
 namespace AutomatedTest.FunctionalTests.PMA
 
 {
+    //Home Page Tests
     [TestClass]
 
     public class HomePageTests : PMA.TestBaseTemplate
