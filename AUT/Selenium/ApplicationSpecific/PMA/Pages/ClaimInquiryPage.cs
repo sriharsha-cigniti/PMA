@@ -95,7 +95,14 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byClaimListButton = By.XPath("//span[contains(text(),'Claim List')]");
         private By byEFRButton = By.XPath("//span[contains(text(),'View EFR')]");
         private By byExportToSpredsheetOnLossummaryLink = By.XPath("//div[@id='MainContent_ASPxPageControl1_btnExportLossline']//span[contains(text(),'Export to Spreadsheet')]");
-
+        //Documents Tab
+        
+        
+        
+        
+        
+        
+        
         #endregion
 
         #region Path
@@ -766,28 +773,143 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             //Thread.Sleep(5000);
         }
 
-        public void EnterReportDateRangeBegin(String ReportDateRangeBeginFieldvalue)
+        public string EnterReportDateRangeBegin()
 
         {
-            this.driver.SendKeysToElement(byReportDateRangeBeginField, ReportDateRangeBeginFieldvalue, "ReportDateRangeBeginField");
+            Thread.Sleep(2000);
+            By calendarDRopdown = By.Id("MainContent_ASPxRoundPanel1_pnlContent_dtreportbegin_B-1Img");
+            this.driver.ClickElement(calendarDRopdown, "Calendar DropDOwn");
+            // By selectDAte = By.XPath(string.Format("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_mt']//td[contains(text(),'{0}')]", date));
+            Thread.Sleep(2000);
+            this.driver.ClickElement(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportbegin_DDD_C']//span[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportbegin_DDD_C_T']"), "Button to select month and year");
+            IReadOnlyList<IWebElement> months = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportbegin_DDD_C_FNP_m']//td[contains(@class,'dxeCalendarFastNavMonth')]"));
+            months[2].Click();
+            Thread.Sleep(2000);
+            IReadOnlyList<IWebElement> years = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportbegin_DDD_C_FNP_y']//td[contains(@class,'dxeCalendarFastNavYear')]"));
+            years[2].Click();
+            Thread.Sleep(2000);
+            this.driver.ClickElement(By.XPath("//div[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportbegin_DDD_C_FNP_PW-1']//td[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportbegin_DDD_C_FNP_BO']"), "OK button in month and year");
+
+            IReadOnlyList<IWebElement> dates = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportbegin_DDD_C_mt']//td"));
+            Thread.Sleep(2000);
+            foreach (var item in dates)
+            {
+                Thread.Sleep(2000);
+                if (item.Text.Equals("2"))
+                {
+
+                    item.Click();
+                    Thread.Sleep(1000);
+                    break;
+                }
+                //break;
+            }
+
+            Thread.Sleep(5000);
+
+            string value = this.driver.GetElementAttribute(byReportDateRangeBeginField, "value");
+            return value;
         }
 
-        public void EnterReportDateRangeEnd(String ReportDateRangeEndFieldvalue)
+        public string EnterReportDateRangeEnd()
 
         {
-            this.driver.SendKeysToElement(byReportDateRangeBeginField, ReportDateRangeEndFieldvalue, "ReportDateRangeEndField");
+            Thread.Sleep(2000);
+            By calendarDRopdown = By.Id("MainContent_ASPxRoundPanel1_pnlContent_dtreportend_B-1Img");
+            this.driver.ClickElement(calendarDRopdown, "Calendar DropDown");
+            // By selectDAte = By.XPath(string.Format("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_mt']//td[contains(text(),'{0}')]", date));
+            Thread.Sleep(2000);
+            this.driver.ClickElement(By.XPath("//div[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportend_DDD_PW-1']//span[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportend_DDD_C_T']"), "Button to select month and year");
+            IReadOnlyList<IWebElement> months = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportend_DDD_C_FNP_m']//td[contains(@class,'dxeCalendarFastNavMonth')]"));
+            months[10].Click();
+            Thread.Sleep(2000);
+            IReadOnlyList<IWebElement> years = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportend_DDD_C_FNP_y']//td[contains(@class,'dxeCalendarFastNavYear')]"));
+            years[5].Click();
+            Thread.Sleep(2000);
+            this.driver.ClickElement(By.XPath("//div[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportend_DDD_C_FNP_PW-1']//td[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportend_DDD_C_FNP_BO']"), "OK button in month and year");
+
+            IReadOnlyList<IWebElement> dates = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtreportend_DDD_C_mt']//td"));
+
+            foreach (var item in dates)
+            {
+                if (item.Enabled && item.Text.Contains("26"))
+                {
+                    item.Click();
+                    break;
+                }
+                //break;
+            }
+
+            Thread.Sleep(5000);
+            string value1 = this.driver.GetElementAttribute(byReportDateRangeEndField, "value");
+            return value1;
         }
 
-        public void EnterActivityDateRangeBegin(String ActivityDateRangeBeginFieldvalue)
+        public void EnterActivityDateRangeBegin()
 
         {
-            this.driver.SendKeysToElement(byActivityDateRangeBeginField, ActivityDateRangeBeginFieldvalue, "ActivityDateRangeBeginField");
+            Thread.Sleep(2000);
+            By calendarDRopdown = By.Id("MainContent_ASPxRoundPanel1_pnlContent_dtactivitybegin_B-1Img");
+            this.driver.ClickElement(calendarDRopdown, "Calendar dRopDOwn");
+            // By selectDAte = By.XPath(string.Format("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_mt']//td[contains(text(),'{0}')]", date));
+            Thread.Sleep(2000);
+            this.driver.ClickElement(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivitybegin_DDD_C']//span[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivitybegin_DDD_C_T']"), "Button to select month and year");
+            IReadOnlyList<IWebElement> months = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivitybegin_DDD_C_FNP_m']//td[contains(@class,'dxeCalendarFastNavMonth')]"));
+            months[2].Click();
+            Thread.Sleep(2000);
+            IReadOnlyList<IWebElement> years = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivitybegin_DDD_C_FNP_y']//td[contains(@class,'dxeCalendarFastNavYear')]"));
+            years[2].Click();
+            Thread.Sleep(2000);
+            this.driver.ClickElement(By.XPath("//div[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivitybegin_DDD_C_FNP_PW-1']//td[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivitybegin_DDD_C_FNP_BO']"), "OK button in month and year");
+
+            IReadOnlyList<IWebElement> dates = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivitybegin_DDD_C_mt']//td"));
+            Thread.Sleep(2000);
+            foreach (var item in dates)
+            {
+                Thread.Sleep(2000);
+                if (item.Text.Equals("2"))
+                {
+
+                    item.Click();
+                    Thread.Sleep(1000);
+                    break;
+                }
+                //break;
+            }
+
+            Thread.Sleep(5000);
         }
 
-        public void EnterActivityDateRangeEnd(String ActivityDateRangeEndFieldvalue)
+        public void EnterActivityDateRangeEnd()
 
         {
-            this.driver.SendKeysToElement(byActivityDateRangeEndField, ActivityDateRangeEndFieldvalue, "ActivityDateRangeEndField");
+            Thread.Sleep(2000);
+            By calendarDRopdown = By.Id("MainContent_ASPxRoundPanel1_pnlContent_dtactivityend_B-1Img");
+            this.driver.ClickElement(calendarDRopdown, "Calendar dRopDOwn");
+            // By selectDAte = By.XPath(string.Format("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_mt']//td[contains(text(),'{0}')]", date));
+            Thread.Sleep(2000);
+            this.driver.ClickElement(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivityend_DDD_C']//span[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivityend_DDD_C_T']"), "Button to select month and year");
+            IReadOnlyList<IWebElement> months = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivityend_DDD_C_FNP_m']//td[contains(@class,'dxeCalendarFastNavMonth')]"));
+            months[10].Click();
+            Thread.Sleep(2000);
+            IReadOnlyList<IWebElement> years = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivityend_DDD_C_FNP_y']//td[contains(@class,'dxeCalendarFastNavYear')]"));
+            years[5].Click();
+            Thread.Sleep(2000);
+            this.driver.ClickElement(By.XPath("//div[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivityend_DDD_C_FNP_PW-1']//td[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivityend_DDD_C_FNP_BO']"), "OK button in month and year");
+
+            IReadOnlyList<IWebElement> dates = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtactivityend_DDD_C_mt']//td"));
+
+            foreach (var item in dates)
+            {
+                if (item.Enabled && item.Text.Contains("26"))
+                {
+                    item.Click();
+                    break;
+                }
+                //break;
+            }
+
+            Thread.Sleep(5000);
         }
 
         public void EnterLocationCodeField(String LocationCodeFieldvalue)
@@ -1295,7 +1417,44 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.AssertTextMatching(ActualClaimAccidentDate, AccidentDate);
         }
 
-        
+        public void VerifyDocumentsTab()
+        {
+
+            
+                Thread.Sleep(2000);
+
+                this.driver.ClickElement(byDocumentsTab, "Documents");
+
+          
+        }
+
+        public void VerifyClaimInfoReportDate(string value,string value1)
+        {
+            
+            string iDate = value;
+            DateTime oDate = Convert.ToDateTime(iDate);
+            string iDate1 = value1;
+            DateTime oDate1 = Convert.ToDateTime(iDate1);
+
+            string ActualClaimReportDate = this.driver.GetElementText(By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_ASPxLabel8']"));
+            string iDate2 = ActualClaimReportDate;
+            DateTime actualvalue = Convert.ToDateTime(iDate2);
+
+            if (actualvalue <= oDate1 && actualvalue >= oDate)
+            {
+                this.TESTREPORT.LogSuccess("Verify ReportDate Result value", string.Format("Date - <mark>{0}</mark> is within the ReportDate Range", actualvalue));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify ReportDate Result value", string.Format("Date is not within the ReportDate Range"), this.SCREENSHOTFILE);
+            }
+            Thread.Sleep(2000);
+
+
+
+        }
+
+
 
 
 
