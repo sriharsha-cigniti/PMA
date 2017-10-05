@@ -1430,8 +1430,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         
 
-        }
-        public void VerifyCloseButton()
+       public void VerifyCloseButton()
         {
 
         }
@@ -1440,6 +1439,78 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
 
         }
+
+    public void VerifyClaimInfoReportDate(string value, string value1)
+    {
+
+        string iDate = value;
+        DateTime oDate = Convert.ToDateTime(iDate);
+        string iDate1 = value1;
+        DateTime oDate1 = Convert.ToDateTime(iDate1);
+
+        string ActualClaimReportDate = this.driver.GetElementText(By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_ASPxLabel8']"));
+        string iDate2 = ActualClaimReportDate;
+        DateTime actualvalue = Convert.ToDateTime(iDate2);
+
+        if (actualvalue <= oDate1 && actualvalue >= oDate)
+        {
+            this.TESTREPORT.LogSuccess("Verify ReportDate Result value", string.Format("Date - <mark>{0}</mark> is within the ReportDate Range", actualvalue));
+        }
+        else
+        {
+            this.TESTREPORT.LogFailure("Verify ReportDate Result value", string.Format("Date is not within the ReportDate Range"), this.SCREENSHOTFILE);
+        }
+        Thread.Sleep(2000);
+
+
+
+    }
+
+        public void DragTheColumnHeaderInSpace(string value)
+        {
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(byColumnHeaders);
+            IWebElement e2 = this.driver.FindElement(byDragaColoumnheaderSpace);
+            foreach (var WebItem in list)
+            {
+
+                if (WebItem.Text.ToLower().Trim().Equals(value.ToLower().Trim()))
+                {
+                    this.driver.DragDrop(WebItem, e2);
+                    break;
+                }
+
+            }
+        }
+
+    public void DraggedColumnList(int number, string value)
+        {
+            try
+            {
+                IReadOnlyList<IWebElement> list = this.driver.FindElements(byDraggedColumnList);
+                if (list[number].Text.Trim().ToLower() == value.Trim().ToLower())
+                {
+                    this.TESTREPORT.LogSuccess("Verify Dragged column", string.Format("Column -<mark>{0}</mark> Dragged successfully", list[number].Text));
+                }
+                else
+                {
+                    this.TESTREPORT.LogFailure("Verify Dragged column", string.Format("Falied to drag the Columns"), this.SCREENSHOTFILE);
+                }
+            }
+            catch (Exception e)
+            {
+                this.TESTREPORT.LogFailure("Verify Dragged column", string.Format("Falied to drag the Columns"), this.SCREENSHOTFILE);
+            }
+
+
+        }
+
+        public ArrayList ClickOnRandomGroupClaim()
+        {
+            Thread.Sleep(6000);
+            return this.driver.ClickRandomCliamNumber(byGroupColumnsData, 1);
+        }
+
+
 
         #endregion
 

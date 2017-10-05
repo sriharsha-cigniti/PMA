@@ -1150,10 +1150,10 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Verify the Documents Tab");
             this.TESTREPORT.LogInfo("Click on View EFR button of the claim page");
-            cInquiry.VerifyDocumentsTab();
+            //cInquiry.VerifyDocumentsTab();
             cInquiry.ClickDocuments();
             cInquiry.SwitchToChildWindow();
-            cInquiry.SelectDocuments();
+            //cInquiry.SelectDocuments();
 
 
 
