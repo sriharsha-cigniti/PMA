@@ -1038,6 +1038,8 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.VerifyDetailedClaimList();
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
+            cInquiry.DragTheColumnHeaderInSpace("Claimant Name");
+            cInquiry.DragTheColumnHeaderInSpace("Location");
 
             //Need to implement-Drag multiple columns(E.G. Claim Number, claimant name and accident date ) into the 'Drag a column header here to group by that column' appears
             //Need to implement-Expand the first selected Column header to see the detail
@@ -1127,15 +1129,19 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Verify the Documents Tab");
             this.TESTREPORT.LogInfo("Click on View EFR button of the claim page");
-            cInquiry.ClickDocuments();
+            cInquiry.VerifyDocumentsTab();
             cInquiry.ClickDocuments();
             cInquiry.SwitchToChildWindow();
-            string PageTitle = "PMA CINCH EFR " + "- " + Index[0].ToString();
-            home.VerifyPageTitle(PageTitle);
-            cInquiry.CloseChildWindow();
-            cInquiry.SwitchToParentWindow();
+            cInquiry.SelectDocuments();
 
-            this.TESTREPORT.LogInfo("Logout from Application");
+
+
+
+            cInquiry.GetExportFilePath("jnlpModified.jsp");
+            cInquiry.ExportFileExists();
+            cInquiry.ExportFileDelete();
+
+            this.TESTREPORT.LogInfo("Logout of Application");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();

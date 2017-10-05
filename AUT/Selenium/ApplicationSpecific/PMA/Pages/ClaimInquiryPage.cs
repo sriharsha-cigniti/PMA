@@ -93,12 +93,19 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By bySendButton = By.XPath("//div[@id='btnSend']");
         private By byResetBtn = By.XPath("//div[@id='ASPxButton1']//span[contains(text(),'Reset')]");
         private By byCancelButton = By.XPath("//div[@id='btncancel']");
-        //EXport spreadsheet
+        //Export spreadsheet
         private By byLossSumaarylink = By.XPath(" //span[contains(text(),'Loss Line Summary')]");
         private By byClaimListButton = By.XPath("//span[contains(text(),'Claim List')]");
         private By byEFRButton = By.XPath("//span[contains(text(),'View EFR')]");
         private By byExportToSpredsheetOnLossummaryLink = By.XPath("//div[@id='MainContent_ASPxPageControl1_btnExportLossline']//span[contains(text(),'Export to Spreadsheet')]");
-
+        // Document LIst
+       
+        
+        
+        
+        
+        
+        
         #endregion
 
         #region Path
@@ -1351,7 +1358,42 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         }
 
+        public void VerifyDocumentsTab()
+        {
+            Thread.Sleep(2000);
+           if( this.driver.IsElementPresent(byDocumentsTab))
+                this.TESTREPORT.LogSuccess("Verify Documents tab","Document tab is present",this.SCREENSHOTFILE);
+           else
+                this.TESTREPORT.LogFailure("Verify Documents tab", "Document tab is not present", this.SCREENSHOTFILE);
+           
+        }
 
+        public void SelectDocuments()
+        {
+            IWebElement DocTable = this.driver.FindElement(By.XPath("//table[@class='table table-striped table-hover']"));
+            IList<IWebElement> list= DocTable.FindElements(By.TagName("tr"));
+            if(list.Count>1)
+            {
+                By checkboxDoc = By.XPath("//input[@type='checkbox']");
+                this.driver.ClickElement(checkboxDoc,"Checkbox");
+            }
+            
+        }
+
+        public void VerifyOpenButton()
+        {
+
+
+        }
+        public void VerifyCloseButton()
+        {
+
+        }
+
+        public void VerifyOpenAllButton()
+        {
+
+        }
 
         #endregion
 
