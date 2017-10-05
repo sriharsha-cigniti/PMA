@@ -23,7 +23,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         private string dataFileName = null;
         private int currentFileRowPointer = 1;
         private TestContext testContextInstance;
-        protected static IWebDriver driver = null;
+        public static  IWebDriver driver = null;
         public TestContext TestContext
         {
             get
@@ -40,14 +40,14 @@ namespace AutomatedTest.FunctionalTests.PMA
         public static void BeforeAllTestsExecution(TestContext testContext)
         {
            
-            #region WebApplication - PMA_Cinch
+          /*  #region WebApplication - PMA_Cinch
             //EngineSetup.TestReport.InitTestCase("Launch Application", "Verify Application Is Launched Successfully");
             driver = WebDriverFactory.getWebDriver(EngineSetup.BROWSER);
             driver.Navigate().GoToUrl(EngineSetup.WEBURL);
             //EngineSetup.TestReport.LogSuccess(String.Format("Launch Application On Browser - {0}",EngineSetup.BROWSER), String.Format("Application - {0} Launch Successful", EngineSetup.WEBURL));
             //EngineSetup.TestReport.UpdateTestCaseStatus();
 
-            #endregion
+            #endregion*/
         }
         [AssemblyCleanup]
         public static void AfterAllTestsExecution()
@@ -55,7 +55,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             //after execution, update extent report with gallop logo 
             /*driver can not be initialized in static method as driver is instance variable*/
-            driver.Close();
+            //driver.Close();
             driver.Quit();
             WebDriverFactory.Free();   
             EngineSetup.TestReport.Close();
@@ -76,15 +76,26 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestInitialize()]
         public void BeforeEachTestCaseExecution()
         {
+          #region WebApplication - PMA_Cinch
+             //EngineSetup.TestReport.InitTestCase("Launch Application", "Verify Application Is Launched Successfully");
+             driver = WebDriverFactory.getWebDriver(EngineSetup.BROWSER);
+             driver.Navigate().GoToUrl(EngineSetup.WEBURL);
+             //EngineSetup.TestReport.LogSuccess(String.Format("Launch Application On Browser - {0}",EngineSetup.BROWSER), String.Format("Application - {0} Launch Successful", EngineSetup.WEBURL));
+            // EngineSetup.TestReport.UpdateTestCaseStatus();
 
+             #endregion
 
         }
 
         ////Use TestCleanup to run code after each test has run
         [TestCleanup()]
-        public void AfterEachTestCaseExecution()
+        public  void AfterEachTestCaseExecution()
         {
-
+            driver.Close();
+            driver.Quit();
+            WebDriverFactory.Free();
+           // EngineSetup.TestReport.Close();
+            TestBaseTemplate.UpdateTestReport();
         }
 
 

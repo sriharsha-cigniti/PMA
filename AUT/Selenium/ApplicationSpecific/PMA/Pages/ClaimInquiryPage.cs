@@ -68,7 +68,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byClaimTotalIncurred = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalfinancial1_0_lblclaimincurred_0");
         private By byClaimInquirypageSize = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult']//input[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_PSI']");
         private By byClaimInquiryPagesizeDropdown = By.XPath("//ul[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_DXMCC']/li[@class='dxm-item']");
-        private By byClaimInquiryPagesizeDRopdownBtn = By.XPath("");
+        private By byClaimInquiryPagesizeDRopdownBtn = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult']//span[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_DDBImg']");
+        
         //private By byLocationField = By.Id("MainContent_ASPxRoundPanel1_pnlContent_txtlocation_I");
         private By byLocationField = By.XPath("//label[contains(text(),'Location : ')]/../..//input[@type='text']");
         private By byLocationCodeFieldColumn = By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@class,'dxgvDataRow')]//td[1]");
@@ -136,40 +137,48 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             
         }
 
-        //select PageSize in the ClaimInquiryResults table
-        //public void SelectPageSizefromtheClaimInquiryResults()
-        //{
-        //    this.TESTREPORT.LogInfo("Select PageSize from ClaimInquiryResults dropdown");
-        //   // string selectedValue = null;
+        //Select PageSize in the ClaimInquiryResults table
+        public void SelectPageSizefromtheClaimInquiryResults()
+        {
+            this.TESTREPORT.LogInfo("Select PageSize from ClaimInquiryResults dropdown");
+            // string selectedValue = null;
+
+            this.driver.ClickElement(byClaimInquiryPagesizeDRopdownBtn,"ClaimInquiryPageSize DropdownButton");
             
-        //        IReadOnlyList<IWebElement> rows = this.driver.FindElements(byClaimInquirySearchResultsTable);
-        //    //int value = rnd.Next(0, list.Count);
-        //    IReadOnlyList<IWebElement> dropdown = this.driver.FindElements(byClaimInquiryPagesizeDropdown);
-        //        dropdown[3].Click();
+            //int value = rnd.Next(0, list.Count);
+            IReadOnlyList<IWebElement> dropdown = this.driver.FindElements(byClaimInquiryPagesizeDropdown);
+            dropdown[1].Click();
+            Thread.Sleep(2000);
+            IReadOnlyList<IWebElement> rows = this.driver.FindElements(byClaimInquirySearchResultsTable);
+            string  selectedValue = this.driver.GetElementAttribute(byClaimInquirypageSize, "value");
 
-                
-        //      //string  selectedValue = this.driver.GetElementAttribute(byClaimInquiryPagesize, "value");
-               
-        //             int x = Convert.ToInt32(selectedValue);
-        //        if (rows.Count == x)
-        //        { 
-        //            this.TESTREPORT.LogSuccess("Verify the count of the results displayed against the pagesize selected in the ClaimInquiry", String.Format("count <mark>{0}</mark> matches", rows[3]));
-        //        }
-        //    else
-        //    {
-        //        this.TESTREPORT.LogFailure("Verify the count of the results displayed against the pagesize selected in the ClaimInquiry", String.Format("Count not matching", this.SCREENSHOTFILE));
-               
-        //    }
-            
-        //}
+            int x = Convert.ToInt32(selectedValue);
+            if (rows.Count == x)
+            {
+                this.TESTREPORT.LogSuccess("Verify the count of the results displayed against the pagesize selected in the ClaimInquiry", String.Format("count <mark>{0}</mark> matches", selectedValue));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify the count of the results displayed against the pagesize selected in the ClaimInquiry", String.Format("Count not matching", this.SCREENSHOTFILE));
 
-    
+            }
 
-    //Click AccidentDateRange Begin ClearBtn in Calendar
-    public void ClickAccidentDateRangeBeginClearBtn()
+        }
+
+
+
+        //Click AccidentDateRange Begin ClearBtn in Calendar
+        public void ClickAccidentDateRangeBeginClearBtn()
 
         {
+            Thread.Sleep(2000);
+            By calendarDRopdown = By.Id("MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_B-1Img");
+            this.driver.ClickElement(calendarDRopdown, "Calendar dRopDOwn");
+            Thread.Sleep(2000);
             this.driver.ClickElement(byAccidentDateRangeBeginClearBtn, "AccidentDateRangeBeginClearBtn");
+            Thread.Sleep(5000);
+            Actions a = new Actions(driver);
+            a.SendKeys(OpenQA.Selenium.Keys.Tab).Build().Perform();
         }
 
 
@@ -547,6 +556,25 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        public void VerifyAccidentDateField()
+        {
+            Thread.Sleep(10000);
+           
+
+            string value = this.driver.GetElementAttribute(byAccidentDateRangeBeginField, "value");
+
+            
+            
+            if (value.Length == 0)
+            {
+                this.TESTREPORT.LogSuccess("To verify the AccidentDate field after Reset", "Field set to empty");
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("To verify the AccidentDate field after Reset", "Field notset to empty");
+            }
+        }
+
         public string EnterLast4SSN(String Last4SSNvalue)
 
         {
@@ -653,33 +681,89 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.SendKeysToElement(byIncurredto, IncurredTovalue, "Incurred to");
         }
 
-        public void EnterAccidentDateRangeBegin(String AccidentDateRangeBeginFieldvalue)
-
+        public void EnterAccidentDateRangeBegin()
         {
-            this.driver.SendKeysToElementWithJavascript(byAccidentDateRangeBeginField, AccidentDateRangeBeginFieldvalue, "AccidentDateRangeBeginField");
+            //string date = "";
+            //string datetemp = AccidentDateRangeBeginFieldvalue.Split('/')[0];
+            //if (datetemp.Contains("0"))
+            //    date=datetemp.Replace("0","");
+            
+            //this.driver.SendKeysToElementWithJavascript(byAccidentDateRangeBeginField, AccidentDateRangeBeginFieldvalue, "AccidentDateRangeBeginField");
             Thread.Sleep(2000);
-            By calendarDRopdown = By.Id("MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_B-1Img");
+           By calendarDRopdown = By.Id("MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_B-1Img");
             this.driver.ClickElement(calendarDRopdown,"Calendar dRopDOwn");
-            By selectDAte = By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_mt']//td[contains(text(),'2')]");
+            // By selectDAte = By.XPath(string.Format("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_mt']//td[contains(text(),'{0}')]", date));
+            Thread.Sleep(2000);
+            this.driver.ClickElement(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C']//span[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_T']"),"Button to select month and year");
+            IReadOnlyList<IWebElement> months = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_FNP_m']//td[contains(@class,'dxeCalendarFastNavMonth')]"));
+            months[2].Click();
+            Thread.Sleep(2000);
+            IReadOnlyList<IWebElement> years = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_FNP_y']//td[contains(@class,'dxeCalendarFastNavYear')]"));
+            years[2].Click();
+            Thread.Sleep(2000);
+            this.driver.ClickElement(By.XPath("//div[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_FNP_PW-1']//td[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_FNP_BO']"),"OK button in month and year");
+
+            IReadOnlyList<IWebElement> dates = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_mt']//td"));
+            Thread.Sleep(2000);
+            foreach (var item in dates)
+            {
+                Thread.Sleep(2000);
+                if ( item.Text.Equals("2"))
+                {
+                    
+                    item.Click();
+                    Thread.Sleep(1000);
+                    break;
+                }
+                //break;
+            }
+
             Thread.Sleep(5000);
-            this.driver.ClickElement(selectDAte, "select dTae");
+            //this.driver.ClickElement(selectDAte, "select date");
 
             
-            Thread.Sleep(5000);
+            //Thread.Sleep(5000);
         }
 
-        public void EnterAccidentDateRangeEnd(String AccidentDateRangeEndFieldvalue)
+        public void EnterAccidentDateRangeEnd()
 
-        {
-            Thread.Sleep(2000);
-            this.driver.SendKeysToElementWithJavascript(byAccidentDateRangeEndField, AccidentDateRangeEndFieldvalue, "AccidentDateRangeEndField");
+        { //string date = "";
+          //string datetemp = AccidentDateRangeBeginFieldvalue.Split('/')[0];
+          //if (datetemp.Contains("0"))
+          //    date=datetemp.Replace("0","");
+
+            //this.driver.SendKeysToElementWithJavascript(byAccidentDateRangeBeginField, AccidentDateRangeBeginFieldvalue, "AccidentDateRangeBeginField");
             Thread.Sleep(2000);
             By calendarDRopdown = By.Id("MainContent_ASPxRoundPanel1_pnlContent_dtaccidentend_B-1Img");
             this.driver.ClickElement(calendarDRopdown, "Calendar dRopDOwn");
-            By selectDate = By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentend_DDD_C_mt']//td[contains(text(),'2')]");
-            this.driver.ClickElement(selectDate,"select dTae");
+            // By selectDAte = By.XPath(string.Format("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_mt']//td[contains(text(),'{0}')]", date));
+            Thread.Sleep(2000);
+            this.driver.ClickElement(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentend_DDD_C']//span[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentend_DDD_C_T']"), "Button to select month and year");
+            IReadOnlyList<IWebElement> months = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentend_DDD_C_FNP_m']//td[contains(@class,'dxeCalendarFastNavMonth')]"));
+            months[10].Click();
+            Thread.Sleep(2000);
+            IReadOnlyList<IWebElement> years = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentend_DDD_C_FNP_y']//td[contains(@class,'dxeCalendarFastNavYear')]"));
+            years[5].Click();
+            Thread.Sleep(2000);
+            this.driver.ClickElement(By.XPath("//div[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentend_DDD_C_FNP_PW-1']//td[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentend_DDD_C_FNP_BO']"), "OK button in month and year");
+
+            IReadOnlyList<IWebElement> dates = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentend_DDD_C_mt']//td"));
+
+            foreach (var item in dates)
+            {
+                if (item.Enabled && item.Text.Contains("26"))
+                {
+                    item.Click();
+                    break;
+                }
+                //break;
+            }
+
             Thread.Sleep(5000);
-            
+            //this.driver.ClickElement(selectDAte, "select date");
+
+
+            //Thread.Sleep(5000);
         }
 
         public void EnterReportDateRangeBegin(String ReportDateRangeBeginFieldvalue)
@@ -994,10 +1078,18 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
-        public void VerifyAccidentDateTableValue(string value, string value1)
+        public void VerifyAccidentDateTableValue()
         {
+            string value = this.driver.GetElementAttribute(byAccidentDateRangeBeginField,"value");
+            Thread.Sleep(2000);
+            string value1 = this.driver.GetElementAttribute(byAccidentDateRangeEndField,"value");
+            Thread.Sleep(2000);
             //string value1 = this.driver.GetElementText(byLocationCodeField);
             Thread.Sleep(3000);
+            string iDate = value;
+            DateTime oDate = Convert.ToDateTime(iDate);
+            string iDate1 = value1;
+            DateTime oDate1 = Convert.ToDateTime(iDate1);
             IReadOnlyList<IWebElement> column = this.driver.FindElements(By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]//td[4]"));
 
             if (column.Count != 0)
@@ -1007,10 +1099,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                     //DateTime dt = new DateTime(2008, 3, 9, 16, 5, 7, 123);
                     //String.Format("{0:MM/dd/yyyy}", dt); 
 
-                    string iDate = value;
-                    DateTime oDate = Convert.ToDateTime(iDate);
-                    string iDate1 = value1;
-                    DateTime oDate1 = Convert.ToDateTime(iDate1);
+                   
                     string iDate2 = item.Text;
                     DateTime actualvalue = Convert.ToDateTime(iDate2);
                    
@@ -1189,6 +1278,25 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             this.driver.CloseChildWindow();
         }
+
+        public void VerifyClaimInfoAccidentDate(string AccidentDate)
+        {
+            //By accidentdate = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_ASPxLabel18");
+            //string accidentDate = this.driver.GetElementText(accidentdate);
+            //if (!string.IsNullOrEmpty(accidentDate))
+            
+            //    this.TESTREPORT.LogSuccess("Verify Claim Info Accident Date", String.Format("Accident Date:<Mark>{0}</Mark>", accidentDate));
+       
+            //else
+            //    this.TESTREPORT.LogFailure("Verify Claim Info Accident Date", String.Format("Accident Date:<Mark>{0}</Mark>", accidentDate));
+
+
+            string ActualClaimAccidentDate = this.driver.GetElementText(By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_lblAccident_0']"));
+            this.driver.AssertTextMatching(ActualClaimAccidentDate, AccidentDate);
+        }
+
+        
+
 
 
         #endregion

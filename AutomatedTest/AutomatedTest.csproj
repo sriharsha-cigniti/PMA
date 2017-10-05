@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FunctionalTests\PMA\ClaimInquiryPageTest.cs" />
+    <Compile Include="FunctionalTests\PMA\DairyNotesPageTest.cs" />
     <Compile Include="FunctionalTests\PMA\HomePageTest.cs" />
     <Compile Include="FunctionalTests\PMA\TestBaseTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +98,7 @@
     <None Include="TestData\PMA\ClaimInquiryPageTests.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="TestData\PMA\DairyNotesPageTest.csv" />
     <None Include="TestData\PMA\HomePageTests.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

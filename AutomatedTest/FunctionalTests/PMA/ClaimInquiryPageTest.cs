@@ -17,11 +17,13 @@ namespace AutomatedTest.FunctionalTests.PMA
         //Create Page Objectss
         HomePage home = new HomePage();
         ClaimInquiry cInquiry = new ClaimInquiry();
+      
 
         [TestMethod, Description("Claim Inquiry-Click search with no search fields filled out"), TestCategory("Regression")]
         public void CI_01claimInquiryPage()
         {
-
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             this.TESTREPORT.InitTestCase("CI_01", "Claim Inquiry-Click search with no search fields filled out");
 
@@ -58,7 +60,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Click reset clears all Claim Inquiry fields"), TestCategory("Regression")]
         public void CI_02claimInquiryPage()
         {
-
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             this.TESTREPORT.InitTestCase("CI_02","Claim Inquiry-Click reset clears all Claim Inquiry fields");
 
@@ -146,8 +149,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.UpdateTestCaseStatus();
 
-
-
         }
         [TestMethod, Description("Claim Inquiry-View all tabs in the claim view(Liability)"), TestCategory("Regression")]
         public void CI_04claimInquiryPage()
@@ -212,8 +213,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.ClickDocuments();
             //Verify New window 'PMA CINCH document List' title
             cInquiry.SwitchtoDocumentswindow(DocumentsWindowPageTitle);
-
-
             //logout of Application
             home.ClickExit();
 
@@ -350,6 +349,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         public void CI_07claimInquiryPage()
         {
 
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             this.TESTREPORT.InitTestCase("CI_07", "Claim Inquiry-Search the data with Accident date range");
 
@@ -367,9 +368,9 @@ namespace AutomatedTest.FunctionalTests.PMA
             //Verify page Title for Claim Inquiry
             home.VerifyPageTitle(ClaimInquiryPageTitle);
             //Enter AccidentDateRange Begin
-            cInquiry.EnterAccidentDateRangeBegin(AccidentDateRangeBegin);
+            cInquiry.EnterAccidentDateRangeBegin();
             //Enter AccidentDateRange End
-            cInquiry.EnterAccidentDateRangeEnd(AccidentDateRangeEnd);
+            cInquiry.EnterAccidentDateRangeEnd();
             //CLick on search button
             home.ClickSearch();
             //Verify table row count- Need to implement
@@ -378,13 +379,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.VerifyLossLineSummary();
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
-            //Need to implement-accident range Column
-            cInquiry.VerifyAccidentDateTableValue(AccidentDateRangeBegin, AccidentDateRangeEnd);
-            //NEed to implement-to select random Claim Number
-
-            //need to implement- verify claim Number
-            //Need to implement-To  Verify accident date from claim information
-
+            
+           cInquiry.VerifyAccidentDateTableValue();
+            ArrayList Index = home.ClickOnRandomClaim();
+            home.VerifyClaimNumber(Index[0].ToString());
+            cInquiry.VerifyClaimInfoAccidentDate(Index[2].ToString());
+            
             //logout of Application
             home.ClickExit();
 
@@ -394,8 +394,10 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Clear Data in Accident Date range Date picker"), TestCategory("Regression")]
         public void CI_08claimInquiryPage()
         {
-
             this.TESTREPORT.InitTestCase("CI_08", "Claim Inquiry-Clear Data in Accident Date range Date picker");
+
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
@@ -406,10 +408,11 @@ namespace AutomatedTest.FunctionalTests.PMA
             //Verify page Title for Claim Inquiry
             home.VerifyPageTitle("Claim Inquiry");
             //Enter AccidentDateRange Begin
-            cInquiry.EnterAccidentDateRangeBegin("");
+            cInquiry.EnterAccidentDateRangeBegin();
             //click on Clear button in date picker 
             cInquiry.ClickAccidentDateRangeBeginClearBtn();
-            
+
+            cInquiry.VerifyAccidentDateField();
             //logout of Application
             home.ClickExit();
 
@@ -582,7 +585,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
             //Need to implement-Activity date range Column
-            //Need to implement-to select random Claim Number
+            //Need to implement-to select random Claim Number 
 
             //need to implement- verify claim Number
            
@@ -865,14 +868,14 @@ namespace AutomatedTest.FunctionalTests.PMA
         public void CI_18claimInquiryPage()
         {
 
-            this.TESTREPORT.InitTestCase("CI_18", "Claim Inquiry-Verify Selecting page size option from the drop down loads all claims");
 
+            this.TESTREPORT.InitTestCase("CI_18", "Claim Inquiry-Verify Selecting page size option from the drop down loads all claims");
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             string HomePageTitle = readCSV("HomePageTitle");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
             
-
-
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
@@ -892,7 +895,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
 
             //In the Detailed claim list, select a page size from the drop down menu in the bottom right side(E.g. ALL )
-           // cInquiry.SelectPageSizefromtheClaimInquiryResults();
+            cInquiry.SelectPageSizefromtheClaimInquiryResults();
             
             //logout of Application
             home.ClickExit();
@@ -903,7 +906,9 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Verify to Drag a column in drag column section"), TestCategory("Regression")]
         public void CI_19claimInquiryPage()
         {
-
+            //Create Page Objectss
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
             this.TESTREPORT.InitTestCase("CI_19", "Claim Inquiry-Verify to Drag a column in drag column section");
 
             string HomePageTitle = readCSV("HomePageTitle");
@@ -1066,5 +1071,74 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
+
+        [TestMethod, Description("Claim Inquiry-Verify the EFR Button on the claim page"), TestCategory("Regression")]
+        public void CI_25claimInquiryPage()
+        {
+
+            this.TESTREPORT.InitTestCase("CI_25", "Verify documents tab in the claim");
+
+
+            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
+            string ClaimantName = readCSV("ClaimantName");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string HomePageTitle = readCSV("HomePageTitle");
+
+            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
+            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+
+            this.TESTREPORT.LogInfo("Verify Cinch Welcome Text");
+            home.VerifyCinchWelome();
+
+            this.TESTREPORT.LogInfo("Click on Claiminquiry");
+            home.ClickClaimInquiry();
+
+            this.TESTREPORT.LogInfo("Verify page Title for Claim Inquiry");
+            home.VerifyPageTitle("Claim Inquiry");
+            home.ClickSearch();
+
+            this.TESTREPORT.LogInfo("Verify table row count");
+            home.ClaimInquiryResultsCount();
+
+
+            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
+            cInquiry.VerifyDetailedClaimList();
+
+            this.TESTREPORT.LogInfo("Verify loss Line Summary");
+            cInquiry.VerifyLossLineSummary();
+
+            this.TESTREPORT.LogInfo("Click on any random claim");
+            cInquiry.EnterClaimantName(ClaimantName);
+            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
+            home.VerifyClaimNumber(Index[0].ToString());
+            home.VerifyClaimantName(Index[1].ToString());
+
+            this.TESTREPORT.LogInfo("Verify the Documents Tab");
+            this.TESTREPORT.LogInfo("Click on View EFR button of the claim page");
+            cInquiry.ClickDocuments();
+            cInquiry.ClickDocuments();
+            cInquiry.SwitchToChildWindow();
+            string PageTitle = "PMA CINCH EFR " + "- " + Index[0].ToString();
+            home.VerifyPageTitle(PageTitle);
+            cInquiry.CloseChildWindow();
+            cInquiry.SwitchToParentWindow();
+
+            this.TESTREPORT.LogInfo("Logout from Application");
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
 }

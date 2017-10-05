@@ -19,6 +19,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
     {
         string accountName, strAccount = null;
 
+
         #region UI Objects
 
         private By byMyAccount = By.XPath("//input[@id='MainContent_sppage_gridaccount_I']");
@@ -430,7 +431,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public ArrayList ClickOnRandomClaim()
         {
             Thread.Sleep(6000);
-            return this.driver.ClickRandomCliamNumber(byClaimInquirySearchResultsTable, 2);
+            return this.driver.ClickRandomCliamNumber(byClaimInquirySearchResultsTable, 9);
         }
 
         //Click on Random Claim in Recentclaims table
@@ -621,11 +622,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byClaimInquirySearchResultsTable);
             if (list.Count!=0)
             {
-                this.TESTREPORT.LogSuccess("Verify ClaimInquiry Search results", String.Format(" Table - {0} is displayed succesfully", "ClaimInquiryResults"));
+                this.TESTREPORT.LogSuccess("Verify ClaimInquiry Search results", String.Format(" Table -<mark>{0}</mark> is displayed succesfully", "ClaimInquiryResults"));
             }
             else
             {
-                this.TESTREPORT.LogFailure("Verify ClaimInquiry search results", String.Format(" Table - {0} is not displayed ", this.SCREENSHOTFILE));
+                this.TESTREPORT.LogFailure("Verify ClaimInquiry search results", String.Format("Results Table is not displayed ", this.SCREENSHOTFILE));
             }
 
         }
