@@ -18,6 +18,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 {
     public class ClaimInquiry : AbstractTemplatePage
     {
+        HomePage home = new HomePage();
+
         #region UI Objects
         private By byLossLineSummary = By.Id("MainContent_ASPxPageControl1_T1T");
         private By byDetailedClaimList = By.Id("MainContent_ASPxPageControl1_T0T");
@@ -60,8 +62,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byAccidentDateRangeBeginClearBtn = By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C']//td[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_BC']");
         private By byDragaColoumnheaderSpace = By.XPath("//div[@id='MainContent_ASPxPageControl1_gridresult_grouppanel']");
         private By bysecondcolumnheader = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@id,'MainContent_ASPxPageControl1_gridresult_DXHeadersRow0')]//th[2]");
-        private By byClaimInquiryResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]"); 
-        private By bythirdcolumnheader = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@id,'MainContent_ASPxPageControl1_gridresult_DXHeadersRow0')]/th[3]");
+        private By byClaimInquiryResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
+        private By byColumnHeaders = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@id,'MainContent_ASPxPageControl1_gridresult_DXHeadersRow0')]/th");
         private By byLossLineSummaryResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridlossline_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byLocationIconResultsTable = By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byClaimInquirySearchResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
@@ -69,7 +71,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byClaimInquirypageSize = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult']//input[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_PSI']");
         private By byClaimInquiryPagesizeDropdown = By.XPath("//ul[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_DXMCC']/li[@class='dxm-item']");
         private By byClaimInquiryPagesizeDRopdownBtn = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult']//span[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_DDBImg']");
-        
+        private By byDraggedColumnList = By.XPath("//th[contains(@id,'MainContent_ASPxPageControl1_gridresult_groupcol')]//a");
+        private By byGroupColumnsData = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvGroupRow')]");
         //private By byLocationField = By.Id("MainContent_ASPxRoundPanel1_pnlContent_txtlocation_I");
         private By byLocationField = By.XPath("//label[contains(text(),'Location : ')]/../..//input[@type='text']");
         private By byLocationCodeFieldColumn = By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@class,'dxgvDataRow')]//td[1]");
@@ -90,11 +93,19 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By bySendButton = By.XPath("//div[@id='btnSend']");
         private By byResetBtn = By.XPath("//div[@id='ASPxButton1']//span[contains(text(),'Reset')]");
         private By byCancelButton = By.XPath("//div[@id='btncancel']");
-        //EXport spreadsheet
+        //Export spreadsheet
         private By byLossSumaarylink = By.XPath(" //span[contains(text(),'Loss Line Summary')]");
         private By byClaimListButton = By.XPath("//span[contains(text(),'Claim List')]");
         private By byEFRButton = By.XPath("//span[contains(text(),'View EFR')]");
         private By byExportToSpredsheetOnLossummaryLink = By.XPath("//div[@id='MainContent_ASPxPageControl1_btnExportLossline']//span[contains(text(),'Export to Spreadsheet')]");
+        // Document LIst
+       
+        
+        
+        
+        
+        
+        
         //Documents Tab
         
         
@@ -1050,7 +1061,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void Dragthecolumnheaderinspace(string value)
         {
-            IReadOnlyList< IWebElement> list = this.driver.FindElements(bythirdcolumnheader);
+            IReadOnlyList< IWebElement> list = this.driver.FindElements(byColumnHeaders);
             IWebElement e2 = this.driver.FindElement(byDragaColoumnheaderSpace);
             foreach (var WebItem in list)
             {
@@ -1417,46 +1428,18 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.AssertTextMatching(ActualClaimAccidentDate, AccidentDate);
         }
 
-        public void VerifyDocumentsTab()
-        {
+        
 
-            
-                Thread.Sleep(2000);
-
-                this.driver.ClickElement(byDocumentsTab, "Documents");
-
-          
         }
-
-        public void VerifyClaimInfoReportDate(string value,string value1)
+        public void VerifyCloseButton()
         {
-            
-            string iDate = value;
-            DateTime oDate = Convert.ToDateTime(iDate);
-            string iDate1 = value1;
-            DateTime oDate1 = Convert.ToDateTime(iDate1);
-
-            string ActualClaimReportDate = this.driver.GetElementText(By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_ASPxLabel8']"));
-            string iDate2 = ActualClaimReportDate;
-            DateTime actualvalue = Convert.ToDateTime(iDate2);
-
-            if (actualvalue <= oDate1 && actualvalue >= oDate)
-            {
-                this.TESTREPORT.LogSuccess("Verify ReportDate Result value", string.Format("Date - <mark>{0}</mark> is within the ReportDate Range", actualvalue));
-            }
-            else
-            {
-                this.TESTREPORT.LogFailure("Verify ReportDate Result value", string.Format("Date is not within the ReportDate Range"), this.SCREENSHOTFILE);
-            }
-            Thread.Sleep(2000);
-
-
 
         }
 
+        public void VerifyOpenAllButton()
+        {
 
-
-
+        }
 
         #endregion
 
