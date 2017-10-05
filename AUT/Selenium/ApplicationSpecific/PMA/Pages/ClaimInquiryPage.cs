@@ -18,6 +18,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 {
     public class ClaimInquiry : AbstractTemplatePage
     {
+        HomePage home = new HomePage();
+
         #region UI Objects
         private By byLossLineSummary = By.Id("MainContent_ASPxPageControl1_T1T");
         private By byDetailedClaimList = By.Id("MainContent_ASPxPageControl1_T0T");
@@ -60,8 +62,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byAccidentDateRangeBeginClearBtn = By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C']//td[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_BC']");
         private By byDragaColoumnheaderSpace = By.XPath("//div[@id='MainContent_ASPxPageControl1_gridresult_grouppanel']");
         private By bysecondcolumnheader = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@id,'MainContent_ASPxPageControl1_gridresult_DXHeadersRow0')]//th[2]");
-        private By byClaimInquiryResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]"); 
-        private By bythirdcolumnheader = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@id,'MainContent_ASPxPageControl1_gridresult_DXHeadersRow0')]/th[3]");
+        private By byClaimInquiryResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
+        private By byColumnHeaders = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@id,'MainContent_ASPxPageControl1_gridresult_DXHeadersRow0')]/th");
         private By byLossLineSummaryResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridlossline_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byLocationIconResultsTable = By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byClaimInquirySearchResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
@@ -69,7 +71,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byClaimInquirypageSize = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult']//input[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_PSI']");
         private By byClaimInquiryPagesizeDropdown = By.XPath("//ul[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_DXMCC']/li[@class='dxm-item']");
         private By byClaimInquiryPagesizeDRopdownBtn = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult']//span[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_DDBImg']");
-        
+        private By byDraggedColumnList = By.XPath("//th[contains(@id,'MainContent_ASPxPageControl1_gridresult_groupcol')]//a");
+        private By byGroupColumnsData = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvGroupRow')]");
         //private By byLocationField = By.Id("MainContent_ASPxRoundPanel1_pnlContent_txtlocation_I");
         private By byLocationField = By.XPath("//label[contains(text(),'Location : ')]/../..//input[@type='text']");
         private By byLocationCodeFieldColumn = By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@class,'dxgvDataRow')]//td[1]");
@@ -928,7 +931,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void Dragthecolumnheaderinspace(string value)
         {
-            IReadOnlyList< IWebElement> list = this.driver.FindElements(bythirdcolumnheader);
+            IReadOnlyList< IWebElement> list = this.driver.FindElements(byColumnHeaders);
             IWebElement e2 = this.driver.FindElement(byDragaColoumnheaderSpace);
             foreach (var WebItem in list)
             {
@@ -1295,7 +1298,58 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.AssertTextMatching(ActualClaimAccidentDate, AccidentDate);
         }
 
-        
+        public void DragTheColumnHeaderInSpace(string value)
+        {
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(byColumnHeaders);
+            IWebElement e2 = this.driver.FindElement(byDragaColoumnheaderSpace);
+            foreach (var WebItem in list)
+            {
+
+                if (WebItem.Text.ToLower().Trim().Equals(value.ToLower().Trim()))
+                {
+                    this.driver.DragDrop(WebItem, e2);                                       
+                    break;
+                }
+
+            }
+        }
+
+        public void DraggedColumnList(int number, string value)
+        {
+            try
+            {
+                IReadOnlyList<IWebElement> list = this.driver.FindElements(byDraggedColumnList);
+                if (list[number].Text.Trim().ToLower() == value.Trim().ToLower())
+                {
+                    this.TESTREPORT.LogSuccess("Verify Dragged column", string.Format("Column -<mark>{0}</mark> Dragged successfully", list[number].Text));
+                }
+                else
+                {
+                    this.TESTREPORT.LogFailure("Verify Dragged column", string.Format("Falied to drag the Columns"), this.SCREENSHOTFILE);
+                }
+            }
+            catch (Exception e)
+            {
+                this.TESTREPORT.LogFailure("Verify Dragged column", string.Format("Falied to drag the Columns"), this.SCREENSHOTFILE);
+            }
+
+
+        }
+
+        //Click on Random Claim in ClaimInquiry Search table
+        public ArrayList ClickOnRandomGroupClaim()
+        {
+            Thread.Sleep(6000);
+            return this.driver.ClickRandomCliamNumber(byGroupColumnsData, 1);
+        }
+
+        //Verify GroupClaimNumber in ClaimInformation Page
+        public void VerifyGroupClaimNumber(string ClaimantName)
+        {
+            string ActualClaimantName = this.driver.GetElementText(home.byClaimInformationClaimantName);
+            this.driver.AssertTextMatching(ClaimantName, ActualClaimantName);
+
+        }
 
 
 

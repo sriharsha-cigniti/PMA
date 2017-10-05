@@ -47,7 +47,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byQuickClaimResetBtn = By.Id("MainContent_sppage_pnlQuickSearch_btnreset");
         private By byRecentClaims = By.Id("MainContent_sppage_pnlRecentClaims_lblRecentClaims");
         private By byQuickClaimSearchTable = By.XPath("//table[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
-        private By byClaimInformationClaimNumber = By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_lblClaimNo_0']");
+        public By  byClaimInformationClaimNumber = By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_lblClaimNo_0']");
         private By byClaimNameinformation = By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxLabel1_0']");
         public By byClaimInquirySearchResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byMyDiaryResultsTable = By.XPath("//table[@id='MainContent_sppage_pnlDiary_griddiary_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
@@ -55,7 +55,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byQuickClaimPageSize = By.XPath("//input[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXPagerBottom_PSI']");
         private By byQuickClaimDropdownBtn = By.XPath("//span[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXPagerBottom_DDB']");
         private By byQuickClaimAccountName = By.XPath("//input[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXFREditorcol1_I']");
-        private By byClaimInformationClaimantName = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_lblClaimantName_0");
+        public By byClaimInformationClaimantName = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_lblClaimantName_0");
         private By byClaimInformationClaimAccident = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_lblAccident_0");
         private By byAccountName = By.XPath("//span[@id='lblAccount1']");
         private By byClaimAccountName = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_ASPxLabel21");
