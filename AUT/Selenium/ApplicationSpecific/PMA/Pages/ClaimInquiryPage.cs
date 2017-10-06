@@ -99,21 +99,25 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byEFRButton = By.XPath("//span[contains(text(),'View EFR')]");
         private By byExportToSpredsheetOnLossummaryLink = By.XPath("//div[@id='MainContent_ASPxPageControl1_btnExportLossline']//span[contains(text(),'Export to Spreadsheet')]");
         // Document LIst
-       
-        
-        
-        
-        
-        
-        
+
+        private By byDeSelectallButton = By.XPath("//button[contains(text(),'Deselect All')]");
+
+        private By byOpenButton = By.XPath("//button[contains(text(),'Open')]");
+
+        private By byCloseWIndowButton = By.XPath("//button[contains(text(),'Close Window')]");
+        private By byDocumentsListTable = By.XPath("//table[@class='table table-striped table-hover']");
+        private By byEntryNumber = By.XPath("//a[contains(text(),'Entry Number')]");
+
+
+
         //Documents Tab
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
         #endregion
 
         #region Path
@@ -971,7 +975,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             Thread.Sleep(2000);
             this.driver.ClickElement(byDocumentsTab, "Documents");
-
+            Thread.Sleep(2000);
+            SwitchToChildWindow();
+            if (this.driver.IsElementPresent(byOpenButton))
+                this.TESTREPORT.LogSuccess("verify documents nAvigation ", string.Format("<Mark>Navigated to documentlistTab </Mark>"), this.SCREENSHOTFILE);
+            
         }
 
         public void ClickShowNotesLink()
@@ -1275,6 +1283,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void EnterClaimantName(string ClaimantName)
         {
+            ClaimantName = ClaimantName.ToLower();
             if (ClaimantName.Contains("l"))
             {
                 this.driver.SendKeysToElementClearFirst(byClaimantName, ClaimantName, "ClaimantName");
@@ -1509,6 +1518,104 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             Thread.Sleep(6000);
             return this.driver.ClickRandomCliamNumber(byGroupColumnsData, 1);
         }
+
+        public void VerifyDocumentsTab()
+        {
+            Thread.Sleep(2000);
+            if (this.driver.IsElementPresent(byDocumentsTab))
+                this.TESTREPORT.LogSuccess("Verify Documents tab", "Documents tab is present", this.SCREENSHOTFILE);
+            else
+                this.TESTREPORT.LogFailure("Verify Documents tab", "Documents tab is present", this.SCREENSHOTFILE);
+        }
+
+
+        public void SelectDocuments()
+        {
+
+           IWebElement table= driver.FindElement(byDocumentsListTable);
+            IList<IWebElement> rows = table.FindElements(By.TagName("tr"));
+            if (rows.Count > 1)
+            {
+                By chkbox = By.XPath("//input[@type='checkbox']");
+                this.driver.ClickElement(chkbox, "Checkbox for selecting document");
+                this.TESTREPORT.LogInfo("Document selected");
+                Thread.Sleep(1000);
+                this.driver.ClickElement(byOpenButton, "Open button for downloading document");
+                this.driver.ClickElement(byOpenButton, "Open button for downloading document");
+            }
+            else
+                this.TESTREPORT.LogInfo("No Documents attached ");
+
+
+        }
+
+        public void VerifyOpenButton()
+        {
+            Thread.Sleep(1000);
+            
+            if (this.driver.IsElementPresent(byOpenButton))
+                this.TESTREPORT.LogSuccess("Verify Open Button", "Open Button is present", this.SCREENSHOTFILE);
+            else
+                this.TESTREPORT.LogFailure("Verify Open Button", "Open Button is not present", this.SCREENSHOTFILE);
+
+        }
+
+        public void VerifyDeselectallButton()
+        {
+            Thread.Sleep(1000);
+            if (this.driver.IsElementPresent(byDeSelectallButton))
+                this.TESTREPORT.LogSuccess("Verify DeselectAll Button", "Deselectall Button is present", this.SCREENSHOTFILE);
+            else
+                this.TESTREPORT.LogFailure("Verify DeselectAll Button", "Deselectall Button is not present", this.SCREENSHOTFILE);
+        }
+
+        public void VerifyCloseWindow()
+        {
+            Thread.Sleep(1000);
+            if (this.driver.IsElementPresent(byCloseWIndowButton))
+                this.TESTREPORT.LogSuccess("Verify Close Window Button", "Close Window is present", this.SCREENSHOTFILE);
+            else
+                this.TESTREPORT.LogFailure("Verify Close Window Button", "Close Window is not present", this.SCREENSHOTFILE);
+        }
+
+        public void VerifySortingOnDocumentlist()
+        {
+            this.driver.WaitElementPresent(byDocumentsListTable);
+            IWebElement table = driver.FindElement(byDocumentsListTable);
+            IList<IWebElement> rows = table.FindElements(By.TagName("tr"));
+            if (rows.Count > 1)
+            {
+                this.driver.ClickElement(byEntryNumber, "Entry Number Link");
+                //getting actual sorted list from page
+                IList<IWebElement> coloumnEntryNos = this.driver.FindElements(By.XPath("//table[@class='table table-striped table-hover']//td[2] "));
+
+                var list = coloumnEntryNos.Select(i => i.Text);
+                var list1=list.Select(int.Parse).ToList();
+                var sorted = new List<int>();
+                sorted.AddRange(list1);
+                sorted.Sort();
+                
+                if (list1.SequenceEqual(sorted))
+                {
+                    this.TESTREPORT.LogSuccess("Entry Nos in Order", String.Format("Entry Nos are in sorted correct order <Mark>{0}</Mark>", coloumnEntryNos.Count));
+                }
+                else
+                {
+                    this.TESTREPORT.LogFailure("Entry Nos in Order", String.Format("Entry Nos are not in sorted correct order <Mark>{0}</Mark>", coloumnEntryNos.Count));
+                }
+
+
+            }
+
+            else
+                this.TESTREPORT.LogInfo("No Documents attached ");
+
+
+
+
+        }
+
+        
 
 
 

@@ -1107,29 +1107,25 @@ namespace AutomatedTest.FunctionalTests.PMA
         }
 
 
-        [TestMethod, Description("Claim Inquiry-Verify the EFR Button on the claim page"), TestCategory("Regression")]
+        [TestMethod, Description("Claim Inquiry-Verify documents tab in the claim"), TestCategory("Regression")]
         public void CI_25claimInquiryPage()
         {
 
             this.TESTREPORT.InitTestCase("CI_25", "Verify documents tab in the claim");
-
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
-            string ClaimantName = readCSV("ClaimantName");
+            string ClaimantName = readCSV("claimNoFordocuments");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
             string HomePageTitle = readCSV("HomePageTitle");
+            string DocumentPagetitle = readCSV("documentListPageTitle");
 
             this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
-
-            this.TESTREPORT.LogInfo("Verify Cinch Welcome Text");
+            
             home.VerifyCinchWelome();
-
-            this.TESTREPORT.LogInfo("Click on Claiminquiry");
             home.ClickClaimInquiry();
-
-            this.TESTREPORT.LogInfo("Verify page Title for Claim Inquiry");
-            home.VerifyPageTitle("Claim Inquiry");
             home.ClickSearch();
 
             this.TESTREPORT.LogInfo("Verify table row count");
@@ -1149,15 +1145,19 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyClaimantName(Index[1].ToString());
 
             this.TESTREPORT.LogInfo("Verify the Documents Tab");
-            this.TESTREPORT.LogInfo("Click on View EFR button of the claim page");
-            //cInquiry.VerifyDocumentsTab();
+            cInquiry.VerifyDocumentsTab();
             cInquiry.ClickDocuments();
             cInquiry.SwitchToChildWindow();
-            //cInquiry.SelectDocuments();
 
+            this.TESTREPORT.LogInfo("Verify the Open,DeselectAll,CLoseWindow buttons");
+            cInquiry.VerifyOpenButton();
+            cInquiry.VerifyDeselectallButton();
+            cInquiry.VerifyCloseWindow();
 
-
-
+            this.TESTREPORT.LogInfo("Verify Downloaded .JSP file/ Window ");
+            cInquiry.SelectDocuments();
+            cInquiry.CloseChildWindow();
+            cInquiry.SwitchToParentWindow();
             cInquiry.GetExportFilePath("jnlpModified.jsp");
             cInquiry.ExportFileExists();
             cInquiry.ExportFileDelete();
@@ -1168,6 +1168,74 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
+
+        [TestMethod, Description("Claim Inquiry-Verify Sorting in documents tab in the claim"), TestCategory("Regression")]
+        public void CI_26claimInquiryPage()
+        {
+
+            this.TESTREPORT.InitTestCase("CI_26", "Verify Sorting in documents tab in the claim");
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+
+            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
+            string ClaimantName = readCSV("claimNoFordocuments");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string HomePageTitle = readCSV("HomePageTitle");
+            string DocumentPagetitle = readCSV("documentListPageTitle");
+
+            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
+            home.VerifyPageTitle("The PMA Group - Risk Management Information System");
+
+            home.VerifyCinchWelome();
+            home.ClickClaimInquiry();
+            home.ClickSearch();
+
+            this.TESTREPORT.LogInfo("Verify table row count");
+            home.ClaimInquiryResultsCount();
+
+
+            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
+            cInquiry.VerifyDetailedClaimList();
+
+            this.TESTREPORT.LogInfo("Verify loss Line Summary");
+            cInquiry.VerifyLossLineSummary();
+
+            this.TESTREPORT.LogInfo("Click on any random claim");
+            cInquiry.EnterClaimantName(ClaimantName);
+            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
+            home.VerifyClaimNumber(Index[0].ToString());
+            home.VerifyClaimantName(Index[1].ToString());
+
+            this.TESTREPORT.LogInfo("Verify the Documents Tab");
+            cInquiry.VerifyDocumentsTab();
+            cInquiry.ClickDocuments();
+            
+
+            this.TESTREPORT.LogInfo("Verify the Open,DeselectAll,CLoseWindow buttons");
+            cInquiry.VerifyOpenButton();
+            cInquiry.VerifyDeselectallButton();
+            cInquiry.VerifyCloseWindow();
+
+            this.TESTREPORT.LogInfo("Verify Entry Number Sorting ");
+
+            cInquiry.VerifySortingOnDocumentlist();
+
+            cInquiry.CloseChildWindow();
+            cInquiry.SwitchToParentWindow();
+           
+
+            this.TESTREPORT.LogInfo("Logout of Application");
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+
+
+
+
+
+
 
     }
 
