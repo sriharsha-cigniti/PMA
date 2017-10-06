@@ -618,6 +618,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //Count ClaimInquiryResults Count
         public void ClaimInquiryResultsCount()
         {
+            this.TESTREPORT.LogInfo("Verify ClaimInquiry Tablerow COunt");
             Thread.Sleep(6000);
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byClaimInquirySearchResultsTable);
             if (list.Count!=0)
