@@ -19,7 +19,7 @@ namespace Engine.Factories
     {
         private static IWebDriver uniqueInstanceWebDriver = null;
         private const string FILETESTCONFIGURATION = "TestConfiguration.properties";
-        public static string downloadPath = StandardUtilities.FileUtilities.readPropertyFile(FILETESTCONFIGURATION, "folderPath");
+        public static string downloadPath = StandardUtilities.FileUtilities.readPropertyFile(FILETESTCONFIGURATION, "downloadPath");
 
         /// <summary>
         /// Prevents a default instance of the <see cref="WebDriverFactory"/> class from being created.
@@ -44,16 +44,10 @@ namespace Engine.Factories
                     {
                         case ("chrome"):
                             ChromeOptions options = new ChromeOptions();
-                            DesiredCapabilities capab = DesiredCapabilities.Chrome();
-                            capab.SetCapability(CapabilityType.AcceptSslCertificates, true);
-
-                            options.AddUserProfilePreference("download.default_directory", downloadPath);
-                            options.AddUserProfilePreference("intl.accept_languages", "nl");
-                            options.AddUserProfilePreference("disable-popup-blocking", "true");
-                            options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
-                            options.AddUserProfilePreference("safebrowsing.enabled", "true");
-                            options.AddArguments("test-type");
-                            uniqueInstanceWebDriver = new ChromeDriver(System.IO.Directory.GetCurrentDirectory(), options);
+                            options.AddUserProfilePreference("download.prompt_for_download", true);
+                            options.AddArguments("--disable-extensions");
+                            //options.AddArgument("--no-sandbox");
+                            uniqueInstanceWebDriver = new ChromeDriver(System.IO.Directory.GetCurrentDirectory(),options);
                             break;
                         case ("ie"):
                             var ieOptions = new InternetExplorerOptions

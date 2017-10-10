@@ -82,10 +82,15 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byLossLineTab = By.LinkText("Loss Line");
         private By byLossLineDescriptionText = By.LinkText("Loss Line Description");
         private By byClaimFinancialTotalsText = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalfinancial1_0_Label1_0");
-
+        private By byFinancialTotalsbyLossLineText = By.XPath("//div[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_C5']//span[contains(text(),'Financial Totals by Loss Line')]");
         private By byPaymentStatusText = By.LinkText("Payment Status");
         private By byNote = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrnotes1_0_gridNotes_0_DXMainTable']//th[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrnotes1_0_gridNotes_0_col0']");
         private By byClaimantName = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXFREditorcol1']//input[@id='MainContent_ASPxPageControl1_gridresult_DXFREditorcol1_I']");
+        private By byFinancialtabResults = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalfinancial1_0_gridfinancial_0_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
+        private By byBreakdownbylossLineReslts = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrfinancial1_0_gridfinancial_0_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
+        private By byExpandMedicalExpenseBtn = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrfinancial1_0_gridfinancial_0_DXMainTable']//tr[3]//td[1]");
+        private By byReserveWorksheetsMedicalText = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrfinancial1_0_gridfinancial_0_DXMainTable']//span[contains(text(),'Reserve Worksheets Medical')]");
+        private By byExpandMedicalExpenseBtnAbsence = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrfinancial1_0_gridfinancial_0_DXMainTable']//tr[3]//td[1]//span");
         //EmailAdjuster
         private By byCheckboxEmailAdjuster = By.Id("chkEmail_S_D");
         private By byEmailAddressField = By.XPath("//table[@id='mememailcc']//textarea[@id='mememailcc_I']");
@@ -231,11 +236,19 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         }
 
         //Click FinancialTab in claimInformation
-        public void ClickFinancialTab()
+        public void ClickandVerifyFinancialTab()
 
         {
-            Thread.Sleep(2000);
-            this.driver.ClickElement(byFinancialTab, "FinancialTab");
+            if (this.driver.IsElementPresent(byFinancialTab))
+            {
+                this.TESTREPORT.LogInfo("click on Finanacial tab");
+                Thread.Sleep(2000);
+                this.driver.ClickElement(byFinancialTab, "FinancialTab");
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify Financial tab",string.Format("Tab is not displayed",this.SCREENSHOTFILE));
+            }
         }
 
 
@@ -273,6 +286,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //verify LossLineSummary in the Claiminquiry Page
         public void VerifyLossLineSummary()
         {
+            this.TESTREPORT.LogInfo("verify loss Line Summary");
             bool flag = this.driver.IsElementPresent(byLossLineSummary);
             try
             {
@@ -296,6 +310,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //Verify DetailedClaimList
         public void VerifyDetailedClaimList()
         {
+            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
             bool flag = this.driver.IsElementPresent(byDetailedClaimList);
             if (flag)
             {
@@ -471,17 +486,35 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
 
         //Verify Claim FinancialTotal in the Financial Tab
-        public void VerifyClaimFinancialTotallink()
+        public void VerifyClaimFinancialTotalText()
         {
+            this.TESTREPORT.LogInfo("Verify Claim FinancialTotal in Financial tab");
             Thread.Sleep(2000);
             bool flag = this.driver.IsElementPresent(byClaimFinancialTotalsText);
             if (flag)
             {
-                this.TESTREPORT.LogSuccess("Verify ClaimFinancialTotal", String.Format(" Successfully verified - <Mark>{0}</Mark> ", "ClaimFinancialTotal Link"));
+                this.TESTREPORT.LogSuccess("Verify ClaimFinancialTotal", String.Format(" Successfully verified - <Mark>{0}</Mark> ", "ClaimFinancialTotal Text"));
             }
             else
             {
-                this.TESTREPORT.LogFailure("Verify ClaimFinancialTotal", String.Format("Failed to Verify Link"), this.SCREENSHOTFILE);
+                this.TESTREPORT.LogFailure("Verify ClaimFinancialTotal", String.Format("Failed to Verify Text"), this.SCREENSHOTFILE);
+            }
+        }
+
+
+        //Verify Claim FinancialTotalbyLossLine in the Financial Tab
+        public void VerifyFinancialTotalsbyLossLineText()
+        {
+            this.TESTREPORT.LogInfo("Verify FinancialTotalsbyLossLine in Financial tab");
+            Thread.Sleep(2000);
+            bool flag = this.driver.IsElementPresent(byFinancialTotalsbyLossLineText);
+            if (flag)
+            {
+                this.TESTREPORT.LogSuccess("Verify FinancialTotalsbyLossLine", String.Format(" Successfully verified - <Mark>{0}</Mark> ", "FinancialTotalsbyLossLine Text"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify FinancialTotalsbyLossLine", String.Format("Failed to Verify Text"), this.SCREENSHOTFILE);
             }
         }
 
@@ -1284,6 +1317,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void EnterClaimantName(string ClaimantName)
         {
             ClaimantName = ClaimantName.ToLower();
+            this.TESTREPORT.LogInfo("Enter a ClaimNumber-starts with 'L or 'W' in the grid view");
             if (ClaimantName.Contains("l"))
             {
                 this.driver.SendKeysToElementClearFirst(byClaimantName, ClaimantName, "ClaimantName");
@@ -1521,13 +1555,14 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void VerifyDocumentsTab()
         {
+            this.TESTREPORT.LogInfo("Verify Documents tab");
             Thread.Sleep(2000);
-            if (this.driver.IsElementPresent(byDocumentsTab))
-                this.TESTREPORT.LogSuccess("Verify Documents tab", "Documents tab is present", this.SCREENSHOTFILE);
-            else
-                this.TESTREPORT.LogFailure("Verify Documents tab", "Documents tab is present", this.SCREENSHOTFILE);
+           if( this.driver.IsElementPresent(byDocumentsTab))
+                this.TESTREPORT.LogSuccess("Verify Documents tab","Document tab is present");
+           else
+                this.TESTREPORT.LogFailure("Verify Documents tab", "Document tab is not present", this.SCREENSHOTFILE);
+           
         }
-
 
         public void SelectDocuments()
         {
@@ -1615,12 +1650,133 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         }
 
-        
+        public void CalculateNetPaidAmount()
+        {
 
+            this.TESTREPORT.LogInfo("Check the NetPaid mount");
+            string TotalPaid = this.driver.GetElementText(By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrfinancial1_0_gridfinancial_0_DXMainTable']//tr[contains(@class,'dxgvFooter')]//td[4]"));
+            double x = Convert.ToDouble(TotalPaid);
+            string Recoveries = this.driver.GetElementText(By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrfinancial1_0_gridfinancial_0_DXMainTable']//tr[contains(@class,'dxgvFooter')]//td[5]"));
+            double y = Convert.ToDouble(Recoveries);
+            string NetPaid = this.driver.GetElementText(By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrfinancial1_0_gridfinancial_0_DXMainTable']//tr[contains(@class,'dxgvFooter')]//td[6]"));
+            double z = Convert.ToDouble(NetPaid);
+            if((x+y) == z)
+            {
+                this.TESTREPORT.LogSuccess("Calculate NetPaid =  Total Paid + Recoveries","NetPaid Amount matches");
+            }
+            else
+            {
+                this.TESTREPORT.LogSuccess("Calculate NetPaid =  Total Paid + Recoveries", string.Format("NetPaid Amount doesnt match",this.SCREENSHOTFILE));
+            }
+
+        }
+
+
+        public void ExpandMedicalExpenseinFinancial()
+        {
+            this.TESTREPORT.LogInfo("Verify and click Expand button for MedicalExpense");
+            Thread.Sleep(2000);
+           
+               string value = this.driver.GetElementAttribute(byExpandMedicalExpenseBtnAbsence, "style");
+                Thread.Sleep(2000);
+                string x = "visibility: hidden;";
+                if (value.Equals(x))
+                {
+                    this.TESTREPORT.LogFailure("Verify ExpandMedicalExpense button in Financial Tab", string.Format("Element not present", this.SCREENSHOTFILE));
+                }
+
+                else
+                {
+                    this.driver.ClickElement(byExpandMedicalExpenseBtn, "ExpandMedicalExpense");
+                    Thread.Sleep(2000);
+
+
+                    if (this.driver.IsElementPresent(byReserveWorksheetsMedicalText))
+                    {
+                        this.TESTREPORT.LogInfo("VerifyReserveWorksheetsMedical");
+                        this.TESTREPORT.LogSuccess("Verify ReserveWorksheetsMedical Text", String.Format(" Successfully verified - <Mark>{0}</Mark> text ", "ReserveWorksheetsMedical"));
+                    }
+                    else
+                    {
+                        this.TESTREPORT.LogFailure("Verify ReserveWorksheetsMedical Text", String.Format("Failed to Verify Text"), this.SCREENSHOTFILE);
+                    }
+                
+               }
+        }
+
+      
+       
+            //Verify IncurredAmount  in Financial Tab
+            public void VerifyIncurredAmount(string IncurredAmount)
+            {
+            this.TESTREPORT.LogInfo("Verify IncurredAmount  in Financial Tab");
+                string ActualIncurredAccount = this.driver.GetElementText(By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrfinancial1_0_gridfinancial_0_DXMainTable']//tr[contains(@class,'dxgvFooter')]//td[3]"));
+
+                decimal x = Convert.ToDecimal(IncurredAmount);
+               decimal y = Convert.ToDecimal(ActualIncurredAccount);
+               if (x == y)
+                {
+                 this.TESTREPORT.LogSuccess("verify IncurredAmount", string.Format("Amount:<mark>{0}</mark> matches",x));
+                }
+              else
+
+               { 
+                this.TESTREPORT.LogFailure("verify IncurredAmount",string.Format("Amount not matched",this.SCREENSHOTFILE));
+               }
+              
+          }
+
+        public void VerifyBreakdownbyLossLineTableHeaders(string value)
+        {
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrfinancial1_0_gridfinancial_0_DXMainTable']//th"));
+            foreach (var item in list)
+            {
+                if (item.Text.ToLower().Contains(value.ToLower()))
+                {
+                    Thread.Sleep(2000);
+                    this.TESTREPORT.LogSuccess("verify TableHeaders in BreakdownbyLossLine Table", string.Format("Header contains:<mark>{0}</mark>", item.Text));
+                    break;
+                }
+               
+
+            }
+        }
+        public void BreakdownbyLosslineResultscount()
+        {
+            this.TESTREPORT.LogInfo("Verify BreakdownbyLosslineResultscount");
+            Thread.Sleep(6000);
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(byBreakdownbylossLineReslts);
+            if (list.Count != 0)
+            {
+                this.TESTREPORT.LogSuccess("Verify BreakdownbyLossline data results", String.Format(" Table -<mark>{0}</mark> data is displayed succesfully", "BreakdownbyLosslineResults"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify BreakdownbyLossline data results", String.Format("Table Data not displayed ", this.SCREENSHOTFILE));
+            }
+
+        }
+        public void FinancialtabResultscount()
+        {
+            this.TESTREPORT.LogInfo("Verify FinancialtabResultscount");
+            Thread.Sleep(6000);
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(byFinancialtabResults);
+            if (list.Count != 0)
+            {
+                this.TESTREPORT.LogSuccess("Verify Financialtab data results", String.Format(" Table -<mark>{0}</mark> data is displayed succesfully", "FinancialtabResults"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify Financialtab data results", String.Format("Table Data not displayed ", this.SCREENSHOTFILE));
+            }
+
+        }
+    }
 
 
 
         #endregion
 
     }
-}
+
+
