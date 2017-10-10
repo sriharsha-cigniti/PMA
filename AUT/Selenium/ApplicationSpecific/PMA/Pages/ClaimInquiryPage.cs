@@ -1567,6 +1567,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             Thread.Sleep(6000);                    
             //Get first 100 count to verify the sorting
             list =  driver.FindElements(byGroupColumnsList);
+
             List<string> data = new List<string>();
             if (list.Count > 1)
             {
