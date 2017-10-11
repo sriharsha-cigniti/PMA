@@ -542,11 +542,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             string[] words = ActualAccountName.Split(',');
             foreach (var item in words)
             {
-                if (item.Trim().ToLower().Contains(ClaimantName.Trim().ToLower()))
+                if (ClaimantName.Trim().ToLower().Contains(item.Trim().ToLower()))
                 {
                     flag = true;
                     break;
-                }
+                }   
             }
             if (flag)
             {
@@ -622,6 +622,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //Count ClaimInquiryResults Count
         public void ClaimInquiryResultsCount()
         {
+            this.TESTREPORT.LogInfo("Verify ClaimInquiry Tablerow COunt");
             Thread.Sleep(6000);
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byClaimInquirySearchResultsTable);
             if (list.Count!=0)
