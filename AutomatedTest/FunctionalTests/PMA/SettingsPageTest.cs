@@ -53,6 +53,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Verify Default Account details applied");
             settingsPage.VerifyDefaulAccountDetailsIsApplied(accountDetails);
+
             
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
