@@ -68,6 +68,9 @@
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\DairyNotesPage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\ExportSpreadsheet.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\HomePage.cs" />
+    <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\LoginPage.cs" />
+    <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\NCEAutoPage.cs" />
+    <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\SettingsPage.cs" />
     <Compile Include="Selenium\CommonReUsablePages\AbstractTemplatePage.cs" />
   </ItemGroup>
   <ItemGroup>
