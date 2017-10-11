@@ -62,7 +62,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byClaimType = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_ASPxLabel29");
         private By byQuickClaimTypeColumnSearch = By.Id("MainContent_sppage_pnlQuickSearch_gridresult_DXFREditorcol5_I");
         private By byClaimAccidentDate = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_ASPxLabel18");
-
+       
         //header links
         private By byClaimInquiry = By.LinkText("Claim Inquiry");
         private By byReports = By.LinkText("Reports");
@@ -160,7 +160,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             Thread.Sleep(1000);
             this.TESTREPORT.LogInfo("Click on Exit to close the application");
-            this.driver.ClickElement(byExit, "Exit", 60);
+            //this.driver.ClickElement(byExit, "Exit", 60);
+            this.driver.ClickElementWithJavascript(byExit, "Exit", 60);
         }
 
         //Verify Account Header
@@ -537,19 +538,28 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void VerifyClaimantName(string ClaimantName)
         {
             string ActualAccountName = this.driver.GetElementText(byClaimInformationClaimantName);
-
+            bool flag = false;
             string[] words = ActualAccountName.Split(',');
             foreach (var item in words)
             {
-                if (item.Contains(ActualAccountName))
+                if (ClaimantName.Trim().ToLower().Contains(item.Trim().ToLower()))
                 {
-                    TESTREPORT.LogSuccess("Text Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", ActualAccountName, ClaimantName));
+                    flag = true;
                     break;
-                }
-                
+                }   
+            }
+            if (flag)
+            {
+                TESTREPORT.LogSuccess("Name is Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", ActualAccountName, ClaimantName));
+            }
+            else
+            {
+                TESTREPORT.LogFailure("Name is not Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are not matching", ActualAccountName, ClaimantName), this.SCREENSHOTFILE);
             }
         }
-        
+
+
+
 
         public void VerifyAccountName(string AccountName)
         {
@@ -570,12 +580,6 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
-
-
-        //public void EnterQuickClaimPageSize(string PageSize)
-        //{
-        //    this.driver.SendKeysToElement(byQuickClaimPageSizeDropdown, PageSize, "PageSize");
-        //}
 
         //Select QuickClaim PageSize
         public string SelectQuickClaimPageSizeDropDownvalue()

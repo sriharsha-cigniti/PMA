@@ -1392,11 +1392,20 @@ namespace Engine.UIHandlers.Selenium
 
             return listName;
         }
-    }
+
+        public static void WaitUntilElementVisible(this IWebDriver driver, By locator, int seconds)
+        {
+             
+                WebDriverWait wait = new WebDriverWait(driver,TimeSpan.FromSeconds(seconds));
+            wait.Until(ExpectedConditions.ElementIsVisible(locator));
+
+        }
 
 
 
         #endregion
     }
+
+}
 
 

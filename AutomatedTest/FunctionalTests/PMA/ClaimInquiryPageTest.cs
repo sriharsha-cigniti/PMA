@@ -9,6 +9,8 @@ using StandardUtilities;
 using OpenQA.Selenium;
 using System.Collections;
 using System.Threading;
+using AUT.Selenium.CommonReUsablePages;
+using AUT.Selenium.ApplicationSpecific.PMA.Pages;
 
 namespace AutomatedTest.FunctionalTests.PMA
 {
@@ -116,6 +118,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         public void CI_03claimInquiryPage()
         {
 
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             this.TESTREPORT.InitTestCase("CI_03", "Claim Inquiry-Location Code Modal - clicking on a row selects the location");
 
@@ -154,11 +158,11 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-View all tabs in the claim view(Liability)"), TestCategory("Regression")]
         public void CI_04claimInquiryPage()
         {
-
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             this.TESTREPORT.InitTestCase("CI_04", "Claim Inquiry-View all tabs in the claim view(Liability)");
-
-
+                        
             string HomePageTitle = readCSV("HomePageTitle");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
             string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
@@ -220,7 +224,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
 
-
         }
         [TestMethod, Description("Claim Inquiry-View all tabs in the claim view (Workers compensation)"), TestCategory("Regression")]
         public void CI_05claimInquiryPage()
@@ -228,6 +231,10 @@ namespace AutomatedTest.FunctionalTests.PMA
 
 
             this.TESTREPORT.InitTestCase("CI_05", "Claim Inquiry-View all tabs in the claim view (Workers compensation)");
+
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+
             string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
             string ClaimantName = readCSV("ClaimantName");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
@@ -296,7 +303,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Search the data with Total Incurred amount"), TestCategory("Regression")]
         public void CI_06claimInquiryPage()
         {
-
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             this.TESTREPORT.InitTestCase("CI_06", "Claim Inquiry-Search the data with Total Incurred amount");
 
@@ -357,8 +365,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.InitTestCase("CI_07", "Claim Inquiry-Search the data with Accident date range");
 
             string HomePageTitle = readCSV("HomePageTitle");
-            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
-           
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");           
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
@@ -423,6 +430,9 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Export to spreadsheet-Detailed Claim list"), TestCategory("Regression")]
         public void CI_09claimInquiryPage()
         {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+
             this.TESTREPORT.InitTestCase("CI_09", "Claim Inquiry-Export to spreadsheet-Detailed Claim list");
 
             string HomePageTitle = readCSV("HomePageTitle");
@@ -473,7 +483,8 @@ namespace AutomatedTest.FunctionalTests.PMA
 
         public void CI_10claimInquiryPage()
         {
-
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             this.TESTREPORT.InitTestCase("CI_10", "Claim Inquiry-Export to spreadsheet-Loss line summary");
 
@@ -622,6 +633,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Email to Claim Adjuster-Send"), TestCategory("Regression")]
         public void CI_13claimInquiryPage()
         {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             this.TESTREPORT.InitTestCase("CI_13", "Claim Inquiry-Email to Claim Adjuster-Send");
 
@@ -675,6 +688,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Email to Claim Adjuster Reset"), TestCategory("Regression")]
         public void CI_14claimInquiryPage()
         {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             this.TESTREPORT.InitTestCase("CI_14", "Claim Inquiry-Email to Claim Adjuster Reset");
 
@@ -731,6 +746,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Email to Claim Adjuster -cancel"), TestCategory("Regression")]
         public void CI_15claimInquiryPage()
         {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             this.TESTREPORT.InitTestCase("CI_15", "Claim Inquiry-Email to Claim Adjuster -cancel");
 
@@ -785,6 +802,9 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Verify the Claim List"), TestCategory("Regression")]
         public void CI_16claimInquiryPage()
         {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+            
             this.TESTREPORT.InitTestCase("CI_16", "Verify the Claim List");
 
             string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
@@ -833,6 +853,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Verify the EFR Button on the claim page"), TestCategory("Regression")]
         public void CI_17claimInquiryPage()
         {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             this.TESTREPORT.InitTestCase("CI_17", "Verify the EFR Button on the claim page");
 
@@ -889,9 +911,9 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Verify Selecting page size option from the drop down loads all claims"), TestCategory("Regression")]
         public void CI_18claimInquiryPage()
         {
-
-
+            
             this.TESTREPORT.InitTestCase("CI_18", "Claim Inquiry-Verify Selecting page size option from the drop down loads all claims");
+
             HomePage home = new HomePage();
             ClaimInquiry cInquiry = new ClaimInquiry();
 
@@ -931,6 +953,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             //Create Page Objectss
             HomePage home = new HomePage();
             ClaimInquiry cInquiry = new ClaimInquiry();
+
             this.TESTREPORT.InitTestCase("CI_19", "Claim Inquiry-Verify to Drag a column in drag column section");
 
             string HomePageTitle = readCSV("HomePageTitle");
@@ -967,6 +990,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Verify to Drag a column in drag column section and open a claim"), TestCategory("Regression")]
         public void CI_20claimInquiryPage()
         {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             this.TESTREPORT.InitTestCase("CI_20", "Claim Inquiry-Verify to Drag a column in drag column section and open a claim");
             string HomePageTitle = readCSV("HomePageTitle");
@@ -992,7 +1017,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             Thread.Sleep(3000);
             cInquiry.DraggedColumnList(0, "Claimant Name");
             ArrayList index = cInquiry.ClickOnRandomGroupClaim();
-            // cInquiry.VerifyGroupClaimNumber(index[0].ToString().Replace("Claimant Name: ", ""));
+            //cInquiry.VerifyGroupClaimNumber(index[0].ToString().Replace("Claimant Name: ", ""));
             home.VerifyClaimantName(index[0].ToString());
             //logout of Application
             home.ClickExit();
@@ -1002,11 +1027,54 @@ namespace AutomatedTest.FunctionalTests.PMA
         }
         [TestMethod, Description("Claim Inquiry-Verify the Drag column to group by the column and sort the order"), TestCategory("Regression")]
         public void CI_21claimInquiryPage()
+
         {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+
             this.TESTREPORT.InitTestCase("CI_21", "Claim Inquiry-Verify the Drag column to group by the column and sort the order");
             string HomePageTitle = readCSV("HomePageTitle");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
 
+            //Verify that user lands on Cinch application
+            home.VerifyPageTitle(HomePageTitle);
+            //Verify  Cinch Welcome Text
+            home.VerifyCinchWelome();
+            //Click on Claiminquiry
+            home.ClickClaimInquiry();
+            //Verify page Title for Claim Inquiry
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
+            //Click on search button
+            home.ClickSearch();
+            //Verify table row count
+            home.ClaimInquiryResultsCount();
+            //Verify Detailed Claim list
+            cInquiry.VerifyDetailedClaimList();
+            //Verify loss Line Summary
+            cInquiry.VerifyLossLineSummary();           
+            //Drag the column in header Columns
+            cInquiry.DragTheColumnHeaderInSpace("Claimant Name");
+            //Verify the Grouped/Dragged Column
+            cInquiry.DraggedColumnList(0, "Claimant Name");
+            //Verify the Sorting for Grouped columns
+            cInquiry.VerifySortingOnGroupedColumn();     
+            //Logout of Application
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+        [TestMethod, Description("Claim Inquiry-Verify to Drag  multiple columns in drag column section"), TestCategory("Regression")]
+        public void CI_22claimInquiryPage()
+        {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+
+            this.TESTREPORT.InitTestCase("CI_22", "Claim Inquiry-Verify to Drag  multiple columns in drag column section");
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+
+            
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch Welcome Text
@@ -1023,48 +1091,22 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.VerifyDetailedClaimList();
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
-            //Drag the column in h
+            //Drag Claimant Name column into the dragged column space
             cInquiry.DragTheColumnHeaderInSpace("Claimant Name");
+            Thread.Sleep(3000);
+            //Verify the dragged columns
             cInquiry.DraggedColumnList(0, "Claimant Name");
-
-            //Need to implement-Click on the triangle Image to sort the column in alphabetical order
-
-            //logout of Application
-            home.ClickExit();
-
-            this.TESTREPORT.UpdateTestCaseStatus();
-
-        }
-        [TestMethod, Description("Claim Inquiry-Verify to Drag  multiple columns in drag column section"), TestCategory("Regression")]
-        public void CI_22claimInquiryPage()
-        {
-
-            this.TESTREPORT.InitTestCase("CI_22", "Claim Inquiry-Verify to Drag  multiple columns in drag column section");
-            string HomePageTitle = readCSV("HomePageTitle");
-            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
-
-            //Verify that user lands on Cinch application
-            home.VerifyPageTitle(HomePageTitle);
-            //Verify  Cinch WElcome Text
-            home.VerifyCinchWelome();
-            //Click on Claiminquiry
-            home.ClickClaimInquiry();
-            //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle(ClaimInquiryPageTitle);
-            //CLick on search button
-            home.ClickSearch();
-            //Verify table row count
-            home.ClaimInquiryResultsCount();
-            //Verify Detailed Claim list
-            cInquiry.VerifyDetailedClaimList();
-            //verify loss Line Summary
-            cInquiry.VerifyLossLineSummary();
-            cInquiry.DragTheColumnHeaderInSpace("Claimant Name");
+            //Drag Claimant Name column into the dragged column space
             cInquiry.DragTheColumnHeaderInSpace("Location");
-
-            //Need to implement-Drag multiple columns(E.G. Claim Number, claimant name and accident date ) into the 'Drag a column header here to group by that column' appears
-            //Need to implement-Expand the first selected Column header to see the detail
-
+            Thread.Sleep(3000);
+            //Verify the dragged columns
+            cInquiry.DraggedColumnList(1, "Location");
+            //Click on the Expand and Verify the name and location       
+            string detailedCliamDetails = cInquiry.ClaimantNameAndLocationAfterExpand();
+            //Verify Claimant Name
+            home.VerifyClaimantName(detailedCliamDetails.Split('@')[0].Replace("Claimant Name: ", ""));
+            //Verify Location
+            cInquiry.VerifyAccidentLocation(detailedCliamDetails.Split('@')[1].Replace("Location: ", ""));
             //logout of Application
             home.ClickExit();
 
@@ -1074,6 +1116,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Verify to Drag status column in drag column section"), TestCategory("Regression")]
         public void CI_23claimInquiryPage()
         {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
 
             this.TESTREPORT.InitTestCase("CI_23", "Claim Inquiry-Verify to Drag status column in drag column section");
 
@@ -1096,7 +1140,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
 
-            //Need to implement-Select and Drag status column into the 'Drag a column header here to group by that column' appears
+            cInquiry.DragTheColumnHeaderInSpace("Status");
+            Thread.Sleep(3000);
+            cInquiry.DraggedColumnList(0, "Status");
+
+          //  ArrayList index = cInquiry.ClickOnRandomGroupClaimExpandImage();
+
             //Need to implement-select random claim 
 
             //logout of Application
@@ -1110,11 +1159,11 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Claim Inquiry-Verify documents tab in the claim"), TestCategory("Regression")]
         public void CI_25claimInquiryPage()
         {
-
-            this.TESTREPORT.InitTestCase("CI_25", "Verify documents tab in the claim");
             HomePage home = new HomePage();
             ClaimInquiry cInquiry = new ClaimInquiry();
 
+            this.TESTREPORT.InitTestCase("CI_25", "Verify documents tab in the claim");
+           
             string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
             string ClaimantName = readCSV("claimNoFordocuments");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
@@ -1593,6 +1642,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
 
 
+        }
 
     }
 
