@@ -44,10 +44,15 @@ namespace Engine.Factories
                     {
                         case ("chrome"):
                             ChromeOptions options = new ChromeOptions();
-                            options.AddUserProfilePreference("download.prompt_for_download", true);
-                            options.AddArguments("--disable-extensions");
-                            //options.AddArgument("--no-sandbox");
-                            uniqueInstanceWebDriver = new ChromeDriver(System.IO.Directory.GetCurrentDirectory(),options);
+                            DesiredCapabilities capab = DesiredCapabilities.Chrome();
+                            capab.SetCapability(CapabilityType.AcceptSslCertificates, true);
+                            options.AddUserProfilePreference("download.default_directory", downloadPath);
+                            options.AddUserProfilePreference("intl.accept_languages", "nl");
+                            options.AddUserProfilePreference("disable-popup-blocking", "true");
+                            options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
+                            options.AddUserProfilePreference("safebrowsing.enabled", "true");
+                            options.AddArguments("test-type");
+                            uniqueInstanceWebDriver = new ChromeDriver(System.IO.Directory.GetCurrentDirectory(), options);
                             break;
                         case ("ie"):
                             var ieOptions = new InternetExplorerOptions

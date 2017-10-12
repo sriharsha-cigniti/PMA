@@ -91,7 +91,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestCleanup()]
         public  void AfterEachTestCaseExecution()
         {
-            driver.Close();
+            //driver.Close();
             driver.Quit();
             WebDriverFactory.Free();
            // EngineSetup.TestReport.Close();
