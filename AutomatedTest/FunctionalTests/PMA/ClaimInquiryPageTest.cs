@@ -166,7 +166,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             string HomePageTitle = readCSV("HomePageTitle");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
             string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
-            string ClaimantName = readCSV("ClaimantName");
+            string ClaimantName = readCSV("ClaimantName1");
 
 
             //Verify that user lands on Cinch application
@@ -292,7 +292,10 @@ namespace AutomatedTest.FunctionalTests.PMA
             //click on Documents tab
             cInquiry.ClickDocuments();
             //Verify New window 'PMA CINCH document List' title
-            cInquiry.SwitchtoDocumentswindow(DocumentsWindowPageTitle);
+            //cInquiry.SwitchtoDocumentswindow(DocumentsWindowPageTitle);
+            home.VerifyPageTitle(DocumentsWindowPageTitle);
+            cInquiry.CloseChildWindow();
+            cInquiry.SwitchToParentWindow();
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -1845,7 +1848,123 @@ namespace AutomatedTest.FunctionalTests.PMA
 
         }
 
-        
+        [TestMethod, Description("Claim Inquiry-Verify Payment Information Tab of the claim(Workers Accident) and Group by column"), TestCategory("Regression")]
+        public void CI_35claimInquiryPage()
+
+        {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+
+
+            this.TESTREPORT.InitTestCase("CI_35", "Claim Inquiry-Verify Payment Information Tab of the claim(Workers Accident) and Group by column");
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string ClaimantName = readCSV("ClaimantName");
+
+            //Verify that user lands on Cinch application
+            home.VerifyPageTitle(HomePageTitle);
+            //Verify  Cinch Welcome Text
+            home.VerifyCinchWelome();
+            //Click on Claiminquiry
+            home.ClickClaimInquiry();
+            //Verify page Title for Claim Inquiry
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
+            //CLick on search button
+            home.ClickSearch();
+            //Verify table row count
+            home.ClaimInquiryResultsCount();
+            //Verify Detailed Claim list
+            cInquiry.VerifyDetailedClaimList();
+            //Verify loss Line Summary
+            cInquiry.VerifyLossLineSummary();
+            //Enter a ClaimNumber-starts with 'L or 'W' in the grid view
+            cInquiry.EnterClaimantName(ClaimantName);
+
+            ArrayList Index = cInquiry.ClickOnRandomClaimInquiryResults();
+            home.VerifyClaimNumber(Index[0].ToString());
+            home.VerifyClaimantName(Index[1].ToString());
+            //Click on Payments Tab
+            cInquiry.ClickPayments();
+            //Verify Column Headers
+            cInquiry.VerifyPaymentsTableHeaders("Loss Line");
+            cInquiry.VerifyPaymentsTableHeaders("Payment Issue");
+            cInquiry.VerifyPaymentsTableHeaders("Check Number");
+            cInquiry.VerifyPaymentsTableHeaders("Payment Amt");
+            cInquiry.VerifyPaymentsTableHeaders("Payment Status");
+            cInquiry.VerifyPaymentsTableHeaders("Vendor/Payee Name");
+            cInquiry.VerifyPaymentsTableHeaders("Claimant Name");
+
+            //Verify Payments table row count
+            cInquiry.PaymentGridResultsCount();
+            //Drag the Loss Line column in header Columns
+            cInquiry.DragTheColumnHeaderPayments("Loss Line");
+            //Verify the Grouped/Dragged Column
+            cInquiry.PaymentsDraggedColumnList(0, "Loss Line");
+
+            cInquiry.LossLineAfterExpand();
+            //Verify Claimant Name
+
+
+            //logout of Application
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+
+        [TestMethod, Description("Claim Inquiry-Verify the Log Notes tab in claim "), TestCategory("Regression")]
+        public void CI_38claimInquiryPage()
+        {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+            
+            this.TESTREPORT.InitTestCase("CI_38", "Claim Inquiry-Verify the Log Notes tab in claim ");
+            #region Reading CSV
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string ClaimantName = readCSV("ClaimantName1");
+            string Header1 = readCSV("LogNoteTableHeader1");
+            string Header2 = readCSV("LogNoteTableHeader2");
+            string Header3 = readCSV("LogNoteTableHeader3");
+            string Header4 = readCSV("LogNoteTableHeader4");
+            string Header5 = readCSV("LogNoteTableHeader5");
+            #endregion
+
+            home.VerifyPageTitle(HomePageTitle);
+            home.VerifyCinchWelome();
+            home.ClickClaimInquiry();
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
+            
+            home.ClickSearch();
+            home.ClaimInquiryResultsCount();
+            cInquiry.VerifyDetailedClaimList();
+            cInquiry.VerifyLossLineSummary();
+            cInquiry.EnterClaimantName(ClaimantName);
+
+            ArrayList Index = cInquiry.ClickOnRandomClaimInquiryResults();
+            home.VerifyClaimNumber(Index[0].ToString());
+            home.VerifyClaimantName(Index[1].ToString());
+
+            this.TESTREPORT.LogInfo("Verify Log Notes");
+            cInquiry.VerifyAndClickLogNotes();
+
+            this.TESTREPORT.LogInfo("Verify Show Notes ,Hide Notes Tab");
+            cInquiry.VerifyShortNotesIsDisplayed();
+            cInquiry.VerifyHideNotesIsDisplayed();
+
+            this.TESTREPORT.LogInfo("Verify Note,Category,Date Created,Created By,Note Description");
+            cInquiry.VerifyLogNotesTableHeaders(Header1);
+            cInquiry.VerifyLogNotesTableHeaders(Header2);
+            cInquiry.VerifyLogNotesTableHeaders(Header3);
+            cInquiry.VerifyLogNotesTableHeaders(Header4);
+            cInquiry.VerifyLogNotesTableHeaders(Header5);
+            
+            //logout of Application
+            home.ClickExit();
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+
 
     }
 

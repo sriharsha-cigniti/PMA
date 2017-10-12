@@ -159,6 +159,10 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byOtherClaimantLbl = By.XPath("//span[contains(text(),'Other Claimant Information')]");
         private By byClaimantNameText = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_lossline1_0_gridlossline_0_DXFREditorcol1_I");
         private By byClearButton = By.XPath("//span[contains(text(),'Clear')]");
+        // LogNotes tab
+        private By byHideNotesTab = By.XPath("//span[contains(text(),'Hide Notes')]");
+        private By byShortNotesTab = By.XPath("//span[contains(text(),'Show Notes')]");
+        private By bylogNotesDataTable = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrnotes1_0_gridNotes_0_DXMainTable");
         #endregion
 
         #region Path
@@ -1072,12 +1076,14 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void SwitchtoDocumentswindow(String value)
         {
             Thread.Sleep(2000);
-            string mainWindow = this.driver.GetCurrentWindowHandles();
-            this.driver.SwitchToChildWindow();
+            SwitchToChildWindow();
+           
             //Verify the Page title for the Documents 
             VerifyPageTitle(value);
-            this.driver.CloseChildWindow();
-            this.driver.SwitchToParentWindow(mainWindow);
+            CloseChildWindow();
+            SwitchToParentWindow();
+           
+            
         }
 
         public void VerifyPageTitle(string title)
@@ -1481,7 +1487,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         }
         public void SwitchToParentWindow()
         {
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
             driver.SwitchTo().Window(driver.WindowHandles.First());
 
         }
@@ -1506,9 +1512,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             string ActualClaimAccidentDate = this.driver.GetElementText(By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_lblAccident_0']"));
             this.driver.AssertTextMatching(ActualClaimAccidentDate, AccidentDate);
         }
-
-
-
+        
         public void VerifyCloseButton()
         {
 
@@ -2527,6 +2531,65 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 this.TESTREPORT.LogFailure("Verify WorkerAccident", "Element not Found", this.SCREENSHOTFILE);
             }
         }
+
+        public void VerifyAndClickLogNotes()
+        {
+            this.driver.WaitElementPresent(byLogNotesTab);
+            if (this.driver.IsElementPresent(byLogNotesTab))
+            {
+                this.driver.ClickElement(byLogNotesTab, "Log Notes Tab");
+                if (this.driver.IsElementPresent(byShortNotesTab))
+                {
+                    this.TESTREPORT.LogSuccess("Verify and click Log Notes Tab", "Log Notes Tab is visble and successfully clicked", this.SCREENSHOTFILE);
+                }
+            }
+            else
+                this.TESTREPORT.LogFailure("Verify Log Notes Tab", "Log Notes Tab", this.SCREENSHOTFILE);
+
+        }
+
+        public void VerifyShortNotesIsDisplayed()
+        {
+            this.driver.WaitElementPresent(byShortNotesTab);
+            if (this.driver.IsElementPresent(byShortNotesTab))
+                this.TESTREPORT.LogSuccess("Verify ShortNotes Tab Is Displayed", string.Format("<Mark>ShortNotes Tab is Displayed</Mark>"), this.SCREENSHOTFILE);
+            else
+                this.TESTREPORT.LogFailure("Verify ShortNotes Tab Is Displayed", string.Format("<Mark>ShortNotes Tab is not Displayed</Mark>"), this.SCREENSHOTFILE);
+        }
+
+        public void VerifyHideNotesIsDisplayed()
+        {
+            this.driver.WaitElementPresent(byHideNotesTab);
+            if (this.driver.IsElementPresent(byHideNotesTab))
+                this.TESTREPORT.LogSuccess("Verify HideNotes Tab is Displayed", string.Format("<Mark>HideNotes Tab is Displayed</Mark>"), this.SCREENSHOTFILE);
+            else
+                this.TESTREPORT.LogFailure("Verify HideNotes Tab is not Displayed", string.Format("<Mark>HideNotes Tab is not Displayed</Mark>"), this.SCREENSHOTFILE);
+        }
+
+        public void VerifyLogNotesTableHeaders(string value)
+        {
+            this.driver.WaitElementPresent(bylogNotesDataTable);
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(bylogNotesDataTable);
+            bool headerfound = false;
+            foreach (var item in list)
+            {
+                if (item.Text.ToLower().Contains(value.ToLower()))
+                {
+                    Thread.Sleep(2000);
+                    this.TESTREPORT.LogSuccess("verify TableHeaders in LogNotes Table", string.Format("Header contains:<mark>{0}</mark>", value));
+                    headerfound = true;
+                    break;
+                }
+            }
+            if (!headerfound)
+                this.TESTREPORT.LogFailure("verify TableHeaders in LogNotes Table", string.Format("Header not contains:<mark>{0}</mark>", value));
+        }
+
+
+
+
+
+
     }
 
     #endregion

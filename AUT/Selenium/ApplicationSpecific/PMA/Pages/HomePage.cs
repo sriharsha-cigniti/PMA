@@ -537,30 +537,24 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //Verify AccountName  in ClaimInformation Page
         public void VerifyClaimantName(string ClaimantName)
         {
+            ClaimantName = ClaimantName.Replace(',',' ');
+            ClaimantName = ClaimantName.Replace('.',' ');
+
             string ActualAccountName = this.driver.GetElementText(byClaimInformationClaimantName);
+            ActualAccountName = ActualAccountName.Replace(',', ' ');
+            ActualAccountName = ActualAccountName.Replace('.', ' ');
             bool flag = false;
-            string[] words = ActualAccountName.Split(',');
-            foreach (var item in words)
-            {
-                if (ClaimantName.Trim().ToLower().Contains(item.Trim().ToLower()))
+            if (ClaimantName.Trim().ToLower().Contains(ActualAccountName.Trim().ToLower()))
                 {
                     flag = true;
-                    break;
                 }   
-            }
             if (flag)
-            {
                 TESTREPORT.LogSuccess("Name is Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", ActualAccountName, ClaimantName));
-            }
             else
-            {
                 TESTREPORT.LogFailure("Name is not Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are not matching", ActualAccountName, ClaimantName), this.SCREENSHOTFILE);
-            }
+          
         }
-
-
-
-
+        
         public void VerifyAccountName(string AccountName)
         {
             //string DefaultAccountName = this.driver.GetElementText(byMyAccount);

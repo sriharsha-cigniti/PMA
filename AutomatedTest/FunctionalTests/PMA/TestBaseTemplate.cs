@@ -79,7 +79,8 @@ namespace AutomatedTest.FunctionalTests.PMA
           #region WebApplication - PMA_Cinch
              //EngineSetup.TestReport.InitTestCase("Launch Application", "Verify Application Is Launched Successfully");
              driver = WebDriverFactory.getWebDriver(EngineSetup.BROWSER);
-             driver.Navigate().GoToUrl(EngineSetup.WEBURL);
+           
+            driver.Navigate().GoToUrl(EngineSetup.WEBURL);
              //EngineSetup.TestReport.LogSuccess(String.Format("Launch Application On Browser - {0}",EngineSetup.BROWSER), String.Format("Application - {0} Launch Successful", EngineSetup.WEBURL));
             // EngineSetup.TestReport.UpdateTestCaseStatus();
 
@@ -92,6 +93,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         public  void AfterEachTestCaseExecution()
         {
             //driver.Close();
+            if(driver!=null)
             driver.Quit();
             WebDriverFactory.Free();
            // EngineSetup.TestReport.Close();

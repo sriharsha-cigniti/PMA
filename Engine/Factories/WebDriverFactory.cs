@@ -53,6 +53,7 @@ namespace Engine.Factories
                             options.AddUserProfilePreference("safebrowsing.enabled", "true");
                             options.AddArguments("test-type");
                             uniqueInstanceWebDriver = new ChromeDriver(System.IO.Directory.GetCurrentDirectory(), options);
+                          
                             break;
                         case ("ie"):
                             var ieOptions = new InternetExplorerOptions
@@ -99,6 +100,7 @@ namespace Engine.Factories
                     }
 
                     uniqueInstanceWebDriver.Manage().Window.Maximize();
+                    
                 }
                 return WebDriverFactory.uniqueInstanceWebDriver;
             }
