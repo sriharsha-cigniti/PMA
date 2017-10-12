@@ -21,6 +21,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         HomePage home = new HomePage();
 
         #region UI Objects
+        private By byClaimInformationClaimantName = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_lblClaimantName_0");
         private By byLossLineSummary = By.Id("MainContent_ASPxPageControl1_T1T");
         private By byDetailedClaimList = By.Id("MainContent_ASPxPageControl1_T0T");
         private By byResetButton = By.Id("MainContent_ASPxRoundPanel1_pnlContent_btnReset");
@@ -103,6 +104,26 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byExpandMedicalExpenseBtn = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrfinancial1_0_gridfinancial_0_DXMainTable']//tr[3]//td[1]");
         private By byReserveWorksheetsMedicalText = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrfinancial1_0_gridfinancial_0_DXMainTable']//span[contains(text(),'Reserve Worksheets Medical')]");
         private By byExpandMedicalExpenseBtnAbsence = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrfinancial1_0_gridfinancial_0_DXMainTable']//tr[3]//td[1]//span");
+        //Payments tab
+        private By byPaymentsTabResultsCount = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
+        private By byCheckDetailInformationText = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalpayment1_0_gridpayments_0_DXMainTable']//span[text()='Check Detail Information']");
+        private By byLossInformationText = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalpayment1_0_gridpayments_0_DXMainTable']//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalpayment1_0_gridpayments_0_dxdt0_0_ASPxLabel2_0']");
+        private By byExpandLossLineBtn = By.XPath("//span[@class='dx-acc dxGridView_gvDetailCollapsedButton dx-acc-s']");
+        private By byExpandLossLineBtnAbsence = By.XPath("//span[@class='dx-acc dxGridView_gvDetailCollapsedButton dx-acc-s']");
+        private By byPaymentDetailTab = By.XPath("//a[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_T0T']/span[contains(text(),'Payment Detail')]");
+        private By byExplanationofBenefitsTab = By.XPath("//a[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_T1T']/span[contains(text(),'Explanation of Benefits')]");
+        private By byInvoiceSummaryTab = By.XPath("//a[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_T2T']/span[contains(text(),'Invoice Summary')]");
+        private By byPaymentAmountinPaymentDetail = By.XPath("//div[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_C0']//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_ASPxLabel38_0']");
+        private By byinvoiceAmountinExplanationofBenefits = By.XPath("//div[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_C1']//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_ASPxLabel74_0']");
+        private By bySavingsandChargesText = By.XPath("//div[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_C2']//span[text()='Savings and Charges']");
+        private By bySavingsDetailText = By.XPath("//div[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_C2']//span[text()='Savings Detail']");
+        private By byPaymentAmtinInvoiceSummary = By.XPath("//div[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_C2']//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_ASPxLabel16_0']");
+        private By byInvoiceAmtinInvoiceSummary = By.XPath("//div[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_C2']//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_ASPxLabel12_0']");
+        //Worker Accident
+        private By byAccidentTabinWorkerAccident = By.XPath("//a[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usraccident1_0_pageControl_0_AT0T']");
+        private By byMedicalsummaryinWorkerAccident = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usraccident1_0_pageControl_0_T1T");
+        private By byMedicalsummaryContinWorkerAccident = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usraccident1_0_pageControl_0_T2T");
+
         //EmailAdjuster
         private By byCheckboxEmailAdjuster = By.Id("chkEmail_S_D");
         private By byEmailAddressField = By.XPath("//table[@id='mememailcc']//textarea[@id='mememailcc_I']");
@@ -1942,7 +1963,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
             }
         }
-        }
+        
 
         public void VerifyDocumentsCountOnSearch(string value)
         {
@@ -2132,11 +2153,6 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         }
 
 
-
-
-
-    }
- #endregion
         public void PaymentsDraggedColumnList(int number, string value)
         {
             Thread.Sleep(6000);
@@ -2194,14 +2210,330 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         }
 
+        public void ExpandLossLineinPayments()
+        {
+            this.TESTREPORT.LogInfo("Verify and click Expand button for LossLine");
+            Thread.Sleep(2000);
+            By byNodata = By.XPath("//div[contains(text(),'There are no available payments for this claim')]");
+            if (!this.driver.IsElementPresent(byNodata))
+            {
+                string value = this.driver.GetElementAttribute(byExpandLossLineBtnAbsence, "style");
+                Thread.Sleep(2000);
+                string x = "visibility: hidden;";
+                if (value.Equals(x))
+                {
+                    this.TESTREPORT.LogFailure("Verify ExpandLossLine button in Payments Tab", string.Format("Element not present", this.SCREENSHOTFILE));
+                }
 
+                else
+                {
+                    this.driver.ClickElement(byExpandLossLineBtn, "ExpandLossLine");
+                    Thread.Sleep(2000);
+
+                    this.TESTREPORT.LogInfo("Verify Check Detail Information");
+                    if (this.driver.IsElementPresent(byCheckDetailInformationText))
+                    {
+                        this.TESTREPORT.LogSuccess("Verify CheckDetailInformation", string.Format("successfully verified : <mark>{0}</mark>", "CheckDetailInformation"));
+                    }
+                    else
+                    {
+                        this.TESTREPORT.LogFailure("Verify CheckDetailInformation", "No text Found", this.SCREENSHOTFILE);
+                    }
+
+                    this.TESTREPORT.LogInfo("Verify Loss Information");
+                    if (this.driver.IsElementPresent(byLossInformationText))
+                    {
+                        this.TESTREPORT.LogSuccess("Verify LossInformation", string.Format("successfully verified:<mark>{0}</mark>", "LossInformation"));
+                    }
+
+                    else
+                    {
+                        this.TESTREPORT.LogFailure("Verify LossInformation", "No text Found", this.SCREENSHOTFILE);
+                    }
+                }
+            }
+            else
+                this.TESTREPORT.LogInfo(string.Format("<Mark>No Data to display</Mark>"));
+            }
+        
+
+
+        public void VerifyPaymentsTabTableHeaders(string value)
+        {
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalpayment1_0_gridpayments_0_DXMainTable']//th[contains(@class,'dxgvHeader')]"));
+            foreach (var item in list)
+            {
+                if (item.Text.ToLower().Contains(value.ToLower()))
+                {
+                    Thread.Sleep(2000);
+                    this.TESTREPORT.LogSuccess("verify TableHeaders in BreakdownbyLossLine Table", string.Format("Header contains:<mark>{0}</mark>", item.Text));
+                    break;
+                }
+
+
+            }
+        }
+
+        public void clickExpandButtoninPaymentsTab()
+        {
+            Thread.Sleep(2000);
+            this.driver.ClickElement(byExpandLossLineBtn, "Expand the data");
+
+        }
+
+
+        public void VerifyPaymentDetail()
+        {
+            Thread.Sleep(2000);
+            this.TESTREPORT.LogInfo("Verify Payment Detail in Payments Tab");
+            if (this.driver.IsElementPresent(byPaymentDetailTab))
+            {
+                this.TESTREPORT.LogSuccess("Verify PaymentDetail", string.Format("Successfully verified : <mark>{0}</mark>", "PaymentDetail"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify PaymentDetail", "PaymentDetail not found", this.SCREENSHOTFILE);
+            }
+
+        }
+
+        public void VerifyExplanationofBenefits()
+        {
+            this.TESTREPORT.LogInfo("Verify Explanation of Benefits in Payments Tab");
+            if (this.driver.IsElementPresent(byExplanationofBenefitsTab))
+            {
+                this.TESTREPORT.LogSuccess("Verify ExplanationofBenefits", string.Format("Successfully verified : <mark>{0}</mark>", "ExplanationofBenefits"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify ExplanationofBenefits", "ExplanationofBenefits not found", this.SCREENSHOTFILE);
+            }
+
+        }
+
+        public void VerifyInvoiceSummary()
+        {
+            this.TESTREPORT.LogInfo("Verify InvoiceSummary in Payments Tab");
+            if (this.driver.IsElementPresent(byInvoiceSummaryTab))
+            {
+                this.TESTREPORT.LogSuccess("Verify InvoiceSummary", string.Format("Successfully verified : <mark>{0}</mark>", "InvoiceSummary"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify InvoiceSummary", "InvoiceSummary not found", this.SCREENSHOTFILE);
+            }
+
+        }
+
+
+        public string VerifyPaymentAmount()
+        {
+            string value = this.driver.GetElementText(By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_DXMainTable']//tr[contains(@class,'dxgvDataRow')]//td[7]"));
+            Thread.Sleep(2000);
+            string x = this.driver.GetElementText(byPaymentAmountinPaymentDetail);
+            string z = "$" + x;
+            Thread.Sleep(2000);
+            if (value.Equals(z))
+            {
+                this.TESTREPORT.LogSuccess("Verify PaymentAmount in PaymentDetail", string.Format("Successfully verified : <mark>{0}</mark>", value));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify PaymentAmount in PaymentDetail", "Amount not matched", this.SCREENSHOTFILE);
+            }
+            return value;
+        }
+
+        public void ClickExplanationofBenefits()
+        {
+            this.driver.ClickElement(byExplanationofBenefitsTab, "ExplanationofBenefits");
+            Thread.Sleep(2000);
+        }
+
+        public string VerifyInvoiceAmount()
+        {
+            string value = this.driver.GetElementText(By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_DXMainTable']//tr[contains(@class,'dxgvDataRow')]//td[6]"));
+            Thread.Sleep(2000);
+            string x = this.driver.GetElementText(byinvoiceAmountinExplanationofBenefits);
+            string z = "$" + x;
+            if (value.Equals(z))
+            {
+                this.TESTREPORT.LogSuccess("Verify InvoiceAmount in ExplanationofBenefits", string.Format("Successfully verified : <mark>{0}</mark>", value));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify InvoiceAmount in ExplanationofBenefits", "Amount not matched", this.SCREENSHOTFILE);
+            }
+            return value;
+
+        }
+
+        public void ClickInvoiceSummary()
+        {
+            this.driver.ClickElement(byInvoiceSummaryTab, "InvoiceSummary");
+            Thread.Sleep(2000);
+        }
+
+
+        public void VerifySavingsandCharges()
+        {
+            this.TESTREPORT.LogInfo("Verify SavingsandCharges in InvoiceSummary");
+            if (this.driver.IsElementPresent(bySavingsandChargesText))
+            {
+                this.TESTREPORT.LogSuccess("Verify SavingsandCharges", string.Format("Successfully verified : <mark>{0}</mark>", "SavingsandCharges"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify SavingsandCharges", "SavingsandCharges not found", this.SCREENSHOTFILE);
+            }
+
+        }
+
+        public void VerifySavingsDetail()
+        {
+            this.TESTREPORT.LogInfo("Verify SavingsDetail in InvoiceSummary");
+            if (this.driver.IsElementPresent(bySavingsDetailText))
+            {
+                this.TESTREPORT.LogSuccess("Verify SavingsDetail", string.Format("Successfully verified : <mark>{0}</mark>", "SavingsDetail"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify SavingsDetail", "SavingsDetail not found", this.SCREENSHOTFILE);
+            }
+
+        }
+
+        public void VerifyPaymentAmtinInvoiceSummary(string x)
+        {
+            Thread.Sleep(2000);
+            string PaymentAmount = this.driver.GetElementText(byPaymentAmtinInvoiceSummary);
+            string z = "$" + PaymentAmount;
+            if (z.Equals(x))
+            {
+                this.TESTREPORT.LogSuccess("Verify PaymentAmount in InvoiceSummary", string.Format("Successfully verified : <mark>{0}</mark>", x));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify PaymentAmount in InvoiceSummary", "Amount not matches", this.SCREENSHOTFILE);
+            }
+        }
+
+        public void VerifyInvoiceAmtinInvoiceSummary(string y)
+        {
+            Thread.Sleep(2000);
+            string InvoiceAmount = this.driver.GetElementText(byInvoiceAmtinInvoiceSummary);
+            string z = "$" + InvoiceAmount;
+            if (z.Equals(y))
+            {
+                this.TESTREPORT.LogSuccess("Verify InvoiceAmount in InvoiceSummary", string.Format("Successfully verified : <mark>{0}</mark>", y));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify InvoiceAmount in InvoiceSummary", "Amount not matches", this.SCREENSHOTFILE);
+            }
+            //Thread.Sleep(10000);
+        }
+
+        public void VerifyClaimantNameinCLaimInquiry(string ClaimantName)
+        {
+            string ActualAccountName = this.driver.GetElementText(byClaimInformationClaimantName);
+
+            string[] words = ClaimantName.Split(',');
+            foreach (var item in words)
+            {
+                if (ActualAccountName.Contains(item))
+                {
+                    TESTREPORT.LogSuccess("Text Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", ActualAccountName, ClaimantName));
+                    break;
+                }
+                else
+                {
+                    this.TESTREPORT.LogFailure("Text not Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", ActualAccountName, ClaimantName));
+                }
+            }
+        }
+
+        public void verifyAccidentinWorkerAccident()
+        {
+            Thread.Sleep(2000);
+            this.TESTREPORT.LogInfo("verify Accident in WorkerAccident");
+            if (this.driver.IsElementPresent(byAccidentTabinWorkerAccident))
+            {
+                this.TESTREPORT.LogSuccess("verify Accident in WorkerAccident", string.Format("Successfully verified : <mark>{0}</mark>", "Accident"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("verify Accident in WorkerAccident", string.Format("Element not found : <mark>{0}</mark>", "Accident", this.SCREENSHOTFILE));
+            }
+        }
+
+
+        public void verifyMedicalSummaryinWorkerAccident()
+        {
+
+            this.TESTREPORT.LogInfo("verify Medicalsummary in WorkerAccident");
+            Thread.Sleep(2000);
+            if (this.driver.IsElementPresent(byMedicalsummaryinWorkerAccident))
+            {
+                this.TESTREPORT.LogSuccess("verify Medicalsummary in WorkerAccident", string.Format("Successfully verified : <mark>{0}</mark>", "Medicalsummary"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("verify v in WorkerAccident", string.Format("Element not found : <mark>{0}</mark>", "Medicalsummary", this.SCREENSHOTFILE));
+            }
+        }
+
+        public void verifyMedicalsummaryContinWorkerAccident()
+        {
+            this.TESTREPORT.LogInfo("verify MedicalsummaryCont in WorkerAccident");
+            Thread.Sleep(2000);
+            if (this.driver.IsElementPresent(byMedicalsummaryContinWorkerAccident))
+            {
+                this.TESTREPORT.LogSuccess("verify MedicalsummaryCont in WorkerAccident", string.Format("Successfully verified : <mark>{0}</mark>", "MedicalsummaryCont"));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("verify MedicalsummaryCont in WorkerAccident", string.Format("Element not found : <mark>{0}</mark>", "MedicalsummaryCont", this.SCREENSHOTFILE));
+            }
+        }
+
+        public void PaymentsTabResultscount()
+        {
+            this.TESTREPORT.LogInfo("Verify PaymentsTabResultscount");
+            Thread.Sleep(6000);
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(byPaymentsTabResultsCount);
+            if (list.Count != 0)
+            {
+                this.TESTREPORT.LogSuccess("Verify Payments data results", String.Format(" Table -<mark>{0}</mark> data is displayed succesfully", "Payments"));
+            }
+            else
+            {
+                this.TESTREPORT.LogInfo(String.Format("<Mark>No data to display</Mark>", this.SCREENSHOTFILE));
+            }
+
+        }
+
+
+        public void VerifyandClickWorkerAccident()
+        {
+            if (this.driver.IsElementPresent(byWorkerAccidentTab))
+            {
+                this.TESTREPORT.LogSuccess("Verify WorkerAccident", string.Format("Successfully verified : <mark>{0}</mark>", "WorkerAccident"));
+                this.TESTREPORT.LogInfo("Click on WorkerAccident");
+                this.driver.ClickElement(byWorkerAccidentTab, "Worker Accident");
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify WorkerAccident", "Element not Found", this.SCREENSHOTFILE);
+            }
+        }
     }
 
     #endregion
 
-     
-      
 
-   }
+
+
+}
 
 

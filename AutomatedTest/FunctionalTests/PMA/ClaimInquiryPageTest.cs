@@ -1633,20 +1633,225 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
         }
 
+        [TestMethod, Description("Claim Inquiry-Verify Payment Information tab of the claim"), TestCategory("Regression")]
+        public void CI_31claimInquiryPage()
+        {
 
 
+            this.TESTREPORT.InitTestCase("CI_31", "Claim Inquiry-Verify Payment Information tab of the claim");
+
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
+            string ClaimantName = readCSV("ClaimantName");
+            string TableHeader1 = readCSV("TableHeader1");
+            string TableHeader2 = readCSV("TableHeader2");
+            string TableHeader3 = readCSV("TableHeader3");
+            string TableHeader4 = readCSV("TableHeader4");
+            string TableHeader5 = readCSV("TableHeader5");
+            string TableHeader6 = readCSV("TableHeader6");
+            string TableHeader7 = readCSV("TableHeader7");
 
 
+            //Verify that user lands on Cinch application
+            home.VerifyPageTitle(HomePageTitle);
+            //Verify  Cinch WElcome Text
+            home.VerifyCinchWelome();
+            //Click on Claiminquiry
+            home.ClickClaimInquiry();
+            //Verify page Title for Claim Inquiry
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
+            //CLick on search button
+            home.ClickSearch();
+            //Verify table row count
+            home.ClaimInquiryResultsCount();
+            //verify loss Line Summary
+            cInquiry.VerifyLossLineSummary();
+            //Verify Detailed Claim list
+            cInquiry.VerifyDetailedClaimList();
 
+            ArrayList Index = home.ClickOnRandomClaim();
+            home.VerifyClaimNumber(Index[0].ToString());
+            cInquiry.VerifyClaimantNameinCLaimInquiry(Index[1].ToString());
 
+            //Verify Payments tab
+            cInquiry.VerifyPayment();
+            //click on payments tab
+            cInquiry.ClickPayments();
+            //VErify data  in datagrid
+            cInquiry.PaymentsTabResultscount();
 
+            //Verify TableHeaders in Payments tab
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader1);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader2);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader3);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader4);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader5);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader6);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader7);
 
+            //Expand the LossLine Data and verify CheckDetailInformatiom and Lossinformation
+            cInquiry.ExpandLossLineinPayments();
+
+            //logout of Application
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
 
         }
 
+        [TestMethod, Description("Claim Inquiry-Check for tabs present in Worker Accident (Workers claim number)"), TestCategory("Regression")]
+        public void CI_33claimInquiryPage()
+        {
+
+
+            this.TESTREPORT.InitTestCase("CI_33", "Claim Inquiry-Check for tabs present in Worker Accident (Workers claim number)");
+
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
+            string ClaimantName = readCSV("ClaimantName");
+
+
+            //Verify that user lands on Cinch application
+            home.VerifyPageTitle(HomePageTitle);
+            //Verify  Cinch WElcome Text
+            home.VerifyCinchWelome();
+            //Click on Claiminquiry
+            home.ClickClaimInquiry();
+            //Verify page Title for Claim Inquiry
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
+            //CLick on search button
+            home.ClickSearch();
+            //Verify table row count
+            home.ClaimInquiryResultsCount();
+            //verify loss Line Summary
+            cInquiry.VerifyLossLineSummary();
+            //Verify Detailed Claim list
+            cInquiry.VerifyDetailedClaimList();
+            //eNter Claimant name
+            cInquiry.EnterClaimantName(ClaimantName);
+            ArrayList Index = home.ClickOnRandomClaim();
+            home.VerifyClaimNumber(Index[0].ToString());
+            cInquiry.VerifyClaimantNameinCLaimInquiry(Index[1].ToString());
+            //Click on Worker Accident Tab
+            cInquiry.VerifyandClickWorkerAccident();
+
+            cInquiry.verifyAccidentinWorkerAccident();
+            cInquiry.verifyMedicalSummaryinWorkerAccident();
+            cInquiry.verifyMedicalsummaryContinWorkerAccident();
+
+            //logout of Application
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+
+        [TestMethod, Description("Claim Inquiry-Verify Payment Information Tab of the claim(Workers Accident)"), TestCategory("Regression")]
+        public void CI_34claimInquiryPage()
+        {
+
+
+            this.TESTREPORT.InitTestCase("CI_34", "Claim Inquiry-Verify Payment Information Tab of the claim(Workers Accident)");
+
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
+            string ClaimantName = readCSV("ClaimantName");
+            string TableHeader1 = readCSV("TableHeader1");
+            string TableHeader2 = readCSV("TableHeader2");
+            string TableHeader3 = readCSV("TableHeader3");
+            string TableHeader4 = readCSV("TableHeader4");
+            string TableHeader5 = readCSV("TableHeader5");
+            string TableHeader6 = readCSV("TableHeader6");
+            string TableHeader7 = readCSV("TableHeader7");
+
+
+            //Verify that user lands on Cinch application
+            home.VerifyPageTitle(HomePageTitle);
+            //Verify  Cinch WElcome Text
+            home.VerifyCinchWelome();
+            //Click on Claiminquiry
+            home.ClickClaimInquiry();
+            //Verify page Title for Claim Inquiry
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
+            //CLick on search button
+            home.ClickSearch();
+            //Verify table row count
+            home.ClaimInquiryResultsCount();
+            //verify loss Line Summary
+            cInquiry.VerifyLossLineSummary();
+            //Verify Detailed Claim list
+            cInquiry.VerifyDetailedClaimList();
+            //eNter Claimant name
+            cInquiry.EnterClaimantName(ClaimantName);
+            ArrayList Index = home.ClickOnRandomClaim();
+            home.VerifyClaimNumber(Index[0].ToString());
+            cInquiry.VerifyClaimantNameinCLaimInquiry(Index[1].ToString());
+
+            //Verify Payments tab
+            cInquiry.VerifyPayment();
+            //click on payments tab
+            cInquiry.ClickPayments();
+            //Verify data  in datagrid
+            cInquiry.PaymentsTabResultscount();
+
+            //verify Table Headers in Payments tab
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader1);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader2);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader3);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader4);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader5);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader6);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader7);
+
+            //Expand the LossLine Data 
+            cInquiry.clickExpandButtoninPaymentsTab();
+            //verify Payment Detail
+            cInquiry.VerifyPaymentDetail();
+            //Verify Explanation of benefits
+            cInquiry.VerifyExplanationofBenefits();
+            //VErify InvoiceSummary
+            cInquiry.VerifyInvoiceSummary();
+            //verify payment Amount
+            string x = cInquiry.VerifyPaymentAmount();
+            //click ExplanationofBenefits
+            cInquiry.ClickExplanationofBenefits();
+            //Verify invoiceAmount
+            string y = cInquiry.VerifyInvoiceAmount();
+            //click InvoiceSummary
+            cInquiry.ClickInvoiceSummary();
+
+            cInquiry.VerifySavingsandCharges();
+
+            cInquiry.VerifySavingsDetail();
+            cInquiry.VerifyPaymentAmtinInvoiceSummary(x);
+            cInquiry.VerifyInvoiceAmtinInvoiceSummary(y);
+            cInquiry.clickExpandButtoninPaymentsTab();
+            //logout of Application
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+
+        
+
     }
+
+}
 
     
 
-    }
+    
 
