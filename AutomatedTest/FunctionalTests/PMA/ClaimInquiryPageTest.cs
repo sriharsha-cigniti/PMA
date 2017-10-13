@@ -1295,10 +1295,8 @@ namespace AutomatedTest.FunctionalTests.PMA
             string HomePageTitle = readCSV("HomePageTitle");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
             string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
-            string ClaimantName = readCSV("ClaimantName");
-
+            string ClaimantName = readCSV("ClaimantName1");
             
-
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text

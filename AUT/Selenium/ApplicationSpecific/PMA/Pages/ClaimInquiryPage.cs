@@ -1451,6 +1451,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void ExportFileDelete()
         {
             bool exists = false;
+            Thread.Sleep(5000);
             ExportSpreadsheet file = new ExportSpreadsheet(FileName, FilePath);
             exists = file.FileDelete();
             if (exists)
@@ -1494,6 +1495,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void CloseChildWindow()
         {
+            Thread.Sleep(3000);
             this.driver.CloseChildWindow();
         }
 
@@ -1722,9 +1724,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 By chkbox = By.XPath("//input[@type='checkbox']");
                 this.driver.ClickElement(chkbox, "Checkbox for selecting document");
                 this.TESTREPORT.LogInfo("Document selected");
-                Thread.Sleep(1000);
+                Thread.Sleep(3000);
                 this.driver.ClickElement(byOpenButton, "Open button for downloading document");
+                Thread.Sleep(3000);
                 this.driver.ClickElement(byOpenButton, "Open button for downloading document");
+                Thread.Sleep(5000);
             }
             else
                 this.TESTREPORT.LogInfo("No Documents attached ");
@@ -1830,7 +1834,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             string x = "visibility: hidden;";
             if (value.Equals(x))
             {
-                this.TESTREPORT.LogFailure("Verify ExpandMedicalExpense button in Financial Tab", string.Format("Element not present", this.SCREENSHOTFILE));
+                this.TESTREPORT.LogFailure("Verify ExpandMedicalExpense button in Financial Tab", string.Format("Element not present"), this.SCREENSHOTFILE);
             }
 
             else
@@ -2280,7 +2284,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void clickExpandButtoninPaymentsTab()
         {
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
+            this.driver.WaitElementPresent(byExpandLossLineBtn);
             this.driver.ClickElement(byExpandLossLineBtn, "Expand the data");
 
         }

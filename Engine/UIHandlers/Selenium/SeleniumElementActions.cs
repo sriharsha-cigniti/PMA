@@ -112,7 +112,7 @@ namespace Engine.UIHandlers.Selenium
                         }
                         catch (System.InvalidOperationException ex)
                         {
-                            testReport.LogWarning("ClickElement", string.Format("Trying with Javascript Click, as normal click threw exception - <mark>{0}</mark>", ex.Message), EngineSetup.GetScreenShotPath());
+                            //testReport.LogWarning("ClickElement", string.Format("Trying with Javascript Click, as normal click threw exception - <mark>{0}</mark>", ex.Message), EngineSetup.GetScreenShotPath());
                             driver.ClickElementWithJavascript(locator, controlName);
                         }
                         return driver;
