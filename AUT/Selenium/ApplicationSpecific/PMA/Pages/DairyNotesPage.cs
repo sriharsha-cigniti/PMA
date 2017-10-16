@@ -29,11 +29,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //private By byNote = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_efnew_0_DXEFL_DXEditor2_DDD_L_LBI1T0");
         private By byTextInputBox = By.XPath("//textarea[@class='dxeMemoEditArea dxeMemoEditAreaSys']");
         private By bySave = By.XPath("//span[contains(text(),'Save')]");
-       // private By bySubjectText = By.XPath("//tr[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_DXDataRow0']/td[5]");
+        // private By bySubjectText = By.XPath("//tr[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_DXDataRow0']/td[5]");
         private By byColumnsData = By.XPath("//tr[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_DXDataRow0']/td");
         private By byHome = By.LinkText("Home");
         private By byHomeDairy = By.XPath("//tr[@id='MainContent_sppage_pnlDiary_griddiary_DXDataRow0']/td");
-       // private By byEdit = By.XPath("//span[contains(text(),'Edit')]");
+        // private By byEdit = By.XPath("//span[contains(text(),'Edit')]");
         private By byEdit = By.LinkText("Edit");
         private By byDelete = By.LinkText("Delete");
         #endregion
@@ -108,7 +108,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             try
             {
                 System.Collections.Generic.IReadOnlyList<IWebElement> category = this.driver.FindElements(byListValues);
-                category[1].Click();       
+                category[0].Click();
                 this.TESTREPORT.LogSuccess("Select Random Catogery from dropdown", String.Format("Category - {0} is selcted succesfully", category[1]));
             }
             catch
@@ -131,7 +131,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void EnterTextInTextArea(string inputText)
         {
             this.TESTREPORT.LogInfo("Enter text in text area");
-            this.driver.SendKeysToElement(byTextInputBox, inputText,"inputText");
+            this.driver.SendKeysToElement(byTextInputBox, inputText, "inputText");
         }
 
         //Click on save
@@ -148,7 +148,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void VerifyColumns(string SubjectText, string TextInTextArea)
         {
             this.TESTREPORT.LogInfo("Verify Columns Data");
-              
+
             IReadOnlyList<IWebElement> element = driver.FindElements(byColumnsData);
             this.driver.AssertTextMatching(element[4].Text, SubjectText);
             this.driver.AssertTextMatching(element[5].Text, TextInTextArea);
@@ -173,7 +173,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
             else
             {
-                this.TESTREPORT.LogFailure("Verify Home Diary Coloumns","NO records found");
+                this.TESTREPORT.LogFailure("Verify Home Diary Coloumns", "NO records found");
             }
         }
     }

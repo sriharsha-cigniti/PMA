@@ -483,7 +483,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
         }
         [TestMethod, Description("Claim Inquiry-Export to spreadsheet-Loss line summary"), TestCategory("Regression")]
-
         public void CI_10claimInquiryPage()
         {
             HomePage home = new HomePage();
@@ -533,8 +532,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
 
         }
-
-
         [TestMethod, Description("Claim Inquiry-Search the data with Report date range"), TestCategory("Regression")]
         public void CI_11claimInquiryPage()
         {
@@ -1021,7 +1018,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.DraggedColumnList(0, "Claimant Name");
             ArrayList index = cInquiry.ClickOnRandomGroupClaim();
             //cInquiry.VerifyGroupClaimNumber(index[0].ToString().Replace("Claimant Name: ", ""));
-            home.VerifyClaimantName(index[0].ToString());
+            home.VerifyClaimantName(index[0].ToString().Replace("Claimant Name: ", ""));
             //logout of Application
             home.ClickExit();
 
@@ -1054,13 +1051,13 @@ namespace AutomatedTest.FunctionalTests.PMA
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
             //Verify loss Line Summary
-            cInquiry.VerifyLossLineSummary();           
+            cInquiry.VerifyLossLineSummary();
             //Drag the column in header Columns
             cInquiry.DragTheColumnHeaderInSpace("Claimant Name");
             //Verify the Grouped/Dragged Column
             cInquiry.DraggedColumnList(0, "Claimant Name");
             //Verify the Sorting for Grouped columns
-            cInquiry.VerifySortingOnGroupedColumn();     
+            cInquiry.VerifySortingOnGroupedColumn();
             //Logout of Application
             home.ClickExit();
 
@@ -1077,7 +1074,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             string HomePageTitle = readCSV("HomePageTitle");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
 
-            
+
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch Welcome Text
@@ -1157,8 +1154,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-
-
         [TestMethod, Description("Claim Inquiry-Verify documents tab in the claim"), TestCategory("Regression")]
         public void CI_25claimInquiryPage()
         {
@@ -1220,7 +1215,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-
         [TestMethod, Description("Claim Inquiry-Verify Sorting in documents tab in the claim"), TestCategory("Regression")]
         public void CI_26claimInquiryPage()
         {
@@ -1333,7 +1327,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.UpdateTestCaseStatus();
         }
-
         [TestMethod, Description("Verify LossLine Information tab of the claim"), TestCategory("Regression")]
         public void CI_28claimInquiryPage()
         {
@@ -1399,7 +1392,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.UpdateTestCaseStatus();
         }
-
         [TestMethod, Description("Claim Inquiry-Verify Financial Information tab of the claim"), TestCategory("Regression")]
         public void CI_29claimInquiryPage()
         {
@@ -1452,8 +1444,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-
-
         [TestMethod, Description("Claim Inquiry-Verify Financial Information tab of the claim(Workers claim number)"), TestCategory("Regression")]
         public void CI_30claimInquiryPage()
         {
@@ -1524,7 +1514,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-
         [TestMethod, Description("Claim Inquiry-Verify Payment Information tab of the claim"), TestCategory("Regression")]
         public void CI_31claimInquiryPage()
         {
@@ -1594,9 +1583,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-
-
-
         [TestMethod, Description("Verify Lossline Information of the claim by search and clear the searched data"), TestCategory("Regression")]
         public void CI_32claimInquiryPage()
         {
@@ -1645,10 +1631,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
-        }
-
-       
-
+        }       
         [TestMethod, Description("Claim Inquiry-Check for tabs present in Worker Accident (Workers claim number)"), TestCategory("Regression")]
         public void CI_33claimInquiryPage()
         {
@@ -1699,7 +1682,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-
         [TestMethod, Description("Claim Inquiry-Verify Payment Information Tab of the claim(Workers Accident)"), TestCategory("Regression")]
         public void CI_34claimInquiryPage()
         {
@@ -1790,7 +1772,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-
         [TestMethod, Description("Claim Inquiry-Verify Payment Information Tab of the claim(Workers Accident) and Group by column"), TestCategory("Regression")]
         public void CI_35claimInquiryPage()
 
@@ -1802,7 +1783,13 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.InitTestCase("CI_35", "Claim Inquiry-Verify Payment Information Tab of the claim(Workers Accident) and Group by column");
             string HomePageTitle = readCSV("HomePageTitle");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
-            string ClaimantName = readCSV("ClaimantName");
+            string TableHeader1 = readCSV("TableHeader1");
+            string TableHeader2 = readCSV("TableHeader2");
+            string TableHeader3 = readCSV("TableHeader3");
+            string TableHeader4 = readCSV("TableHeader4");
+            string TableHeader5 = readCSV("TableHeader5");
+            string TableHeader6 = readCSV("TableHeader6");
+            string TableHeader7 = readCSV("TableHeader7");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
@@ -1820,33 +1807,94 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.VerifyDetailedClaimList();
             //Verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
-            //Enter a ClaimNumber-starts with 'L or 'W' in the grid view
-            cInquiry.EnterClaimantName(ClaimantName);
-
             ArrayList Index = cInquiry.ClickOnRandomClaimInquiryResults();
             home.VerifyClaimNumber(Index[0].ToString());
             home.VerifyClaimantName(Index[1].ToString());
             //Click on Payments Tab
             cInquiry.ClickPayments();
             //Verify Column Headers
-            cInquiry.VerifyPaymentsTableHeaders("Loss Line");
-            cInquiry.VerifyPaymentsTableHeaders("Payment Issue");
-            cInquiry.VerifyPaymentsTableHeaders("Check Number");
-            cInquiry.VerifyPaymentsTableHeaders("Payment Amt");
-            cInquiry.VerifyPaymentsTableHeaders("Payment Status");
-            cInquiry.VerifyPaymentsTableHeaders("Vendor/Payee Name");
-            cInquiry.VerifyPaymentsTableHeaders("Claimant Name");
-
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader1);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader2);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader3);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader4);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader5);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader6);
+            cInquiry.VerifyPaymentsTabTableHeaders(TableHeader7);
             //Verify Payments table row count
-            cInquiry.PaymentGridResultsCount();
+            int Value = cInquiry.PaymentsTabResultscount();
             //Drag the Loss Line column in header Columns
             cInquiry.DragTheColumnHeaderPayments("Loss Line");
             //Verify the Grouped/Dragged Column
             cInquiry.PaymentsDraggedColumnList(0, "Loss Line");
+            if (Value > 0)
+            {
+                cInquiry.LossLineAfterExpand();
+            }
 
-            cInquiry.LossLineAfterExpand();
-            //Verify Claimant Name
+            //logout of Application
+            home.ClickExit();
 
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+        [TestMethod, Description("Claim Inquiry-Verify Payment Information Tab of the claim(Workers Accident) and Group by column"), TestCategory("Regression")]
+        public void CI_36claimInquiryPage()
+
+        {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+
+            this.TESTREPORT.InitTestCase("CI_36", "Claim Inquiry-Verify Log Notes tab Group by column");
+            string HomePageTitle = readCSV("HomePageTitle");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string ClaimantName = readCSV("ClaimantName");
+            string Header1 = readCSV("LogNoteTableHeader1");
+            string Header2 = readCSV("LogNoteTableHeader2");
+            string Header3 = readCSV("LogNoteTableHeader3");
+            string Header4 = readCSV("LogNoteTableHeader4");
+            string Header5 = readCSV("LogNoteTableHeader5");
+
+            //Verify that user lands on Cinch application
+            home.VerifyPageTitle(HomePageTitle);
+            //Verify  Cinch Welcome Text
+            home.VerifyCinchWelome();
+            //Click on Claiminquiry
+            home.ClickClaimInquiry();
+            //Verify page Title for Claim Inquiry
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
+            //CLick on search button
+            home.ClickSearch();
+            //Verify table row count
+            home.ClaimInquiryResultsCount();
+            //Verify Detailed Claim list
+            cInquiry.VerifyDetailedClaimList();
+            //Verify loss Line Summary
+            cInquiry.VerifyLossLineSummary();
+            //Click on Random claim 
+            ArrayList Index = cInquiry.ClickOnRandomClaimInquiryResults();
+            home.VerifyClaimNumber(Index[0].ToString());
+            home.VerifyClaimantName(Index[1].ToString());
+            //Click on LogNotes Tab
+            cInquiry.ClickLogNotes();
+            //Verify Column Headers
+            cInquiry.VerifyLogNotesTableHeaders(Header1);
+            cInquiry.VerifyLogNotesTableHeaders(Header2);
+            cInquiry.VerifyLogNotesTableHeaders(Header3);
+            cInquiry.VerifyLogNotesTableHeaders(Header4);
+            cInquiry.VerifyLogNotesTableHeaders(Header5);
+
+            //Verify Payments table row count
+            int Value = cInquiry.LogNotesGridResultsCount();
+
+            //Drag the Loss Line column in header Columns
+            cInquiry.DragTheColumnHeaderLogNotes("Category");
+            //Verify the Grouped/Dragged Column
+            cInquiry.LogNotesDraggedColumnList(0, "Category");
+
+            if (Value > 0)
+            {
+                cInquiry.LogNotesAfterExpand();
+            }
 
             //logout of Application
             home.ClickExit();
@@ -1910,8 +1958,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.UpdateTestCaseStatus();
         }
-
-
         [TestMethod, Description("Claim Inquiry-Verify the Log Notes tab in claim "), TestCategory("Regression")]
         public void CI_38claimInquiryPage()
         {

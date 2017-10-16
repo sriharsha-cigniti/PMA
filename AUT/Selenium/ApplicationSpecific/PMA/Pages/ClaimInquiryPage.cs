@@ -80,7 +80,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byDraggedColumnListInSpacePayments = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalpayment1_0_gridpayments_0_grouppanel");
         private By byDraggedColumnListPayments = By.XPath("//th[contains(@id,'MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalpayment1_0_gridpayments_0_groupcol')]");
         private By byGroupColumnsList = By.XPath("//tr[contains(@id,'MainContent_ASPxPageControl1_gridresult_DXGroupRow')]/td[2]");
-        
+        //log notes
+
+        private By byLogNotesGridCount = By.XPath("//tr[contains(@id,'MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrnotes1_0_gridNotes_0_DXDataRow')]");
+        private By byDraggedColumnListInSpaceLogNotes = By.XPath("//div[contains(@id,'MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrnotes1_0_gridNotes_0_grouppanel')]");
+        private By byDraggedColumnListLogNotes = By.XPath("//th[contains(@id,'MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrnotes1_0_gridNotes_0_groupcol')]");
 
         private By byLocationField = By.XPath("//label[contains(text(),'Location : ')]/../..//input[@type='text']");
         private By byLocationCodeFieldColumn = By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@class,'dxgvDataRow')]//td[1]");
@@ -2506,7 +2510,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
-        public void PaymentsTabResultscount()
+        //Payments table results count
+        public int PaymentsTabResultscount()
         {
             this.TESTREPORT.LogInfo("Verify PaymentsTabResultscount");
             Thread.Sleep(6000);
@@ -2517,9 +2522,9 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
             else
             {
-                this.TESTREPORT.LogInfo(String.Format("<Mark>No data to display</Mark>", this.SCREENSHOTFILE));
+                this.TESTREPORT.LogInfo(String.Format("<Mark>There are no available payments for this claim</Mark>", this.SCREENSHOTFILE));
             }
-
+            return list.Count;
         }
 
 
@@ -2589,8 +2594,98 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             if (!headerfound)
                 this.TESTREPORT.LogFailure("verify TableHeaders in LogNotes Table", string.Format("Header not contains:<mark>{0}</mark>", value));
         }
+        
+       
+        //Verify LogNotes tab grid results Count
+        public int LogNotesGridResultsCount()
+        {
+            Thread.Sleep(6000);
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(byLogNotesGridCount);
+            if (list.Count != 0)
+            {
+                this.TESTREPORT.LogSuccess("Verify LogNotes Table results", String.Format(" Table - <mark>{0}</mark> rows are displayed succesfully", "PaymentsResults", list.Count()));
+            }
+            else
+            {
+                this.TESTREPORT.LogInfo(String.Format("There are no available log notes for this claim"), this.SCREENSHOTFILE);
+            }
+            return list.Count;
+        }
+
+        //Dragged Column Header Lognotes
+        public void DragTheColumnHeaderLogNotes(string value)
+        {
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(By.XPath("//th[contains(@id,'MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrnotes1_0_gridNotes_0_col')]"));
+            IWebElement e2 = this.driver.FindElement(byDraggedColumnListInSpaceLogNotes);
+            foreach (var WebItem in list)
+            {
+
+                if (WebItem.Text.ToLower().Trim().Equals(value.ToLower().Trim()))
+                {
+                    this.driver.DragDrop(WebItem, e2);
+                    break;
+                }
+
+            }
+        }
+
+        //Verify the Dragged Column
+
+        public void LogNotesDraggedColumnList(int number, string value)
+        {
+            Thread.Sleep(6000);
+            try
+            {
+
+                IReadOnlyList<IWebElement> list = this.driver.FindElements(byDraggedColumnListLogNotes);
+                if (list[number].Text.Trim().ToLower() == value.Trim().ToLower())
+                {
+                    this.TESTREPORT.LogSuccess("Verify Dragged column", string.Format("Column -<mark>{0}</mark> Dragged successfully", list[number].Text));
+                }
+                else
+                {
+                    this.TESTREPORT.LogFailure("Verify Dragged column", string.Format("Falied to drag the Columns"), this.SCREENSHOTFILE);
+                }
+            }
+            catch (Exception e)
+            {
+                this.TESTREPORT.LogFailure("Verify Dragged column", string.Format("Falied to drag the Columns"), this.SCREENSHOTFILE);
+            }
 
 
+        }
+
+        //Log Notes after Expand
+        public void LogNotesAfterExpand()
+        {
+
+            int rowCount = this.driver.FindElements(By.XPath("//tr[contains(@id,'MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrnotes1_0_gridNotes_0_DXGroupRow')]")).Count();
+
+            string LogNotes, name;
+            //string name = null;
+
+            if (rowCount > 0)
+            {
+
+                By byGroupLogNotes = By.XPath("(//table[contains(@id,'MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrnotes1_0_gridNotes_0_DXMainTable')]//tr[contains(@class,'dxgvGroupRow')]/td[2])[1]");
+                LogNotes = this.driver.GetElementText(byGroupLogNotes);
+                name = LogNotes.Split(':')[1].Trim();
+                By byExpandClick = By.XPath("(//a/img[@class='dxGridView_gvCollapsedButton'])[1]");
+
+                this.driver.ClickElementWithJavascript(byExpandClick, "Expand LogNotes");
+                Thread.Sleep(3000);
+                By byExpand = By.XPath("//td[@class='dxgvDetailButton dxgv']//a");
+
+                this.driver.ClickElementWithJavascript(byExpand, "Click on Expand");
+                Thread.Sleep(2000);
+
+                this.TESTREPORT.LogInfo(String.Format("Group the columns by Catogery <Mark>{0}</Mark>", name));
+
+
+            }
+
+
+        }
 
 
 

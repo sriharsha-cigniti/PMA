@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace AutomatedTest.FunctionalTests.PMA
 {
     [TestClass]
-     public class DairyNotesPageTest : PMA.TestBaseTemplate
+    public class DairyNotesPageTest : PMA.TestBaseTemplate
     {
         HomePage home = new HomePage();
         ClaimInquiry cInquiry = new ClaimInquiry();
@@ -21,6 +21,10 @@ namespace AutomatedTest.FunctionalTests.PMA
 
         public void CI_D1DairyNotes()
         {
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+            DairyNotesPage dairyNotes = new DairyNotesPage();
+
             this.TESTREPORT.InitTestCase("CI_D1", "Create a diary entry");
 
             this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
@@ -49,11 +53,11 @@ namespace AutomatedTest.FunctionalTests.PMA
             dairyNotes.EnterTextInTextArea(TextInTextArea);
             Thread.Sleep(3000);
             dairyNotes.ClickSave();
-            dairyNotes.VerifyColumns(SubjectText,TextInTextArea);
+            dairyNotes.VerifyColumns(SubjectText, TextInTextArea);
             home.VerifyClaimNumber(Index[0].ToString());
             home.VerifyClaimantName(Index[1].ToString());
             dairyNotes.ClickHome();
-            dairyNotes.VerifyHomeDairyColumns(Index[0].ToString(),Index[1].ToString());
+            dairyNotes.VerifyHomeDairyColumns(Index[0].ToString(), Index[1].ToString());
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
         }
