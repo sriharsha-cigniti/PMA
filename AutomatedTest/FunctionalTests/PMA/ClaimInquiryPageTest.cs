@@ -1282,7 +1282,124 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-        
+        [TestMethod, Description("Claim Inquiry-View documents and filter the results in the claim view"), TestCategory("Regression")]
+        public void CI_27claimInquiryPage()
+        {
+            this.TESTREPORT.InitTestCase("CI_27", "Verify Accident Information tab for the claim");
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string HomePageTitle = readCSV("HomePageTitle");
+            string DocumentPagetitle = readCSV("documentListPageTitle");
+            string ClaimantName = readCSV("ClaimantName1");
+
+            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
+            home.VerifyPageTitle(HomePageTitle);
+
+            home.VerifyCinchWelome();
+            home.ClickClaimInquiry();
+            home.ClickSearch();
+
+            this.TESTREPORT.LogInfo("Verify table row count");
+            home.ClaimInquiryResultsCount();
+
+
+            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
+            cInquiry.VerifyDetailedClaimList();
+
+            this.TESTREPORT.LogInfo("Verify loss Line Summary");
+            cInquiry.VerifyLossLineSummary();
+
+            this.TESTREPORT.LogInfo("Click on any random claim");
+            cInquiry.EnterClaimantName(ClaimantName);
+            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
+            home.VerifyClaimNumber(Index[0].ToString());
+            home.VerifyClaimantName(Index[1].ToString());
+
+            this.TESTREPORT.LogInfo("Verify and Click the Accident Tab");
+            cInquiry.VerifyAndClickonAccidentTab();
+
+            this.TESTREPORT.LogInfo("Verify Accident Information,Description ,Vehicle List");
+            cInquiry.VerifyAccidentInformationIsDisplayed();
+            cInquiry.VerifyAccidentDescriptionIsDisplayed();
+            cInquiry.VerifyVehicleListIsDisplayed();
+
+            this.TESTREPORT.LogInfo("Verify Data in VehicleList");
+            cInquiry.VerifyDataInVehicleList();
+
+            this.TESTREPORT.LogInfo("Logout of Application");
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+        }
+
+        [TestMethod, Description("Verify LossLine Information tab of the claim"), TestCategory("Regression")]
+        public void CI_28claimInquiryPage()
+        {
+            this.TESTREPORT.InitTestCase("CI_28", "Verify LossLine Information tab of the claim");
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+            #region Reading DAta from CSV 
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string HomePageTitle = readCSV("HomePageTitle");
+            string DocumentPagetitle = readCSV("documentListPageTitle");
+            string ClaimantName = readCSV("ClaimantName1");
+            string Header1 = readCSV("LossLineTableHeader1");
+            string Header2 = readCSV("LossLineTableHeader2");
+            string Header3 = readCSV("LossLineTableHeader3");
+            string Header4 = readCSV("LossLineTableHeader4");
+            string Header5 = readCSV("LossLineTableHeader5");
+
+            #endregion
+
+            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
+            home.VerifyPageTitle(HomePageTitle);
+
+            home.VerifyCinchWelome();
+            home.ClickClaimInquiry();
+            home.ClickSearch();
+
+            this.TESTREPORT.LogInfo("Verify table row count");
+            home.ClaimInquiryResultsCount();
+
+
+            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
+            cInquiry.VerifyDetailedClaimList();
+
+            this.TESTREPORT.LogInfo("Verify loss Line Summary");
+            cInquiry.VerifyLossLineSummary();
+
+            this.TESTREPORT.LogInfo("Click on any random claim");
+            cInquiry.EnterClaimantName(ClaimantName);
+            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
+            home.VerifyClaimNumber(Index[0].ToString());
+            home.VerifyClaimantName(Index[1].ToString());
+
+            this.TESTREPORT.LogInfo("Verify and Click the Lossline Tab");
+            cInquiry.VerifyAndClickonLossLineTab();
+
+            this.TESTREPORT.LogInfo("Verify Claimant name ,LossLine Description, Suffix Code, Loss Line Status, In Suit)");
+            cInquiry.VerifyLossLineTableHeaders(Header1);
+            cInquiry.VerifyLossLineTableHeaders(Header2);
+            cInquiry.VerifyLossLineTableHeaders(Header3);
+            cInquiry.VerifyLossLineTableHeaders(Header4);
+            cInquiry.VerifyLossLineTableHeaders(Header5);
+
+
+            this.TESTREPORT.LogInfo("Verify LossLine Detail Information Text,Claimant Detail Information,Other loss line information");
+            cInquiry.CLickLossLineExpand();
+            cInquiry.VerifyLosslineInformationIsDisplayed();
+            cInquiry.VerifyClaimantInformationIsDisplayed();
+            cInquiry.VerifyOtherLossLineIsDisplayed();
+            cInquiry.VerifyOtherClaimantNameIsDisplayed();
+
+            this.TESTREPORT.LogInfo("Logout of Application");
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+        }
+
         [TestMethod, Description("Claim Inquiry-Verify Financial Information tab of the claim"), TestCategory("Regression")]
         public void CI_29claimInquiryPage()
         {
@@ -1408,232 +1525,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
         }
 
-        [TestMethod, Description("Claim Inquiry-View documents and filter the results in the claim view"), TestCategory("Regression")]
-        public void CI_37claimInquiryPage()
-        {
-            this.TESTREPORT.InitTestCase("CI_37", "Verify documents and filter the results in the claim view");
-            HomePage home = new HomePage();
-            ClaimInquiry cInquiry = new ClaimInquiry();
-
-            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
-            string ClaimantName = readCSV("claimNoFordocuments");
-            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
-            string HomePageTitle = readCSV("HomePageTitle");
-            string DocumentPagetitle = readCSV("documentListPageTitle");
-            string DocumentSearchValue=readCSV("DocumentSearchValue");
-
-            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
-            home.VerifyPageTitle(HomePageTitle);
-
-            home.VerifyCinchWelome();
-            home.ClickClaimInquiry();
-            home.ClickSearch();
-
-            this.TESTREPORT.LogInfo("Verify table row count");
-            home.ClaimInquiryResultsCount();
-
-
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
-            cInquiry.VerifyDetailedClaimList();
-
-            this.TESTREPORT.LogInfo("Verify loss Line Summary");
-            cInquiry.VerifyLossLineSummary();
-
-            this.TESTREPORT.LogInfo("Click on any random claim");
-            cInquiry.EnterClaimantName(ClaimantName);
-            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
-            home.VerifyClaimNumber(Index[0].ToString());
-            home.VerifyClaimantName(Index[1].ToString());
-
-            this.TESTREPORT.LogInfo("Verify the Documents Tab");
-            cInquiry.VerifyDocumentsTab();
-            cInquiry.ClickDocuments();
-            
-            this.TESTREPORT.LogInfo("Verify Count of the results ");
-            cInquiry.EnterDocumentSearchText(DocumentSearchValue);
-            cInquiry.VerifyDocumentsCountOnSearch(DocumentSearchValue);
-            cInquiry.CloseChildWindow();
-            cInquiry.SwitchToParentWindow();
-            
-            this.TESTREPORT.LogInfo("Verify CLaim Inquiry Page Title ");
-            home.ClickClaimInquiry();
-            home.VerifyPageTitle(ClaimInquiryPageTitle);
-
-            this.TESTREPORT.LogInfo("Logout of Application");
-            home.ClickExit();
-
-            this.TESTREPORT.UpdateTestCaseStatus();
-        }
-
-        [TestMethod, Description("Claim Inquiry-View documents and filter the results in the claim view"), TestCategory("Regression")]
-        public void CI_27claimInquiryPage()
-        {
-            this.TESTREPORT.InitTestCase("CI_27", "Verify Accident Information tab for the claim");
-            HomePage home = new HomePage();
-            ClaimInquiry cInquiry = new ClaimInquiry();
-            
-            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
-            string HomePageTitle = readCSV("HomePageTitle");
-            string DocumentPagetitle = readCSV("documentListPageTitle");
-            string ClaimantName = readCSV("ClaimantName1");
-
-            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
-            home.VerifyPageTitle(HomePageTitle);
-
-            home.VerifyCinchWelome();
-            home.ClickClaimInquiry();
-            home.ClickSearch();
-
-            this.TESTREPORT.LogInfo("Verify table row count");
-            home.ClaimInquiryResultsCount();
-
-
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
-            cInquiry.VerifyDetailedClaimList();
-
-            this.TESTREPORT.LogInfo("Verify loss Line Summary");
-            cInquiry.VerifyLossLineSummary();
-
-            this.TESTREPORT.LogInfo("Click on any random claim");
-            cInquiry.EnterClaimantName(ClaimantName);
-            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
-            home.VerifyClaimNumber(Index[0].ToString());
-            home.VerifyClaimantName(Index[1].ToString());
-
-            this.TESTREPORT.LogInfo("Verify and Click the Accident Tab");
-            cInquiry.VerifyAndClickonAccidentTab();
-            
-            this.TESTREPORT.LogInfo("Verify Accident Information,Description ,Vehicle List");
-            cInquiry.VerifyAccidentInformationIsDisplayed();
-            cInquiry.VerifyAccidentDescriptionIsDisplayed();
-            cInquiry.VerifyVehicleListIsDisplayed();
-
-            this.TESTREPORT.LogInfo("Verify Data in VehicleList");
-            cInquiry.VerifyDataInVehicleList();
-
-            this.TESTREPORT.LogInfo("Logout of Application");
-            home.ClickExit();
-
-            this.TESTREPORT.UpdateTestCaseStatus();
-        }
-    
-        [TestMethod, Description("Verify LossLine Information tab of the claim"), TestCategory("Regression")]
-        public void CI_28claimInquiryPage()
-        {
-            this.TESTREPORT.InitTestCase("CI_28", "Verify LossLine Information tab of the claim");
-            HomePage home = new HomePage();
-            ClaimInquiry cInquiry = new ClaimInquiry();
-           #region Reading DAta from CSV 
-            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
-            string HomePageTitle = readCSV("HomePageTitle");
-            string DocumentPagetitle = readCSV("documentListPageTitle");
-            string ClaimantName = readCSV("ClaimantName1");
-            string Header1 = readCSV("LossLineTableHeader1");
-            string Header2 = readCSV("LossLineTableHeader2");
-            string Header3 = readCSV("LossLineTableHeader3");
-            string Header4 = readCSV("LossLineTableHeader4");
-            string Header5 = readCSV("LossLineTableHeader5");
-            
-            #endregion
-
-            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
-            home.VerifyPageTitle(HomePageTitle);
-
-            home.VerifyCinchWelome();
-            home.ClickClaimInquiry();
-            home.ClickSearch();
-
-            this.TESTREPORT.LogInfo("Verify table row count");
-            home.ClaimInquiryResultsCount();
-
-
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
-            cInquiry.VerifyDetailedClaimList();
-
-            this.TESTREPORT.LogInfo("Verify loss Line Summary");
-            cInquiry.VerifyLossLineSummary();
-
-            this.TESTREPORT.LogInfo("Click on any random claim");
-            cInquiry.EnterClaimantName(ClaimantName);
-            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
-            home.VerifyClaimNumber(Index[0].ToString());
-            home.VerifyClaimantName(Index[1].ToString());
-
-            this.TESTREPORT.LogInfo("Verify and Click the Lossline Tab");
-            cInquiry.VerifyAndClickonLossLineTab();
-            
-            this.TESTREPORT.LogInfo("Verify Claimant name ,LossLine Description, Suffix Code, Loss Line Status, In Suit)");
-            cInquiry.VerifyLossLineTableHeaders(Header1);
-            cInquiry.VerifyLossLineTableHeaders(Header2);
-            cInquiry.VerifyLossLineTableHeaders(Header3);
-            cInquiry.VerifyLossLineTableHeaders(Header4);
-            cInquiry.VerifyLossLineTableHeaders(Header5);
-            
-
-            this.TESTREPORT.LogInfo("Verify LossLine Detail Information Text,Claimant Detail Information,Other loss line information");
-            cInquiry.CLickLossLineExpand();
-            cInquiry.VerifyLosslineInformationIsDisplayed();
-             cInquiry.VerifyClaimantInformationIsDisplayed();
-             cInquiry.VerifyOtherLossLineIsDisplayed();
-             cInquiry.VerifyOtherClaimantNameIsDisplayed();
-           
-            this.TESTREPORT.LogInfo("Logout of Application");
-            home.ClickExit();
-
-            this.TESTREPORT.UpdateTestCaseStatus();
-        }
-
-
-        [TestMethod, Description("Verify Lossline Information of the claim by search and clear the searched data"), TestCategory("Regression")]
-        public void CI_32claimInquiryPage()
-        {
-            this.TESTREPORT.InitTestCase("CI_32", "Verify Lossline Information of the claim by search and clear the searched data");
-            HomePage home = new HomePage();
-            ClaimInquiry cInquiry = new ClaimInquiry();
-            #region Reading Data from CSV 
-            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
-            string HomePageTitle = readCSV("HomePageTitle");
-            string DocumentPagetitle = readCSV("documentListPageTitle");
-            string ClaimantName = readCSV("ClaimantName1");
-            string ClaimantNameSearch = readCSV("ClaimantNameSearch");
-            #endregion
-
-            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
-            home.VerifyPageTitle(HomePageTitle);
-
-            home.VerifyCinchWelome();
-            home.ClickClaimInquiry();
-            home.ClickSearch();
-
-            this.TESTREPORT.LogInfo("Verify table row count");
-            home.ClaimInquiryResultsCount();
-
-
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
-            cInquiry.VerifyDetailedClaimList();
-
-            this.TESTREPORT.LogInfo("Verify loss Line Summary");
-            cInquiry.VerifyLossLineSummary();
-
-            this.TESTREPORT.LogInfo("Click on any random claim");
-            cInquiry.EnterClaimantName(ClaimantName);
-            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
-            home.VerifyClaimNumber(Index[0].ToString());
-            home.VerifyClaimantName(Index[1].ToString());
-
-            this.TESTREPORT.LogInfo("Verify and Click the Lossline Tab");
-            cInquiry.VerifyAndClickonLossLineTab();
-
-            this.TESTREPORT.LogInfo("Verify Clear Button");
-            cInquiry.SearchByClaimantNameInLossLineTab(ClaimantNameSearch);
-            cInquiry.VerifyandClickClearButton(ClaimantNameSearch);
-           
-            this.TESTREPORT.LogInfo("Logout of Application");
-            home.ClickExit();
-
-            this.TESTREPORT.UpdateTestCaseStatus();
-        }
-
         [TestMethod, Description("Claim Inquiry-Verify Payment Information tab of the claim"), TestCategory("Regression")]
         public void CI_31claimInquiryPage()
         {
@@ -1703,6 +1594,60 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
+
+
+
+        [TestMethod, Description("Verify Lossline Information of the claim by search and clear the searched data"), TestCategory("Regression")]
+        public void CI_32claimInquiryPage()
+        {
+            this.TESTREPORT.InitTestCase("CI_32", "Verify Lossline Information of the claim by search and clear the searched data");
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+            #region Reading Data from CSV 
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string HomePageTitle = readCSV("HomePageTitle");
+            string DocumentPagetitle = readCSV("documentListPageTitle");
+            string ClaimantName = readCSV("ClaimantName1");
+            string ClaimantNameSearch = readCSV("ClaimantNameSearch");
+            #endregion
+
+            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
+            home.VerifyPageTitle(HomePageTitle);
+
+            home.VerifyCinchWelome();
+            home.ClickClaimInquiry();
+            home.ClickSearch();
+
+            this.TESTREPORT.LogInfo("Verify table row count");
+            home.ClaimInquiryResultsCount();
+
+
+            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
+            cInquiry.VerifyDetailedClaimList();
+
+            this.TESTREPORT.LogInfo("Verify loss Line Summary");
+            cInquiry.VerifyLossLineSummary();
+
+            this.TESTREPORT.LogInfo("Click on any random claim");
+            cInquiry.EnterClaimantName(ClaimantName);
+            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
+            home.VerifyClaimNumber(Index[0].ToString());
+            home.VerifyClaimantName(Index[1].ToString());
+
+            this.TESTREPORT.LogInfo("Verify and Click the Lossline Tab");
+            cInquiry.VerifyAndClickonLossLineTab();
+
+            this.TESTREPORT.LogInfo("Verify Clear Button");
+            cInquiry.SearchByClaimantNameInLossLineTab(ClaimantNameSearch);
+            cInquiry.VerifyandClickClearButton(ClaimantNameSearch);
+           
+            this.TESTREPORT.LogInfo("Logout of Application");
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+        }
+
+       
 
         [TestMethod, Description("Claim Inquiry-Check for tabs present in Worker Accident (Workers claim number)"), TestCategory("Regression")]
         public void CI_33claimInquiryPage()
@@ -1909,6 +1854,63 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
+        [TestMethod, Description("Claim Inquiry-View documents and filter the results in the claim view"), TestCategory("Regression")]
+        public void CI_37claimInquiryPage()
+        {
+            this.TESTREPORT.InitTestCase("CI_37", "Verify documents and filter the results in the claim view");
+            HomePage home = new HomePage();
+            ClaimInquiry cInquiry = new ClaimInquiry();
+
+            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
+            string ClaimantName = readCSV("claimNoFordocuments");
+            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            string HomePageTitle = readCSV("HomePageTitle");
+            string DocumentPagetitle = readCSV("documentListPageTitle");
+            string DocumentSearchValue = readCSV("DocumentSearchValue");
+
+            this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
+            home.VerifyPageTitle(HomePageTitle);
+
+            home.VerifyCinchWelome();
+            home.ClickClaimInquiry();
+            home.ClickSearch();
+
+            this.TESTREPORT.LogInfo("Verify table row count");
+            home.ClaimInquiryResultsCount();
+
+
+            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
+            cInquiry.VerifyDetailedClaimList();
+
+            this.TESTREPORT.LogInfo("Verify loss Line Summary");
+            cInquiry.VerifyLossLineSummary();
+
+            this.TESTREPORT.LogInfo("Click on any random claim");
+            cInquiry.EnterClaimantName(ClaimantName);
+            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
+            home.VerifyClaimNumber(Index[0].ToString());
+            home.VerifyClaimantName(Index[1].ToString());
+
+            this.TESTREPORT.LogInfo("Verify the Documents Tab");
+            cInquiry.VerifyDocumentsTab();
+            cInquiry.ClickDocuments();
+
+            this.TESTREPORT.LogInfo("Verify Count of the results ");
+            cInquiry.EnterDocumentSearchText(DocumentSearchValue);
+            cInquiry.VerifyDocumentsCountOnSearch(DocumentSearchValue);
+            cInquiry.CloseChildWindow();
+            cInquiry.SwitchToParentWindow();
+
+            this.TESTREPORT.LogInfo("Verify CLaim Inquiry Page Title ");
+            home.ClickClaimInquiry();
+            home.VerifyPageTitle(ClaimInquiryPageTitle);
+
+            this.TESTREPORT.LogInfo("Logout of Application");
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+        }
+
 
         [TestMethod, Description("Claim Inquiry-Verify the Log Notes tab in claim "), TestCategory("Regression")]
         public void CI_38claimInquiryPage()
