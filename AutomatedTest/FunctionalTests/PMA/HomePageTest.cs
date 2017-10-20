@@ -17,11 +17,11 @@ namespace AutomatedTest.FunctionalTests.PMA
         //TestCase HM_1
         //TestCase Title : verify Default ACcountm        
         HomePage home = new HomePage();
-
             
         [TestMethod, Description("Verify Default Account"), TestCategory("Regression")]
         public void HM_01HomePage()
         {
+            HomePage home = new HomePage();
             this.TESTREPORT.InitTestCase("HM_01", "Verify Default Account");
             this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
             string HomePageTitle = readCSV("HomePageTitle");
@@ -40,7 +40,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Verify My Diary and Quick Claim search"), TestCategory("Regression")]
         public void HM_02HomePage()
         {
-                      
+            HomePage home = new HomePage();
+
             this.TESTREPORT.InitTestCase("HM_02", "Verify My Diary and Quick Claim search");
             this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
             string HomePageTitle = readCSV("HomePageTitle");
@@ -58,7 +59,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         }
         [TestMethod, Description("My Account - Select account from the my accounts pane"), TestCategory("Regression")]
         public void HM_03HomePage()
-        {            
+        {
+            HomePage home = new HomePage();
             this.TESTREPORT.InitTestCase("HM_03", "My Account - Select account from the my accounts pane");
             string HomePageTitle = readCSV("HomePageTitle");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
@@ -83,7 +85,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("My Account - search by providing name of account"), TestCategory("Regression")]
         public void HM_04HomePage()
         {
-                      
+            HomePage home = new HomePage();
+
             this.TESTREPORT.InitTestCase("HM_04", "My Account - search by providing name of account");
 
             string HomePageTitle = readCSV("HomePageTitle");
@@ -112,7 +115,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("My Account -Search Account by providing number of account"), TestCategory("Regression")]
         public void HM_05HomePage()
         {
-          
+            HomePage home = new HomePage();
             this.TESTREPORT.InitTestCase("HM_05", "My Account -Search Account by providing number of account");
 
             string HomePageTitle = readCSV("HomePageTitle"); 
@@ -141,8 +144,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Home Test- Verify the claim from the diary section on homepage"), TestCategory("Regression")]
         public void HM_06HomePage()
         {
-
-           this.TESTREPORT.InitTestCase("HM_06", "Home Test - Verify the claim from the diary section on homepage");
+            HomePage home = new HomePage();
+            this.TESTREPORT.InitTestCase("HM_06", "Home Test - Verify the claim from the diary section on homepage");
 
             //Verify that user lands on Cinch application
             string HomePageTitle = readCSV("HomePageTitle");
@@ -161,7 +164,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Home Test- Drag the columns in My Diary Section"), TestCategory("Regression")]
         public void HM_07HomePage()
         {
-
+            HomePage home = new HomePage();
             this.TESTREPORT.InitTestCase("HM_07", "Home Test- Drag the columns in My Diary Section");
             string HomePageTitle = readCSV("HomePageTitle");
             string UserName = readCSV("UserName");
@@ -181,7 +184,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Home Test- Drag the columns in Quick Claim Search"), TestCategory("Regression")]
         public void HM_08HomePage()
         {
-
+            HomePage home = new HomePage();
             this.TESTREPORT.InitTestCase("HM_08", "Home Test- Drag the columns in Quick Claim Search");
             string HomePageTitle = readCSV("HomePageTitle");
             string UserName = readCSV("UserName");
@@ -200,6 +203,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Quick Claim Search - Open and view an existing claim(Claimant number)"), TestCategory("Regression")]
         public void HM_09HomePage()
         {
+            HomePage home = new HomePage();
             this.TESTREPORT.InitTestCase("HM_09", "Quick Claim Search - Open and view an existing claim(Claimant number)");
             string HomePageTitle = readCSV("HomePageTitle");
             string UserName = readCSV("UserName");
@@ -221,6 +225,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Quick Claim Search - Open and view an existing claim(Claimant name)"), TestCategory("Regression")]
         public void HM_10HomePage()
         {
+            HomePage home = new HomePage();
 
             this.TESTREPORT.InitTestCase("HM_10", "Quick Claim Search - Open and view an existing claim(Claimant name)");
             string HomePageTitle = readCSV("HomePageTitle");
@@ -243,7 +248,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Quick Claim Search - Selecting an page size option from the drop down loads all claims"), TestCategory("Regression")]
         public void HM_11HomePage()
         {
-
+            HomePage home = new HomePage();
             this.TESTREPORT.InitTestCase("HM_11", "Quick Claim Search - Selecting an page size option from the drop down loads all claims");
             string HomePageTitle = readCSV("HomePageTitle");
             string UserName = readCSV("UserName");
@@ -265,7 +270,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Quick Claim Search - Typing into any filter column heading and the grid view will automatically populate with related matches"), TestCategory("Regression")]
         public void HM_12HomePage()
         {
-
+            HomePage home = new HomePage();
             this.TESTREPORT.InitTestCase("HM_12", "Quick Claim Search - Typing into any filter column heading and the grid view will automatically populate with related matches");
             
             string HomePageTitle = readCSV("HomePageTitle");
@@ -287,6 +292,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Quick Claim Search - Clicking reset in the Quick Claim Search clears the search fields"), TestCategory("Regression")]
         public void HM_13HomePage()
         {
+            HomePage home = new HomePage();
 
             this.TESTREPORT.InitTestCase("HM_13", "Quick Claim Search - Clicking reset in the Quick Claim Search clears the search fields");
             string HomePageTitle = readCSV("HomePageTitle");
@@ -307,6 +313,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Home Page Main Navigation - Click on each main menu item navigates the user to that section"), TestCategory("Regression")]
         public void HM_14HomePage()
         {
+            HomePage home = new HomePage();
 
             this.TESTREPORT.InitTestCase("HM_14", "Home Page Main Navigation - Click on each main menu item navigates the user to that section");
             string HomePageTitle = readCSV("HomePageTitle");
@@ -344,6 +351,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Home Page Main Navigation - Click on Recent Claims to see the claims details"), TestCategory("Regression")]
         public void HM_15HomePage()
         {
+            HomePage home = new HomePage();
             this.TESTREPORT.InitTestCase("HM_15", "Home Page Main Navigation - Click on Recent Claims to see the claims details");
             string HomePageTitle = readCSV("HomePageTitle");
 

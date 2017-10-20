@@ -790,7 +790,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             //this.driver.SendKeysToElementWithJavascript(byAccidentDateRangeBeginField, AccidentDateRangeBeginFieldvalue, "AccidentDateRangeBeginField");
             Thread.Sleep(2000);
             By calendarDRopdown = By.Id("MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_B-1Img");
-            this.driver.ClickElement(calendarDRopdown, "Calendar dRopDOwn");
+            this.driver.ClickElement(calendarDRopdown, "Calendar DropDown");
             // By selectDAte = By.XPath(string.Format("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_mt']//td[contains(text(),'{0}')]", date));
             Thread.Sleep(2000);
             this.driver.ClickElement(By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C']//span[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_T']"), "Button to select month and year");

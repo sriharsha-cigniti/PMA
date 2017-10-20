@@ -10,7 +10,6 @@ using OpenQA.Selenium;
 using System.Collections;
 using System.Threading;
 using AUT.Selenium.CommonReUsablePages;
-using AUT.Selenium.ApplicationSpecific.PMA.Pages;
 
 namespace AutomatedTest.FunctionalTests.PMA
 {
@@ -1778,7 +1777,6 @@ namespace AutomatedTest.FunctionalTests.PMA
         {
             HomePage home = new HomePage();
             ClaimInquiry cInquiry = new ClaimInquiry();
-
 
             this.TESTREPORT.InitTestCase("CI_35", "Claim Inquiry-Verify Payment Information Tab of the claim(Workers Accident) and Group by column");
             string HomePageTitle = readCSV("HomePageTitle");

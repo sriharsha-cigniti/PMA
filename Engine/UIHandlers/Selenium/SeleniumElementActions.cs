@@ -1313,10 +1313,11 @@ namespace Engine.UIHandlers.Selenium
         {
             testReport.LogInfo(" Click on any random claim number");
             ArrayList listName = new ArrayList();
-            Random rnd = new Random();          
-            int value = rnd.Next(0, 9);
+            Random rnd = new Random();
+            IReadOnlyList<IWebElement> rows = driver.FindElements(locator);
+            int value = rnd.Next(0, rows.Count-1);
             int j = 0;
-            IReadOnlyList<IWebElement> rows = driver.FindElements(locator);        
+                    
                   
             try
             {

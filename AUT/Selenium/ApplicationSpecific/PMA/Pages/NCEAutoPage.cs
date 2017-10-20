@@ -76,7 +76,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                     this.TESTREPORT.LogSuccess("Click Cancel", String.Format("<mark>{0}</mark> is visible", "Select Line of Business:"));
                 else
                     this.TESTREPORT.LogFailure("Click Cancel", String.Format("<mark>{0}</mark> is not visible", "Select Line of Business:"), this.SCREENSHOTFILE);
-            this.driver.SwitchTo().DefaultContent();
+                  this.driver.SwitchTo().DefaultContent();
         }
 
         public void ClickSubmit()
@@ -107,13 +107,13 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(byLocationDropdOwnimage,"location dropdown image");
             By byLocationDropDown = By.XPath(string.Format("//td[contains(text(),'{0}')]", LocationLoss));
             this.driver.ClickElement(byLocationDropDown,"Location Dropdown");
-    }
+        } 
 
         public void SelectStateOfLoss(string StateOfLoss)
         {
             this.driver.ClickElement(byStateOfLossDropdOwnimage, "StateOfLoss dropdown image");
             By byStateOfLossDropDown = By.XPath(string.Format("//td[contains(text(),'{0}')]", StateOfLoss));
-            this.driver.ClickElement(byStateOfLossDropDown, "Location Dropdown");
+            this.driver.ClickElement(byStateOfLossDropDown, "StateOfLoss Dropdown");
 
         }
 

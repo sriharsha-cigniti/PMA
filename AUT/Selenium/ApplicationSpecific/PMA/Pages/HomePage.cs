@@ -18,8 +18,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
     public class HomePage : AbstractTemplatePage
     {
         string accountName, strAccount = null;
-
-
+        
         #region UI Objects
 
         private By byMyAccount = By.XPath("//input[@id='MainContent_sppage_gridaccount_I']");
@@ -55,7 +54,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byQuickClaimPageSize = By.XPath("//input[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXPagerBottom_PSI']");
         private By byQuickClaimDropdownBtn = By.XPath("//span[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXPagerBottom_DDB']");
         private By byQuickClaimAccountName = By.XPath("//input[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXFREditorcol1_I']");
-        public By byClaimInformationClaimantName = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_lblClaimantName_0");
+        public static By byClaimInformationClaimantName = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_lblClaimantName_0");
         private By byClaimInformationClaimAccident = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_lblAccident_0");
         private By byAccountName = By.XPath("//span[@id='lblAccount1']");
         private By byClaimAccountName = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_ASPxLabel21");
@@ -431,6 +430,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //Click on Random Claim in ClaimInquiry Search table
         public ArrayList ClickOnRandomClaim()
         {
+
+           
             Thread.Sleep(6000);
             return this.driver.ClickRandomCliamNumber(byClaimInquirySearchResultsTable, 9);
         }
@@ -657,7 +658,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
              if(list.Count!=0)
             {
                
- this.TESTREPORT.LogSuccess("Verify Recent Claims", String.Format("Recent Claims - {0} are displayed succesfully", list.Count));
+                this.TESTREPORT.LogSuccess("Verify Recent Claims", String.Format("Recent Claims - {0} are displayed succesfully", list.Count));
             }
             else
             {
@@ -666,50 +667,47 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         }
 
-        public void VerifyDiarylabel()
-        {
-            if (this.driver.IsElementPresent(byDiaryLink))
+        //public void VerifyDiarylabel()
+        //{
+        //    if (this.driver.IsElementPresent(byDiaryLink))
 
-            {
-                this.TESTREPORT.LogSuccess("Verify Diary", String.Format("Text - {0} is  displayed succesfully", "Diary"));
-            }
-            else
-                this.TESTREPORT.LogFailure("Verify Diary", String.Format("Text is  not displayed",this.SCREENSHOTFILE ));
-        }
+        //    {
+        //        this.TESTREPORT.LogSuccess("Verify Diary", String.Format("Dairy text - {0} is  displayed succesfully", "Diary"));
+        //    }
+        //    else
+        //    {
+        //        this.TESTREPORT.LogFailure("Verify Diary", String.Format("Diary text is  not displayed", this.SCREENSHOTFILE));
+        //    }
+        //}
 
-        public void VerifyandSelectMyDiary()
+        public int VerifyandSelectMyDiary()
         {
-            IReadOnlyList<IWebElement> results = this.driver.FindElements(byMyDiaryResultsTable);
+            int results = this.driver.FindElements(byMyDiaryResultsTable).Count;
             this.TESTREPORT.LogInfo("Check for the DiaryEntry available in MyDiary section ");
-            if (results.Count != 0)
+            if (results != 0)
             {
-                this.TESTREPORT.LogSuccess("Verify MyDiaryResults", String.Format("Results - {0} are displayed succesfully",results.Count));
+                this.TESTREPORT.LogSuccess("Verify MyDiaryResults", String.Format("Results - {0} are displayed succesfully",results));
                 this.TESTREPORT.LogInfo("select random DiaryEntry available in MyDiary section ");
+                VerifyMyDairyLabel();
                 ArrayList index = ClickonRandomDiaryEntry();
-                VerifyDiarylabel();
+                Thread.Sleep(3000);
                 VerifyClaimNumber(index[0].ToString());
-                VerifyClaimantName(index[1].ToString());
+                VerifyClaimantName(index[1].ToString());                
 
             }
             else
             {
-
-                this.TESTREPORT.LogSuccess("Verify MyDiaryResults", String.Format(" Results are empty", this.SCREENSHOTFILE));
+                this.TESTREPORT.LogSuccess("Verify MyDiaryResults", String.Format("There are no diary entries available"), this.SCREENSHOTFILE);
                
-
             }
+            return results;
         }
        
         public void VerifyFieldsAfterReset()
         {
             string ClaimantName = this.driver.GetElementText(byQuickClaimantNameSearch);
             string ClaimantNumber = this.driver.GetElementText(byQuickClaimNumberSearch);
-
-            //string attributevalue = this.driver.GetElementAttribute(byQuickClaimantNameSearch,"value");
-            //string attributevalue = this.driver.GetElementText(byQuickClaimNumberSearch);
-
-
-
+            
             if (ClaimantName.Length==0 && ClaimantNumber.Length==0)         
             {
                 this.TESTREPORT.LogSuccess("Verify entry fields after RESET", String.Format("Results - '{0}','{1}' are displayed succesfully", ClaimantName, ClaimantNumber));
