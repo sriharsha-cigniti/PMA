@@ -386,7 +386,21 @@ namespace AUT.Selenium.CommonReUsablePages
             }
         }
 
-        
+        public void VerifyForm(string dropDownText, By spanText)
+        {
+            this.driver.ClickElement(By.XPath("//span[@id='MainContent_ddlob_B-1Img']"), "Image");
+            By bySelectBusinessDropDown = By.XPath(string.Format("//td[contains(text(),'{0}')]", dropDownText));
+            this.driver.ClickElement(bySelectBusinessDropDown, "Drop Down value");
+            //SWitching to Default..... 
+            this.driver.SwitchTo().DefaultContent();
+            this.driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']")));
+            //Switching to different frame.....
+            this.driver.WaitElementPresent(spanText);
+            if (this.driver.IsElementPresent(spanText))
+                this.TESTREPORT.LogSuccess("Verify auto Form", String.Format("<mark>{0}</mark> selected from dropdown <mark>{1}</mark> form appeared", dropDownText, dropDownText));
+            else
+                this.TESTREPORT.LogFailure("Verify auto Form", String.Format("<mark>{0}</mark> selected from dropdown <mark>{1}</mark> form not appeared", dropDownText, dropDownText));
+        }
     }
 
    
