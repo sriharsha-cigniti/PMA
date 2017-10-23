@@ -84,8 +84,8 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.VerifyRequiredfieldErrorMessage(Convert.ToInt32(RequiredErrorMessageCount));
 
             this.TESTREPORT.LogInfo("Verify 'The claim information you entered has been recorded and saved' message");
-            string Date = DateTime.Now.ToString("MM/dd/yyyy");
-            nceAuto.EnterOccurenceDate(Date);
+           
+            nceAuto.EnterOccurenceDate();
             nceProperty.SelectLocationLoss(LocationLoss);
             nceAuto.SelectStateOfLoss(StateofLoss);
             nceAuto.EnterContactBusinessPhone(ContactBusinessPhone);

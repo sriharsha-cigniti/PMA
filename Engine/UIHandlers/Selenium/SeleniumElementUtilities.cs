@@ -211,6 +211,33 @@ namespace Engine.UIHandlers.Selenium
             return isPresent;
         }
 
+
+        public static Boolean IsWebElementDisplayed(this IWebDriver driver, By locator)
+        {
+            Boolean elementStatus = false;
+            try
+            {
+                elementStatus = driver.FindElement(locator).Displayed;
+                //elementStatus = true;
+
+            }
+            catch (NoSuchElementException)
+            {
+                elementStatus = false;
+            }
+
+            catch (WebDriverException)
+            {
+                elementStatus = false;
+            }
+            catch (Exception)
+            {
+                elementStatus = false;
+            }
+
+            return elementStatus;
+        }
+
         /// <summary>
         /// wait for the element to load on the page. waits for it to exists then for it to be visible.
         /// </summary>

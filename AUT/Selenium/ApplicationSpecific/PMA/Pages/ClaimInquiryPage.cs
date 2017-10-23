@@ -2229,15 +2229,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             By byNodata = By.XPath("//div[contains(text(),'There are no available payments for this claim')]");
             if (!this.driver.IsElementPresent(byNodata))
             {
-                string value = this.driver.GetElementAttribute(byExpandLossLineBtnAbsence, "style");
-                Thread.Sleep(2000);
-                string x = "visibility: hidden;";
-                if (value.Equals(x))
-                {
-                    this.TESTREPORT.LogFailure("Verify ExpandLossLine button in Payments Tab", string.Format("Element not present", this.SCREENSHOTFILE));
-                }
 
-                else
+                if (this.driver.IsWebElementDisplayed(byExpandLossLineBtn))
                 {
                     this.driver.ClickElement(byExpandLossLineBtn, "ExpandLossLine");
                     Thread.Sleep(2000);
@@ -2263,11 +2256,14 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                         this.TESTREPORT.LogFailure("Verify LossInformation", "No text Found", this.SCREENSHOTFILE);
                     }
                 }
+                else
+                    this.TESTREPORT.LogFailure("Verify ExpandLossLine button in Payments Tab", string.Format("Element not present", this.SCREENSHOTFILE));
             }
             else
                 this.TESTREPORT.LogInfo(string.Format("<Mark>No Data to display</Mark>"));
-            }
-        
+        }
+
+
 
 
         public void VerifyPaymentsTabTableHeaders(string value)
