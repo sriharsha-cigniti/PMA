@@ -103,11 +103,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             dairyNotes.ClickOnCreateEntry();
             dairyNotes.ClickDropDown();
             dairyNotes.SelectCategoryDropDown("Diary");
-            dairyNotes.EnterSubjectText(SubjectText);
+            
+            dairyNotes.EnterSubjectText(SubjectText+dairyNotes.GenerateRandomNumber());
             dairyNotes.EnterTextInTextArea(TextInTextArea);
             dairyNotes.ClickSave();           
             dairyNotes.ClickEdit();         
-            dairyNotes.EnterSubjectText(SubjectEditText);
+            dairyNotes.EnterSubjectText(SubjectEditText+dairyNotes.GenerateRandomNumber());
             dairyNotes.EnterTextInTextArea(EditTextInTextArea);
             dairyNotes.ClickStatusDropDown();
             dairyNotes.SelectStatusDropDown("Open");
@@ -126,7 +127,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
         public void CI_D3DairyNotes()
         {
-
             HomePage home = new HomePage();
             ClaimInquiry cInquiry = new ClaimInquiry();
             DairyNotesPage diaryNotes = new DairyNotesPage();
@@ -190,7 +190,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             dairyNotes.ClickOnCreateEntry();
             dairyNotes.ClickDropDown();
             dairyNotes.SelectCategoryDropDown("Diary");
-            dairyNotes.EnterSubjectText(SubjectText);
+            dairyNotes.EnterSubjectText(SubjectText + dairyNotes.GenerateRandomNumber());
             dairyNotes.EnterTextInTextArea(TextInTextArea);
             Thread.Sleep(3000);
             dairyNotes.ClickSave();
@@ -203,10 +203,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             dairyNotes.VerifyDiaryCount(beforeCount);            
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
-
-
-
-
         }
     }
 }

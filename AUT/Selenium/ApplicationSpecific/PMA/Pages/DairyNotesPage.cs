@@ -95,26 +95,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
-        ////Verify No Entries Text in Dairy tab
-        //public void VerifyNoEntriesText(string EmptyText)
-        //{
-        //    this.TESTREPORT.LogInfo("Verify No Entries Text");
-        //    IReadOnlyList<IWebElement> elements = this.driver.FindElements(byEntryCount);
-        //    if (elements.Count > 0)
-        //    {
-
-        //        this.TESTREPORT.LogInfo("Dairy entry is available");
-        //    }
-        //    else 
-        //    {
-        //        this.driver.IsElementPresent(byNoEntriesText);
-        //        string noEntriesTextExpected = this.driver.GetElementText(byNoEntriesText, 60);
-        //        this.driver.AssertTextMatching(noEntriesTextExpected, EmptyText);
-        //    }
-
-            
-        //}
-
+        
         public void VerifyDiaryCount(int beforeCount)
         {
             int results = this.driver.FindElements(byMyDiaryResultsTable).Count;
@@ -360,6 +341,12 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 TESTREPORT.LogFailure("Name is not Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are not matching", ActualAccountName, ClaimantNameExpected), this.SCREENSHOTFILE);
 
         }
+
+        public string GenerateRandomNumber()
+        {
+            return DateTime.Now.ToString("hh:mm:ss").Replace(":", "");
+        }
+
 
 
 

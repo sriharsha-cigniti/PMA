@@ -935,8 +935,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.VerifyDetailedClaimList();
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
-
-
             //In the Detailed claim list, select a page size from the drop down menu in the bottom right side(E.g. ALL )
             cInquiry.SelectPageSizefromtheClaimInquiryResults();
 
@@ -1681,7 +1679,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-        [TestMethod, Description("Claim Inquiry-Verify Payment Information Tab of the claim(Workers Accident)"), TestCategory("Regression")]
+        [TestMethod, Description("Claim Inquiry-Verify Payment Information Tab of the claim(Liability)"), TestCategory("Regression")]
         public void CI_34claimInquiryPage()
         {
 
@@ -1771,7 +1769,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-        [TestMethod, Description("Claim Inquiry-Verify Payment Information Tab of the claim(Workers Accident) and Group by column"), TestCategory("Regression")]
+        [TestMethod, Description("Claim Inquiry-Verify Payment Information Tab of the claim(Liability) and Group by column"), TestCategory("Regression")]
         public void CI_35claimInquiryPage()
 
         {
@@ -1788,6 +1786,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             string TableHeader5 = readCSV("TableHeader5");
             string TableHeader6 = readCSV("TableHeader6");
             string TableHeader7 = readCSV("TableHeader7");
+            string ClaimantName1 = readCSV("ClaimantName1");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
@@ -1797,8 +1796,10 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
             home.VerifyPageTitle(ClaimInquiryPageTitle);
-            //CLick on search button
+            //Click on search button
             home.ClickSearch();
+            //Search with 'L'
+            cInquiry.EnterClaimantName(ClaimantName1);
             //Verify table row count
             home.ClaimInquiryResultsCount();
             //Verify Detailed Claim list

@@ -22,6 +22,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byDropdOwnimage = By.XPath("//span[@id='MainContent_ddlob_B-1Img']");
         private By byPropertySpan = By.XPath("//span[contains(text(),'Property')]");
         private By byLocationDropDownImage = By.XPath("//span[@id='MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocationloss_B-1Img']");
+        private By byDescriptionOfDamage = By.XPath("//textarea[@id='MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_memDamageDesc_I']");
+        private By byLocationofLossField= By.XPath("//input[@id='MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocationloss_I']");
         #endregion
 
 
@@ -48,5 +50,26 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             By byLocationDropDown = By.XPath(string.Format("//td[contains(text(),'{0}')]", LocationLoss));
             this.driver.ClickElement(byLocationDropDown, "Location of Loss Dropdown");
         }
+        //Describe Loss
+
+        public void EnterDescriptionOfDamage(string describelossvalue)
+        {
+            Thread.Sleep(2000);
+            this.driver.SendKeysToElementClearFirst(byDescriptionOfDamage, describelossvalue, "Enter DescribeLoss");
+        }
+
+        public string GetLocationofLoss()
+        {
+
+            return (this.driver.GetElementAttribute(byLocationofLossField, "value"));
+
+        }
+
+        public string GetDescriptionOfDamage()
+        {
+           return (this.driver.GetElementText(byDescriptionOfDamage));
+
+        }
+
     }
 }
