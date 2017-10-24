@@ -1,2 +1,2 @@
-HomePageTitle,SelectBusinessvalueDropDown,ContactBusinessPhone,
-The PMA Group - Risk Management Information System,Workers' Compensation,
+HomePageTitle,SelectBusinessvalueDropDown,BusinessValueText,SelectState,Location,FirstName,LastName,Address,City,Zip,DOB,SSN,Occupation,AccidentCause,InjuryType,BodyPart,Description,IsInjuredWorkerLosingTime,IsInjuredWorkerModifiedShift,PreparerPhone,DataSaveMessage
+The PMA Group - Risk Management Information System,Compensation,Workers' Compensation,Alabama,AUDITOR,fname,lname,TestAddress,TestCity,12345,03041988,123456789,Engineer,CAUGHT IN OR BETWEEN,MULTIPLE INJURIES - MULTIPLE INJURIES NCLUDING BOTH PHYSICAL & PSYCHOLOGICAL,HEAD - BRAIN,Happened in Lane,Yes,No,0123456789,The claim information you entered has been recorded and saved.
