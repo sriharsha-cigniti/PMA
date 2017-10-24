@@ -110,7 +110,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             NCEGeneralLiability nceGE = new NCEGeneralLiability();
 
             this.TESTREPORT.InitTestCase("NCE_GL3", "Create a new General Liability claim, fill out only the required fields and submit");
-            #region ReadCS
+            #region ReadCSV
             string HomePageTitle = readCSV("HomePageTitle");
             string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
             string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
@@ -124,6 +124,18 @@ namespace AutomatedTest.FunctionalTests.PMA
             string DescribeLoss = readCSV("DescribeLoss");
             string RequiredErrorMessageForDraftSave = readCSV("RequiredErrorMessageForDraftSave");
             string DataSaveMessage = readCSV("DataSaveMessage");
+            string name = readCSV("Name");
+            string Organization = readCSV("Organization");
+            string ZipCode = readCSV("ZipCode");
+            string DescribeProperty = readCSV("DescribeProperty");
+            string WhenProperty = readCSV("WhenProperty");
+            string Whereproperty = readCSV("Whereproperty");
+            string DescriptionOfInJury = readCSV("DescriptionOfInJury");
+            string whereInjuryTaken = readCSV("whereInjuryTaken");
+            string InjuredPriorToInjury = readCSV("InjuredPriorToInjury");
+            string EstimatedAmount = readCSV("EstimatedAmount");
+            string OtherRemarks = readCSV("OtherRemarks");
+            string EMailAdress = readCSV("EMailAdress");
             #endregion
 
             home.VerifyPageTitle(HomePageTitle);
@@ -147,8 +159,18 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE.EnterAuthoritycontacted(Authority);
             nceGE.EnterDescribeLoss(DescribeLoss);
             nceGE.EntertimeOccurence(time);
+            nceGE.EnterZipCode(ZipCode);
 
-            this.TESTREPORT.LogInfo("Click on SUbmit button and Verify 'The claim information you entered has been recorded and saved' as message");
+            this.TESTREPORT.LogInfo("Entering the InjuredDamagedPropertyInformation Section");
+            nceGE.EnterInjuredDamagedPropertyInformation(name, Organization, Address, City, StateofLoss, ZipCode, ContactBusinessPhone, DescriptionOfInJury, whereInjuryTaken, InjuredPriorToInjury, DescribeProperty, Convert.ToInt32(EstimatedAmount), Whereproperty, WhenProperty);
+
+            this.TESTREPORT.LogInfo("Entering the WitnessInformation Section");
+            nceGE.EnterWitnessInformation(name, Organization, Address, City, StateofLoss, ZipCode, ContactBusinessPhone, OtherRemarks);
+
+            this.TESTREPORT.LogInfo("Entering the claimSubmission Section");
+            nceGE.EnterclaimSubmission(OtherRemarks, EMailAdress);
+
+            this.TESTREPORT.LogInfo("Click on Submit button and Verify 'The claim information you entered has been recorded and saved' as message");
             nceAuto.ClickSubmit();
             nceAuto.VerifyDataSaveMessage(DataSaveMessage);
 
@@ -284,6 +306,97 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Verify GRid row is deleted after record is deleted");
             nceGE.VerifyGridRowIsExistsAfterDeletion(rowCOUntBeforeDelete - 1);
+
+            nceAuto.SwitchToDefaultContent();
+
+            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+        }
+
+        [TestMethod, Description("NCEGeneralLiability - Create a new General Liability claim, save as draft, navigate back to draft and submit claim with only required fields"), TestCategory("Regression")]
+        public void NCE_GL6_NCEGeneralLiability()
+        {
+            HomePage home = new HomePage();
+            NCEAutoPage nceAuto = new NCEAutoPage();
+            NCEGeneralLiability nceGE = new NCEGeneralLiability();
+
+            this.TESTREPORT.InitTestCase("NCE_GL6", "Create a new General Liability claim, save as draft, return to the saved claim page and deletes");
+            #region ReadCSV
+            string HomePageTitle = readCSV("HomePageTitle");
+            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
+            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
+            string DraftSaveMessage = readCSV("DraftSaveMessage");
+            string StateofLoss = readCSV("StateOfLoss");
+            string LocationLoss = readCSV("LocationLoss");
+            string RequiredErrorMessageForDraftSave = readCSV("RequiredErrorMessageForDraftSave");
+            string TextFromDeleteAlert = readCSV("TextFromDeleteAlert");
+            string InvalidDataFormatcount = readCSV("InvalidFormatCount");
+            string InvalidData = readCSV("Invaliddata");
+            string ErrorCount = readCSV("ErrorCount");
+            string ZipCode = readCSV("ZipCode");
+            string DataSaveMessage = readCSV("DataSaveMessage");
+            #endregion
+
+            home.VerifyPageTitle(HomePageTitle);
+            home.VerifyCinchWelome();
+
+            this.TESTREPORT.LogInfo("Click /'New claim Entry/' Tab. Verify New Claim Entry Page is displayed and 'Select Line of Business' text");
+            nceAuto.ClickOnNewClaimEntry();
+
+            this.TESTREPORT.LogInfo("Verify General Liability Page is displayed and Text");
+            nceGE.VerifyGeneralLIabilityForm(SelectBusinessvalueDropDown);
+
+            this.TESTREPORT.LogInfo("Click on save Draft button");
+            nceGE.ClickOnSavedraft();
+
+            this.TESTREPORT.LogInfo("Verify Loss Information(Colour change) and Required Field");
+            nceAuto.VerifyRequiredfieldErrorMessage(Convert.ToInt32(RequiredErrorMessageForDraftSave));
+
+            this.TESTREPORT.LogInfo("Verify 'The claim information you entered has been recorded and saved' as Draft message");
+            string Date = DateTime.Now.ToString("MM/dd/yyyy");
+            nceAuto.EnterOccurenceDate();
+            nceAuto.SelectLocationLoss(LocationLoss);
+
+            nceGE.ClickOnSavedraft();
+            nceAuto.VerifyDataSaveMessage(DraftSaveMessage);
+
+            this.TESTREPORT.LogInfo("Click on cancel button");
+            nceAuto.ClickCancel();
+
+            this.TESTREPORT.LogInfo("Verify Data Grid row and row values ");
+            int rowCOUntBeforeDelete = nceGE.GetGridRowCount();
+            nceGE.VerifyGridView();
+
+            this.TESTREPORT.LogInfo("Verify Accident Date and Location of loss value in Liability Form ");
+            nceGE.VerifyRowDataingGrid(1, Date);
+            nceGE.VerifyRowDataingGrid(3, LocationLoss);
+
+            //string getAccidentDate = nceGE.GetColumnDataFromRowGrid(1);
+            //this.TESTREPORT.LogInfo(string.Format("Accident Date in Grid : ", getAccidentDate));
+
+            //string getLocation = nceGE.GetColumnDataFromRowGrid(3);
+            //this.TESTREPORT.LogInfo(string.Format("Location in Grid : ", getLocation));
+
+            this.TESTREPORT.LogInfo("Click on Saved claim");
+            nceGE.ClickOnSavedClaiminGrid();
+
+            this.TESTREPORT.LogInfo("Click on submit button");
+            nceAuto.ClickSubmit();
+
+            this.TESTREPORT.LogInfo("Verifys Required Field, Invalid Format error message");
+            nceAuto.VerifyRequiredfieldErrorMessage(Convert.ToInt32(ErrorCount));
+            nceGE.VerifyErrorMessage(Convert.ToInt32(InvalidDataFormatcount), InvalidData);
+
+            nceAuto.SelectStateOfLoss(StateofLoss);
+            nceAuto.EnterContactBusinessPhone(ContactBusinessPhone);
+            nceGE.EnterZipCode(ZipCode);
+
+            this.TESTREPORT.LogInfo("Click on submit button");
+            nceAuto.ClickSubmit();
+
+            nceAuto.VerifyDataSaveMessage(DataSaveMessage);
 
             nceAuto.SwitchToDefaultContent();
 
