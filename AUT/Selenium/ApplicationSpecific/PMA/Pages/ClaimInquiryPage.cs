@@ -1080,7 +1080,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void SwitchtoDocumentswindow(String value)
         {
             Thread.Sleep(2000);
-            SwitchToChildWindow();
+           // SwitchToChildWindow();
            
             //Verify the Page title for the Documents 
             VerifyPageTitle(value);
@@ -1455,7 +1455,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void ExportFileDelete()
         {
             bool exists = false;
-            Thread.Sleep(5000);
+            Thread.Sleep(10000);
             ExportSpreadsheet file = new ExportSpreadsheet(FileName, FilePath);
             exists = file.FileDelete();
             if (exists)
@@ -1962,6 +1962,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void DragTheColumnHeaderPayments(string value)
         {
+            this.driver.WaitElementPresent(byColumnHeadersPayments);
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byColumnHeadersPayments);
             IWebElement e2 = this.driver.FindElement(byDraggedColumnListInSpacePayments);
             foreach (var WebItem in list)
@@ -2027,6 +2028,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         }
         public void VerifyAccidentDescriptionIsDisplayed()
         {
+            this.driver.WaitElementPresent(byAccidentDescriptionLbl);
             if (this.driver.IsElementPresent(byAccidentDescriptionLbl))
                 this.TESTREPORT.LogSuccess("Verify Accident Description Is Displayed", string.Format("<Mark>Accident Description Is Displayed</Mark>"), this.SCREENSHOTFILE);
             else
@@ -2035,7 +2037,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
     
         public void VerifyVehicleListIsDisplayed()
             {
-            if(this.driver.IsElementPresent(byAccidentVehicleListLbl))
+            this.driver.WaitElementPresent(byAccidentVehicleListLbl);
+            if (this.driver.IsElementPresent(byAccidentVehicleListLbl))
             this.TESTREPORT.LogSuccess("Verify Accident Vehicle Is Displayed", string.Format("<Mark>Accident Vehicle Is Displayed</Mark>"), this.SCREENSHOTFILE);
             else
             this.TESTREPORT.LogFailure("Verify Accident Vehicle Is Displayed", string.Format("<Mark>Accident Vehicle Is Displayed</Mark>"), this.SCREENSHOTFILE);
@@ -2043,8 +2046,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void VerifyDataInVehicleList()
             {
-            
-        IWebElement VehicleTable = this.driver.FindElement(byVehiclelisttable);
+            this.driver.WaitElementPresent(byVehiclelisttable);
+            IWebElement VehicleTable = this.driver.FindElement(byVehiclelisttable);
             IList<IWebElement> rows = VehicleTable.FindElements(By.TagName("tr"));
             if (rows.Count> 1)
                 this.TESTREPORT.LogSuccess("Verify VehicleList Data",string.Format("VehicleList Data is present:<Mark>{0}</Mark>",rows.Count.ToString()));
@@ -2233,9 +2236,10 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 if (this.driver.IsWebElementDisplayed(byExpandLossLineBtn))
                 {
                     this.driver.ClickElement(byExpandLossLineBtn, "ExpandLossLine");
-                    Thread.Sleep(2000);
+                    Thread.Sleep(5000);
 
                     this.TESTREPORT.LogInfo("Verify Check Detail Information");
+                    this.driver.WaitElementPresent(byCheckDetailInformationText);
                     if (this.driver.IsElementPresent(byCheckDetailInformationText))
                     {
                         this.TESTREPORT.LogSuccess("Verify CheckDetailInformation", string.Format("successfully verified : <mark>{0}</mark>", "CheckDetailInformation"));
@@ -2246,6 +2250,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                     }
 
                     this.TESTREPORT.LogInfo("Verify Loss Information");
+                    this.driver.WaitElementPresent(byLossInformationText);
                     if (this.driver.IsElementPresent(byLossInformationText))
                     {
                         this.TESTREPORT.LogSuccess("Verify LossInformation", string.Format("successfully verified:<mark>{0}</mark>", "LossInformation"));
@@ -2268,7 +2273,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void VerifyPaymentsTabTableHeaders(string value)
         {
-            IReadOnlyList<IWebElement> list = this.driver.FindElements(By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalpayment1_0_gridpayments_0_DXMainTable']//th[contains(@class,'dxgvHeader')]"));
+            Thread.Sleep(2000);
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_DXMainTable']//th[contains(@class,'dxgvHeader')]"));
             foreach (var item in list)
             {
                 if (item.Text.ToLower().Contains(value.ToLower()))
@@ -2286,6 +2292,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             Thread.Sleep(5000);
             this.driver.WaitElementPresent(byExpandLossLineBtn);
+
             this.driver.ClickElement(byExpandLossLineBtn, "Expand the data");
 
         }
@@ -2683,9 +2690,20 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         }
 
+        public bool ExpandButtoninPaymentsTabIsDisplayed()
+        {
+            Thread.Sleep(5000);
+           return this.driver.IsWebElementDisplayed(byExpandLossLineBtn);
+        }
 
+        public void clickCollapseButtoninPaymentsTab()
+        {
+            Thread.Sleep(5000);
+            this.driver.WaitElementPresent(byExpandLossLineBtnAbsence);
 
+            this.driver.ClickElement(byExpandLossLineBtnAbsence, "Collapse the data");
 
+        }
     }
 
     #endregion

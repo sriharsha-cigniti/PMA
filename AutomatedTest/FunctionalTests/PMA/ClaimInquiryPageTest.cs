@@ -1176,8 +1176,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Verify table row count");
             home.ClaimInquiryResultsCount();
-
-
+            
             this.TESTREPORT.LogInfo("Verify Detailed Claim list");
             cInquiry.VerifyDetailedClaimList();
 
@@ -1742,29 +1741,34 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.VerifyPaymentsTabTableHeaders(TableHeader6);
             cInquiry.VerifyPaymentsTabTableHeaders(TableHeader7);
 
-            //Expand the LossLine Data 
-            cInquiry.clickExpandButtoninPaymentsTab();
-            //verify Payment Detail
-            cInquiry.VerifyPaymentDetail();
-            //Verify Explanation of benefits
-            cInquiry.VerifyExplanationofBenefits();
-            //VErify InvoiceSummary
-            cInquiry.VerifyInvoiceSummary();
-            //verify payment Amount
-            string x = cInquiry.VerifyPaymentAmount();
-            //click ExplanationofBenefits
-            cInquiry.ClickExplanationofBenefits();
-            //Verify invoiceAmount
-            string y = cInquiry.VerifyInvoiceAmount();
-            //click InvoiceSummary
-            cInquiry.ClickInvoiceSummary();
+            //Expand the LossLine Data
+            if (cInquiry.ExpandButtoninPaymentsTabIsDisplayed())
+            {
+                cInquiry.clickExpandButtoninPaymentsTab();
+                //verify Payment Detail
+                cInquiry.VerifyPaymentDetail();
+                //Verify Explanation of benefits
+                cInquiry.VerifyExplanationofBenefits();
+                //VErify InvoiceSummary
+                cInquiry.VerifyInvoiceSummary();
+                //verify payment Amount
+                string x = cInquiry.VerifyPaymentAmount();
+                //click ExplanationofBenefits
+                cInquiry.ClickExplanationofBenefits();
+                //Verify invoiceAmount
+                string y = cInquiry.VerifyInvoiceAmount();
+                //click InvoiceSummary
+                cInquiry.ClickInvoiceSummary();
 
-            cInquiry.VerifySavingsandCharges();
+                cInquiry.VerifySavingsandCharges();
 
-            cInquiry.VerifySavingsDetail();
-            cInquiry.VerifyPaymentAmtinInvoiceSummary(x);
-            cInquiry.VerifyInvoiceAmtinInvoiceSummary(y);
-            cInquiry.clickExpandButtoninPaymentsTab();
+                cInquiry.VerifySavingsDetail();
+                cInquiry.VerifyPaymentAmtinInvoiceSummary(x);
+                cInquiry.VerifyInvoiceAmtinInvoiceSummary(y);
+                cInquiry.clickCollapseButtoninPaymentsTab();
+            }
+            else
+                this.TESTREPORT.LogInfo("NO DATA TO DISPLAY");
             //logout of Application
             home.ClickExit();
 
@@ -1788,6 +1792,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             string TableHeader5 = readCSV("TableHeader5");
             string TableHeader6 = readCSV("TableHeader6");
             string TableHeader7 = readCSV("TableHeader7");
+            string ClaimantName1 = readCSV("ClaimantName1");
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
@@ -1799,6 +1804,8 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyPageTitle(ClaimInquiryPageTitle);
             //CLick on search button
             home.ClickSearch();
+            //Search with 'L'
+            cInquiry.EnterClaimantName(ClaimantName1);
             //Verify table row count
             home.ClaimInquiryResultsCount();
             //Verify Detailed Claim list
