@@ -1109,48 +1109,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.UpdateTestCaseStatus();
 
-        }
-        [TestMethod, Description("Claim Inquiry-Verify to Drag status column in drag column section"), TestCategory("Regression")]
-        public void CI_23claimInquiryPage()
-        {
-            HomePage home = new HomePage();
-            ClaimInquiry cInquiry = new ClaimInquiry();
-
-            this.TESTREPORT.InitTestCase("CI_23", "Claim Inquiry-Verify to Drag status column in drag column section");
-
-            string HomePageTitle = readCSV("HomePageTitle");
-            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
-            //Verify that user lands on Cinch application
-            home.VerifyPageTitle(HomePageTitle);
-            //Verify  Cinch Welcome Text
-            home.VerifyCinchWelome();
-            //Click on Claiminquiry
-            home.ClickClaimInquiry();
-            //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle(ClaimInquiryPageTitle);
-            //CLick on search button
-            home.ClickSearch();
-            //Verify table row count
-            home.ClaimInquiryResultsCount();
-            //Verify Detailed Claim list
-            cInquiry.VerifyDetailedClaimList();
-            //verify loss Line Summary
-            cInquiry.VerifyLossLineSummary();
-
-            cInquiry.DragTheColumnHeaderInSpace("Status");
-            Thread.Sleep(3000);
-            cInquiry.DraggedColumnList(0, "Status");
-
-          //  ArrayList index = cInquiry.ClickOnRandomGroupClaimExpandImage();
-
-            //Need to implement-select random claim 
-
-            //logout of Application
-            home.ClickExit();
-
-            this.TESTREPORT.UpdateTestCaseStatus();
-
-        }
+        }        
         [TestMethod, Description("Claim Inquiry-Verify documents tab in the claim"), TestCategory("Regression")]
         public void CI_25claimInquiryPage()
         {
