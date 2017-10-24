@@ -68,16 +68,19 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyPageTitle(HomePageTitle);            
             home.VerifyCinchWelome();
             home.ClickMyAccount();
-                 string AccountName = home.GetMyAccount();
+            string AccountName = home.GetMyAccount();
             string value=home.SelectAccountDropDown();
             home.VerifyAccountHeader(value);            
             home.ClickClaimInquiry();
             home.VerifyPageTitle(ClaimInquiryPageTitle);           
             home.ClickSearch();
-            home.ClaimInquiryResultsCount();
-            ArrayList Index =home.ClickOnRandomClaim();
-            home.VerifyClaimNumber(Index[0].ToString());
-            home.VerifyAccountName(AccountName);
+            int count = home.ClaimInquiryResultsCount();
+            if (count != 0)
+            {
+                ArrayList Index = home.ClickOnRandomClaim();
+                home.VerifyClaimNumber(Index[0].ToString());
+                home.VerifyAccountName(AccountName);
+            }
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();         
 
@@ -260,7 +263,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyCinchWelome();
             home.SearchQuickCliamantName(ClaimantName);
             home.ClickQuickClaimSearch();
-            home.ClickQuickClaimPagesizeBtn();
+            home.ClickQuickClaimPagesizeBtn();            
             string value=home.SelectQuickClaimPageSizeDropDownvalue();
             home.QuickClaimResultsCount(value);
             home.ClickExit();

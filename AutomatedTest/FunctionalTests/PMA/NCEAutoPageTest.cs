@@ -261,9 +261,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             //verify LOB in table
             nceAuto.VerifyLineofBusinessinTable(SelectBusinessvalueDropDown);
             //verify Accident date in table
-            nceAuto.VerifyAccidentDateinTable(a);
-            //****need to verify ------verify claimant name in table
-            //*** nceAuto.VerifyClaimanatNameinTable("");
+            nceAuto.VerifyAccidentDateinTable(a);            
             //verfiy location in table
             nceAuto.VerifyLocationinTable(b);
             //verify description in table

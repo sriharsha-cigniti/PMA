@@ -38,29 +38,52 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
+            //Verify Cinch welcome text 
             home.VerifyCinchWelome();
+            //Click  on ClaimInquiry tab
             home.ClickClaimInquiry();
+            //Verify Claim Inquiry Page Title
             home.VerifyPageTitle(ClaimInquiryPageTitle);
+            //Click on Search
             home.ClickSearch();
+            //Enter Claimant Name 'L'
             cInquiry.EnterClaimantName(ClaimantName);
+            //Table Results count
             home.ClaimInquiryResultsCount();
+            //Click on random CLaim
             ArrayList Index = home.ClickOnRandomClaim();
+            //Verify Claim Number 
             home.VerifyClaimNumber(Index[0].ToString());
+            //Verify claimant Name
             dairyNotes.VerifyClaimantName(Index[1].ToString());
+            //Click on Diary 
             dairyNotes.ClickOnDairy();
+            //Verify No entries text
             dairyNotes.VerifyNoEntriesText(NoEntriesText);
+            //Click on Create Entry
             dairyNotes.ClickOnCreateEntry();
+            //Clikck on Dropdown
             dairyNotes.ClickDropDown();
-           // dairyNotes.SelectCategoryDropDown("Diary");
-            dairyNotes.EnterSubjectText(SubjectText);
+            // dairyNotes.SelectCategoryDropDown("Diary");
+            string SubjectTextValue = SubjectText + dairyNotes.GenerateRandomNumber();
+            //Enter Subject text
+            dairyNotes.EnterSubjectText(SubjectTextValue);
+            //Enter Text in text area
             dairyNotes.EnterTextInTextArea(TextInTextArea);
             Thread.Sleep(3000);
+            //Click on Save
             dairyNotes.ClickSave();
-            dairyNotes.VerifyColumns(SubjectText, TextInTextArea);
+            //Verify Subject and Text area text
+            dairyNotes.VerifyColumns(SubjectTextValue, TextInTextArea);
+            //Verify Claim Number
             home.VerifyClaimNumber(Index[0].ToString());
+            //Verify Claimant Name
             dairyNotes.VerifyClaimantName(Index[1].ToString());
+            //Click on Home
             dairyNotes.ClickHome();
+            //Verify Home DIary Columns
             dairyNotes.VerifyHomeDairyColumns(Index[0].ToString(), Index[1].ToString());
+            //Click on Exit 
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
         }
@@ -89,35 +112,68 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
+            //Verify Cinch welcome text 
             home.VerifyCinchWelome();
+            //Click  on ClaimInquiry tab
             home.ClickClaimInquiry();
+            //Verify Claim Inquiry Page Title
             home.VerifyPageTitle(ClaimInquiryPageTitle);
+            //Click on Search
             home.ClickSearch();
+            //Enter Claimant Name 'L'
             cInquiry.EnterClaimantName(ClaimantName);
+            //Table Results count
             home.ClaimInquiryResultsCount();
+            //Click on random CLaim
             ArrayList Index = home.ClickOnRandomClaim();
+            //Verify Claim Number 
             home.VerifyClaimNumber(Index[0].ToString());
+            //Verify claimant Name
             dairyNotes.VerifyClaimantName(Index[1].ToString());
+            //Click on Diary 
             dairyNotes.ClickOnDairy();
-            //dairyNotes.VerifyNoEntriesText(NoEntriesText);
+            //Verify No entries text
+            dairyNotes.VerifyNoEntriesText(NoEntriesText);
+            //Click on Create Entry
             dairyNotes.ClickOnCreateEntry();
+            //Click on Dropdown
             dairyNotes.ClickDropDown();
+            //Select Diary value from dropdown
             dairyNotes.SelectCategoryDropDown("Diary");
-            dairyNotes.EnterSubjectText(SubjectText);
+            string SubjectTextValue = SubjectText + dairyNotes.GenerateRandomNumber();
+            //Enter Subject text
+            dairyNotes.EnterSubjectText(SubjectTextValue);
+            //Enter Text in text area
             dairyNotes.EnterTextInTextArea(TextInTextArea);
-            dairyNotes.ClickSave();           
-            dairyNotes.ClickEdit();         
-            dairyNotes.EnterSubjectText(SubjectEditText);
-            dairyNotes.EnterTextInTextArea(EditTextInTextArea);
-            dairyNotes.ClickStatusDropDown();
-            dairyNotes.SelectStatusDropDown("Open");
-            dairyNotes.DueDate();
+            Thread.Sleep(3000);
+            //Click on Save
             dairyNotes.ClickSave();
-            dairyNotes.VerifyColumns(SubjectEditText, EditTextInTextArea);
+            //Click on Edit
+            dairyNotes.ClickEdit();
+            string SubjectEditTextvalue = SubjectEditText + dairyNotes.GenerateRandomNumber();
+            //Edit Subject Text
+            dairyNotes.EnterSubjectText(SubjectEditTextvalue);
+            //Edit Text in Text area
+            dairyNotes.EnterTextInTextArea(EditTextInTextArea);
+            //Click on status dropdown
+            dairyNotes.ClickStatusDropDown();
+            //Select value from status dropdwon
+            dairyNotes.SelectStatusDropDown("Open");
+            //Select due date
+            dairyNotes.DueDate();
+            //Click on Save
+            dairyNotes.ClickSave();
+            //Verify Subject text and Edit text columns
+            dairyNotes.VerifyColumns(SubjectEditTextvalue, EditTextInTextArea);
+            //Verify Claim Number
             home.VerifyClaimNumber(Index[0].ToString());
+            //Verify Claimant Name
             dairyNotes.VerifyClaimantName(Index[1].ToString());
+            //Click on Home
             dairyNotes.ClickHome();
+            //Verify Columns in Home Page
             dairyNotes.VerifyHomeDairyColumns(Index[0].ToString(), Index[1].ToString());
+            //click on Exit to close the application
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
         }
@@ -126,7 +182,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
         public void CI_D3DairyNotes()
         {
-
             HomePage home = new HomePage();
             ClaimInquiry cInquiry = new ClaimInquiry();
             DairyNotesPage diaryNotes = new DairyNotesPage();
@@ -140,14 +195,20 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
+            //Verify Cinch welcome text
             home.VerifyCinchWelome();
+            //Select my diary from Home page
             int value = home.VerifyandSelectMyDiary();
             
             if (value > 0)
             {
-                diaryNotes.VerifyDiaryLable();                
+                //Verify Diary Lable
+                diaryNotes.VerifyDiaryLable(); 
+                //Click on Delete for Diary
                 diaryNotes.ClickDelete();
-                diaryNotes.VerifyNoEntriesText(NoEntriesText);                 
+                //Verify No entries text
+                diaryNotes.VerifyNoEntriesText(NoEntriesText); 
+                //Click on Home
                 diaryNotes.ClickHome();
                 diaryNotes.VerifyDiaryCount(value);
             }
@@ -203,10 +264,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             dairyNotes.VerifyDiaryCount(beforeCount);            
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
-
-
-
-
         }
     }
 }

@@ -935,8 +935,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.VerifyDetailedClaimList();
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
-
-
             //In the Detailed claim list, select a page size from the drop down menu in the bottom right side(E.g. ALL )
             cInquiry.SelectPageSizefromtheClaimInquiryResults();
 
@@ -1111,48 +1109,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.UpdateTestCaseStatus();
 
-        }
-        [TestMethod, Description("Claim Inquiry-Verify to Drag status column in drag column section"), TestCategory("Regression")]
-        public void CI_23claimInquiryPage()
-        {
-            HomePage home = new HomePage();
-            ClaimInquiry cInquiry = new ClaimInquiry();
-
-            this.TESTREPORT.InitTestCase("CI_23", "Claim Inquiry-Verify to Drag status column in drag column section");
-
-            string HomePageTitle = readCSV("HomePageTitle");
-            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
-            //Verify that user lands on Cinch application
-            home.VerifyPageTitle(HomePageTitle);
-            //Verify  Cinch Welcome Text
-            home.VerifyCinchWelome();
-            //Click on Claiminquiry
-            home.ClickClaimInquiry();
-            //Verify page Title for Claim Inquiry
-            home.VerifyPageTitle(ClaimInquiryPageTitle);
-            //CLick on search button
-            home.ClickSearch();
-            //Verify table row count
-            home.ClaimInquiryResultsCount();
-            //Verify Detailed Claim list
-            cInquiry.VerifyDetailedClaimList();
-            //verify loss Line Summary
-            cInquiry.VerifyLossLineSummary();
-
-            cInquiry.DragTheColumnHeaderInSpace("Status");
-            Thread.Sleep(3000);
-            cInquiry.DraggedColumnList(0, "Status");
-
-          //  ArrayList index = cInquiry.ClickOnRandomGroupClaimExpandImage();
-
-            //Need to implement-select random claim 
-
-            //logout of Application
-            home.ClickExit();
-
-            this.TESTREPORT.UpdateTestCaseStatus();
-
-        }
+        }        
         [TestMethod, Description("Claim Inquiry-Verify documents tab in the claim"), TestCategory("Regression")]
         public void CI_25claimInquiryPage()
         {
@@ -1680,7 +1637,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-        [TestMethod, Description("Claim Inquiry-Verify Payment Information Tab of the claim(Workers Accident)"), TestCategory("Regression")]
+        [TestMethod, Description("Claim Inquiry-Verify Payment Information Tab of the claim(Liability)"), TestCategory("Regression")]
         public void CI_34claimInquiryPage()
         {
 
@@ -1775,7 +1732,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
-        [TestMethod, Description("Claim Inquiry-Verify Payment Information Tab of the claim(Workers Accident) and Group by column"), TestCategory("Regression")]
+        [TestMethod, Description("Claim Inquiry-Verify Payment Information Tab of the claim(Liability) and Group by column"), TestCategory("Regression")]
         public void CI_35claimInquiryPage()
 
         {
@@ -1802,7 +1759,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry
             home.VerifyPageTitle(ClaimInquiryPageTitle);
-            //CLick on search button
+            //Click on search button
             home.ClickSearch();
             //Search with 'L'
             cInquiry.EnterClaimantName(ClaimantName1);

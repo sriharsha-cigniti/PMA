@@ -1,2 +1,2 @@
-HomePageTitle,SelectBusinessvalueDropDown,LocationLoss,StateOfLoss,DataSaveMessage,RequiredErrorMessageCount,ContactBusinessPhone
-The PMA Group - Risk Management Information System,Property,AUDITOR,Alabama, The claim information you entered has been recorded and saved.,3,1234567890
+HomePageTitle,SelectBusinessvalueDropDown,LocationLoss,StateOfLoss,DataSaveMessage,RequiredErrorMessageCount,ContactBusinessPhone,DescribeLoss
+The PMA Group - Risk Management Information System,Property,AUDITOR,Alabama, The claim information you entered has been recorded and saved.,3,1234567890,Property loss has happened because of floods

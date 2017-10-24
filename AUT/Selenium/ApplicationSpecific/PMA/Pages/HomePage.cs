@@ -50,7 +50,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byClaimNameinformation = By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxLabel1_0']");
         public By byClaimInquirySearchResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byMyDiaryResultsTable = By.XPath("//table[@id='MainContent_sppage_pnlDiary_griddiary_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
-        private By byQuickClaimPageSizeDropdown = By.XPath("//ul[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXPagerBottom_DXMCC']/li[@class='dxm-item']");
+        private By byQuickClaimPageSizeDropdown = By.XPath("//ul[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXPagerBottom_DXMCC']/li[contains(@class,'dxm-item')]");
         private By byQuickClaimPageSize = By.XPath("//input[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXPagerBottom_PSI']");
         private By byQuickClaimDropdownBtn = By.XPath("//span[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXPagerBottom_DDB']");
         private By byQuickClaimAccountName = By.XPath("//input[@id='MainContent_sppage_pnlQuickSearch_gridresult_DXFREditorcol1_I']");
@@ -430,8 +430,6 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //Click on Random Claim in ClaimInquiry Search table
         public ArrayList ClickOnRandomClaim()
         {
-
-           
             Thread.Sleep(6000);
             return this.driver.ClickRandomCliamNumber(byClaimInquirySearchResultsTable, 9);
         }
@@ -580,20 +578,21 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public string SelectQuickClaimPageSizeDropDownvalue()
         {
             this.TESTREPORT.LogInfo("Select PageSize from QuickClaim dropdown");
+            Thread.Sleep(6000);
             string selectedValue = null;
+            //this.driver.ScrollToPageBottom();
+            
             try
-            {
-                //Random rnd = new Random();
-
+            {                
                 IReadOnlyList<IWebElement> list = this.driver.FindElements(byQuickClaimPageSizeDropdown);
-                //int value = rnd.Next(0, list.Count);
-                list[0].Click();
+                this.driver.WaitElementExistsAndVisible(byQuickClaimPageSizeDropdown);
+                list[1].Click();
                 selectedValue = this.driver.GetElementAttribute(byQuickClaimPageSize, "value");
-                this.TESTREPORT.LogSuccess("Select PageSize from the QuickClaimPagesize dropdown", String.Format("PageSize - {0} is selcted succesfully", list[0]));
+                this.TESTREPORT.LogSuccess("Select PageSize from the QuickClaimPagesize dropdown", String.Format("PageSize - {0} is selcted succesfully", list[1].ToString()));
             }
-            catch
+            catch(Exception e)
             {
-                this.TESTREPORT.LogFailure("Select PageSize from the QuickClaimPagesize dropdown", String.Format("PageSize not selected", this.SCREENSHOTFILE));
+               this.TESTREPORT.LogFailure("Select PageSize from the QuickClaimPagesize dropdown", String.Format("PageSize not selected"), this.SCREENSHOTFILE);
 
             }
             return selectedValue;
@@ -615,7 +614,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         }
 
         //Count ClaimInquiryResults Count
-        public void ClaimInquiryResultsCount()
+        public int ClaimInquiryResultsCount()
         {
             this.TESTREPORT.LogInfo("Verify ClaimInquiry Tablerow COunt");
             Thread.Sleep(6000);
@@ -628,12 +627,15 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             {
                 this.TESTREPORT.LogFailure("Verify ClaimInquiry search results", String.Format("Results Table is not displayed ", this.SCREENSHOTFILE));
             }
+            return list.Count;
 
         }
 
         //click QuickClaim Pagesize Button
         public void ClickQuickClaimPagesizeBtn()
         {
+            Thread.Sleep(6000);
+            this.driver.ScrollToPageBottom();
             this.driver.ClickElement(byQuickClaimDropdownBtn, "QuickClaimPagesizeBtn");
         }
 
