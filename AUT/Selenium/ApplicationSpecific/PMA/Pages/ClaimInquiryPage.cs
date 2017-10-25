@@ -113,7 +113,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byCheckDetailInformationText = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalpayment1_0_gridpayments_0_DXMainTable']//span[text()='Check Detail Information']");
         private By byLossInformationText = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalpayment1_0_gridpayments_0_DXMainTable']//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalpayment1_0_gridpayments_0_dxdt0_0_ASPxLabel2_0']");
         private By byExpandLossLineBtn = By.XPath("//span[@class='dx-acc dxGridView_gvDetailCollapsedButton dx-acc-s']");
-        private By byExpandLossLineBtnAbsence = By.XPath("//span[@class='dx-acc dxGridView_gvDetailCollapsedButton dx-acc-s']");
+        private By byExpandLossLineBtnAbsence = By.XPath("//span[@class='dx-acc dxGridView_gvDetailExpandedButton dx-acc-s']");
         private By byPaymentDetailTab = By.XPath("//a[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_T0T']/span[contains(text(),'Payment Detail')]");
         private By byExplanationofBenefitsTab = By.XPath("//a[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_T1T']/span[contains(text(),'Explanation of Benefits')]");
         private By byInvoiceSummaryTab = By.XPath("//a[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_dxdt0_0_pageControl_0_T2T']/span[contains(text(),'Invoice Summary')]");
@@ -2344,6 +2344,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public string VerifyPaymentAmount()
         {
+            Thread.Sleep(2000);
             string value = this.driver.GetElementText(By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_DXMainTable']//tr[contains(@class,'dxgvDataRow')]//td[7]"));
             Thread.Sleep(2000);
             string x = this.driver.GetElementText(byPaymentAmountinPaymentDetail);
