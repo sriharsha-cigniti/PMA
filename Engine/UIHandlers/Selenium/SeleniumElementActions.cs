@@ -1402,7 +1402,61 @@ namespace Engine.UIHandlers.Selenium
 
         }
 
+        public static void SwitchToDefaultFrame(this IWebDriver driver)
+        {
+            try
+            {
+                driver.SwitchTo().DefaultContent();
+                testReport.LogSuccess("SwitchToDefaultFrame", String.Format("Switch to default frame was successful"));
+            }
+            catch (Exception ex)
+            {
+                testReport.LogFailure("SwitchToDefaultFrame", String.Format("Failed to Switch to Default Frame"));
+                testReport.LogException(ex, EngineSetup.GetScreenShotPath());
+            }
+        }
 
+        public static void SwitchToFrameById(this IWebDriver driver, string idValue)
+        {
+            try
+            {
+                driver.SwitchTo().Frame(idValue);
+                testReport.LogSuccess("SwitchToFrameById", String.Format("Switch to Frame by id: <mark>{0}</mark> was successful", idValue));
+            }
+            catch (Exception ex)
+            {
+                testReport.LogFailure("SwitchToFrameById", String.Format("Failed to Switch to Frame by Id: <mark>{0}</mark>", idValue));
+                testReport.LogException(ex, EngineSetup.GetScreenShotPath());
+            }
+        }
+
+        public static void SwitchToFrameByIndex(this IWebDriver driver, int index)
+        {
+            try
+            {
+                driver.SwitchTo().Frame(index);
+                testReport.LogSuccess("SwitchToFrameByIndex", String.Format("Switch to Frame by Index: <mark>{0}</mark> was successful", index.ToString()));
+            }
+            catch (Exception ex)
+            {
+                testReport.LogFailure("SwitchToFrameByIndex", String.Format("Failed to Switch to Frame by Index: <mark>{0}</mark>", index.ToString()));
+                testReport.LogException(ex, EngineSetup.GetScreenShotPath());
+            }
+        }
+
+        public static void SwitchToFrameByLocator(this IWebDriver driver, By locator)
+        {
+            try
+            {
+                driver.SwitchTo().Frame(driver.FindElement(locator));
+                testReport.LogSuccess("SwitchToFrameByLocator", String.Format("Switch to Frame by Locator: <mark>{0}</mark> was successful", locator.ToString()));
+            }
+            catch (Exception ex)
+            {
+                testReport.LogFailure("SwitchToFrameByLocator", String.Format("Failed to Switch to Frame by Locator: <mark>{0}</mark>", locator.ToString()));
+                testReport.LogException(ex, EngineSetup.GetScreenShotPath());
+            }
+        }
 
         #endregion
     }

@@ -401,7 +401,20 @@ namespace AUT.Selenium.CommonReUsablePages
             else
                 this.TESTREPORT.LogFailure("Verify auto Form", String.Format("<mark>{0}</mark> selected from dropdown <mark>{1}</mark> form not appeared", dropDownText, dropDownText));
         }
-    }
 
+        public void SelectDropDown(string DropDownText, By DropDown)
+        {
+            this.driver.ClickElement(DropDown, "dropdown image");
+            By byDropDownText = By.XPath(string.Format("//td[contains(text(),'{0}')]", DropDownText));
+            this.driver.ClickElement(byDropDownText, "Dropdown");
+        }
+
+        public void SelectDropDownWithParent(string DropDownText, By DropDown, string ParentId)
+        {
+            this.driver.ClickElement(DropDown, "dropdown image");
+            By byDropDownText = By.XPath(string.Format("//table[@id='{0}']/tbody/tr/td[contains(text(),'{1}')]", ParentId, DropDownText));
+            this.driver.ClickElement(byDropDownText, "Dropdown");
+        }
+    }
    
 }

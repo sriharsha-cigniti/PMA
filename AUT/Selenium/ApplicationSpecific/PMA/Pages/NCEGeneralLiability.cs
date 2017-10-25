@@ -90,7 +90,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             string getColor = this.driver.FindElement(byLostInformation).GetAttribute("style");
             
-            if (getColor.Contains("background-color: rgb(0, 56, 135)"))
+            if (getColor.Contains("background-color: rgb(0, 56, 135)") || getColor.Contains("background - color: red"))
             {
                 this.TESTREPORT.LogSuccess("Verify Loss Information color change", string.Format("actual -<mark>{0}</mark> expected  {1} is equal", "", getColor));
             }
