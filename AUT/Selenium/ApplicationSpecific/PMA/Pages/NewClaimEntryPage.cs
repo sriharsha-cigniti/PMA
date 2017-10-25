@@ -25,6 +25,9 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By bySavedDraftLable = By.XPath("//caption[contains(text(),'Saved Drafts')]");
         private By byClaiminquiryLink = By.Id("CinchMenu_DXI3_T");
         private By byLobtext = By.Id("MainContent_griddata_DXFREditorcol1_I");
+        private By byGetClaimnNumberCol = By.XPath("//span[contains(text(),'Claim Number :')]/../../td[2]");
+        private By byColumnHeadersLocation = By.XPath("//table[@id='MainContent_griddata_DXMainTable']//a[contains(text(),'Location')]/../../../../..");
+        private By byColumnHeadersDescription = By.XPath("//table[@id='MainContent_griddata_DXMainTable']//a[contains(text(),'Description')]/../../../../..");
 
         #endregion
 
@@ -83,7 +86,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 this.TESTREPORT.LogFailure("Compare pageSize item count with claimant entry table Count", string.Format("Page Item count : <mark>{0}</mark> and Claim entry table count : <mark>{1}</mark>", Pageitemcount, Itemlist.Count.ToString()));
         }
 
-            public void VerifySavedDraftsIsdisplayed()
+        public void VerifySavedDraftsIsdisplayed()
         {
             Thread.Sleep(1000);
             //Switching to frame.......
@@ -100,6 +103,70 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             this.driver.SendKeysToElementClearFirst(byLobtext, lob, "lob filter textbox");
         }
+
+        public string GetAndVerifyClaimNumber()
+        {
+            this.driver.WaitElementPresent(byGetClaimnNumberCol);
+            if (!string.IsNullOrEmpty(this.driver.GetElementText(byGetClaimnNumberCol)))
+                this.TESTREPORT.LogSuccess("Verify Claim no", string.Format("CLaim no generated is:<mark>{0}</mark>", this.driver.GetElementText(byGetClaimnNumberCol)));
+            else
+                this.TESTREPORT.LogFailure("Verify Claim no", string.Format("CLaim no generated is:<mark>{0}</mark>", this.driver.GetElementText(byGetClaimnNumberCol)));
+            return this.driver.GetElementText(byGetClaimnNumberCol);
+        }
+
+        public void VerifyClaimNoSequentialOrder(string ClaimNo1,string ClaimNo2)
+        {
+            string Claim1 = new String(ClaimNo1.Where(Char.IsDigit).ToArray());
+            string Claim2 = new String(ClaimNo2.Where(Char.IsDigit).ToArray());
+            int Claim11 = int.Parse(Claim1);
+            int Claim22 = int.Parse(Claim2);
+            if (Claim11 < Claim22)
+                this.TESTREPORT.LogSuccess("Verify Claim no Sequential Order", string.Format("Claim no sequence are claimno 1 created <mark>{0}</mark>, claimno 2 created <mark>{1}</mark>", ClaimNo1.ToString(), ClaimNo2.ToString()));
+            else
+                this.TESTREPORT.LogFailure("Verify Claim no Sequential Order", string.Format("Claim no sequence are claimno 1 created <mark>{0}</mark>, claimno 2 created <mark>{1}</mark>", ClaimNo1.ToString(), ClaimNo2.ToString()));
+        }
+
+        //Drag Coulmns Headers
+        public void DragColumns(string option)
+        {
+            this.TESTREPORT.LogInfo("Drag the columns of " + option);
+                IWebElement e1 = driver.FindElement(byColumnHeadersLocation);
+                IWebElement e2 = driver.FindElement(byColumnHeadersDescription);
+                this.driver.DragDrop(e1, e2, 60);
+                Thread.Sleep(10000);
+            
+        }
+
+        public void VerifySwappingcellsposition(string headerValue,int position1,int position2)
+        {
+            if (position1 != position2)
+                this.TESTREPORT.LogSuccess("Verify swapping of cells", string.Format("Header Name:<mark>{0}</mark> Previous header Position:<mark>{1}</mark> Current Header Position:<mark>{2}</mark>", headerValue, position1.ToString(), position2.ToString()), this.SCREENSHOTFILE);
+            else
+                this.TESTREPORT.LogFailure("Verify swapping of cells", string.Format("Header Name:<mark>{0}</mark> Previous header Position:<mark>{1}</mark> Current Header Position:<mark>{2}</mark>", headerValue, position1.ToString(), position2.ToString()), this.SCREENSHOTFILE);
+
+        }
+
+        public int getHeaderPosition(string headerValue)
+        {
+            Thread.Sleep(2000);
+            IReadOnlyList<IWebElement> headerList = this.driver.FindElements(By.XPath("//tr[@id='MainContent_griddata_DXHeadersRow0']//th//a"));
+            bool headerfound = false;
+            int Count = 0;
+            foreach (var header in headerList)
+            {
+                if (header.Text.ToLower().Contains(headerValue.ToLower()))
+                {
+                    Count = Count + 1;
+                    break;
+                }
+                else
+                    Count = Count + 1;
+                 
+            }
+            return Count;
+
+        }
+
 
 
     }
