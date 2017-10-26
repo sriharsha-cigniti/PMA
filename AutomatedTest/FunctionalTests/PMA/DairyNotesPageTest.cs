@@ -210,6 +210,7 @@ namespace AutomatedTest.FunctionalTests.PMA
                 diaryNotes.VerifyNoEntriesText(NoEntriesText); 
                 //Click on Home
                 diaryNotes.ClickHome();
+                //Verify Dairy Count
                 diaryNotes.VerifyDiaryCount(value);
             }
             home.ClickExit();

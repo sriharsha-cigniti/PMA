@@ -292,7 +292,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.ClickCancel();
 
             this.TESTREPORT.LogInfo("Verify Data Grid row and row values ");
-            int rowCOUntBeforeDelete = nceGE.GetGridRowCount();
+            int rowCountBeforeDelete = nceGE.GetGridRowCount();
             nceGE.VerifyGridView();
             nceGE.VerifyRowDataingGrid(0, "LIAB");
             nceGE.VerifyRowDataingGrid(1, Date);
@@ -304,8 +304,8 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Click on Delete Popup and verify text");
             nceGE.HandleDeleteLiabilityAlert(TextFromDeleteAlert);
 
-            this.TESTREPORT.LogInfo("Verify GRid row is deleted after record is deleted");
-            nceGE.VerifyGridRowIsExistsAfterDeletion(rowCOUntBeforeDelete - 1);
+            this.TESTREPORT.LogInfo("Verify Grid row count after record is deleted");
+            nceGE.VerifyGridRowIsExistsAfterDeletion(rowCountBeforeDelete - 1);
 
             nceAuto.SwitchToDefaultContent();
 
@@ -322,7 +322,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             NCEAutoPage nceAuto = new NCEAutoPage();
             NCEGeneralLiability nceGE = new NCEGeneralLiability();
 
-            this.TESTREPORT.InitTestCase("NCE_GL6", "Create a new General Liability claim, save as draft, return to the saved claim page and deletes");
+            this.TESTREPORT.InitTestCase("NCE_GL6", "Create a new General Liability claim, save as draft, navigate back to draft and submit claim with only required fields");
             #region ReadCSV
             string HomePageTitle = readCSV("HomePageTitle");
             string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
@@ -331,7 +331,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             string StateofLoss = readCSV("StateOfLoss");
             string LocationLoss = readCSV("LocationLoss");
             string RequiredErrorMessageForDraftSave = readCSV("RequiredErrorMessageForDraftSave");
-            string TextFromDeleteAlert = readCSV("TextFromDeleteAlert");
+           // string TextFromDeleteAlert = readCSV("TextFromDeleteAlert");
             string InvalidDataFormatcount = readCSV("InvalidFormatCount");
             string InvalidData = readCSV("Invaliddata");
             string ErrorCount = readCSV("ErrorCount");
@@ -373,19 +373,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE.VerifyRowDataingGrid(1, Date);
             nceGE.VerifyRowDataingGrid(3, LocationLoss);
 
-            //string getAccidentDate = nceGE.GetColumnDataFromRowGrid(1);
-            //this.TESTREPORT.LogInfo(string.Format("Accident Date in Grid : ", getAccidentDate));
-
-            //string getLocation = nceGE.GetColumnDataFromRowGrid(3);
-            //this.TESTREPORT.LogInfo(string.Format("Location in Grid : ", getLocation));
-
             this.TESTREPORT.LogInfo("Click on Saved claim");
             nceGE.ClickOnSavedClaiminGrid();
-
-            this.TESTREPORT.LogInfo("Click on submit button");
+                        
             nceAuto.ClickSubmit();
 
-            this.TESTREPORT.LogInfo("Verifys Required Field, Invalid Format error message");
+            this.TESTREPORT.LogInfo("Verify Required Field, Invalid Format error message");
             nceAuto.VerifyRequiredfieldErrorMessage(Convert.ToInt32(ErrorCount));
             nceGE.VerifyErrorMessage(Convert.ToInt32(InvalidDataFormatcount), InvalidData);
 
@@ -393,7 +386,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.EnterContactBusinessPhone(ContactBusinessPhone);
             nceGE.EnterZipCode(ZipCode);
 
-            this.TESTREPORT.LogInfo("Click on submit button");
             nceAuto.ClickSubmit();
 
             nceAuto.VerifyDataSaveMessage(DataSaveMessage);

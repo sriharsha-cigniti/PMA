@@ -33,7 +33,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byZipcode = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_txtLossZip_I");
         private By bySubmitButton = By.XPath("//div[@id='MainContent_btnSubmit']//span[contains(text(),'Submit')]");
         private By bySavedDraftButton = By.XPath("//div[@id='MainContent_btnSaveAsDraft_CD']//span[contains(text(),'Save Draft')]");
-        private By byDataGridRows = By.XPath("//table[@id='MainContent_griddata_DXMainTable']/tbody/tr");
+        private By byDataGridRows = By.XPath("//table[@id='MainContent_griddata_DXMainTable']/tbody/tr[contains(@id,'MainContent_griddata_DXDataRow')]");
         private By byTablerow = By.XPath("//table[@id='MainContent_griddata_DXMainTable']//tr[@id='MainContent_griddata_DXDataRow0']//td");
         private By byDeleteLink = By.XPath("//a[@id='MainContent_griddata_DXCBtn0']/span[contains(text(),'Delete')]");
         private By byFirstName = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel2_txtClaimantFirstName_I");
@@ -217,7 +217,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
             this.driver.SendKeysToElementClearFirst(byClaimSubmissionComments, comments, "ClaimSubmissionComments");
             this.driver.ClickElement(byClaimRecordOnly, "Claim record only CheckBox");
-            this.driver.ClickElement(byClaimEmailcheck, "CLaim Email Check CheckBox");
+            this.driver.ClickElement(byClaimEmailcheck, "Claim Email Check CheckBox");
             this.driver.SendKeysToElementClearFirst(byClaimMUltipleAdressTextbox, EmailAdress, "ClaimEmailTextbox");
         }
 
@@ -313,9 +313,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             this.driver.SwitchTo().DefaultContent();
             this.driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']")));
-            
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byDataGridRows);
-            this.TESTREPORT.LogInfo(string.Format("GET GRID ROW COUNT : {0}", list.Count));
+            this.TESTREPORT.LogInfo(string.Format("Get Grid Row Count : {0}", list.Count));
             return list.Count;
         }
 
@@ -334,6 +333,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void ClickOnSavedClaiminGrid()
         {
+            Thread.Sleep(4000);
             this.driver.SwitchTo().DefaultContent();
             this.driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']")));
             
