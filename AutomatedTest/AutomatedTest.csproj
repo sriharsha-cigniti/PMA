@@ -105,14 +105,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestData\PMA\DairyNotesPageTest.csv" />
-    <None Include="TestData\PMA\NewClaimEntry.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="TestData\PMA\NCEWorkersCompensationTest.csv" />
     <None Include="TestData\PMA\NCEGeneralLiabilityTests.csv" />
     <None Include="TestData\PMA\NCEPropertyPageTest.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="TestData\PMA\NewClaimEntry.csv" />
     <None Include="TestData\PMA\SettingsPageTest.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
