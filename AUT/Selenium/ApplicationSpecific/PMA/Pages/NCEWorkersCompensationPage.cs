@@ -53,12 +53,27 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byWorkState = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddWorkState_B-1Img");
         private By byContactInformationBar = By.Id("MainContent_CallbackPanel_ASPxRoundPanel3_CBImg");
         private By byContactTelePhone = By.Id("MainContent_CallbackPanel_ASPxRoundPanel3_ASPxPanel2_txtpreparerphone_I");
+        private By byDateOfInjuryImg = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_dtInjury_B-1Img");
+        private By byClearButton = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_dtInjury_DDD_C_BC");
         private By bySubmit = By.XPath("//div[@id='MainContent_btnSubmit_CD']//span[contains(text(),'Submit')]");
-        
-
-        //private By bySelectLocation = By.XPath(string.Format("//td[contains(text(),'{0}')]", "AUDITOR"));//td[contains(text(),'CAUGHT IN OR BETWEEN')];
-        //td[contains(text(),'MULTIPLE INJURIES - MULTIPLE INJURIES NCLUDING BOTH PHYSICAL & PSYCHOLOGICAL')]
-        ////td[contains(text(),'HEAD - BRAIN')];//td[contains(text(),'Yes')];//td[contains(text(),'No')]
+        private By byMiddleName = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_txtempmiddlename_I");
+        private By bySuffixImg = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_ddempsuffix_B-1Img");
+        private By byGender = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_ddempSex_B-1Img");
+        private By byTelePhone = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_txtempphone_I");
+        private By byHireImg = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_dtemphiredate_B-1Img");
+        private By byMaritalStatus = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_ddempmaritalstatus_B-1Img");
+        //table[@id='MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_dtemphiredate_DDD_C_mt']//tr[@class='dx-ac']//following-sibling::tr/td[contains(text(),'3')]
+        private By byNoOfDependents = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_ddempdependents_B-1Img");
+        //private By bySSN = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddsideofbody_B-1Img");
+        //private By byOccupation = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_tmemployeebeganwork_B-2Img");
+        //private By byOccupation = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_dtExpectedToWork_DDD_C_mt");
+        //private By byOccupation = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_dtExpectedToWork_DDD_C_NMCImg");
+        //private By byOccupation = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_txtOccupation_I");
+        //private By byOccupation = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_txtOccupation_I");
+        //private By byOccupation = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_txtOccupation_I");
+        //private By byOccupation = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_txtOccupation_I");
+        //private By byOccupation = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_txtOccupation_I");
+        //private By byOccupation = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_txtOccupation_I");
 
         #endregion
 
@@ -87,7 +102,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.AssertTextMatching(this.driver.GetElementText(byWCText), valueToVerify);
         }
 
-        public void FillRequiredFieldsInWCForm(string Location, string FirstName, string LastName, string Adress, string City, string Zip, string DOB, string SSN, string Occupation, string DateOfInjury, string AccidentCause, string InjuryType, string BodyPart, string Description, string IsInjuredWorkerLosingTime, string IsInjuredWorkerModifiedShift, string State, string PreparerPhone)
+        public void FillAllRequiredFieldsInWCForm(string Location, string FirstName, string LastName, string Adress, string City, string Zip, string DOB, string SSN, string Occupation, string DateOfInjury, string AccidentCause, string InjuryType, string BodyPart, string Description, string IsInjuredWorkerLosingTime, string IsInjuredWorkerModifiedShift, string State, string PreparerPhone, string date)
         {
             SelectDropDown(Location, byLocationDropDown);
             this.driver.SendKeysToElementClearFirst(byFirstName, FirstName, "Employee FirstName");
@@ -114,14 +129,14 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             SelectDropDown(BodyPart, byBodyPartDD);
             this.driver.SendKeysToElementClearFirst(byAccidentDescription, Description, "Accident Description");
 
-            this.driver.ClickElement(byDateEmployerNotified, "Date of Injury");
-            this.driver.SendKeysToElement(byDateEmployerNotified, DateOfInjury, "Employee Notified");
+            this.driver.ClickElement(byDateEmployerNotified, "Employee Notified");
+            this.driver.SendKeysToElement(byDateEmployerNotified, date, "Employee Notified");
 
             this.driver.ClickElement(byIsInjuredWorkerOnModifiedDutyText, "IsInjuredWorkerOnModifiedDuty");
             this.driver.SendKeysToElementClearFirst(byIsInjuredWorkerOnModifiedDutyText, IsInjuredWorkerModifiedShift, "IsInjuredWorkerOnModifiedDuty");
 
             this.driver.ClickElement(byDateDisabilityBegan, "Date of Disability");
-            this.driver.SendKeysToElement(byDateDisabilityBegan, DateOfInjury, "Date of Disability");
+            this.driver.SendKeysToElement(byDateDisabilityBegan, date, "Date of Disability");
 
             this.driver.SendKeysToElementClearFirst(byLossLocationAdress, Adress, "Loss Location Address");
             this.driver.SendKeysToElementClearFirst(byLossLocationCity, City, "Loss Location City");
@@ -142,9 +157,70 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             this.driver.ClickElement(bySubmit, "Submit Button");
         }
+
+        public void FillRequiredFieldsForSaveDraftInWCForm(string Location, string FirstName, string LastName, string DateOfInjury, string Description)
+        {
+            SelectDropDown(Location, byLocationDropDown);
+            this.driver.SendKeysToElementClearFirst(byFirstName, FirstName, "Employee FirstName");
+            this.driver.SendKeysToElementClearFirst(byLastName, LastName, "Employee LastName");
+
+            this.driver.ClickElement(byOccurenceInformationMenu, "Occurence Information");
+
+            this.driver.ClickElement(byDateOfInjury, "Date of Injury");
+            this.driver.SendKeysToElement(byDateOfInjury, DateOfInjury, "Date of Injury");
+            this.driver.SendKeysToElementClearFirst(byAccidentDescription, Description, "Accident Description");
+        }
+
+        public void VerifySavedGridText(string saveDraftText)
+        {
+            By bysaveDraftText = By.XPath(string.Format("//table[@id='MainContent_griddata_DXMainTable']/caption[contains(text(),'')]", saveDraftText));
+            this.driver.WaitElementPresent(bysaveDraftText);
+            if (this.driver.IsElementPresent(bysaveDraftText))
+            {
+                this.TESTREPORT.LogSuccess("Verify Text On Table", string.Format("Text - <mark>{0}</mark> appeared", saveDraftText));
+            }
+            else
+            {
+                this.TESTREPORT.LogFailure("Verify Text On Table", string.Format("Text -<mark>{0}</mark> is not appeared", saveDraftText));
+            }
+        }
+
+        public void VerifyInvalidFormatErrorMessage(int Count)
+        {
+            IList<IWebElement> FieldError = driver.FindElements(By.XPath("//td[contains(text(),'Invalid Format')]"));
+            if (FieldError.Count > 0 && FieldError.Count == Count)
+                this.TESTREPORT.LogSuccess("Verify InvalidFormat field Error Message", String.Format("InvalidFormat field error with count: <mark>{0}</mark>", FieldError.Count.ToString()));
+            else
+                this.TESTREPORT.LogFailure("Verify InvalidFormat field Error Message", String.Format("InvalidFormat field error with count: <mark>{0}</mark>", FieldError.Count.ToString()));
+        }
+
+        public void VerifyDate(string valueToVerify)
+        {
+            this.driver.SwitchTo().DefaultContent();
+            this.driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']")));
+
+            this.driver.ClickElement(byOccurenceInformationMenu, "Occurence Information");
+            string value = this.driver.GetElementAttribute(byDateOfInjury, "value");
+
+            if (valueToVerify.Trim().ToLower().Contains(value.Trim().ToLower()))
+            {
+                this.TESTREPORT.LogSuccess("Verify Text from saved claim for column ", string.Format("actual text -<mark>{0}</mark> expected count {1} is equal", value, valueToVerify));
+            }
+            else
+            {
+                this.TESTREPORT.LogSuccess("Verify Text from saved claim for column ", string.Format("actual text -<mark>{0}</mark> expected count {1} is not equal", value, valueToVerify));
+            }
+        }
+
+        public void ClickOnClearButtonInDD()
+        {
+            this.driver.ClickElement(byOccurenceInformationMenu, "Occurence Information");
+            Thread.Sleep(2000);
+            this.driver.ClickElement(byDateOfInjuryImg, "Date of Injury DropDown Image");
+            Thread.Sleep(2000);
+            this.driver.ClickElement(byClearButton, "Clear the date");
+        }
         #endregion
 
     }
 }
-
-

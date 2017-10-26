@@ -14,6 +14,7 @@ using Engine.Setup;
 using OpenQA.Selenium;
 using StandardUtilities;
 using Engine.Factories;
+using AUT.Selenium.ApplicationSpecific.PMA.Pages;
 
 namespace AutomatedTest.FunctionalTests.PMA
 {
@@ -23,7 +24,21 @@ namespace AutomatedTest.FunctionalTests.PMA
         private string dataFileName = null;
         private int currentFileRowPointer = 1;
         private TestContext testContextInstance;
-        public static  IWebDriver driver = null;
+        public static IWebDriver driver = null;
+        public HomePage home = null;
+        public NCEAutoPage nceAuto = null;
+        public NCEGeneralLiability nceGE = null;
+        public NCEWorkersCompensationPage nceWC = null;
+
+        public TestBaseTemplate()
+        {
+            driver = WebDriverFactory.getWebDriver(EngineSetup.BROWSER);
+            home = new HomePage();
+            nceAuto = new NCEAutoPage();
+            nceGE = new NCEGeneralLiability();
+            nceWC = new NCEWorkersCompensationPage();
+        }
+
         public TestContext TestContext
         {
             get
@@ -39,15 +54,15 @@ namespace AutomatedTest.FunctionalTests.PMA
         [AssemblyInitialize]
         public static void BeforeAllTestsExecution(TestContext testContext)
         {
-           
-          /*  #region WebApplication - PMA_Cinch
-            //EngineSetup.TestReport.InitTestCase("Launch Application", "Verify Application Is Launched Successfully");
-            driver = WebDriverFactory.getWebDriver(EngineSetup.BROWSER);
-            driver.Navigate().GoToUrl(EngineSetup.WEBURL);
-            //EngineSetup.TestReport.LogSuccess(String.Format("Launch Application On Browser - {0}",EngineSetup.BROWSER), String.Format("Application - {0} Launch Successful", EngineSetup.WEBURL));
-            //EngineSetup.TestReport.UpdateTestCaseStatus();
 
-            #endregion*/
+            /*  #region WebApplication - PMA_Cinch
+              //EngineSetup.TestReport.InitTestCase("Launch Application", "Verify Application Is Launched Successfully");
+              driver = WebDriverFactory.getWebDriver(EngineSetup.BROWSER);
+              driver.Navigate().GoToUrl(EngineSetup.WEBURL);
+              //EngineSetup.TestReport.LogSuccess(String.Format("Launch Application On Browser - {0}",EngineSetup.BROWSER), String.Format("Application - {0} Launch Successful", EngineSetup.WEBURL));
+              //EngineSetup.TestReport.UpdateTestCaseStatus();
+
+              #endregion*/
         }
         [AssemblyCleanup]
         public static void AfterAllTestsExecution()
@@ -57,7 +72,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             /*driver can not be initialized in static method as driver is instance variable*/
             //driver.Close();
             driver.Quit();
-            WebDriverFactory.Free();   
+            WebDriverFactory.Free();
             EngineSetup.TestReport.Close();
             TestBaseTemplate.UpdateTestReport();
         }
@@ -76,27 +91,25 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestInitialize()]
         public void BeforeEachTestCaseExecution()
         {
-          #region WebApplication - PMA_Cinch
-             //EngineSetup.TestReport.InitTestCase("Launch Application", "Verify Application Is Launched Successfully");
-             driver = WebDriverFactory.getWebDriver(EngineSetup.BROWSER);
-           
+            #region WebApplication - PMA_Cinch
+            //EngineSetup.TestReport.InitTestCase("Launch Application", "Verify Application Is Launched Successfully");
+
             driver.Navigate().GoToUrl(EngineSetup.WEBURL);
-             //EngineSetup.TestReport.LogSuccess(String.Format("Launch Application On Browser - {0}",EngineSetup.BROWSER), String.Format("Application - {0} Launch Successful", EngineSetup.WEBURL));
+            //EngineSetup.TestReport.LogSuccess(String.Format("Launch Application On Browser - {0}",EngineSetup.BROWSER), String.Format("Application - {0} Launch Successful", EngineSetup.WEBURL));
             // EngineSetup.TestReport.UpdateTestCaseStatus();
 
-             #endregion
-
+            #endregion
         }
 
         ////Use TestCleanup to run code after each test has run
         [TestCleanup()]
-        public  void AfterEachTestCaseExecution()
+        public void AfterEachTestCaseExecution()
         {
             //driver.Close();
-            if(driver!=null)
-            driver.Quit();
+            if (driver != null)
+                driver.Quit();
             WebDriverFactory.Free();
-           // EngineSetup.TestReport.Close();
+            // EngineSetup.TestReport.Close();
             TestBaseTemplate.UpdateTestReport();
         }
 
@@ -117,13 +130,14 @@ namespace AutomatedTest.FunctionalTests.PMA
 
         protected string DATAFILENAME
         {
-            
-                get {
-                    String modulename = this.GetType().Namespace.Substring(this.GetType().Namespace.LastIndexOf('.') + 1);
-                    this.dataFileName = modulename + "\\" + this.GetType().Name + ".csv";
-                    Console.WriteLine("dataFileName " + dataFileName);
-                    return this.dataFileName;
-                
+
+            get
+            {
+                String modulename = this.GetType().Namespace.Substring(this.GetType().Namespace.LastIndexOf('.') + 1);
+                this.dataFileName = modulename + "\\" + this.GetType().Name + ".csv";
+                Console.WriteLine("dataFileName " + dataFileName);
+                return this.dataFileName;
+
             }
 
         }
@@ -211,5 +225,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             }
             return data;
         }
+
     }
 }

@@ -238,7 +238,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.SwitchToDefaultContent();
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
-            //home.ClickExit();
+            home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
         }
@@ -331,7 +331,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             string StateofLoss = readCSV("StateOfLoss");
             string LocationLoss = readCSV("LocationLoss");
             string RequiredErrorMessageForDraftSave = readCSV("RequiredErrorMessageForDraftSave");
-           // string TextFromDeleteAlert = readCSV("TextFromDeleteAlert");
+            // string TextFromDeleteAlert = readCSV("TextFromDeleteAlert");
             string InvalidDataFormatcount = readCSV("InvalidFormatCount");
             string InvalidData = readCSV("Invaliddata");
             string ErrorCount = readCSV("ErrorCount");
@@ -375,7 +375,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Click on Saved claim");
             nceGE.ClickOnSavedClaiminGrid();
-                        
+
             nceAuto.ClickSubmit();
 
             this.TESTREPORT.LogInfo("Verify Required Field, Invalid Format error message");
@@ -439,7 +439,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE.VerifyColorChange();
 
             this.TESTREPORT.LogInfo("Verify 'The claim information you entered has been recorded and saved' as Draft message");
-            
+
             string time = DateTime.Now.ToString("HH:mm tt");
             nceAuto.EnterOccurenceDate();
             nceAuto.SelectLocationLoss(LocationLoss);
