@@ -312,7 +312,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             string HomePageTitle = readCSV("HomePageTitle");
             string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
-            string ClaimantName = readCSV("ClaimantName");
+            string ClaimantName = readCSV("ClaimantName1");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
             string IncurredFrom = readCSV("IncurredFrom");
             string IncurredTo = readCSV("IncurredTo");

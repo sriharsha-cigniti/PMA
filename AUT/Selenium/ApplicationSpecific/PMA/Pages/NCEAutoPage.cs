@@ -479,6 +479,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void VerifyDataSaveMessage(string saveMessage)
         {
+            Thread.Sleep(2000);
             By DataSaveMessage = By.XPath(string.Format("//span[contains(text(),'{0}')]", saveMessage));
             this.driver.WaitElementPresent(DataSaveMessage);
             if (this.driver.IsElementPresent(DataSaveMessage))
