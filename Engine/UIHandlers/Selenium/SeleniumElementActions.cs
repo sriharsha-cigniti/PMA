@@ -1334,7 +1334,7 @@ namespace Engine.UIHandlers.Selenium
                         IJavaScriptExecutor ex = (IJavaScriptExecutor)driver;
                         ex.ExecuteScript("arguments[0].click();", item);
                         //item.Click();
-                        testReport.LogSuccess("Click on Recent Random ClaimNumber", String.Format(" Successfully Clicked on - <Mark>{0}</Mark> ", listName));
+                        testReport.LogSuccess("Click on Recent Random ClaimNumber", String.Format("<Mark> Successfully Clicked on random Claim No </Mark> "));
                         break;
                     }
                     else

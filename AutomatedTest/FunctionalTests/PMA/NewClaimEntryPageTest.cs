@@ -13,7 +13,7 @@ using System.Threading;
 namespace AutomatedTest.FunctionalTests.PMA
 {
     [TestClass]
-    public  class NewClaimEntry : PMA.TestBaseTemplate
+    public  class NewClaimEntryPageTest : PMA.TestBaseTemplate
     {
         [TestMethod, Description("Create a new Auto claim, save as draft, return to the saved claim page and see the results  displaying according to the selected page size "), TestCategory("Regression")]
         public void NCE_01ncePage()
@@ -75,6 +75,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nce.VerifyNewClaimantEntryTableHeaders(TableHeader5);
 
             this.TESTREPORT.LogInfo("Verify Page size item count with Claim entry table count");
+            nce.SelectPageSizeAll();
             nce.ComparePageSizeItemCountWithClaimantEntryTableCount();
 
             nceAuto.SwitchToDefaultContent();
@@ -281,6 +282,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             int currentPositionDescription = nce.getHeaderPosition("Description");
             nce.VerifySwappingcellsposition("Description",prevPositionDescription, currentPositionDescription);
             nceAuto.SwitchToDefaultContent();
+
 
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();

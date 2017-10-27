@@ -16,9 +16,9 @@ namespace AutomatedTest.FunctionalTests.PMA
     [TestClass]
     public class ClaimInquiryPageTests : PMA.TestBaseTemplate
     {
-        //Create Page Objectss
-        HomePage home = new HomePage();
-        ClaimInquiry cInquiry = new ClaimInquiry();
+        ////Create Page Objectss
+        //HomePage home = new HomePage();
+        //ClaimInquiry cInquiry = new ClaimInquiry();
 
 
         [TestMethod, Description("Claim Inquiry-Click search with no search fields filled out"), TestCategory("Regression")]
@@ -312,7 +312,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             string HomePageTitle = readCSV("HomePageTitle");
             string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
-            string ClaimantName = readCSV("ClaimantName1");
+            string ClaimantName = readCSV("ClaimantName");
             string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
             string IncurredFrom = readCSV("IncurredFrom");
             string IncurredTo = readCSV("IncurredTo");
@@ -330,15 +330,18 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.EnterIncurredTo(IncurredTo);
             //CLick on search button
             home.ClickSearch();
-            //Verify table row count- Need to implement
+            //Verify table row count
             home.ClaimInquiryResultsCount();
             //verify loss Line Summary
             cInquiry.VerifyLossLineSummary();
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
-            //Total Incurred column
 
+            //Enter a claim in the grid view
+            cInquiry.EnterClaimantName(ClaimantName);
+            //Total Incurred column
             cInquiry.VerifyTotalIncurredTableValue(IncurredTo, IncurredFrom);
+
             //To select random Claim Number
             ArrayList Index = cInquiry.ClickOnRandomClaimInquiryResults();
             home.VerifyClaimNumber(Index[0].ToString());

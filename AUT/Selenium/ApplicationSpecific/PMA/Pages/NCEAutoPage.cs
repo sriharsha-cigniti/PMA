@@ -455,7 +455,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void SelectLocationLoss(string LocationLoss)
         {
             this.driver.ClickElement(byLocationDropdOwnimage, "location dropdown image");
-            By byLocationDropDown = By.XPath(string.Format("//td[contains(text(),'{0}')]", LocationLoss));
+            By byLocationDropDown = By.XPath("//td[@id='MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocation_DDD_L_LBI1T0']"));
             this.driver.ClickElement(byLocationDropDown, "Location Dropdown");
         }
 

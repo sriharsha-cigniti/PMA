@@ -457,6 +457,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //Verify ClaimNumber in ClaimInformation Page
         public void VerifyClaimNumber(string ClaimNumber)
         {
+            this.driver.WaitElementPresent(byClaimInformationClaimNumber);
             string ActualClaimNumber = this.driver.GetElementText(byClaimInformationClaimNumber);
             this.driver.AssertTextMatching(ClaimNumber, ActualClaimNumber);
 

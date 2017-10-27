@@ -73,6 +73,7 @@
     <Compile Include="FunctionalTests\PMA\NCEGeneralLiabilityTests.cs" />
     <Compile Include="FunctionalTests\PMA\NCEPropertyPageTest.cs" />
     <Compile Include="FunctionalTests\PMA\NewClaimEntryPageTest.cs" />
+    <Compile Include="FunctionalTests\PMA\OshaPageTest.cs" />
     <Compile Include="FunctionalTests\PMA\SettingsPageTest.cs" />
     <Compile Include="FunctionalTests\PMA\TestBaseTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,6 +106,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestData\PMA\DairyNotesPageTest.csv" />
+    <None Include="TestData\PMA\OshaPageTest.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestData\PMA\NCEWorkersCompensationTest.csv" />
     <None Include="TestData\PMA\NCEGeneralLiabilityTests.csv" />
     <None Include="TestData\PMA\NCEPropertyPageTest.csv">
