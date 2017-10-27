@@ -29,7 +29,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         public NCEAutoPage nceAuto = null;
         public NCEGeneralLiability nceGE = null;
         public NCEWorkersCompensationPage nceWC = null;
-
+        public OshaPage osha = null;
+        public NewClaimEntryPage nce = null;
         public TestBaseTemplate()
         {
             driver = WebDriverFactory.getWebDriver(EngineSetup.BROWSER);
@@ -37,6 +38,8 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto = new NCEAutoPage();
             nceGE = new NCEGeneralLiability();
             nceWC = new NCEWorkersCompensationPage();
+            osha = new OshaPage();
+            nce = new NewClaimEntryPage();
         }
 
         public TestContext TestContext

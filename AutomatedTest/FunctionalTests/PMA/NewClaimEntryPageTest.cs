@@ -15,30 +15,44 @@ namespace AutomatedTest.FunctionalTests.PMA
     [TestClass]
     public  class NewClaimEntryPageTest : PMA.TestBaseTemplate
     {
+        #region Parameters
+        public static string HomePageTitle { get; set; }
+        public static string SelectBusinessvalueDropDown { get; set; }
+        public static string RequiredErrorMessageCount { get; set; }
+        public static string ContactBusinessPhone { get; set; }
+        public static string DataSaveMessage { get; set; }
+        public static string StateofLoss { get; set; }
+        public static string LocationLoss { get; set; }
+        public static string NewClaimTabHighlightcolor { get; set; }
+        public static string TableHeader1 { get; set; }
+        public static string TableHeader2 { get; set; }
+        public static string TableHeader3 { get; set; }
+        public static string TableHeader4 { get; set; }
+        public static string TableHeader5 { get; set; }
+        
+        #endregion
+        public NewClaimEntryPageTest()
+        {
+            #region ReadCSV
+             HomePageTitle = readCSV("HomePageTitle");
+             SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
+             RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
+             ContactBusinessPhone = readCSV("ContactBusinessPhone");
+             DataSaveMessage = readCSV("DataSaveMessage");
+             StateofLoss = readCSV("StateOfLoss");
+             LocationLoss = readCSV("LocationLoss");
+             NewClaimTabHighlightcolor = readCSV("NewClaimTabHighlightcolor");
+             TableHeader1 = readCSV("ClaimEntryHeader1");
+             TableHeader2 = readCSV("ClaimEntryHeader2");
+             TableHeader3 = readCSV("ClaimEntryHeader3");
+             TableHeader4 = readCSV("ClaimEntryHeader4");
+             TableHeader5 = readCSV("ClaimEntryHeader5");
+            #endregion
+        }
         [TestMethod, Description("Create a new Auto claim, save as draft, return to the saved claim page and see the results  displaying according to the selected page size "), TestCategory("Regression")]
         public void NCE_01ncePage()
         {
-            HomePage home = new HomePage();
-            NewClaimEntryPage nce = new NewClaimEntryPage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-
             this.TESTREPORT.InitTestCase("NCE_01", "NCE Create auto Claim,save and return and validate the saved changes ");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string NewClaimTabHighlightcolor = readCSV("NewClaimTabHighlightcolor");
-            string TableHeader1 = readCSV("ClaimEntryHeader1");
-            string TableHeader2 = readCSV("ClaimEntryHeader2");
-            string TableHeader3 = readCSV("ClaimEntryHeader3");
-            string TableHeader4 = readCSV("ClaimEntryHeader4");
-            string TableHeader5 = readCSV("ClaimEntryHeader5");
-           
-            #endregion
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
@@ -88,27 +102,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Typing into the column heading field will filter the column rows"), TestCategory("Regression")]
         public void NCE_02ncePage()
         {
-            HomePage home = new HomePage();
-            NewClaimEntryPage nce = new NewClaimEntryPage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-
             this.TESTREPORT.InitTestCase("NCE_02", "Filtering coloumns on the basis of coloumn text entered in New CLaim inquiry Table ");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string NewClaimTabHighlightcolor = readCSV("NewClaimTabHighlightcolor");
-            string TableHeader1 = readCSV("ClaimEntryHeader1");
-            string TableHeader2 = readCSV("ClaimEntryHeader2");
-            string TableHeader3 = readCSV("ClaimEntryHeader3");
-            string TableHeader4 = readCSV("ClaimEntryHeader4");
-            string TableHeader5 = readCSV("ClaimEntryHeader5");
-
-            #endregion
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
@@ -158,20 +152,9 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Create 2 claim entries for any Line of Business and submit and check whether the Claim number generated is in the sequential order"), TestCategory("Regression")]
         public void NCE_03ncePage()
         {
-            HomePage home = new HomePage();
-            NewClaimEntryPage nce = new NewClaimEntryPage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-
-            this.TESTREPORT.InitTestCase("NCE_03", "Verify Claim Number created in sequential order");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
            
-            #endregion
+            this.TESTREPORT.InitTestCase("NCE_03", "Verify Claim Number created in sequential order");
+           
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
@@ -220,27 +203,10 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Create a claim for any Line of Business, save as draft, return to the saved claim page and drag the column headers in the saved drafts table to modify the order of the columns"), TestCategory("Regression")]
         public void NCE_04ncePage()
         {
-            HomePage home = new HomePage();
-            NewClaimEntryPage nce = new NewClaimEntryPage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
+            
 
             this.TESTREPORT.InitTestCase("NCE_04", "Create a claim for any Line of Business, save as draft, return to the saved claim page and drag the column headers in the saved drafts table to modify the order of the columns");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string NewClaimTabHighlightcolor = readCSV("NewClaimTabHighlightcolor");
-            string TableHeader1 = readCSV("ClaimEntryHeader1");
-            string TableHeader2 = readCSV("ClaimEntryHeader2");
-            string TableHeader3 = readCSV("ClaimEntryHeader3");
-            string TableHeader4 = readCSV("ClaimEntryHeader4");
-            string TableHeader5 = readCSV("ClaimEntryHeader5");
-
-            #endregion
+           
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();

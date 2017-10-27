@@ -114,7 +114,7 @@
     <None Include="TestData\PMA\NCEPropertyPageTest.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\PMA\NewClaimEntry.csv" />
+    <None Include="TestData\PMA\NewClaimEntryPageTest.csv" />
     <None Include="TestData\PMA\SettingsPageTest.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
