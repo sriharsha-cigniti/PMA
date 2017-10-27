@@ -101,7 +101,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             this.TESTREPORT.LogInfo("Verify Welcome Text");
             string welcomeTextExpected = this.driver.GetElementText(byUserName, 60);
-            this.driver.AssertTextMatching(welcomeTextExpected, welcomeText);
+            this.driver.AssertTextMatching(welcomeTextExpected.ToLower(), welcomeText.ToLower());
 
         }
         //Date verification

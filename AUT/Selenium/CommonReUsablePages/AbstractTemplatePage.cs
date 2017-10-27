@@ -415,6 +415,20 @@ namespace AUT.Selenium.CommonReUsablePages
             By byDropDownText = By.XPath(string.Format("//table[@id='{0}']/tbody/tr/td[contains(text(),'{1}')]", ParentId, DropDownText));
             this.driver.ClickElement(byDropDownText, "Dropdown");
         }
+
+        public void ClickOnSpecificDate(string DateTableId, string SelectDate)
+        {
+            By bySelectDate = By.XPath(string.Format("//table[@id='{0}']//tr[@class='dx-ac']//following-sibling::tr/td[contains(text(),'{1}')]", DateTableId, SelectDate));
+            this.driver.ClickElement(bySelectDate, "Select Specific Date");
+        }
+
+        public void EnterDataInField(string FieldName, By ByFieldName)
+        {
+            this.driver.SwitchToDefaultFrame();
+            this.driver.SwitchToFrameByLocator(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']"));
+
+            this.driver.SendKeysToElementClearFirst(ByFieldName, FieldName, "Enter text");
+        }
     }
    
 }
