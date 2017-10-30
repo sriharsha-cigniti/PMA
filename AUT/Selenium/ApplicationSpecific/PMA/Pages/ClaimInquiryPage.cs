@@ -61,8 +61,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byEmailAdjuster = By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_pcemail_0_PWH-1T']");
         private By byLocationCodeField = By.XPath("//input[@id='gridlocation_DXFREditorcol0_I']");
         private By byAccidentDateRangeBeginClearBtn = By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C']//td[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_BC']");
-        private By byDragaColoumnheaderSpace = By.Id("MainContent_ASPxPageControl1_gridresult_grouppanel");
-        //private By bysecondcolumnheader = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@id,'MainContent_ASPxPageControl1_gridresult_DXHeadersRow0')]//th[2]");
+        private By byDragaColoumnheaderSpace = By.Id("MainContent_ASPxPageControl1_gridresult_grouppanel");        
         private By byClaimInquiryResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byColumnHeaders = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@id,'MainContent_ASPxPageControl1_gridresult_DXHeadersRow0')]/th");
         private By byLossLineSummaryResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridlossline_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
@@ -74,8 +73,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byClaimInquiryPagesizeDRopdownBtn = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult']//span[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_DDBImg']");
         private By byDraggedColumnList = By.XPath("//th[contains(@id,'MainContent_ASPxPageControl1_gridresult_groupcol')]//a");
         private By byGroupColumnsData = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvGroupRow')]");
-        private By byAccidentLocation = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_lbllocation");
-        //private By byLocationField = By.Id("MainContent_ASPxRoundPanel1_pnlContent_txtlocation_I");
+        private By byAccidentLocation = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_lbllocation");        
         private By byColumnHeadersPayments = By.XPath("//tr[contains(@id,'MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalpayment1_0_gridpayments_0_DXHeadersRow0')]/th");
         private By byDraggedColumnListInSpacePayments = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalpayment1_0_gridpayments_0_grouppanel");
         private By byDraggedColumnListPayments = By.XPath("//th[contains(@id,'MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalpayment1_0_gridpayments_0_groupcol')]");
@@ -1363,6 +1361,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void EnterClaimantName(string ClaimantName)
         {
+            Thread.Sleep(4000);
             ClaimantName = ClaimantName.ToLower();
             this.TESTREPORT.LogInfo("Enter a ClaimNumber-starts with 'L or 'W' in the grid view");
             if (ClaimantName.Contains("l"))

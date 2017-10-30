@@ -16,7 +16,7 @@ using System.Collections;
 
 namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 {
-    public class DairyNotesPage : AbstractTemplatePage
+    public class DiaryNotesPage : AbstractTemplatePage
     {
         HomePage home = new HomePage();
         #region UI Objects
@@ -322,12 +322,12 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //Verify Claimant Name  in ClaimInformation Page
         public void VerifyClaimantName(string ClaimantNameExpected)
         {   
-            if (ClaimantNameExpected.Contains(','))
-            {
-                ClaimantNameExpected = ClaimantNameExpected.Split(',')[0];
-                //String CNameLast = ClaimantNameExpected.Split(',')[1];
-                //ClaimantNameExpected = CNameLast + " " + CNameFirst;
-            }
+            //if (ClaimantNameExpected.Contains(','))
+            //{
+            //    ClaimantNameExpected = ClaimantNameExpected.Split(',')[0];
+            //    //String CNameLast = ClaimantNameExpected.Split(',')[1];
+            //    //ClaimantNameExpected = CNameLast + " " + CNameFirst;
+            //}
            
             string ActualAccountName = this.driver.GetElementText(HomePage.byClaimInformationClaimantName);            
             bool flag = false;

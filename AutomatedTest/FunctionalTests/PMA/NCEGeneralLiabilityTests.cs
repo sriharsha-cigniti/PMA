@@ -284,7 +284,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Click on cancel button");
             nceAuto.ClickCancel();
-
+            nceGE.SelectPageSizeAll();
             this.TESTREPORT.LogInfo("Verify Data Grid row and row values ");
             int rowCountBeforeDelete = nceGE.GetGridRowCount();
             nceGE.VerifyGridView();

@@ -67,7 +67,7 @@
   <ItemGroup>
     <Compile Include="FunctionalTests\PMA\NCEAutoPageTest.cs" />
     <Compile Include="FunctionalTests\PMA\ClaimInquiryPageTest.cs" />
-    <Compile Include="FunctionalTests\PMA\DairyNotesPageTest.cs" />
+    <Compile Include="FunctionalTests\PMA\DiaryNotesPageTest.cs" />
     <Compile Include="FunctionalTests\PMA\HomePageTest.cs" />
     <Compile Include="FunctionalTests\PMA\NCEWorkersCompensationTest.cs" />
     <Compile Include="FunctionalTests\PMA\NCEGeneralLiabilityTests.cs" />
@@ -76,6 +76,7 @@
     <Compile Include="FunctionalTests\PMA\OshaPageTest.cs" />
     <Compile Include="FunctionalTests\PMA\SettingsPageTest.cs" />
     <Compile Include="FunctionalTests\PMA\TestBaseTemplate.cs" />
+    <Compile Include="FunctionalTests\PMA\ToolsPageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\UnitTest1.cs" />
   </ItemGroup>
@@ -109,12 +110,17 @@
     <None Include="TestData\PMA\OshaPageTest.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="TestData\PMA\DiaryNotesPageTest.csv" />
     <None Include="TestData\PMA\NCEWorkersCompensationTest.csv" />
     <None Include="TestData\PMA\NCEGeneralLiabilityTests.csv" />
     <None Include="TestData\PMA\NCEPropertyPageTest.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestData\PMA\NewClaimEntryPageTest.csv" />
+    <None Include="TestData\PMA\NewClaimEntry.csv" />
+    <None Include="TestData\PMA\ToolsPageTest.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestData\PMA\SettingsPageTest.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

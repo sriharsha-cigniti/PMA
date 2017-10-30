@@ -16,18 +16,11 @@ namespace AutomatedTest.FunctionalTests.PMA
     [TestClass]
     public class NCEPropertyPageTest : PMA.TestBaseTemplate
     {
-        //Create Page Objectss
-        HomePage home = new HomePage();
-        ClaimInquiry cInquiry = new ClaimInquiry();
-
-
+        //Create Page Objects
+        
         [TestMethod, Description("Create a new Property claim and cancel"), TestCategory("Regression")]
         public void NCE_P1NCEProperty()
-        {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEPropertyPage nceProperty = new NCEPropertyPage();
-
+        {            
             this.TESTREPORT.InitTestCase("NCE_P1", "Create a new Property claim and cancel");
 
             #region ReadCSV
@@ -54,9 +47,6 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEPropertyPage-Create a new Property claim, fill out only the required fields and submit"), TestCategory("Regression")]
         public void NCE_P2NCEProperty()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEPropertyPage nceProperty = new NCEPropertyPage();
 
             this.TESTREPORT.InitTestCase("NCE_P2", "Create a new Property claim, fill out only the required fields and submit");
             #region ReadCSV
@@ -103,10 +93,6 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEPropertyPage-Create a new Property claim, fill out all fields and submit"), TestCategory("Regression")]
         public void NCE_P3NCEProperty()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEPropertyPage nceProperty = new NCEPropertyPage();
-            NCEGeneralLiability nceGE = new NCEGeneralLiability();
 
             this.TESTREPORT.InitTestCase("NCE_P3", "Create a new Property claim, fill out all fields and submit");
 
@@ -176,9 +162,6 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEPropertyPage-Create a new Property claim and save as draft"), TestCategory("Regression")]
         public void NCE_P4NCEProperty()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEPropertyPage nceProperty = new NCEPropertyPage();
 
             this.TESTREPORT.InitTestCase("NCE_P4", "Create a new Property claim and save as draft");
             #region ReadCSV
@@ -243,10 +226,6 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEPropertyPage-Create a new Property claim, save as draft, return to the saved claim page and delete"), TestCategory("Regression")]
         public void NCE_P5NCEProperty()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEPropertyPage nceProperty = new NCEPropertyPage();
-            NCEGeneralLiability nceGE = new NCEGeneralLiability();
 
             this.TESTREPORT.InitTestCase("NCE_P5", "Create a new Property claim, save as draft, return to the saved claim page and delete");
             #region ReadCSV
@@ -292,8 +271,11 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify Cancel");
             //Click on Cancel Button
             nceAuto.ClickCancel();
-            this.TESTREPORT.LogInfo("Verify Data Grid row and row values ");
+            nceGE.SelectPageSizeAll();
+
+            this.TESTREPORT.LogInfo("Verify Data Grid row and row values ");            
             int rowCountBeforeDelete = nceGE.GetGridRowCount();
+           
             nceAuto.SwitchToDefaultContent();
             //verify saved drafts text in table
             nceAuto.SavedDraftsText();
@@ -324,11 +306,6 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEPropertyPage - Create a new Property claim, save as draft, navigate back to draft and submit claim with only required fields"), TestCategory("Regression")]
         public void NCE_P6NCEProperty()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEPropertyPage nceProperty = new NCEPropertyPage();
-            NCEGeneralLiability nceGE = new NCEGeneralLiability();
-
             this.TESTREPORT.InitTestCase("NCE_P6", "Create a new Property claim, save as draft, navigate back to draft and submit claim with only required fields");
             #region ReadCSV
             string HomePageTitle = readCSV("HomePageTitle");
@@ -401,9 +378,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             //Get claim number
             nceProperty.GetClaimNumber();
             
-            nceAuto.SwitchToDefaultContent();
-
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+            nceAuto.SwitchToDefaultContent();            
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -469,10 +444,8 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify Cancel");
             //Click on Cancel Button
             nceAuto.ClickCancel();
-
             this.TESTREPORT.LogInfo("Verify Data Grid row and row values ");
             int rowCountBeforeDelete = nceGE.GetGridRowCount();
-
             nceAuto.SwitchToDefaultContent();
             //verify saved drafts text in table
             nceAuto.SavedDraftsText();
@@ -480,12 +453,9 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.VerifyAccidentDateinTable(a);
             //verfiy location in table
             nceAuto.VerifyLocationinTable(b);
-
             this.TESTREPORT.LogInfo("Click on Saved claim");
             nceGE.ClickOnSavedClaiminGrid();
-            nceProperty.VerifyPropertyForm(SelectBusinessvalueDropDown);
-
-            //Provide all fields to fill the form
+          //Provide all fields to fill the form
             nceAuto.SelectStateOfLoss(StateofLoss);
             nceAuto.EnterContactBusinessPhone(ContactBusinessPhone);            
             nceGE.EnterAddress(Address);
@@ -507,7 +477,43 @@ namespace AutomatedTest.FunctionalTests.PMA
             //Get claim number
             nceProperty.GetClaimNumber();
             nceAuto.SwitchToDefaultContent();
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+            //Click on Exit to close the application
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+        }
+        [TestMethod, Description("NCEPropertyPage - Verify the Tabs/sections present in the Property Claim"), TestCategory("Regression")]
+        public void NCE_P8NCEProperty()
+        {
+            HomePage home = new HomePage();
+            NCEAutoPage nceAuto = new NCEAutoPage();
+            NCEGeneralLiability nceGE = new NCEGeneralLiability();
+            NCEPropertyPage nceProperty = new NCEPropertyPage();
+
+            this.TESTREPORT.InitTestCase("NCE_P8", "Verify the Tabs/sections present in the Property Claim");
+            #region ReadCSV
+            string HomePageTitle = readCSV("HomePageTitle");
+            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
+            string LossInformationText = readCSV("LossInformationText");           
+            string ClaimSubmissionText = readCSV("ClaimSubmissionText");
+            #endregion
+
+            //verify home page title
+            home.VerifyPageTitle(HomePageTitle);
+            //verify cinch welcome
+            home.VerifyCinchWelome();
+            //click new Claim Entry and verify select line of business text            
+            this.TESTREPORT.LogInfo("Verify New Claim Entry Tab and 'Select Line of Business' text");
+            nceAuto.ClickOnNewClaimEntry();
+            //Verify Property Text
+            this.TESTREPORT.LogInfo("Verify 'Property' text");
+            nceProperty.VerifyPropertyForm(SelectBusinessvalueDropDown);
+
+            nceGE.VerifyTextOnPage(LossInformationText);            
+            nceGE.VerifyTextOnPage(ClaimSubmissionText);
+
+            nceAuto.SwitchToDefaultContent();
+           
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();

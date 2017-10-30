@@ -214,10 +214,21 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(bySearchButton, "Search", 60);
         }
         //click on Claim Inquiry link
-        public void ClickClaimInquiry()
+        public bool ClickClaimInquiry()
         {
             this.TESTREPORT.LogInfo("Click on claim inquiry");
-            this.driver.ClickElement(byClaimInquiry, "Claim Inquiry", 60);
+            bool flag = this.driver.IsElementPresent(byClaimInquiry);
+            if(flag)
+            {
+                this.driver.ClickElement(byClaimInquiry, "Claim Inquiry", 60);
+                this.TESTREPORT.LogSuccess("Verify Claim Inquiry Tab present", String.Format(" Successfully verified <Mark>{0}</Mark>", ""));
+            }
+            else
+            {
+                this.TESTREPORT.LogWarning("Verify Claim Inquiry Tab present", String.Format("Claim Inquiry Tab is not present"), this.SCREENSHOTFILE);
+            }
+            return flag;
+            
         }
         //click on my account dropdown
         public void ClickMyAccount()

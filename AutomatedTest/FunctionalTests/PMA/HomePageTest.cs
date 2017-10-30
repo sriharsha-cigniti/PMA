@@ -14,7 +14,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
     public class HomePageTests : PMA.TestBaseTemplate
     {
-        //TestCase HM_1
+        
         //TestCase Title : verify Default ACcountm    
         #region parameters
         public static string HomePageTitle { get; set; }
@@ -93,15 +93,17 @@ namespace AutomatedTest.FunctionalTests.PMA
             string AccountName = home.GetMyAccount();
             string value = home.SelectAccountDropDown();
             home.VerifyAccountHeader(value);
-            home.ClickClaimInquiry();
-            home.VerifyPageTitle(ClaimInquiryPageTitle);
-            home.ClickSearch();
-            int count = home.ClaimInquiryResultsCount();
-            if (count != 0)
+            if (home.ClickClaimInquiry())
             {
-                ArrayList Index = home.ClickOnRandomClaim();
-                home.VerifyClaimNumber(Index[0].ToString());
-                home.VerifyAccountName(AccountName);
+                home.VerifyPageTitle(ClaimInquiryPageTitle);
+                home.ClickSearch();
+                int count = home.ClaimInquiryResultsCount();
+                if (count != 0)
+                {
+                    ArrayList Index = home.ClickOnRandomClaim();
+                    home.VerifyClaimNumber(Index[0].ToString());
+                    home.VerifyAccountName(AccountName);
+                }
             }
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -149,7 +151,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.ClaimInquiryResultsCount();
             ArrayList Index = home.ClickOnRandomClaim();
             home.VerifyClaimNumber(Index[0].ToString());
-            home.VerifyClaimantName(Index[1].ToString());
+           // home.VerifyClaimantName(Index[1].ToString());
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
