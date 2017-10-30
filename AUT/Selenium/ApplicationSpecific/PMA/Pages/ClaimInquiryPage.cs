@@ -67,7 +67,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byLossLineSummaryResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridlossline_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byLocationIconResultsTable = By.XPath("//table[@id='gridlocation_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byClaimInquirySearchResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
-        private By byClaimTotalIncurred = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpalfinancial1_0_lblclaimincurred_0");
+        private By byClaimTotalIncurred = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrfinancial1_0_gridfinancial_0_DXMainTable']//tr[@class='dxgvFooter']/td[3]");
         private By byClaimInquirypageSize = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult']//input[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_PSI']");
         private By byClaimInquiryPagesizeDropdown = By.XPath("//ul[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_DXMCC']/li[contains(@class,'dxm-item')]");
         private By byClaimInquiryPagesizeDRopdownBtn = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult']//span[@id='MainContent_ASPxPageControl1_gridresult_DXPagerTop_DDBImg']");
@@ -1346,6 +1346,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void VerifyTotalIncurredAmount(string IncurredAmount)
         {
+            this.driver.WaitElementPresent(byClaimTotalIncurred);
             string ActualIncurredAmount = this.driver.GetElementText(byClaimTotalIncurred);
             if (ActualIncurredAmount.Contains(IncurredAmount))
             {
@@ -1371,14 +1372,15 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             {
                 this.driver.SendKeysToElementClearFirst(byClaimantName, "w", "ClaimantName");
             }
-
+            Thread.Sleep(5000);
         }
 
 
         public ArrayList VerifyClaimantNameColumn(string value)
         {
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             int count = 0;
+            this.driver.WaitElementPresent(byClaimantNameResultcolumn);
             IReadOnlyList<IWebElement> column = this.driver.FindElements(byClaimantNameResultcolumn);
             ArrayList a = new ArrayList();
             if (column.Count != 0)
@@ -1394,7 +1396,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                         string text = ele.Text;
                         IWebElement ele1 = this.driver.FindElement(By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[@id='MainContent_ASPxPageControl1_gridresult_DXDataRow0']/td[3]"));
                         string text1 = ele1.Text;
-                        ele1.Click();
+
+                        IJavaScriptExecutor ex = (IJavaScriptExecutor)driver;
+                        ex.ExecuteScript("arguments[0].click();", ele);
+
+                       // ele.Click();
                         a.Add(text);
                         a.Add(text1);
 

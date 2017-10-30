@@ -92,6 +92,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             //Switching to frame.......
             this.driver.SwitchTo().Frame("MainContent_ASPxSplitter1_0_CC");
             Thread.Sleep(1000);
+            this.driver.WaitElementPresent(bySavedDraftLable);
             if (this.driver.IsElementPresent(bySavedDraftLable))
                 this.TESTREPORT.LogSuccess("Verify Saved Drafts label",string.Format("Saved Drafts Label with Text :<Mark>{0} </Mark>", this.driver.GetElementAttribute(bySavedDraftLable,"text")));
             else
@@ -167,7 +168,15 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         }
 
-
+        public void SelectPageSizeAll()
+        {
+            this.driver.SwitchTo().DefaultContent();
+            this.driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']")));
+            this.driver.ClickElement(By.XPath("//span[@id='MainContent_griddata_DXPagerTop_DDBImg']"), "ClaimInquiryPageSize DropdownButton");
+            Thread.Sleep(5000);
+            this.driver.FindElement(By.XPath("//div[@id='MainContent_griddata_DXPagerTop_PSP_DXI5_T']/span[contains(text(),'All')]")).Click();
+            Thread.Sleep(5000);
+        }
 
     }
 }

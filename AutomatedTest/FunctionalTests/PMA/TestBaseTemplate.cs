@@ -32,6 +32,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         public NCEGeneralLiability nceGE = null;
         public NCEPropertyPage nceProperty = null;
         public NCEWorkersCompensationPage nceWC = null;
+        public OshaPage osha = null;
+        public NewClaimEntryPage nce = null;
         public ToolsPage Tools = null;
 
         public TestBaseTemplate()
@@ -44,7 +46,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE = new NCEGeneralLiability();
             nceProperty = new NCEPropertyPage();
             nceWC = new NCEWorkersCompensationPage();
-            Tools = new ToolsPage();
         }
 
         public TestContext TestContext

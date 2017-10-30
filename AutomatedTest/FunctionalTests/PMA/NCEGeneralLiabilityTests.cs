@@ -15,19 +15,89 @@ namespace AutomatedTest.FunctionalTests.PMA
     [TestClass]
     public class NCEGeneralLiabilityTests : PMA.TestBaseTemplate
     {
+        #region parameters
+
+        public static string HomePageTitle { get; set; }
+        public static string SelectBusinessvalueDropDown { get; set; }
+        public static string RequiredErrorMessageCount { get; set; }
+        public static string ContactBusinessPhone { get; set; }
+        public static string DataSaveMessage { get; set; }
+        public static string StateofLoss { get; set; }
+        public static string LocationLoss { get; set; }
+        public static string zipcode { get; set; }
+        public static string InvalidDataFormatcount { get; set; }
+        public static string InvalidData { get; set; }
+        public static string Address { get; set; }
+        public static string City { get; set; }
+        public static string Authority { get; set; }
+        public static string DescribeLoss { get; set; }
+        public static string RequiredErrorMessageForDraftSave { get; set; }
+        public static string name { get; set; }
+        public static string Organization { get; set; }
+        public static string DraftSaveMessage { get; set; }
+        public static string DescribeProperty { get; set; }
+        public static string WhenProperty { get; set; }
+        public static string Whereproperty { get; set; }
+        public static string DescriptionOfInJury { get; set; }
+        public static string whereInjuryTaken { get; set; }
+        public static string InjuredPriorToInjury { get; set; }
+        public static string EstimatedAmount { get; set; }
+        public static string OtherRemarks { get; set; }
+        public static string EMailAdress { get; set; }
+        public static string TextFromDeleteAlert { get; set; }
+        public static string ErrorCount { get; set; }
+        public static string LossInformationText { get; set; }
+        public static string InjuredPropertyDamageInformationText { get; set; }
+        public static string WitnessInformationText { get; set; }
+        public static string ClaimSubmissionText { get; set; }
+
+        #endregion
+
+        public NCEGeneralLiabilityTests()
+        {
+            // Read CSV values
+            HomePageTitle = readCSV("HomePageTitle");
+            SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
+            RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
+            ContactBusinessPhone = readCSV("ContactBusinessPhone");
+            DataSaveMessage = readCSV("DataSaveMessage");
+            StateofLoss = readCSV("StateOfLoss");
+            LocationLoss = readCSV("LocationLoss");
+            zipcode = readCSV("ZipCode");
+            InvalidDataFormatcount = readCSV("InvalidFormatCount");
+            InvalidData = readCSV("Invaliddata");
+            Address = readCSV("Address");
+            City = readCSV("city");
+            Authority = readCSV("Authority");
+            DescribeLoss = readCSV("DescribeLoss");
+            RequiredErrorMessageForDraftSave = readCSV("RequiredErrorMessageForDraftSave");
+            DataSaveMessage = readCSV("DataSaveMessage");
+            name = readCSV("Name");
+            Organization = readCSV("Organization");
+            DescribeProperty = readCSV("DescribeProperty");
+            WhenProperty = readCSV("WhenProperty");
+            Whereproperty = readCSV("Whereproperty");
+            DescriptionOfInJury = readCSV("DescriptionOfInJury");
+            whereInjuryTaken = readCSV("whereInjuryTaken");
+            InjuredPriorToInjury = readCSV("InjuredPriorToInjury");
+            EstimatedAmount = readCSV("EstimatedAmount");
+            OtherRemarks = readCSV("OtherRemarks");
+            EMailAdress = readCSV("EMailAdress");
+            TextFromDeleteAlert = readCSV("TextFromDeleteAlert");
+            InvalidDataFormatcount = readCSV("InvalidFormatCount");
+            InvalidData = readCSV("Invaliddata");
+            ErrorCount = readCSV("ErrorCount");
+            LossInformationText = readCSV("LossInformationText");
+            InjuredPropertyDamageInformationText = readCSV("InjuredPropertyDamageInformationText");
+            WitnessInformationText = readCSV("WitnessInformationText");
+            ClaimSubmissionText = readCSV("ClaimSubmissionText");
+            ClaimSubmissionText = readCSV("DraftSaveMessage");
+        }
 
         [TestMethod, Description("NCEGeneralLiability - Create a new General Liability claim and cancel"), TestCategory("Regression")]
         public void NCE_GL1_NCEGeneralLiability()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEGeneralLiability nceGE = new NCEGeneralLiability();
-
             this.TESTREPORT.InitTestCase("NCE_GL1", "Create a new General Liability claim and cancel");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            #endregion
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
@@ -50,23 +120,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEGeneralLiability - Create a new General Liability claim, fill out only the required fields and submit"), TestCategory("Regression")]
         public void NCE_GL2_NCEGeneralLiability()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEGeneralLiability nceGE = new NCEGeneralLiability();
-
             this.TESTREPORT.InitTestCase("NCE_GL2", "Create a new General Liability claim, fill out only the required fields and submit");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string zipcode = readCSV("ZipCode");
-            string InvalidDataFormatcount = readCSV("InvalidFormatCount");
-            string InvalidData = readCSV("Invaliddata");
-            #endregion
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
@@ -105,38 +159,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEGeneralLiability - Create a new General Liability claim, fill out all fields and submit"), TestCategory("Regression")]
         public void NCE_GL3_NCEGeneralLiability()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEGeneralLiability nceGE = new NCEGeneralLiability();
-
             this.TESTREPORT.InitTestCase("NCE_GL3", "Create a new General Liability claim, fill out only the required fields and submit");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DraftSaveMessage = readCSV("DraftSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string Address = readCSV("Address");
-            string City = readCSV("city");
-            string Authority = readCSV("Authority");
-            string DescribeLoss = readCSV("DescribeLoss");
-            string RequiredErrorMessageForDraftSave = readCSV("RequiredErrorMessageForDraftSave");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            string name = readCSV("Name");
-            string Organization = readCSV("Organization");
-            string ZipCode = readCSV("ZipCode");
-            string DescribeProperty = readCSV("DescribeProperty");
-            string WhenProperty = readCSV("WhenProperty");
-            string Whereproperty = readCSV("Whereproperty");
-            string DescriptionOfInJury = readCSV("DescriptionOfInJury");
-            string whereInjuryTaken = readCSV("whereInjuryTaken");
-            string InjuredPriorToInjury = readCSV("InjuredPriorToInjury");
-            string EstimatedAmount = readCSV("EstimatedAmount");
-            string OtherRemarks = readCSV("OtherRemarks");
-            string EMailAdress = readCSV("EMailAdress");
-            #endregion
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
@@ -159,13 +182,13 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE.EnterAuthoritycontacted(Authority);
             nceGE.EnterDescribeLoss(DescribeLoss);
             nceGE.EntertimeOccurence(time);
-            nceGE.EnterZipCode(ZipCode);
+            nceGE.EnterZipCode(zipcode);
 
             this.TESTREPORT.LogInfo("Entering the InjuredDamagedPropertyInformation Section");
-            nceGE.EnterInjuredDamagedPropertyInformation(name, Organization, Address, City, StateofLoss, ZipCode, ContactBusinessPhone, DescriptionOfInJury, whereInjuryTaken, InjuredPriorToInjury, DescribeProperty, Convert.ToInt32(EstimatedAmount), Whereproperty, WhenProperty);
+            nceGE.EnterInjuredDamagedPropertyInformation(name, Organization, Address, City, StateofLoss, zipcode, ContactBusinessPhone, DescriptionOfInJury, whereInjuryTaken, InjuredPriorToInjury, DescribeProperty, Convert.ToInt32(EstimatedAmount), Whereproperty, WhenProperty);
 
             this.TESTREPORT.LogInfo("Entering the WitnessInformation Section");
-            nceGE.EnterWitnessInformation(name, Organization, Address, City, StateofLoss, ZipCode, ContactBusinessPhone, OtherRemarks);
+            nceGE.EnterWitnessInformation(name, Organization, Address, City, StateofLoss, zipcode, ContactBusinessPhone, OtherRemarks);
 
             this.TESTREPORT.LogInfo("Entering the claimSubmission Section");
             nceGE.EnterclaimSubmission(OtherRemarks, EMailAdress);
@@ -185,21 +208,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEGeneralLiability - Create a new General Liability claim and save as draft"), TestCategory("Regression")]
         public void NCE_GL4_NCEGeneralLiability()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEGeneralLiability nceGE = new NCEGeneralLiability();
-
             this.TESTREPORT.InitTestCase("NCE_GL4", "Create a new General Liability claim and save as draft");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DraftSaveMessage = readCSV("DraftSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string RequiredErrorMessageForDraftSave = readCSV("RequiredErrorMessageForDraftSave");
-            #endregion
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
@@ -246,22 +255,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEGeneralLiability - Create a new General Liability claim, save as draft, return to the saved claim page and delete"), TestCategory("Regression")]
         public void NCE_GL5_NCEGeneralLiability()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEGeneralLiability nceGE = new NCEGeneralLiability();
-
             this.TESTREPORT.InitTestCase("NCE_GL5", "Create a new General Liability claim, save as draft, return to the saved claim page and deletes");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DraftSaveMessage = readCSV("DraftSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string RequiredErrorMessageForDraftSave = readCSV("RequiredErrorMessageForDraftSave");
-            string TextFromDeleteAlert = readCSV("TextFromDeleteAlert");
-            #endregion
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
@@ -318,26 +312,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEGeneralLiability - Create a new General Liability claim, save as draft, navigate back to draft and submit claim with only required fields"), TestCategory("Regression")]
         public void NCE_GL6_NCEGeneralLiability()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEGeneralLiability nceGE = new NCEGeneralLiability();
-
             this.TESTREPORT.InitTestCase("NCE_GL6", "Create a new General Liability claim, save as draft, navigate back to draft and submit claim with only required fields");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DraftSaveMessage = readCSV("DraftSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string RequiredErrorMessageForDraftSave = readCSV("RequiredErrorMessageForDraftSave");
-            // string TextFromDeleteAlert = readCSV("TextFromDeleteAlert");
-            string InvalidDataFormatcount = readCSV("InvalidFormatCount");
-            string InvalidData = readCSV("Invaliddata");
-            string ErrorCount = readCSV("ErrorCount");
-            string ZipCode = readCSV("ZipCode");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            #endregion
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
@@ -384,7 +359,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             nceAuto.SelectStateOfLoss(StateofLoss);
             nceAuto.EnterContactBusinessPhone(ContactBusinessPhone);
-            nceGE.EnterZipCode(ZipCode);
+            nceGE.EnterZipCode(zipcode);
 
             nceAuto.ClickSubmit();
 
@@ -401,26 +376,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEGeneralLiability - Create a new General Liability claim, save as draft, navigate back to draft and submit claim with all fields"), TestCategory("Regression")]
         public void NCE_GL7_NCEGeneralLiability()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEGeneralLiability nceGE = new NCEGeneralLiability();
-
             this.TESTREPORT.InitTestCase("NCE_GL7", "Create a new General Liability claim, save as draft, navigate back to draft and submit claim with all fields");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DraftSaveMessage = readCSV("DraftSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string Address = readCSV("Address");
-            string City = readCSV("city");
-            string Authority = readCSV("Authority");
-            string DescribeLoss = readCSV("DescribeLoss");
-            string RequiredErrorMessageForDraftSave = readCSV("RequiredErrorMessageForDraftSave");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            #endregion
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
@@ -475,19 +431,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEGeneralLiability - Verify the Tabs/sections present in the General Liability Claim"), TestCategory("Regression")]
         public void NCE_GL8_NCEGeneralLiability()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEGeneralLiability nceGE = new NCEGeneralLiability();
-
             this.TESTREPORT.InitTestCase("NCE_GL8", "Verify the Tabs/sections present in the General Liability Claim");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string LossInformationText = readCSV("LossInformationText");
-            string InjuredPropertyDamageInformationText = readCSV("InjuredPropertyDamageInformationText");
-            string WitnessInformationText = readCSV("WitnessInformationText");
-            string ClaimSubmissionText = readCSV("ClaimSubmissionText");
-            #endregion
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();

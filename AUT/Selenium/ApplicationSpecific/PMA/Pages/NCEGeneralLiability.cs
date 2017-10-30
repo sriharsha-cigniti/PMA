@@ -78,7 +78,6 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         #endregion
 
-
         #region Public Methods
 
         public void VerifyGeneralLIabilityForm(string dropDOwnText)

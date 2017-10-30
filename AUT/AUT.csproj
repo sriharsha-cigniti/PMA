@@ -74,6 +74,7 @@
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\NCEGeneralLiability.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\NCEPropertyPage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\NewClaimEntryPage.cs" />
+    <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\OshaPage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\SettingsPage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\ToolsPage.cs" />
     <Compile Include="Selenium\CommonReUsablePages\AbstractTemplatePage.cs" />
