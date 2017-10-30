@@ -14,7 +14,7 @@ using AUT.Selenium.CommonReUsablePages;
 namespace AutomatedTest.FunctionalTests.PMA
 {
     [TestClass]
-    public  class OshaPageTest:PMA.TestBaseTemplate
+    public class OshaPageTest : PMA.TestBaseTemplate
     {
         #region parameters
         public static string HomePageTitle { get; set; }
@@ -23,17 +23,17 @@ namespace AutomatedTest.FunctionalTests.PMA
         public static string Year { get; set; }
         public static string OshaPageTitle2 { get; set; }
         public static string PageSize { get; set; }
-       
+
         public OshaPageTest()
         {
             // Read CSV values
-           
-             HomePageTitle = readCSV("HomePageTitle");
-             NewOshaTabHighlightcolor = readCSV("NewOshaTabHighlightcolor");
-             OshaPageTitle = readCSV("OshaPageTitle");
-             Year = readCSV("Year");
-             OshaPageTitle2 = readCSV("OshaPageTitle2");
-             PageSize = readCSV("Pagesize");
+
+            HomePageTitle = readCSV("HomePageTitle");
+            NewOshaTabHighlightcolor = readCSV("NewOshaTabHighlightcolor");
+            OshaPageTitle = readCSV("OshaPageTitle");
+            Year = readCSV("Year");
+            OshaPageTitle2 = readCSV("OshaPageTitle2");
+            PageSize = readCSV("Pagesize");
         }
         #endregion
 
@@ -53,7 +53,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Verify 'Important Information Please Read' text");
             osha.VerifyInformation();
-            
+
             osha.ClickAcceptButton();
             this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
@@ -85,26 +85,26 @@ namespace AutomatedTest.FunctionalTests.PMA
                 else
                     this.TESTREPORT.LogInfo(string.Format("<mark> NO DATA TO DISPLAY </mark>"));
 
-                    osha.ClickOnExitDetail();
-                    this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
-                    osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
+                osha.ClickOnExitDetail();
+                this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+                osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
-                    this.TESTREPORT.LogInfo("Verify  Default/Selected year from drop down");
-                    osha.VerifyDropDownValue(Year);
-                }
-                else
+                this.TESTREPORT.LogInfo("Verify  Default/Selected year from drop down");
+                osha.VerifyDropDownValue(Year);
+            }
+            else
                 this.TESTREPORT.LogInfo(string.Format("<mark> NO DATA/YEAR FOUND</mark>"));
 
-                home.ClickExit();
-                this.TESTREPORT.UpdateTestCaseStatus();
+            home.ClickExit();
+            this.TESTREPORT.UpdateTestCaseStatus();
         }
 
         [TestMethod, Description("Claim Inquiry-Click reset clears all Claim Inquiry fields"), TestCategory("Regression")]
         public void Osha_02oshaPage()
         {
-            
+
             this.TESTREPORT.InitTestCase("Osha_02", "Click reset clears all Claim Inquiry fields");
-          
+
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
@@ -170,10 +170,155 @@ namespace AutomatedTest.FunctionalTests.PMA
         }
 
 
+        [TestMethod, Description("Osha-Add a time period to the Lost days Calculator"), TestCategory("Regression")]
+        public void Osha_03oshaPage()
+        {
+            this.TESTREPORT.InitTestCase("Osha_03", "Add a time period to the Lost days Calculator");
+
+            home.VerifyPageTitle(HomePageTitle);
+            home.VerifyCinchWelome();
+
+            this.TESTREPORT.LogInfo("Verify Osha tab");
+            osha.ClickOnOsha();
+
+            this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+            osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
+
+            this.TESTREPORT.LogInfo("Verify 'Important Information Please Read' text");
+            osha.VerifyInformation();
+
+            osha.ClickAcceptButton();
+            this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+            osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
+
+
+            this.TESTREPORT.LogInfo("Verify Page Title");
+            home.VerifyPageTitle(OshaPageTitle);
+
+            if (osha.SelectYearFromDropdown(Year))
+            {
+                ArrayList claimdetails = osha.ClickOnClaimnumber();
+                if (claimdetails.Count > 0)
+                {
+                    this.TESTREPORT.LogInfo("Verify Page Title");
+                    home.VerifyPageTitle(OshaPageTitle2);
+
+                    this.TESTREPORT.LogInfo("Verify Claim Number");
+                    osha.VerifyOshaClaimDetail(claimdetails[0].ToString(), osha.GetClaimno());
+
+                    this.TESTREPORT.LogInfo("Verify  Account number");
+                    osha.VerifyOshaClaimDetail(osha.GetAccountNoFromPageHeader(), osha.GetClaimAccountNo());
+
+                    this.TESTREPORT.LogInfo("Verify Name");
+                    osha.VerifyOshaClaimDetail(claimdetails[2].ToString(), osha.GetEstablishmentName());
+
+                    this.TESTREPORT.LogInfo("Verify Job Title ");
+                    osha.VerifyOshaClaimDetail(claimdetails[1].ToString(), osha.GetJobtitle());
+
+                    osha.ClickOnNewLink();
+                    this.TESTREPORT.LogInfo("'Cancel' link");
+                    osha.VerifyCancel();
+                    this.TESTREPORT.LogInfo("'Update' link");
+                    osha.EnterBeginDate();
+                    osha.EnterEndDate();
+                    osha.VerifyAndClickUpdate();
+
+                    this.TESTREPORT.LogInfo("Total Days(count of all the days in Days column)");
+                    osha.VerifyTotalLostDays();
+
+                    this.TESTREPORT.LogInfo("'Submit changes completed at given Time");
+                    osha.ClickAndVerifySubmitChanges();
+                }
+                else
+                    this.TESTREPORT.LogInfo(string.Format("<mark> NO DATA TO DISPLAY </mark>"));
+
+              
+
+                osha.ClickOnExitDetail();
+                this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+                osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
+            }
+            else
+                this.TESTREPORT.LogInfo(string.Format("<mark> NO DATA/YEAR FOUND</mark>"));
+
+            home.ClickExit();
+            this.TESTREPORT.UpdateTestCaseStatus();
+        }
+
+        [TestMethod, Description("Osha-Add a time period to the restricted days Calculator"), TestCategory("Regression")]
+        public void Osha_04oshaPage()
+        {
+            this.TESTREPORT.InitTestCase("Osha_04", "Add a time period to the restricted days Calculator");
+
+            home.VerifyPageTitle(HomePageTitle);
+            home.VerifyCinchWelome();
+
+            this.TESTREPORT.LogInfo("Verify Osha tab");
+            osha.ClickOnOsha();
+
+            this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+            osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
+
+            this.TESTREPORT.LogInfo("Verify 'Important Information Please Read' text");
+            osha.VerifyInformation();
+
+            osha.ClickAcceptButton();
+            this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+            osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
+
+
+            this.TESTREPORT.LogInfo("Verify Page Title");
+            home.VerifyPageTitle(OshaPageTitle);
+
+            if (osha.SelectYearFromDropdown(Year))
+            {
+                ArrayList claimdetails = osha.ClickOnClaimnumber();
+                if (claimdetails.Count > 0)
+                {
+                    this.TESTREPORT.LogInfo("Verify Page Title");
+                    home.VerifyPageTitle(OshaPageTitle2);
+
+                    this.TESTREPORT.LogInfo("Verify Claim Number");
+                    osha.VerifyOshaClaimDetail(claimdetails[0].ToString(), osha.GetClaimno());
+
+                    this.TESTREPORT.LogInfo("Verify  Account number");
+                    osha.VerifyOshaClaimDetail(osha.GetAccountNoFromPageHeader(), osha.GetClaimAccountNo());
+
+                    this.TESTREPORT.LogInfo("Verify Name");
+                    osha.VerifyOshaClaimDetail(claimdetails[2].ToString(), osha.GetEstablishmentName());
+
+                    this.TESTREPORT.LogInfo("Verify Job Title ");
+                    osha.VerifyOshaClaimDetail(claimdetails[1].ToString(), osha.GetJobtitle());
+
+                    osha.ClickOnRestrictedLink();
+                    this.TESTREPORT.LogInfo("'Cancel' link");
+                    osha.VerifyCancel();
+                    this.TESTREPORT.LogInfo("'Update' link");
+                    osha.EnterRestrictedBeginDate();
+                    osha.EnterRestrictedEndDate();
+                    osha.VerifyAndClickUpdate();
+
+                    this.TESTREPORT.LogInfo("Total Days(count of all the days in Days column)");
+                    osha.VerifyRestrictedDays();
+
+                    this.TESTREPORT.LogInfo("'Submit changes completed at given Time");
+                    osha.ClickAndVerifySubmitChanges();
+                }
+                else
+                    this.TESTREPORT.LogInfo(string.Format("<mark> NO DATA TO DISPLAY </mark>"));
 
 
 
+                osha.ClickOnExitDetail();
+                this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+                osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
+            }
+            else
+                this.TESTREPORT.LogInfo(string.Format("<mark> NO DATA/YEAR FOUND</mark>"));
 
+            home.ClickExit();
+            this.TESTREPORT.UpdateTestCaseStatus();
+        }
 
     }
 }

@@ -46,6 +46,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE = new NCEGeneralLiability();
             nceProperty = new NCEPropertyPage();
             nceWC = new NCEWorkersCompensationPage();
+            osha = new OshaPage();
         }
 
         public TestContext TestContext

@@ -106,7 +106,6 @@
     <None Include="TestData\PMA\ClaimInquiryPageTests.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\PMA\DairyNotesPageTest.csv" />
     <None Include="TestData\PMA\OshaPageTest.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -117,7 +116,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestData\PMA\NewClaimEntryPageTest.csv" />
-    <None Include="TestData\PMA\NewClaimEntry.csv" />
     <None Include="TestData\PMA\ToolsPageTest.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

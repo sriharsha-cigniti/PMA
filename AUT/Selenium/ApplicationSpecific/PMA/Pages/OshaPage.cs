@@ -13,6 +13,7 @@ using System.Collections;
 using System.Threading;
 using System.Windows.Forms;
 using Engine.Factories;
+using System.Text.RegularExpressions;
 
 namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 {
@@ -34,6 +35,20 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byInjuryDatecoloumns = By.XPath("//table[@id='MainContent_gridresult_DXMainTable']//tr[contains(@id,'MainContent_gridresult_DXDataRow')]");
         private By byOshaClaimrows = By.XPath("//table[@id='MainContent_gridresult_DXMainTable']//tr[contains(@id,'MainContent_gridresult_DXDataRow')]");
         private By byPageSizeDropDown = By.XPath("//span[@id='MainContent_gridresult_DXPagerTop_DDBImg']");
+        private By byNewLink = By.Id("MainContent_gridlost_DXCBtn0");
+        private By byUpdateLink = By.XPath("//span[contains(text(),'Update')]");
+        private By byCancelLink = By.XPath("//span[contains(text(),'Cancel')]");
+        private By byLostDaysColoumns = By.XPath("//table[@id='MainContent_gridlost']//tr[contains(@id,'MainContent_gridlost_DXDataRow')]/td[3]");
+        private By byLostDaysTotalColoumn = By.XPath("//table[@id='MainContent_gridlost']//tr[contains(@id,'MainContent_gridlost_DXFooterRow')]/td[3]");
+        private By bySubmitChangeButton = By.XPath("//span[contains(text(),'Submit changes')]");
+        private By bySubmitText = By.Id("MainContent_lblMessage");
+        private By BeginDate = By.Id("MainContent_gridlost_DXEFL_DXEditor1_I");
+        private By byEndDate = By.Id("MainContent_gridlost_DXEFL_DXEditor2_I");
+        private By byRestrictedDaysColoumns = By.XPath("//table[@id='MainContent_gridrestricted_DXMainTable']//tr[contains(@id,'MainContent_gridrestricted_DXDataRow')]/td[3]");
+        private By byRestrictedDaysTotalColoumn = By.XPath("//table[@id='MainContent_gridrestricted_DXMainTable']//tr[contains(@id,'MainContent_gridrestricted_DXFooterRow')]/td[3]");
+        private By byRestrictedNewLink = By.Id("MainContent_gridrestricted_DXCBtn0");
+        private By byRestrictedBeginDate = By.Id("MainContent_gridrestricted_DXEFL_DXEditor1_I");
+        private By byRestrictedEndDate = By.Id("MainContent_gridrestricted_DXEFL_DXEditor2_I");
         #endregion
 
 
@@ -206,17 +221,6 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 this.TESTREPORT.LogInfo("NO DATA TO DISPLAY");
             }
 
-
-
-
-
-
-
-
-
-
-
-
         }
 
         public void SelectPageSizeAll(string value)
@@ -231,14 +235,146 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             Thread.Sleep(10000);
         }
 
+        public void ClickOnNewLink()
+        {
+            this.driver.ClickElement(byNewLink, "New link button");
+        }
+
+        public void VerifyAndClickUpdate()
+        {
+            this.driver.WaitElementPresent(byUpdateLink);
+            if (this.driver.IsElementPresent(byUpdateLink))
+            {
+                this.driver.ClickElement(byUpdateLink, "Update link button");
+                this.TESTREPORT.LogSuccess("Verify and click Update link", "Update Link is present and successfully clicked", this.SCREENSHOTFILE);
+            }
+            else
+                this.TESTREPORT.LogFailure("Verify and click Update link", "Update Link is not present", this.SCREENSHOTFILE);
+        }
+
+        public void VerifyCancel()
+        {
+            this.driver.WaitElementPresent(byCancelLink);
+            if (this.driver.IsElementPresent(byCancelLink))
+                this.TESTREPORT.LogSuccess("Verify Cancel link", "Cancel Link is present", this.SCREENSHOTFILE);
+            else
+                this.TESTREPORT.LogFailure("Verify Cancel link", "Cancel Link is not present", this.SCREENSHOTFILE);
+        }
+
+        public void EnterBeginDate()
+        {
+            DateTime today = DateTime.Today; // As DateTime
+            string s_today = today.ToString("MM/dd/yyyy"); // As String
+            this.driver.SendKeysToElement(BeginDate, s_today, "Begin Date Textbox ");
+
+        }
+
+        public void EnterEndDate()
+        {
+            DateTime today = DateTime.Today.AddMonths(1); // As DateTime
+            string s_today = today.ToString("MM/dd/yyyy"); // As String
+          
+            this.driver.SendKeysToElement(byEndDate, s_today, "bEginDAte");
+        }
+
+        public void VerifyTotalLostDays()
+        {
+            this.driver.WaitElementPresent(byLostDaysColoumns);
+           
+            int totalDaysTemp = 0;
+            IReadOnlyList<IWebElement> coloumns = driver.FindElements(byLostDaysColoumns);
+           
+            if (coloumns.Count > 0)
+            {
+                foreach (var item in coloumns)
+                {
+                    string totaldayColValue = item.Text.Trim();
+                    totalDaysTemp = totalDaysTemp + Convert.ToInt32(totaldayColValue);
+                }
+                string Totalvalue=this.driver.GetElementText(byLostDaysTotalColoumn);
+                Totalvalue = Totalvalue.Split(':')[1];
+                if (Convert.ToInt32(Totalvalue.Trim())==totalDaysTemp)
+                    this.TESTREPORT.LogSuccess("Verify Total Lost Days", string.Format("Total Lost Days:<Mark>{0}</Mark>,Lost Days Coloumn Total:<Mark>{1}</Mark>", Totalvalue, totalDaysTemp.ToString()));
+                else
+                    this.TESTREPORT.LogFailure("Verify Total Lost Days", string.Format("Total Lost Days:<Mark>{0}</Mark>,Lost Days Coloumn Total:<Mark>{1}</Mark>", Totalvalue, totalDaysTemp.ToString()));
+            }
+            else
+            {
+                this.TESTREPORT.LogInfo("NO DATA TO DISPLAY");
+            }
+
+        }
+
+        public void ClickAndVerifySubmitChanges()
+        {
+            this.driver.ClickElement(bySubmitChangeButton, "Submit changes Button");
+           
+            this.driver.WaitElementPresent(bySubmitText);
+            string submitActualText = this.driver.GetElementText(bySubmitText);
+            string text = "Submit Changes completed at " + DateTime.Now.ToString("HH:mm");
+            text =text.Split(':')[0];
+            submitActualText = submitActualText.Split(':')[0];
+           
+            if (this.driver.IsElementPresent(bySubmitText) && text.Equals(submitActualText))
+            {
+
+                this.TESTREPORT.LogSuccess("Verify Submit Text", string.Format("Submit text appears:<Mark>{0}</Mark>", submitActualText));
+            }
+            else
+                this.TESTREPORT.LogFailure("Verify Submit Text", string.Format("Submit text appears:<Mark>{0}</Mark>", submitActualText),this.SCREENSHOTFILE);
 
 
+        }
 
+        public void VerifyRestrictedDays()
+        {
+            this.driver.WaitElementPresent(byRestrictedDaysColoumns);
 
+            int totalDaysTemp = 0;
+            IReadOnlyList<IWebElement> coloumns = driver.FindElements(byRestrictedDaysColoumns);
 
+            if (coloumns.Count > 0)
+            {
+                foreach (var item in coloumns)
+                {
+                    string totaldayColValue = item.Text.Trim();
+                    totalDaysTemp = totalDaysTemp + Convert.ToInt32(totaldayColValue);
+                }
+                string Totalvalue = this.driver.GetElementText(byRestrictedDaysTotalColoumn);
+                Totalvalue = Totalvalue.Split(':')[1];
+                if (Convert.ToInt32(Totalvalue.Trim()) == totalDaysTemp)
+                    this.TESTREPORT.LogSuccess("Verify Total Restricted Days", string.Format("Total Restricted Days:<Mark>{0}</Mark>,Restricted Days Coloumn Total:<Mark>{1}</Mark>", Totalvalue, totalDaysTemp.ToString()));
+                else
+                    this.TESTREPORT.LogFailure("Verify Total Restricted Days", string.Format("Total Restricted Days:<Mark>{0}</Mark>,Restricted Days Coloumn Total:<Mark>{1}</Mark>", Totalvalue, totalDaysTemp.ToString()));
+            }
+            else
+            {
+                this.TESTREPORT.LogInfo("NO DATA TO DISPLAY");
+            }
 
+        }
 
+        public void EnterRestrictedBeginDate()
+        {
+            DateTime today = DateTime.Today; // As DateTime
+            string s_today = today.ToString("MM/dd/yyyy"); // As String
+            this.driver.SendKeysToElement(byRestrictedBeginDate, s_today, "Restricted Begin Date");
 
+        }
+
+        public void EnterRestrictedEndDate()
+        {
+            DateTime today = DateTime.Today.AddMonths(1); // As DateTime
+            string s_today = today.ToString("MM/dd/yyyy"); // As String
+            this.driver.SendKeysToElement(byRestrictedEndDate, s_today, "Restricted End Date");
+        }
+
+        public void ClickOnRestrictedLink()
+        {
+            this.driver.ClickElement(byRestrictedNewLink, "Restricted New Link");
+        }
+
+        
         #endregion
 
     }
