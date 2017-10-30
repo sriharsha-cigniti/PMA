@@ -65,7 +65,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\ClaimInquiryPage.cs" />
-    <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\DairyNotesPage.cs" />
+    <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\DiaryNotesPage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\ExportSpreadsheet.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\HomePage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\LoginPage.cs" />
@@ -75,6 +75,7 @@
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\NCEPropertyPage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\NewClaimEntryPage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\SettingsPage.cs" />
+    <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\ToolsPage.cs" />
     <Compile Include="Selenium\CommonReUsablePages\AbstractTemplatePage.cs" />
   </ItemGroup>
   <ItemGroup>

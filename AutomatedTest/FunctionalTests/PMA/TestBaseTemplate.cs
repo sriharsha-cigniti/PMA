@@ -26,17 +26,25 @@ namespace AutomatedTest.FunctionalTests.PMA
         private TestContext testContextInstance;
         public static IWebDriver driver = null;
         public HomePage home = null;
+        public ClaimInquiry cInquiry = null;
+        public DiaryNotesPage diaryNotes = null;
         public NCEAutoPage nceAuto = null;
         public NCEGeneralLiability nceGE = null;
+        public NCEPropertyPage nceProperty = null;
         public NCEWorkersCompensationPage nceWC = null;
+        public ToolsPage Tools = null;
 
         public TestBaseTemplate()
         {
             driver = WebDriverFactory.getWebDriver(EngineSetup.BROWSER);
             home = new HomePage();
+            cInquiry = new ClaimInquiry();
+            diaryNotes = new DiaryNotesPage();
             nceAuto = new NCEAutoPage();
             nceGE = new NCEGeneralLiability();
+            nceProperty = new NCEPropertyPage();
             nceWC = new NCEWorkersCompensationPage();
+            Tools = new ToolsPage();
         }
 
         public TestContext TestContext

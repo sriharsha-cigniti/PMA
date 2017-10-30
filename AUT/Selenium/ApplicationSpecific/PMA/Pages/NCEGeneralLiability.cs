@@ -310,12 +310,20 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         }
 
         public int GetGridRowCount()
-        {
-            this.driver.SwitchTo().DefaultContent();
-            this.driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']")));
+        {                      
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byDataGridRows);
             this.TESTREPORT.LogInfo(string.Format("Get Grid Row Count : {0}", list.Count));
             return list.Count;
+        }
+
+        public  void  SelectPageSizeAll()
+        {
+            this.driver.SwitchTo().DefaultContent();
+            this.driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']")));
+            this.driver.ClickElement(By.XPath("//span[@id='MainContent_griddata_DXPagerTop_DDBImg']"), "ClaimInquiryPageSize DropdownButton");
+            Thread.Sleep(5000);           
+            this.driver.FindElement(By.XPath("//div[@id='MainContent_griddata_DXPagerTop_PSP_DXI5_T']/span[contains(text(),'All')]")).Click();           
+            Thread.Sleep(5000);
         }
 
         public void VerifyGridRowIsExistsAfterDeletion(int actualCount)
@@ -323,11 +331,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             Thread.Sleep(3000);
             if (GetGridRowCount().Equals(actualCount))
             {
-                this.TESTREPORT.LogSuccess("Verify Data Grid row count", string.Format("actual count -<mark>{0}</mark> expected count {1} is equal", actualCount, GetGridRowCount()));
+                this.TESTREPORT.LogSuccess("Verify Data Grid row count", string.Format("actual count -<mark>{0}</mark> expected count <mark>{1}</mark> is equal", actualCount, GetGridRowCount()));
             }
             else
             {
-                this.TESTREPORT.LogFailure("Verify Data Grid row count", string.Format("actual count <mark>{0}</mark> expected count {1} is not equal", actualCount, GetGridRowCount()));
+                this.TESTREPORT.LogFailure("Verify Data Grid row count", string.Format("actual count <mark>{0}</mark> expected count <mark>{1}</mark> is not equal", actualCount, GetGridRowCount()));
             }
         }
 
