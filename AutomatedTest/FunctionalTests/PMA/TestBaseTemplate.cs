@@ -35,6 +35,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         public OshaPage osha = null;
         public NewClaimEntryPage nce = null;
         public ToolsPage Tools = null;
+        public HelpPage help = null;
 
         public TestBaseTemplate()
         {
@@ -47,6 +48,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceProperty = new NCEPropertyPage();
             nceWC = new NCEWorkersCompensationPage();
             osha = new OshaPage();
+            help = new HelpPage();
         }
 
         public TestContext TestContext

@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\itextsharp-all-5.5.10\itextsharp.xfaworker-dll-5.5.10\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -67,6 +71,7 @@
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\ClaimInquiryPage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\DiaryNotesPage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\ExportSpreadsheet.cs" />
+    <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\HelpPage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\HomePage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\LoginPage.cs" />
     <Compile Include="Selenium\ApplicationSpecific\PMA\Pages\NCEAutoPage.cs" />

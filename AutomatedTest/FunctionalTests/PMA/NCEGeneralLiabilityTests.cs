@@ -60,7 +60,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
             RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
             ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            DataSaveMessage = readCSV("DataSaveMessage");
             StateofLoss = readCSV("StateOfLoss");
             LocationLoss = readCSV("LocationLoss");
             zipcode = readCSV("ZipCode");
@@ -91,7 +90,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             InjuredPropertyDamageInformationText = readCSV("InjuredPropertyDamageInformationText");
             WitnessInformationText = readCSV("WitnessInformationText");
             ClaimSubmissionText = readCSV("ClaimSubmissionText");
-            ClaimSubmissionText = readCSV("DraftSaveMessage");
+            DraftSaveMessage = readCSV("DraftSaveMessage");
         }
 
         [TestMethod, Description("NCEGeneralLiability - Create a new General Liability claim and cancel"), TestCategory("Regression")]
@@ -284,7 +283,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Click on cancel button");
             nceAuto.ClickCancel();
-            nceGE.SelectPageSizeAll();
             this.TESTREPORT.LogInfo("Verify Data Grid row and row values ");
             int rowCountBeforeDelete = nceGE.GetGridRowCount();
             nceGE.VerifyGridView();
