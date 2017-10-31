@@ -346,8 +346,17 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE.VerifyRowDataingGrid(1, Date);
             nceGE.VerifyRowDataingGrid(3, LocationLoss);
 
+            string getAccidentDate = nceGE.GetColumnDataFromRowGrid(1);
+            this.TESTREPORT.LogInfo(string.Format("Accident Date in Grid : ", getAccidentDate));
+
+            string getLocation = nceGE.GetColumnDataFromRowGrid(3);
+            this.TESTREPORT.LogInfo(string.Format("Location in Grid : ", getLocation));
+
             this.TESTREPORT.LogInfo("Click on Saved claim");
             nceGE.ClickOnSavedClaiminGrid();
+
+            nceGE.ValidatecolumnDataInLiabilityForm("DateOccurence", getAccidentDate);
+            nceGE.ValidatecolumnDataInLiabilityForm("LocationOfLoss", getLocation);
 
             nceAuto.ClickSubmit();
 
