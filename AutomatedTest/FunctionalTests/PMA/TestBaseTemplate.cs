@@ -33,6 +33,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         public NCEPropertyPage nceProperty = null;
         public NCEWorkersCompensationPage nceWC = null;
         public OshaPage osha = null;
+        public SettingsPage settingsPage = null;
+        public LoginPage login = null;
         public NewClaimEntryPage nce = null;
         public ToolsPage Tools = null;
         public HelpPage help = null;
@@ -49,6 +51,10 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceWC = new NCEWorkersCompensationPage();
             osha = new OshaPage();
             help = new HelpPage();
+            settingsPage = new SettingsPage();
+            Tools = new ToolsPage();
+            login = new LoginPage();
+
             nce = new NewClaimEntryPage();
         }
 

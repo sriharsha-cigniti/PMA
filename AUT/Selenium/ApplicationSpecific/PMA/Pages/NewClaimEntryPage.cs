@@ -133,14 +133,6 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void DragColumns(string option)
         {
             ClickAndDragDropcolumn(byColumnHeadersLocation, byLocationSpace, byDescriptionSpace);
-            //this.TESTREPORT.LogInfo("Drag the columns of " + option);
-            //this.driver.ClickElement(byColumnHeadersLocation, "location");
-            //Thread.Sleep(10000);
-            //IWebElement e1 = driver.FindElement(byLocationSpace);
-            //    IWebElement e2 = driver.FindElement(byDescriptionSpace);
-            //    this.driver.DragDrop(e1, e2, 60);
-            //    Thread.Sleep(10000);
-            
         }
 
         public void VerifySwappingcellsposition(string headerValue,int position1,int position2)
@@ -149,7 +141,6 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 this.TESTREPORT.LogSuccess("Verify swapping of cells", string.Format("Header Name:<mark>{0}</mark> Previous header Position:<mark>{1}</mark> Current Header Position:<mark>{2}</mark>", headerValue, position1.ToString(), position2.ToString()), this.SCREENSHOTFILE);
             else
                 this.TESTREPORT.LogFailure("Verify swapping of cells", string.Format("Header Name:<mark>{0}</mark> Previous header Position:<mark>{1}</mark> Current Header Position:<mark>{2}</mark>", headerValue, position1.ToString(), position2.ToString()), this.SCREENSHOTFILE);
-
         }
 
         public int getHeaderPosition(string headerValue)

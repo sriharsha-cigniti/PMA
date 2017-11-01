@@ -81,7 +81,9 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byAccountNameSpaceInMD = By.XPath("//th[@id='MainContent_sppage_pnlDiary_griddiary_col0']//td[@style='width:1px;text-align:right;']/span");
         private By byDueDateSpaceInMD = By.XPath("//th[@id='MainContent_sppage_pnlDiary_griddiary_col3']//td[@style='width:1px;text-align:right;']/span");
         private By byAccountNameSpaceInQCS = By.XPath("//th[@id='MainContent_sppage_pnlQuickSearch_gridresult_col1']//td[@style='width:1px;text-align:right;']/span");
-        private By byClaimSearchInQCS = By.XPath("//th[@id='MainContent_sppage_pnlQuickSearch_gridresult_col2']//td[@style='width:1px;text-align:right;']/span");
+        private By byClaimNumberSpaceInQCS = By.XPath("//th[@id='MainContent_sppage_pnlQuickSearch_gridresult_col2']//td[@style='width:1px;text-align:right;']/span");
+        private By byMyDiaryColumns = By.XPath("//*[contains(@id,'MainContent_sppage_pnlDiary_griddiary_col')]");
+        private By byClaimSearchColumns = By.XPath("//*[contains(@id,'MainContent_sppage_pnlQuickSearch_gridresult_col')]");
 
         #endregion
 
@@ -256,31 +258,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void DragAccountNameInMyDiary()
         {
             ClickAndDragDropcolumn(byMyDairyAccountColumn, byAccountNameSpaceInMD, byDueDateSpaceInMD);
-            //this.TESTREPORT.LogInfo("Drag the columns of " + option);
-            //if (option == "MyDairy")
-            //{
-            //    this.driver.ClickElement(byMyDairyAccountColumn, "Account Column");
-            //    Thread.Sleep(8000);
-
-            //    IWebElement e1 = driver.FindElement(byMyDairyAccountColumn);
-            //    IWebElement e2 = driver.FindElement(byMyDairyDueDateColumn);
-            //    this.driver.DragDrop(e1, e2, 60);
-            //}
-            //Thread.Sleep(8000);
-            //else
-            //{
-            //    IWebElement e3 = driver.FindElement(byQuickAccountColumn);
-            //    IWebElement e4 = driver.FindElement(byQuickClaimNumberColumn);
-            //    Actions a = new Actions(driver);
-            //    a.DragAndDrop(e3, e4).Build().Perform();
-
-            //    Thread.Sleep(8000);
-            //}
         }
 
         public void DragAccountNameToClaimNumberInQCS()
         {
-            ClickAndDragDropcolumn(byQuickAccountColumn, byAccountNameSpaceInQCS, byClaimSearchInQCS);
+            ClickAndDragDropcolumn(byQuickAccountColumn, byAccountNameSpaceInQCS, byClaimNumberSpaceInQCS);
         }
 
         // Search Quick Claim Number 
@@ -717,11 +699,17 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 this.TESTREPORT.LogFailure("Verify entry fields after RESET", String.Format("Fields-'{0}','{1}' are not empty", ClaimantName, ClaimantNumber));
             }
         }
-            
 
+        public int getColumnPositionInMYDiary(string ColumnName)
+        {
+           return getHeaderPosition(ColumnName, "MainContent_sppage_pnlDiary_griddiary_DXHeadersRow0");
+        }
 
+        public int getColumnPositionInClaimSearch(string ColumnName)
+        {
+            return getHeaderPosition(ColumnName, "MainContent_sppage_pnlQuickSearch_gridresult_DXHeadersRow0");
+        }
     }
-
 
     #endregion
 
