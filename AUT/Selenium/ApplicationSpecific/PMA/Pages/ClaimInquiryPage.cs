@@ -61,7 +61,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byEmailAdjuster = By.XPath("//span[@id='MainContent_dvclaims_IT0_usrdetail1_0_pcemail_0_PWH-1T']");
         private By byLocationCodeField = By.XPath("//input[@id='gridlocation_DXFREditorcol0_I']");
         private By byAccidentDateRangeBeginClearBtn = By.XPath("//table[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C']//td[@id='MainContent_ASPxRoundPanel1_pnlContent_dtaccidentbegin_DDD_C_BC']");
-        private By byDragaColoumnheaderSpace = By.Id("MainContent_ASPxPageControl1_gridresult_grouppanel");        
+        private By byDragColoumnheaderSpace = By.Id("MainContent_ASPxPageControl1_gridresult_grouppanel");        
         private By byClaimInquiryResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
         private By byColumnHeaders = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridresult_DXMainTable']//tr[contains(@id,'MainContent_ASPxPageControl1_gridresult_DXHeadersRow0')]/th");
         private By byLossLineSummaryResultsTable = By.XPath("//table[@id='MainContent_ASPxPageControl1_gridlossline_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
@@ -1147,7 +1147,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void Dragthecolumnheaderinspace(string value)
         {
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byColumnHeaders);
-            IWebElement e2 = this.driver.FindElement(byDragaColoumnheaderSpace);
+            IWebElement e2 = this.driver.FindElement(byDragColoumnheaderSpace);
             foreach (var WebItem in list)
             {
                 if (WebItem.Text.ToLower().Equals(value.ToLower()))
@@ -1561,7 +1561,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void DragTheColumnHeaderInSpace(string value)
         {
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byColumnHeaders);
-            IWebElement e2 = this.driver.FindElement(byDragaColoumnheaderSpace);
+            IWebElement e2 = this.driver.FindElement(byDragColoumnheaderSpace);
             foreach (var WebItem in list)
             {
 

@@ -49,6 +49,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceWC = new NCEWorkersCompensationPage();
             osha = new OshaPage();
             help = new HelpPage();
+            nce = new NewClaimEntryPage();
         }
 
         public TestContext TestContext

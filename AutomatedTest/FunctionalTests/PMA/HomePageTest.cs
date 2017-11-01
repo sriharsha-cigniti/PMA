@@ -186,7 +186,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyWelcomeText("Welcome " + Environment.UserName);
             home.VerifyDate();
             home.VerifyMyDairyLabel();
-            home.DragColumns("My Diary");
+            //home.DragColumns("My Diary");
 
             //home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -204,7 +204,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyWelcomeText("Welcome " + Environment.UserName);
             home.VerifyDate();
             home.VerifyQuickClaimSearchLabel();
-            home.DragColumns("QuickClaimSearch");
+            //home.DragColumns("QuickClaimSearch");
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
         }

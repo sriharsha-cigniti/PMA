@@ -400,7 +400,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void VerifyAutoForm(string autoText)
         {
-            this.driver.ClickElement(byDropDownimage, "Image");
+            this.driver.ClickElement(byDropDownimage, "Image", 60);
             By bySelectBusinessDropDown = By.XPath(string.Format("//td[contains(text(),'{0}')]", autoText));
             this.driver.ClickElement(bySelectBusinessDropDown, "Drop Down value");
             //SWitching to Default..... 

@@ -78,8 +78,10 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byRecentClaimRows = By.XPath("//table[@id='MainContent_sppage_pnlRecentClaims_gridRecentClaims']//tr[contains(@class,'dxgvDataRow')]");
         private By byDiaryLink = By.LinkText("Diary");
         private By byRecentClaimsTableCount = By.XPath("//table[@id='MainContent_sppage_pnlRecentClaims_gridRecentClaims_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
-
-
+        private By byAccountNameSpaceInMD = By.XPath("//th[@id='MainContent_sppage_pnlDiary_griddiary_col0']//td[@style='width:1px;text-align:right;']/span");
+        private By byDueDateSpaceInMD = By.XPath("//th[@id='MainContent_sppage_pnlDiary_griddiary_col3']//td[@style='width:1px;text-align:right;']/span");
+        private By byAccountNameSpaceInQCS = By.XPath("//th[@id='MainContent_sppage_pnlQuickSearch_gridresult_col1']//td[@style='width:1px;text-align:right;']/span");
+        private By byClaimSearchInQCS = By.XPath("//th[@id='MainContent_sppage_pnlQuickSearch_gridresult_col2']//td[@style='width:1px;text-align:right;']/span");
 
         #endregion
 
@@ -251,50 +253,34 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         }
         //Drag Coulmns Headers
-        public void DragColumns(string option)
+        public void DragAccountNameInMyDiary()
         {
-            this.TESTREPORT.LogInfo("Drag the columns of " + option);
-            if (option == "MyDairy")
-            {
-                IWebElement e1 = driver.FindElement(byMyDairyAccountColumn);
-                IWebElement e2 = driver.FindElement(byMyDairyDueDateColumn);
-                this.driver.DragDrop(e1, e2, 60);
+            ClickAndDragDropcolumn(byMyDairyAccountColumn, byAccountNameSpaceInMD, byDueDateSpaceInMD);
+            //this.TESTREPORT.LogInfo("Drag the columns of " + option);
+            //if (option == "MyDairy")
+            //{
+            //    this.driver.ClickElement(byMyDairyAccountColumn, "Account Column");
+            //    Thread.Sleep(8000);
 
-            }
-            else
-            {
-                IWebElement e3 = driver.FindElement(byQuickAccountColumn);
-                IWebElement e4 = driver.FindElement(byQuickClaimNumberColumn);
-                Actions a = new Actions(driver);
-                a.DragAndDrop(e3, e4).Build().Perform();
+            //    IWebElement e1 = driver.FindElement(byMyDairyAccountColumn);
+            //    IWebElement e2 = driver.FindElement(byMyDairyDueDateColumn);
+            //    this.driver.DragDrop(e1, e2, 60);
+            //}
+            //Thread.Sleep(8000);
+            //else
+            //{
+            //    IWebElement e3 = driver.FindElement(byQuickAccountColumn);
+            //    IWebElement e4 = driver.FindElement(byQuickClaimNumberColumn);
+            //    Actions a = new Actions(driver);
+            //    a.DragAndDrop(e3, e4).Build().Perform();
 
+            //    Thread.Sleep(8000);
+            //}
+        }
 
-                // a.ClickAndHold(e3).MoveToElement(e4).Click(e3).Release().Build().Perform();
-                //Thread.Sleep(5000);
-                //a.ClickAndHold(e3).Build().Perform();
-                //Thread.Sleep(5000);
-                //a.Click(e4).Build().Perform();
-                //a.Release(e4).Build().Perform();
-                //Thread.Sleep(5000);
-                //a.ClickAndHold(e3).Release(e4).Build().Perform();
-
-
-
-
-
-
-
-                //  //String xto = integer.toString(LocatorTo.getLocation().x);
-                //  //String yto = Integer.toString(LocatorTo.getLocation().y);
-                //  ((IJavaScriptExecutor)driver).ExecuteScript("function simulate(f,c,d,e){var b,a=null;for(b in eventMatchers)if(eventMatchers[b].test(c)){a=b;break}if(!a)return!1;document.createEvent?(b=document.createEvent(a),a==\"HTMLEvents\"?b.initEvent(c,!0,!0):b.initMouseEvent(c,!0,!0,document.defaultView,0,d,e,d,e,!1,!1,!1,!1,0,null),f.dispatchEvent(b)):(a=document.createEventObject(),a.detail=0,a.screenX=d,a.screenY=e,a.clientX=d,a.clientY=e,a.ctrlKey=!1,a.altKey=!1,a.shiftKey=!1,a.metaKey=!1,a.button=1,f.fireEvent(\"on\"+c,a));return!0} var eventMatchers={HTMLEvents:/^(?:load|unload|abort|error|select|change|submit|reset|focus|blur|resize|scroll)$/,MouseEvents:/^(?:click|dblclick|mouse(?:down|up|over|move|out))$/}; " +
-                //  "simulate(arguments[0],\"mousedown\",0,0); simulate(arguments[0],\"mousemove\",arguments[1],arguments[2]); simulate(arguments[0],\"mouseup\",arguments[1],arguments[2]); "
-                //, e3, e4); 
-
-
-                // a.ClickAndHold(e3).MoveToElement(e4).Release(e4).Build().Perform();
-                Thread.Sleep(8000);
-                //this.driver.DragDrop(e3, e4, 60);
-            }
+        public void DragAccountNameToClaimNumberInQCS()
+        {
+            ClickAndDragDropcolumn(byQuickAccountColumn, byAccountNameSpaceInQCS, byClaimSearchInQCS);
         }
 
         // Search Quick Claim Number 
