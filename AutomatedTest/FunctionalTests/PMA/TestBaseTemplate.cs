@@ -37,6 +37,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         public LoginPage login = null;
         public NewClaimEntryPage nce = null;
         public ToolsPage Tools = null;
+        public HelpPage help = null;
 
         public TestBaseTemplate()
         {
@@ -48,6 +49,8 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE = new NCEGeneralLiability();
             nceProperty = new NCEPropertyPage();
             nceWC = new NCEWorkersCompensationPage();
+            osha = new OshaPage();
+            help = new HelpPage();
             settingsPage = new SettingsPage();
             Tools = new ToolsPage();
             login = new LoginPage();

@@ -60,7 +60,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
             RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
             ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            DataSaveMessage = readCSV("DataSaveMessage");
             StateofLoss = readCSV("StateOfLoss");
             LocationLoss = readCSV("LocationLoss");
             zipcode = readCSV("ZipCode");
@@ -91,7 +90,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             InjuredPropertyDamageInformationText = readCSV("InjuredPropertyDamageInformationText");
             WitnessInformationText = readCSV("WitnessInformationText");
             ClaimSubmissionText = readCSV("ClaimSubmissionText");
-            ClaimSubmissionText = readCSV("DraftSaveMessage");
+            DraftSaveMessage = readCSV("DraftSaveMessage");
         }
 
         [TestMethod, Description("NCEGeneralLiability - Create a new General Liability claim and cancel"), TestCategory("Regression")]
@@ -284,7 +283,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Click on cancel button");
             nceAuto.ClickCancel();
-            nceGE.SelectPageSizeAll();
             this.TESTREPORT.LogInfo("Verify Data Grid row and row values ");
             int rowCountBeforeDelete = nceGE.GetGridRowCount();
             nceGE.VerifyGridView();
@@ -348,8 +346,17 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE.VerifyRowDataingGrid(1, Date);
             nceGE.VerifyRowDataingGrid(3, LocationLoss);
 
+            string getAccidentDate = nceGE.GetColumnDataFromRowGrid(1);
+            this.TESTREPORT.LogInfo(string.Format("Accident Date in Grid : ", getAccidentDate));
+
+            string getLocation = nceGE.GetColumnDataFromRowGrid(3);
+            this.TESTREPORT.LogInfo(string.Format("Location in Grid : ", getLocation));
+
             this.TESTREPORT.LogInfo("Click on Saved claim");
             nceGE.ClickOnSavedClaiminGrid();
+
+            nceGE.ValidatecolumnDataInLiabilityForm("DateOccurence", getAccidentDate);
+            nceGE.ValidatecolumnDataInLiabilityForm("LocationOfLoss", getLocation);
 
             nceAuto.ClickSubmit();
 
