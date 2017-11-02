@@ -24,26 +24,26 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public By byDairyLink = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_T8T");
         private By byCreateEntry = By.XPath("//th[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_col0']//a");
-        private By byNoEntriesText= By.XPath("//div[contains(text(),'There are no diary / note entries for this claim')]");
+        private By byNoEntriesText = By.XPath("//div[contains(text(),'There are no diary / note entries for this claim')]");
         private By byListValues = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_efnew_0_DXEFL_DXEditor2_DDD_L_LBT']//tr");
         private By bySelectCatogery = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_efnew_0_DXEFL_DXEditor2_B-1");
         private By bySubjectTextBox = By.XPath("//label[contains(text(),'Subject:')]/../..//input");
         //private By byNote = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_efnew_0_DXEFL_DXEditor2_DDD_L_LBI1T0");
         private By byTextInputBox = By.XPath("//textarea[contains(@class,'dxeMemoEditArea')]");
         private By bySave = By.XPath("//span[contains(text(),'Save')]");
-        // private By bySubjectText = By.XPath("//tr[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_DXDataRow0']/td[5]");
         private By byColumnsData = By.XPath("//tr[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_DXDataRow0']/td");
         private By byHome = By.LinkText("Home");
         private By byHomeDairy = By.XPath("//tr[@id='MainContent_sppage_pnlDiary_griddiary_DXDataRow0']/td");
         private By byHomeDairyCount = By.XPath("//tr[contains(@id,'MainContent_sppage_pnlDiary_griddiary_DXDataRow')]");
         private By byDairyClaimNumber = By.XPath("//tr[contains(@id,'MainContent_sppage_pnlDiary_griddiary_DXDataRow')]/td[2]");
         private By byDairyClaimantName = By.XPath("//tr[contains(@id,'MainContent_sppage_pnlDiary_griddiary_DXDataRow')]/td[3]");
-       // private By byEdit = By.XPath("//span[contains(text(),'Edit')]");
+        // private By byEdit = By.XPath("//span[contains(text(),'Edit')]");
+
         private By byEdit = By.LinkText("Edit");
         private By byDelete = By.LinkText("Delete");
 
         private By bySelectStatus = By.XPath("//td[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_ef0_0_DXEFL_0_DXEditor3_B-1']");
-        private By byStatusList = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_ef0_0_DXEFL_0_DXEditor3_DDD_L_LBT']/tbody/tr");            
+        private By byStatusList = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_ef0_0_DXEFL_0_DXEditor3_DDD_L_LBT']/tbody/tr");
         private By byDueDate = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_ef0_0_DXEFL_0_DXEditor4_B-1Img");
         private By byToday = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_ef0_0_DXEFL_0_DXEditor4_DDD_C_BT");
         private By byEntryCount = By.XPath("//tr[contains(@id,'MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_DXDataRow')]");
@@ -71,7 +71,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             Thread.Sleep(3000);
             VerifyLablePresent(byDairyLink);
-            
+
         }
 
         //Verify Dairy Tab lable present 
@@ -95,7 +95,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
-        
+
         public void VerifyDiaryCount(int beforeCount)
         {
             int results = this.driver.FindElements(byMyDiaryResultsTable).Count;
@@ -167,11 +167,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 {
                     if ((Value.Trim()).Equals(category[i].Text.Trim()))
                     {
-                        category[i].Click();                        
+                        category[i].Click();
                         break;
                     }
                 }
-               
+
                 this.TESTREPORT.LogSuccess("Select Dairy from Catogery dropdown", String.Format("Category - {0} is selcted succesfully", category[0]));
             }
             catch
@@ -196,7 +196,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             this.driver.WaitElementPresent(byTextInputBox, 60);
             this.TESTREPORT.LogInfo("Enter text in text area");
-           // this.driver.SendKeysToElement(byTextInputBox, inputText, "inputText");
+            // this.driver.SendKeysToElement(byTextInputBox, inputText, "inputText");
             this.driver.SendKeysToElementClearFirst(byTextInputBox, inputText, "inputText");
         }
 
@@ -236,31 +236,31 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             IReadOnlyList<IWebElement> ClaimNumberDairyTable = driver.FindElements(byDairyClaimNumber);
             IReadOnlyList<IWebElement> ClaimantNameDairyTable = driver.FindElements(byDairyClaimantName);
             if (element.Count != 0)
-            {                
-                    for (int j = 0; j < ClaimNumberDairyTable.Count; j++)
+            {
+                for (int j = 0; j < ClaimNumberDairyTable.Count; j++)
+                {
+                    string ClaimNumber = ClaimNumberDairyTable[j].Text;
+                    string ClaimantName = ClaimantNameDairyTable[j].Text;
+                    if (ClaimNumber.Equals(DairyClaimNumber))
                     {
-                        string ClaimNumber = ClaimNumberDairyTable[j].Text;
-                        string ClaimantName = ClaimantNameDairyTable[j].Text;
-                        if (ClaimNumber.Equals(DairyClaimNumber))
-                        {
-                            this.TESTREPORT.LogSuccess("Claim Number Verified successfully", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", ClaimNumber, DairyClaimNumber));
-                            this.driver.AssertTextMatching(ClaimantName, DairyClaimantName);
-                            break;
-                        }
+                        this.TESTREPORT.LogSuccess("Claim Number Verified successfully", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", ClaimNumber, DairyClaimNumber));
+                        this.driver.AssertTextMatching(ClaimantName, DairyClaimantName);
+                        break;
                     }
-                
+                }
+
             }
 
             else
             {
-               this.TESTREPORT.LogFailure("Verify Home Diary Table Count", String.Format("Dairy Entry is not created"), this.SCREENSHOTFILE);
+                this.TESTREPORT.LogFailure("Verify Home Diary Table Count", String.Format("Dairy Entry is not created"), this.SCREENSHOTFILE);
             }
         }
 
         //Click on Edit
         public void ClickEdit()
         {
-            this.driver.WaitElementExistsAndVisible(byEdit);          
+            this.driver.WaitElementExistsAndVisible(byEdit);
             this.TESTREPORT.LogInfo("Click on Edit Link");
             this.driver.ClickElement(byEdit, "Edit", 60);
             Thread.Sleep(3000);
@@ -288,7 +288,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                         Status[i].Click();
                     }
                 }
-                
+
                 this.TESTREPORT.LogSuccess("Select Status from dropdown", String.Format("Status - {0} is selcted succesfully", Status[0]));
             }
             catch
@@ -301,14 +301,14 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
 
         //Select date from due date dropdown
-        public void  DueDate()
+        public void DueDate()
         {
             this.TESTREPORT.LogInfo("Click on Today date from Calender");
             this.driver.ClickElement(byDueDate, "DueDate", 60);
             this.driver.WaitElementPresent(byToday, 60);
             this.driver.ClickElement(byToday, "Today", 60);
         }
-        
+
         //Click on Delete
         public void ClickDelete()
         {
@@ -321,15 +321,15 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         //Verify Claimant Name  in ClaimInformation Page
         public void VerifyClaimantName(string ClaimantNameExpected)
-        {   
+        {
             //if (ClaimantNameExpected.Contains(','))
             //{
             //    ClaimantNameExpected = ClaimantNameExpected.Split(',')[0];
             //    //String CNameLast = ClaimantNameExpected.Split(',')[1];
             //    //ClaimantNameExpected = CNameLast + " " + CNameFirst;
             //}
-           
-            string ActualAccountName = this.driver.GetElementText(HomePage.byClaimInformationClaimantName);            
+
+            string ActualAccountName = this.driver.GetElementText(HomePage.byClaimInformationClaimantName);
             bool flag = false;
             if (ActualAccountName.Trim().ToLower().Contains(ClaimantNameExpected.Trim().ToLower()))
             {
@@ -347,7 +347,45 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             return DateTime.Now.ToString("hh:mm:ss").Replace(":", "");
         }
 
+        public string GetColumnDataFromDiaryRowGrid(int number)
+        {
+            Thread.Sleep(3000);
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(byColumnsData);
+            return list[number].Text;
+        }
 
+        public string GetColumnDataFromMyDiaryRowGrid(int number)
+        {
+            Thread.Sleep(3000);
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(byColumnsData);
+            return list[number].Text;
+        }
+
+        public void ValidateUpdatedSubjectInMyDiaryGrid(string ClaimNumber, string SubjectText)
+        {
+            string subjectTextFromMydiary = string.Empty;
+            IReadOnlyList<IWebElement> ClaimNumberDairyTable = driver.FindElements(byDairyClaimNumber);
+            for (int i = 0; i < ClaimNumberDairyTable.Count; i++)
+            {
+                if (ClaimNumberDairyTable[i].Text.Contains(ClaimNumber))
+                {
+                    By bySubjectText = By.XPath(string.Format("//tr[contains(@id,'MainContent_sppage_pnlDiary_griddiary_DXDataRow{0}')]/td[5]", i));
+                    subjectTextFromMydiary = this.driver.GetElementText(bySubjectText);
+                    break;
+                }
+            }
+
+            if (subjectTextFromMydiary.Trim().ToLower().Contains(subjectTextFromMydiary.Trim().ToLower()))
+            {
+                this.TESTREPORT.LogSuccess("Verify Text from MyDiaryGrid for column ", string.Format("actual text -<mark>{0}</mark> expected Text {1} is equal", subjectTextFromMydiary, SubjectText));
+            }
+            else
+            {
+                this.TESTREPORT.LogSuccess("Verify Text from MyDiaryGrid for column ", string.Format("actual text -<mark>{0}</mark> expected Text {1} is not equal", subjectTextFromMydiary, SubjectText), this.SCREENSHOTFILE);
+            }
+        }
+
+       
 
 
     }

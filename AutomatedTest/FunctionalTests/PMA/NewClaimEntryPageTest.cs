@@ -203,10 +203,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Create a claim for any Line of Business, save as draft, return to the saved claim page and drag the column headers in the saved drafts table to modify the order of the columns"), TestCategory("Regression")]
         public void NCE_04ncePage()
         {
-            
-
             this.TESTREPORT.InitTestCase("NCE_04", "Create a claim for any Line of Business, save as draft, return to the saved claim page and drag the column headers in the saved drafts table to modify the order of the columns");
-           
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
@@ -244,11 +241,10 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Verify Table modified after swapping cell");
            int prevPositionDescription= nce.getHeaderPosition("Description");
-            nce.DragColumns("Description");
+            nce.DragColumns("Location");
             int currentPositionDescription = nce.getHeaderPosition("Description");
             nce.VerifySwappingcellsposition("Description",prevPositionDescription, currentPositionDescription);
             nceAuto.SwitchToDefaultContent();
-
 
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();

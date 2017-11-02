@@ -38,7 +38,6 @@ namespace AutomatedTest.FunctionalTests.PMA
         public NewClaimEntryPage nce = null;
         public ToolsPage Tools = null;
         public HelpPage help = null;
-       
 
         public TestBaseTemplate()
         {
@@ -55,6 +54,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             settingsPage = new SettingsPage();
             Tools = new ToolsPage();
             login = new LoginPage();
+
             nce = new NewClaimEntryPage();
         }
 

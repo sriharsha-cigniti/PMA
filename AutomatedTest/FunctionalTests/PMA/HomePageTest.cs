@@ -13,9 +13,8 @@ namespace AutomatedTest.FunctionalTests.PMA
     [TestClass]
 
     public class HomePageTests : PMA.TestBaseTemplate
-    {
-        
-        //TestCase Title : verify Default ACcountm    
+    {      
+         
         #region parameters
         public static string HomePageTitle { get; set; }
         public static string ClaimInquiryPageTitle { get; set; }
@@ -186,9 +185,11 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyWelcomeText("Welcome " + Environment.UserName);
             home.VerifyDate();
             home.VerifyMyDairyLabel();
-            home.DragColumns("My Diary");
+            int columnPositionBeforeDrag = home.getColumnPositionInMYDiary("Account Name");
+            home.DragAccountNameInMyDiary();
+            int columnPositionAfterDrag = home.getColumnPositionInMYDiary("Account Name");
+            nce.VerifySwappingcellsposition("Account Name", columnPositionBeforeDrag, columnPositionAfterDrag);
 
-            //home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
         }
 
@@ -204,8 +205,11 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyWelcomeText("Welcome " + Environment.UserName);
             home.VerifyDate();
             home.VerifyQuickClaimSearchLabel();
-            home.DragColumns("QuickClaimSearch");
-            home.ClickExit();
+            int columnPositionBeforeDrag = home.getColumnPositionInClaimSearch("Account Name");
+            home.DragAccountNameToClaimNumberInQCS();
+            int columnPositionAfterDrag = home.getColumnPositionInClaimSearch("Account Name");
+            nce.VerifySwappingcellsposition("Account Name", columnPositionBeforeDrag, columnPositionAfterDrag);
+
             this.TESTREPORT.UpdateTestCaseStatus();
         }
 

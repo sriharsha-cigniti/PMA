@@ -28,6 +28,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byGetClaimnNumberCol = By.XPath("//span[contains(text(),'Claim Number :')]/../../td[2]");
         private By byColumnHeadersLocation = By.XPath("//table[@id='MainContent_griddata_DXMainTable']//a[contains(text(),'Location')]/../../../../..");
         private By byColumnHeadersDescription = By.XPath("//table[@id='MainContent_griddata_DXMainTable']//a[contains(text(),'Description')]/../../../../..");
+        private By byLocationSpace = By.XPath("//th[@id='MainContent_griddata_col4']//td[@style='width:1px;text-align:right;']/span");
+        private By byDescriptionSpace = By.XPath("//th[@id='MainContent_griddata_col5']//td[@style='width:1px;text-align:right;']/span");
 
         #endregion
 
@@ -130,12 +132,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //Drag Coulmns Headers
         public void DragColumns(string option)
         {
-            this.TESTREPORT.LogInfo("Drag the columns of " + option);
-                IWebElement e1 = driver.FindElement(byColumnHeadersLocation);
-                IWebElement e2 = driver.FindElement(byColumnHeadersDescription);
-                this.driver.DragDrop(e1, e2, 60);
-                Thread.Sleep(10000);
-            
+            ClickAndDragDropcolumn(byColumnHeadersLocation, byLocationSpace, byDescriptionSpace);
         }
 
         public void VerifySwappingcellsposition(string headerValue,int position1,int position2)
@@ -144,7 +141,6 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 this.TESTREPORT.LogSuccess("Verify swapping of cells", string.Format("Header Name:<mark>{0}</mark> Previous header Position:<mark>{1}</mark> Current Header Position:<mark>{2}</mark>", headerValue, position1.ToString(), position2.ToString()), this.SCREENSHOTFILE);
             else
                 this.TESTREPORT.LogFailure("Verify swapping of cells", string.Format("Header Name:<mark>{0}</mark> Previous header Position:<mark>{1}</mark> Current Header Position:<mark>{2}</mark>", headerValue, position1.ToString(), position2.ToString()), this.SCREENSHOTFILE);
-
         }
 
         public int getHeaderPosition(string headerValue)

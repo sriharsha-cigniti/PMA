@@ -429,6 +429,34 @@ namespace AUT.Selenium.CommonReUsablePages
 
             this.driver.SendKeysToElementClearFirst(ByFieldName, FieldName, "Enter text");
         }
+
+        public void ClickAndDragDropcolumn(By ClickColumn, By ColumnToDrag, By ColumnToDrop)
+        {
+            this.TESTREPORT.LogInfo("Drag the columns of " + ClickColumn);
+            this.driver.ClickElement(ClickColumn, "location");
+            Thread.Sleep(10000);
+            IWebElement e1 = driver.FindElement(ColumnToDrag);
+            IWebElement e2 = driver.FindElement(ColumnToDrop);
+            this.driver.DragDrop(e1, e2, 60);
+            Thread.Sleep(10000);
+        }
+
+        public int getHeaderPosition(string HeaderValue, string TableHeader)
+        {
+            IReadOnlyList<IWebElement> headerList = this.driver.FindElements(By.XPath(string.Format("//tr[@id='{0}']//th//a", TableHeader)));
+            int Count = 0;
+            foreach (IWebElement header in headerList)
+            {
+                if (header.Text.ToLower().Contains(HeaderValue.ToLower()))
+                {
+                    Count++;
+                    break;
+                }
+                else
+                    Count++;
+            }
+            return Count;
+        }
     }
    
 }

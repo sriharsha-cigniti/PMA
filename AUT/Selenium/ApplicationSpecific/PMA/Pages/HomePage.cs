@@ -61,7 +61,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byClaimType = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_ASPxLabel29");
         private By byQuickClaimTypeColumnSearch = By.Id("MainContent_sppage_pnlQuickSearch_gridresult_DXFREditorcol5_I");
         private By byClaimAccidentDate = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_ASPxLabel18");
-       
+        private By bySubjectText = By.XPath("//tr[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_DXDataRow0']/td[5]");
+
         //header links
         private By byClaimInquiry = By.LinkText("Claim Inquiry");
         private By byReports = By.LinkText("Reports");
@@ -78,8 +79,12 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byRecentClaimRows = By.XPath("//table[@id='MainContent_sppage_pnlRecentClaims_gridRecentClaims']//tr[contains(@class,'dxgvDataRow')]");
         private By byDiaryLink = By.LinkText("Diary");
         private By byRecentClaimsTableCount = By.XPath("//table[@id='MainContent_sppage_pnlRecentClaims_gridRecentClaims_DXMainTable']//tr[contains(@class,'dxgvDataRow')]");
-
-
+        private By byAccountNameSpaceInMD = By.XPath("//th[@id='MainContent_sppage_pnlDiary_griddiary_col0']//td[@style='width:1px;text-align:right;']/span");
+        private By byDueDateSpaceInMD = By.XPath("//th[@id='MainContent_sppage_pnlDiary_griddiary_col3']//td[@style='width:1px;text-align:right;']/span");
+        private By byAccountNameSpaceInQCS = By.XPath("//th[@id='MainContent_sppage_pnlQuickSearch_gridresult_col1']//td[@style='width:1px;text-align:right;']/span");
+        private By byClaimNumberSpaceInQCS = By.XPath("//th[@id='MainContent_sppage_pnlQuickSearch_gridresult_col2']//td[@style='width:1px;text-align:right;']/span");
+        private By byMyDiaryColumns = By.XPath("//*[contains(@id,'MainContent_sppage_pnlDiary_griddiary_col')]");
+        private By byClaimSearchColumns = By.XPath("//*[contains(@id,'MainContent_sppage_pnlQuickSearch_gridresult_col')]");
 
         #endregion
 
@@ -251,50 +256,14 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         }
         //Drag Coulmns Headers
-        public void DragColumns(string option)
+        public void DragAccountNameInMyDiary()
         {
-            this.TESTREPORT.LogInfo("Drag the columns of " + option);
-            if (option == "MyDairy")
-            {
-                IWebElement e1 = driver.FindElement(byMyDairyAccountColumn);
-                IWebElement e2 = driver.FindElement(byMyDairyDueDateColumn);
-                this.driver.DragDrop(e1, e2, 60);
+            ClickAndDragDropcolumn(byMyDairyAccountColumn, byAccountNameSpaceInMD, byDueDateSpaceInMD);
+        }
 
-            }
-            else
-            {
-                IWebElement e3 = driver.FindElement(byQuickAccountColumn);
-                IWebElement e4 = driver.FindElement(byQuickClaimNumberColumn);
-                Actions a = new Actions(driver);
-                a.DragAndDrop(e3, e4).Build().Perform();
-
-
-                // a.ClickAndHold(e3).MoveToElement(e4).Click(e3).Release().Build().Perform();
-                //Thread.Sleep(5000);
-                //a.ClickAndHold(e3).Build().Perform();
-                //Thread.Sleep(5000);
-                //a.Click(e4).Build().Perform();
-                //a.Release(e4).Build().Perform();
-                //Thread.Sleep(5000);
-                //a.ClickAndHold(e3).Release(e4).Build().Perform();
-
-
-
-
-
-
-
-                //  //String xto = integer.toString(LocatorTo.getLocation().x);
-                //  //String yto = Integer.toString(LocatorTo.getLocation().y);
-                //  ((IJavaScriptExecutor)driver).ExecuteScript("function simulate(f,c,d,e){var b,a=null;for(b in eventMatchers)if(eventMatchers[b].test(c)){a=b;break}if(!a)return!1;document.createEvent?(b=document.createEvent(a),a==\"HTMLEvents\"?b.initEvent(c,!0,!0):b.initMouseEvent(c,!0,!0,document.defaultView,0,d,e,d,e,!1,!1,!1,!1,0,null),f.dispatchEvent(b)):(a=document.createEventObject(),a.detail=0,a.screenX=d,a.screenY=e,a.clientX=d,a.clientY=e,a.ctrlKey=!1,a.altKey=!1,a.shiftKey=!1,a.metaKey=!1,a.button=1,f.fireEvent(\"on\"+c,a));return!0} var eventMatchers={HTMLEvents:/^(?:load|unload|abort|error|select|change|submit|reset|focus|blur|resize|scroll)$/,MouseEvents:/^(?:click|dblclick|mouse(?:down|up|over|move|out))$/}; " +
-                //  "simulate(arguments[0],\"mousedown\",0,0); simulate(arguments[0],\"mousemove\",arguments[1],arguments[2]); simulate(arguments[0],\"mouseup\",arguments[1],arguments[2]); "
-                //, e3, e4); 
-
-
-                // a.ClickAndHold(e3).MoveToElement(e4).Release(e4).Build().Perform();
-                Thread.Sleep(8000);
-                //this.driver.DragDrop(e3, e4, 60);
-            }
+        public void DragAccountNameToClaimNumberInQCS()
+        {
+            ClickAndDragDropcolumn(byQuickAccountColumn, byAccountNameSpaceInQCS, byClaimNumberSpaceInQCS);
         }
 
         // Search Quick Claim Number 
@@ -348,21 +317,10 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(byOsha, "OSHA", 60);
         }
         // Click on Tools tab in main menu
-        public bool ClickTools()
+        public void ClickTools()
         {
             this.TESTREPORT.LogInfo("Click on Tools menu");
-            bool flag = this.driver.IsElementPresent(byTools);
-            if (flag)
-            {
-                this.driver.ClickElement(byTools, "Tools", 60);
-                this.TESTREPORT.LogSuccess("Verify Tools Tab present", String.Format(" Successfully verified <Mark>{0}</Mark>", ""));
-            }
-            else
-            {
-                this.TESTREPORT.LogWarning("Verify Tools Tab present", String.Format("Tools Tab is not present"), this.SCREENSHOTFILE);
-            }
-            return flag;
-            
+            this.driver.ClickElement(byTools, "Tools", 60);
         }
         // Click on Settings tab in main menu
         public void ClickSettings()
@@ -717,8 +675,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 ArrayList index = ClickonRandomDiaryEntry();
                 Thread.Sleep(3000);
                 VerifyClaimNumber(index[0].ToString());
-                VerifyClaimantName(index[1].ToString());                
-
+                VerifyClaimantName(index[1].ToString());
+                ValidatesubjectTexInDiaryTab(index[3].ToString());
             }
             else
             {
@@ -727,7 +685,20 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
             return results;
         }
-       
+
+        public void ValidatesubjectTexInDiaryTab(string SubjectText)
+        {
+            string subjectTextFromDiaryTab = this.driver.GetElementText(bySubjectText);
+            if (subjectTextFromDiaryTab.Trim().ToLower().Contains(SubjectText.Trim().ToLower()))
+            {
+                this.TESTREPORT.LogSuccess("Verify Text from DiaryTab Grid for column ", string.Format("actual text -<mark>{0}</mark> expected Text {1} is equal", subjectTextFromDiaryTab, SubjectText));
+            }
+            else
+            {
+                this.TESTREPORT.LogSuccess("Verify Text from DiaryTab Grid for column ", string.Format("actual text -<mark>{0}</mark> expected Text {1} is not equal", subjectTextFromDiaryTab, SubjectText), this.SCREENSHOTFILE);
+            }
+        }
+
         public void VerifyFieldsAfterReset()
         {
             string ClaimantName = this.driver.GetElementText(byQuickClaimantNameSearch);
@@ -742,11 +713,17 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 this.TESTREPORT.LogFailure("Verify entry fields after RESET", String.Format("Fields-'{0}','{1}' are not empty", ClaimantName, ClaimantNumber));
             }
         }
-            
 
+        public int getColumnPositionInMYDiary(string ColumnName)
+        {
+           return getHeaderPosition(ColumnName, "MainContent_sppage_pnlDiary_griddiary_DXHeadersRow0");
+        }
 
+        public int getColumnPositionInClaimSearch(string ColumnName)
+        {
+            return getHeaderPosition(ColumnName, "MainContent_sppage_pnlQuickSearch_gridresult_DXHeadersRow0");
+        }
     }
-
 
     #endregion
 

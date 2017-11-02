@@ -63,11 +63,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 this.TESTREPORT.LogFailure("Verify Property Form", String.Format("<mark>{0}</mark> selected from dropdown <mark>{1}</mark> form not appeared", propertyText, propertyText));
         }
         // Location of Loss
-        public void SelectLocationLoss(string LocationLoss)
+        public void SelectLocationLoss()
         {
             this.driver.ClickElement(byLocationDropDownImage, "location dropdown image");
-            By byLocationDropDown = By.XPath(string.Format("//td[contains(text(),'{0}')]", LocationLoss));
-            this.driver.ClickElement(byLocationDropDown, "Location of Loss Dropdown");
+            By byLocationDropDownD = By.XPath("//td[@id='MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocationloss_DDD_L_LBI1T0']");
+            this.driver.ClickElement(byLocationDropDownD, "Loss Location Dropdown");
         }
         //Description of Damage
         public void EnterDescriptionOfDamage(string describelossvalue)
