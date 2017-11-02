@@ -1458,6 +1458,73 @@ namespace Engine.UIHandlers.Selenium
             }
         }
 
+        public static void GetSetAndVerifyTextValues(this IWebDriver driver, By locator,string ControlName,string data="")
+        {
+            string elementText = "";
+            try
+            {
+                if (string.IsNullOrEmpty(data))
+                {
+                    elementText = driver.GetElementAttribute(locator, "value");
+                    elementText.Replace(" t", " t");
+                     elementText = elementText + " t";
+                }
+                else
+                    elementText = data;
+                driver.SendKeysToElementClearFirst(locator, elementText, ControlName);
+                string setText = driver.GetElementAttribute(locator, "value");
+                driver.AssertTextMatching(setText, elementText);
+            }
+            catch (Exception ex)
+            {
+                testReport.LogFailure("GetSetAndVerifyTextValues", String.Format("Failed to verify text values by Locator: <mark>{0}</mark>", locator.ToString()));
+                testReport.LogException(ex, EngineSetup.GetScreenShotPath());
+            }
+        }
+
+        public static bool CheckBoxIsSelected(this IWebDriver driver,By locator)
+        {
+            bool selected = false;
+            try
+            {
+                selected = driver.FindElement(locator).Selected;
+                
+            }
+
+            catch(Exception ex)
+            {
+                testReport.LogFailure("CheckBoxIsSelected", String.Format("Failed to verify checkbox selection by Locator: <mark>{0}</mark>", locator.ToString()));
+                testReport.LogException(ex, EngineSetup.GetScreenShotPath());
+            }
+            return selected;
+        }
+
+        /// <summary>
+        /// Assert Tex tEqual
+        /// </summary>
+        /// <param>Locators,text</param>
+        /// <returns></returns>
+        public static void AssertTextNotMatching(this IWebDriver driver, string actual, string expected)
+        {
+            try
+            {
+                Assert.AreEqual(actual.Trim(), expected.Trim());
+                testReport.LogFailure("Text not Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", actual, expected));
+            }
+            catch (Exception e)
+            {
+                testReport.LogSuccess("Text not Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> not matching", actual, expected), EngineSetup.GetScreenShotPath());
+            }
+
+        }
+
+
+
+
+
+
+
+
         #endregion
     }
 
