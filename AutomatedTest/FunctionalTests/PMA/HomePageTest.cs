@@ -13,9 +13,8 @@ namespace AutomatedTest.FunctionalTests.PMA
     [TestClass]
 
     public class HomePageTests : PMA.TestBaseTemplate
-    {
-        
-        //TestCase Title : verify Default ACcountm    
+    {      
+         
         #region parameters
         public static string HomePageTitle { get; set; }
         public static string ClaimInquiryPageTitle { get; set; }
