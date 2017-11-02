@@ -1457,6 +1457,55 @@ namespace Engine.UIHandlers.Selenium
             }
         }
 
+        public static void GetSetAndVerifyTextValues(this IWebDriver driver, By locator, string ControlName, string data = "")
+        {
+            string elementText = "";
+            try
+            {
+                if (string.IsNullOrEmpty(data))
+                {
+                    elementText = driver.GetElementAttribute(locator, "value");
+                    elementText.Replace(" t", " t");
+                    elementText = elementText + " t";
+                }
+                else
+                    elementText = data;
+                driver.SendKeysToElementClearFirst(locator, elementText, ControlName);
+                string setText = driver.GetElementAttribute(locator, "value");
+                driver.AssertTextMatching(setText, elementText);
+            }
+            catch (Exception ex)
+            {
+                testReport.LogFailure("GetSetAndVerifyTextValues", String.Format("Failed to verify text values by Locator: <mark>{0}</mark>", locator.ToString()));
+                testReport.LogException(ex, EngineSetup.GetScreenShotPath());
+            }
+        }
+
+        public static bool CheckBoxIsSelected(this IWebDriver driver, By locator)
+        {
+            bool selected = false;
+            try
+            {
+                selected = driver.FindElement(locator).Selected;
+
+            }
+
+            catch (Exception ex)
+            {
+                testReport.LogFailure("CheckBoxIsSelected", String.Format("Failed to verify checkbox selection by Locator: <mark>{0}</mark>", locator.ToString()));
+                testReport.LogException(ex, EngineSetup.GetScreenShotPath());
+            }
+            return selected;
+        }
+
+
+
+
+
+
+
+
+
         #endregion
     }
 
