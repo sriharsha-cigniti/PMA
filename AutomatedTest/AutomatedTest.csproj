@@ -65,6 +65,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FunctionalTests\PMA\HelpTest.cs" />
     <Compile Include="FunctionalTests\PMA\NCEAutoPageTest.cs" />
     <Compile Include="FunctionalTests\PMA\ClaimInquiryPageTest.cs" />
     <Compile Include="FunctionalTests\PMA\DiaryNotesPageTest.cs" />
@@ -106,6 +107,7 @@
     <None Include="TestData\PMA\ClaimInquiryPageTests.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="TestData\PMA\HelpTest.csv" />
     <None Include="TestData\PMA\OshaPageTest.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -116,6 +118,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestData\PMA\NewClaimEntryPageTest.csv" />
+    <None Include="TestData\PMA\NewClaimEntry.csv" />
     <None Include="TestData\PMA\ToolsPageTest.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

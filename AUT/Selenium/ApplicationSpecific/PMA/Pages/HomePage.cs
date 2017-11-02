@@ -348,10 +348,21 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(byOsha, "OSHA", 60);
         }
         // Click on Tools tab in main menu
-        public void ClickTools()
+        public bool ClickTools()
         {
             this.TESTREPORT.LogInfo("Click on Tools menu");
-            this.driver.ClickElement(byTools, "Tools", 60);
+            bool flag = this.driver.IsElementPresent(byTools);
+            if (flag)
+            {
+                this.driver.ClickElement(byTools, "Tools", 60);
+                this.TESTREPORT.LogSuccess("Verify Tools Tab present", String.Format(" Successfully verified <Mark>{0}</Mark>", ""));
+            }
+            else
+            {
+                this.TESTREPORT.LogWarning("Verify Tools Tab present", String.Format("Tools Tab is not present"), this.SCREENSHOTFILE);
+            }
+            return flag;
+            
         }
         // Click on Settings tab in main menu
         public void ClickSettings()

@@ -146,7 +146,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void FillAllRequiredFieldsInWCForm(string Location, string FirstName, string LastName, string Adress, string City, string Zip, string DOB, string SSN, string Occupation, string DateOfInjury, string AccidentCause, string InjuryType, string BodyPart, string Description, string IsInjuredWorkerLosingTime, string IsInjuredWorkerModifiedShift, string State, string PreparerPhone, string date)
         {
-            this.driver.ClickElement(byEmployeeInformationMenu, "Employee Information");
+            VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel1_CBImg");
             SelectDropDown(Location, byLocationDropDown);
             this.driver.SendKeysToElementClearFirst(byFirstName, FirstName, "Employee FirstName");
             this.driver.SendKeysToElementClearFirst(byLastName, LastName, "Employee LastName");
@@ -161,7 +161,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.SendKeysToElementClearFirst(bySSN, SSN, "Employee SSN");
             this.driver.SendKeysToElementClearFirst(byOccupation, Occupation, "Employee Occupation");
 
-            this.driver.ClickElement(byOccurenceInformationMenu, "Occurence Information");
+            VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel2_CBImg");
             this.driver.ClickElement(byIsInjuryWorkedLosingTimeText, "IsInjuryWorkedLosingTimeText");
             this.driver.SendKeysToElementClearFirst(byIsInjuryWorkedLosingTimeText, IsInjuredWorkerLosingTime, "IsInjuredWorkerLosingTime");
 
@@ -191,14 +191,14 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.SendKeysToElementClearFirst(byWorkCity, City, "Work Group City");
             SelectDropDownWithParent(State, byWorkState, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddWorkState_DDD_L_LBT");
 
-            this.driver.ClickElement(byContactInformationBar, "Contact Information");
+            VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel3_CBImg");
             this.driver.ClickElement(byContactTelePhone, "TelePhones textBox");
             this.driver.SendKeysToElementClearFirst(byContactTelePhone, PreparerPhone, "TelePhone");
         }
 
         public void FillAllNonRequiredFieldsInWCForm(string MiddleName, string Suffix, string Gender, string TelePhone, string HireDate, string MaritalStatus, string EmployeeStatus, string NoOfDepedents, string SideOfBody, string HoursPerDay, string Date, string PaymentFrequency, string DaysWorkedPerWeek, string Address, string City, string State, string Zip, string YesText, string NoText, string fname, string lname)
         {
-            this.driver.ClickElement(byEmployeeInformationMenu, "Employee Information");
+            VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel1_CBImg");
             this.driver.SendKeysToElementClearFirst(byMiddleName, MiddleName, "Employee MiddleName");
             SelectDropDown(Suffix, bySuffixImg);
             SelectDropDown(Gender, byGender);
@@ -210,8 +210,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             SelectDropDown(EmployeeStatus, byEmployeeStatus);
             SelectDropDownWithParent(NoOfDepedents, byNoOfDependents, "MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_ddempdependents_DDD_L_LBT");
 
-            this.driver.ClickElement(byOccurenceInformationMenu, "Occurence Information");
-            SelectDropDown(SideOfBody, bySideOfBody); 
+            VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel2_CBImg");
+            SelectDropDown(SideOfBody, bySideOfBody);
             this.driver.ClickElement(byEmpBeganWorkImg, "Time occurance employee began work");
             this.driver.ClickElement(byTimeEditOccurenceImg, "Time Edit occurance");
             this.driver.ClickElement(byLstWorkDt, "Last Work Day Image");
@@ -244,7 +244,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             SelectDropDownWithParent(NoText, byemployeerepresented, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddemployeerepresented_DDD_L_LBT");
             SelectDropDownWithParent(YesText, bysafeguardsprovidedused, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddsafeguardsprovidedused_DDD_L_LBT");
 
-            this.driver.ClickElement(byContactInformationBar, "Contact Information");
+            VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel3_CBImg");
             this.driver.SendKeysToElementClearFirst(byphysicianname, "PHY" + fname, "Physician Name");
             this.driver.SendKeysToElementClearFirst(byPhysicianPhone, TelePhone, "Physician TelePhone");
             this.driver.SendKeysToElementClearFirst(byphysicianaddress, "PHY" + Address, "Physician Address");
@@ -275,11 +275,12 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void FillRequiredFieldsForSaveDraftInWCForm(string Location, string FirstName, string LastName, string DateOfInjury, string Description)
         {
+            VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel1_CBImg");
             SelectDropDown(Location, byLocationDropDown);
             this.driver.SendKeysToElementClearFirst(byFirstName, FirstName, "Employee FirstName");
             this.driver.SendKeysToElementClearFirst(byLastName, LastName, "Employee LastName");
 
-            this.driver.ClickElement(byOccurenceInformationMenu, "Occurence Information");
+            VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel2_CBImg");
 
             this.driver.ClickElement(byDateOfInjury, "Date of Injury");
             this.driver.SendKeysToElement(byDateOfInjury, DateOfInjury, "Date of Injury");
@@ -314,7 +315,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.SwitchTo().DefaultContent();
             this.driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']")));
 
-            string name = this.driver.GetElementAttribute(byLastName, "value") + " "+ this.driver.GetElementAttribute(byFirstName, "value");
+            string name = this.driver.GetElementAttribute(byLastName, "value") + " " + this.driver.GetElementAttribute(byFirstName, "value");
             name = name.Replace(",", "");
             if (valueToVerify.Trim().ToLower().Equals(name.Trim().ToLower()))
             {
@@ -388,7 +389,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void EnterContactInformation(string TelePhone, string Address, string City, string State, string Zip, string fname, string lname)
         {
             Thread.Sleep(3000);
-            this.driver.ClickElement(byContactInformationBar, "Contact Information");
+            VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel3_CBImg");
             this.driver.ClickElement(byContactTelePhone, "TelePhones textBox");
             this.driver.SendKeysToElementClearFirst(byContactTelePhone, TelePhone, "TelePhone");
             this.driver.SendKeysToElementClearFirst(byphysicianname, "PHY" + fname, "Physician Name");
@@ -416,9 +417,10 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void EnterOccuranceInformation(string Location, string HireDate, string SideOfBody, string HoursPerDay, string Date, string PaymentFrequency, string DaysWorkedPerWeek, string Address, string City, string State, string Zip, string YesText, string NoText, string fname, string lname, string DateOfInjury, string AccidentCause, string InjuryType, string BodyPart, string Description)
         {
+            VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel1_CBImg");
             SelectDropDown(Location, byLocationDropDown);
 
-            this.driver.ClickElement(byOccurenceInformationMenu, "Occurence Information");
+            VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel2_CBImg");
             this.driver.ClickElement(byIsInjuryWorkedLosingTimeText, "IsInjuryWorkedLosingTimeText");
             this.driver.SendKeysToElementClearFirst(byIsInjuryWorkedLosingTimeText, YesText, "IsInjuredWorkerLosingTime");
 
@@ -434,7 +436,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(byTimeEditOccurenceImg, "Time Edit occurance");
             this.driver.ClickElement(byDateEmployerNotified, "Employee Notified");
             this.driver.SendKeysToElement(byDateEmployerNotified, Date, "Employee Notified");
-            
+
             this.driver.ClickElement(byIsInjuredWorkerOnModifiedDutyText, "IsInjuredWorkerOnModifiedDuty");
             this.driver.SendKeysToElementClearFirst(byIsInjuredWorkerOnModifiedDutyText, NoText, "IsInjuredWorkerOnModifiedDuty");
 
@@ -484,6 +486,19 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             SelectDropDownWithParent(NoText, byemployeerepresented, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddemployeerepresented_DDD_L_LBT");
         }
 
+        public void VerifyAndClickOnMenu(string menuId)
+        {
+            By menu = By.XPath(string.Format("//span[@id='{0}']/img", menuId));
+            if (this.driver.GetElementAttribute(menu, "alt").Contains("[Collapse/Expand]"))
+            {
+                this.driver.ClickElement(menu, "Menu");
+                this.TESTREPORT.LogInfo(string.Format("Clicked on Menu : ", menu));
+            }
+            else if (this.driver.GetElementAttribute(menu, "alt").Contains("Show / Hide"))
+            {
+                this.TESTREPORT.LogInfo("Element is already expanded");
+            }
+        }
         #endregion
 
     }

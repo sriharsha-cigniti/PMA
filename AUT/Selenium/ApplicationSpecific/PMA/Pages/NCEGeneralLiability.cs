@@ -75,7 +75,9 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byLocationOfLossTextbox = By.XPath("div[@id='MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_dtOccurrence_AcAs']");
         private By byDateOfOccurenceTextbox = By.XPath("//table[@id='MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocation_DDD_L_LBT']/tbody/tr/td[@class='dxeListBoxItem  dxeListBoxItemSelected dxeListBoxItemHover']");
         private By byLocationDropdOwnimage = By.XPath("//span[@id='MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocation_B-1Img']");
-
+        private By byDateOfOccurence = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_dtOccurrence_I");
+        private By byLocationLoss = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocation_I");
+        
         #endregion
 
         #region Public Methods
@@ -88,7 +90,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void VerifyColorChange()
         {
             string getColor = this.driver.FindElement(byLostInformation).GetAttribute("style");
-            
+
             if (getColor.Contains("background-color: rgb(0, 56, 135)") || getColor.Contains("background - color: red"))
             {
                 this.TESTREPORT.LogSuccess("Verify Loss Information color change", string.Format("actual -<mark>{0}</mark> expected  {1} is equal", "", getColor));
@@ -160,7 +162,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(bySavedDraftButton, "Save Draft");
         }
 
-        public void EnterInjuredDamagedPropertyInformation(string name, string Organization, string claimntadress, string city, string state, string Zip, string Phone, string DescriptionOfInJury, string whereInjuryTaken, string InjuredPriorToInjury, string DescribeProperty, int EstimatedAmount, string Whereproperty, string WhenProperty )
+        public void EnterInjuredDamagedPropertyInformation(string name, string Organization, string claimntadress, string city, string state, string Zip, string Phone, string DescriptionOfInJury, string whereInjuryTaken, string InjuredPriorToInjury, string DescribeProperty, int EstimatedAmount, string Whereproperty, string WhenProperty)
         {
             Thread.Sleep(3000);
             this.driver.ClickElement(byInjuredPropertyInfoBar, "Injured Property Information Bar");
@@ -259,31 +261,33 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             return list[number].Text;
         }
 
-        //public void ValidatecolumnDataInLiabilityForm(string columnName, string value)
-        //{
-        //    string valueToVerify = string.Empty;
-        //    this.driver.SwitchTo().DefaultContent();
-        //    this.driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']")));
+        public void ValidatecolumnDataInLiabilityForm(string columnName, string value)
+        {
+            string valueToVerify = string.Empty;
+            this.driver.SwitchToDefaultFrame();
+            this.driver.SwitchToFrameByLocator(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']"));
 
-        //    switch (columnName)
-        //    {
-        //        case "LocationOfLoss":
-        //            this.driver.ClickElement(byLocationDropdOwnimage, "location dropdown image");
-        //            valueToVerify = this.driver.FindElement(byLocationOfLossTextbox).Text;
-        //            break;
-        //        default:
-        //            break;
-        //    }
+            switch (columnName)
+            {
+                case "LocationOfLoss":
+                    valueToVerify = this.driver.GetElementAttribute(byLocationLoss, "value"); 
+                    break;
+                case "DateOccurence":
+                    valueToVerify = this.driver.GetElementAttribute(byDateOfOccurence, "value"); 
+                    break;
+                default:
+                    break;
+            }
 
-        //    if (valueToVerify.Trim().ToLower().Contains(value.Trim().ToLower()))
-        //    {
-        //        this.TESTREPORT.LogSuccess("Verify Text from saved claim for column ", string.Format("actual text -<mark>{0}</mark> expected count {1} is equal", value, valueToVerify));
-        //    }
-        //    else
-        //    {
-        //        this.TESTREPORT.LogSuccess("Verify Text from saved claim for column ", string.Format("actual text -<mark>{0}</mark> expected count {1} is not equal", value, valueToVerify));
-        //    }
-        //}
+            if (valueToVerify.Trim().ToLower().Contains(value.Trim().ToLower()))
+            {
+                this.TESTREPORT.LogSuccess("Verify Text from saved claim for column ", string.Format("actual text -<mark>{0}</mark> expected count {1} is equal", value, valueToVerify));
+            }
+            else
+            {
+                this.TESTREPORT.LogSuccess("Verify Text from saved claim for column ", string.Format("actual text -<mark>{0}</mark> expected count {1} is not equal", value, valueToVerify));
+            }
+        }
 
         public void ClickOnDelete()
         {
@@ -309,19 +313,20 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         }
 
         public int GetGridRowCount()
-        {                      
+        {
+            SelectPageSizeAll();
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byDataGridRows);
             this.TESTREPORT.LogInfo(string.Format("Get Grid Row Count : {0}", list.Count));
             return list.Count;
         }
 
-        public  void  SelectPageSizeAll()
+        public void SelectPageSizeAll()
         {
             this.driver.SwitchTo().DefaultContent();
             this.driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']")));
             this.driver.ClickElement(By.XPath("//span[@id='MainContent_griddata_DXPagerTop_DDBImg']"), "ClaimInquiryPageSize DropdownButton");
-            Thread.Sleep(5000);           
-            this.driver.FindElement(By.XPath("//div[@id='MainContent_griddata_DXPagerTop_PSP_DXI5_T']/span[contains(text(),'All')]")).Click();           
+            Thread.Sleep(5000);
+            this.driver.FindElement(By.XPath("//div[@id='MainContent_griddata_DXPagerTop_PSP_DXI5_T']/span[contains(text(),'All')]")).Click();
             Thread.Sleep(5000);
         }
 
@@ -343,7 +348,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             Thread.Sleep(4000);
             this.driver.SwitchTo().DefaultContent();
             this.driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']")));
-            
+
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byTablerow);
             list[0].Click();
         }
@@ -352,7 +357,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             this.driver.SwitchTo().DefaultContent();
             this.driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']")));
-            
+
             By txtOnPage = By.XPath(string.Format("//span[contains(text(),'{0}')]", text));
             this.driver.WaitElementPresent(txtOnPage);
             if (this.driver.IsElementPresent(txtOnPage))
@@ -361,6 +366,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 this.TESTREPORT.LogFailure("Verify text on page", String.Format("text - <mark>{0}</mark> doesn't appeared", text), this.SCREENSHOTFILE);
 
         }
+
         #endregion
 
     }
