@@ -48,12 +48,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.ClickTools();
             home.VerifyPageTitle(ToolsPageTitle);
             Tools.VerifyAdministrationLabel();
-            Tools.VerifyUserTab();         
+            Tools.VerifyUserTab();
+            string AccountExistsMsg = "Account " + AccountNumber + " already exixts for the user.";
             Tools.EnterLoginID(Environment.UserName);
             Tools.ClickSearch();            
             int BeforeCount= Tools.ToolsResultsCount();
-            Tools.AddAccount(AccountNumber);
-            string AccountExistsMsg = "Account " + AccountNumber + " already exixts for the user.";
+            Tools.AddAccount(AccountNumber);           
             Tools.ConfirmationMsg(BeforeCount,ConfirmationMsg, AccountExistsMsg);
             this.TESTREPORT.LogInfo("Re-Login into application");
             login.OpenBrowser();
