@@ -168,10 +168,13 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyClaimNumber(Index[0].ToString());
             //Verify Claimant Name
             diaryNotes.VerifyClaimantName(Index[1].ToString());
+            //Get Updated Subject Text From Diary Tab Grid
+            string updatedSubjectText = diaryNotes.GetColumnDataFromDiaryRowGrid(5);
             //Click on Home
             diaryNotes.ClickHome();
             //Verify Columns in Home Page
             diaryNotes.VerifyHomeDairyColumns(Index[0].ToString(), Index[1].ToString());
+            diaryNotes.ValidateUpdatedSubjectInMyDiaryGrid(Index[0].ToString(), updatedSubjectText);
             //click on Exit to close the application
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -181,22 +184,22 @@ namespace AutomatedTest.FunctionalTests.PMA
 
         public void CI_D3diaryNotes()
         {
-
             this.TESTREPORT.InitTestCase("CI_D3", "Delete the existing diary entry");
 
             this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
-            
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
             //Verify Cinch welcome text
             home.VerifyCinchWelome();
+            
             //Select my diary from Home page
             int value = home.VerifyandSelectMyDiary();
             
             if (value > 0)
             {
                 //Verify Diary Lable
-                diaryNotes.VerifyDiaryLable(); 
+                diaryNotes.VerifyDiaryLable();
+                
                 //Click on Delete for Diary
                 diaryNotes.ClickDelete();
                 //Verify No entries text

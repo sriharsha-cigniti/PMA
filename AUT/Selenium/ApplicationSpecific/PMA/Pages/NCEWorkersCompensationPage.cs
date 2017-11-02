@@ -115,7 +115,9 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By bySearchButton = By.Id("MainContent_btnSearch_CD");
         private By bySearchLstName = By.Id("MainContent_txtlname_I");
         private By bySearchID = By.Id("MainContent_txtID_I");
+        private By byLocation = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocation_I");
         private By byDataGridRows = By.XPath("//table[@id='MainContent_griddata_DXMainTable']/tbody/tr[contains(@id,'MainContent_griddata_DXDataRow')]");
+        private By byHireDatePMT = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_dtemphiredate_DDD_C_PMCImg");
 
         #endregion
 
@@ -135,7 +137,16 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             this.driver.SwitchToDefaultFrame();
             this.driver.SwitchToFrameByLocator(byFrameId);
-            this.driver.ClickElement(byEmployeeNotOnListButton, "Employee Not In List Button");
+            Thread.Sleep(10000);
+            if (this.driver.IsElementPresent(byEmployeeNotOnListButton))
+            {
+                this.driver.ClickElement(byEmployeeNotOnListButton, "Employee Not In List Button");
+            }
+        }
+
+        public string GetLocationText()
+        {
+            return this.driver.GetElementAttribute(byLocation, "value");
         }
 
         public void ValidateText(string valueToVerify)
@@ -144,10 +155,19 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.AssertTextMatching(this.driver.GetElementText(byWCText), valueToVerify);
         }
 
-        public void FillAllRequiredFieldsInWCForm(string Location, string FirstName, string LastName, string Adress, string City, string Zip, string DOB, string SSN, string Occupation, string DateOfInjury, string AccidentCause, string InjuryType, string BodyPart, string Description, string IsInjuredWorkerLosingTime, string IsInjuredWorkerModifiedShift, string State, string PreparerPhone, string date)
+        public void SelectLocationLoss()
+        {
+            this.driver.ClickElement(byLocationDropDown, "location dropdown image");
+            By byLocationDropDownD = By.XPath("//td[@id='MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocation_DDD_L_LBI1T0']");
+            this.driver.ClickElement(byLocationDropDownD, "Location Dropdown");
+        }
+
+        public void FillAllRequiredFieldsInWCForm(string FirstName, string LastName, string Adress, string City, string Zip, string DOB, string SSN, string Occupation, string DateOfInjury, string AccidentCause, string InjuryType, string BodyPart, string Description, string IsInjuredWorkerLosingTime, string IsInjuredWorkerModifiedShift, string State, string PreparerPhone, string date)
         {
             VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel1_CBImg");
-            SelectDropDown(Location, byLocationDropDown);
+
+            SelectLocationLoss();
+            //SelectDropDown(Location, byLocationDropDown);
             this.driver.SendKeysToElementClearFirst(byFirstName, FirstName, "Employee FirstName");
             this.driver.SendKeysToElementClearFirst(byLastName, LastName, "Employee LastName");
             this.driver.SendKeysToElementClearFirst(byAddress, Adress, "Employee Address");
@@ -205,6 +225,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.SendKeysToElementClearFirst(byTelePhone, TelePhone, "TelePhone");
             //Hiredate
             this.driver.ClickElement(byHireImg, "Click On Hire");
+            this.driver.ClickElement(byHireDatePMT, "Click On previous month Img");
             ClickOnSpecificDate("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_dtemphiredate_DDD_C_mt", HireDate);
             SelectDropDown(MaritalStatus, byMaritalStatus);
             SelectDropDown(EmployeeStatus, byEmployeeStatus);
@@ -273,10 +294,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(bySubmit, "Submit Button");
         }
 
-        public void FillRequiredFieldsForSaveDraftInWCForm(string Location, string FirstName, string LastName, string DateOfInjury, string Description)
+        public void FillRequiredFieldsForSaveDraftInWCForm(string FirstName, string LastName, string DateOfInjury, string Description)
         {
             VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel1_CBImg");
-            SelectDropDown(Location, byLocationDropDown);
+            //SelectDropDown(Location, byLocationDropDown);
+            SelectLocationLoss();
             this.driver.SendKeysToElementClearFirst(byFirstName, FirstName, "Employee FirstName");
             this.driver.SendKeysToElementClearFirst(byLastName, LastName, "Employee LastName");
 
@@ -415,11 +437,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.SendKeysToElementClearFirst(bywitnessphone, TelePhone, "Witness telephone");
         }
 
-        public void EnterOccuranceInformation(string Location, string HireDate, string SideOfBody, string HoursPerDay, string Date, string PaymentFrequency, string DaysWorkedPerWeek, string Address, string City, string State, string Zip, string YesText, string NoText, string fname, string lname, string DateOfInjury, string AccidentCause, string InjuryType, string BodyPart, string Description)
+        public void EnterOccuranceInformation(string HireDate, string SideOfBody, string HoursPerDay, string Date, string PaymentFrequency, string DaysWorkedPerWeek, string Address, string City, string State, string Zip, string YesText, string NoText, string fname, string lname, string DateOfInjury, string AccidentCause, string InjuryType, string BodyPart, string Description)
         {
             VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel1_CBImg");
-            SelectDropDown(Location, byLocationDropDown);
-
+            //SelectDropDown(Location, byLocationDropDown);
+            SelectLocationLoss();
             VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel2_CBImg");
             this.driver.ClickElement(byIsInjuryWorkedLosingTimeText, "IsInjuryWorkedLosingTimeText");
             this.driver.SendKeysToElementClearFirst(byIsInjuryWorkedLosingTimeText, YesText, "IsInjuredWorkerLosingTime");

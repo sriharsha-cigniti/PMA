@@ -77,7 +77,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byLocationDropdOwnimage = By.XPath("//span[@id='MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocation_B-1Img']");
         private By byDateOfOccurence = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_dtOccurrence_I");
         private By byLocationLoss = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocation_I");
-        
+
         #endregion
 
         #region Public Methods
@@ -90,8 +90,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void VerifyColorChange()
         {
             string getColor = this.driver.FindElement(byLostInformation).GetAttribute("style");
-
-            if (getColor.Contains("background-color: rgb(0, 56, 135)") || getColor.Contains("background - color: red"))
+            getColor = getColor.Replace(" ", "").ToLower();
+            if (getColor.Contains(("background-color: rgb(0, 56, 135)").Replace(" ", "").ToLower()) || getColor.Contains(("background - color: red").Replace(" ", "").ToLower()))
             {
                 this.TESTREPORT.LogSuccess("Verify Loss Information color change", string.Format("actual -<mark>{0}</mark> expected  {1} is equal", "", getColor));
             }
@@ -241,7 +241,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byTablerow);
 
-            if (list[number].Text.Trim().ToLower().Contains(value.Trim().ToLower()))
+            if (list[number].Text.Replace(" ","").ToLower().Contains(value.Replace(" ", "").ToLower()))
             {
                 this.TESTREPORT.LogSuccess("Verify Data Grid row data", string.Format("<mark>{0}</mark>", list[number].Text));
             }
@@ -259,6 +259,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byTablerow);
             return list[number].Text;
+        }
+
+        public string GetLocationText()
+        {
+            return this.driver.GetElementAttribute(byLocationLoss, "value");
         }
 
         public void ValidatecolumnDataInLiabilityForm(string columnName, string value)

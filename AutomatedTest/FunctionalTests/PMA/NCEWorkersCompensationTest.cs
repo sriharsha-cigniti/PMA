@@ -168,7 +168,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceWC.ValidateText(BusinessValueText);
 
             this.TESTREPORT.LogInfo("Fill the required fields and Click on Submit Button");
-            nceWC.FillAllRequiredFieldsInWCForm(Location, FirstName, LastName, Address, City, Zip, DOB, SSN, Occupation, Date, AccidentCause, InjuryType, BodyPart, Description, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, SelectState, PreparerPhone, Date);
+            nceWC.FillAllRequiredFieldsInWCForm(FirstName, LastName, Address, City, Zip, DOB, SSN, Occupation, Date, AccidentCause, InjuryType, BodyPart, Description, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, SelectState, PreparerPhone, Date);
             nceWC.ClickOnSubmitButton();
 
             this.TESTREPORT.LogInfo("Verify The claim information you entered has been recorded and saved. message is displayed");
@@ -202,7 +202,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceWC.ValidateText(BusinessValueText);
 
             this.TESTREPORT.LogInfo("Fill the all fields and Click on Submit Button");
-            nceWC.FillAllRequiredFieldsInWCForm(Location, FirstName, LastName, Address, City, Zip, DOB, SSN, Occupation, Date, AccidentCause, InjuryType, BodyPart, Description, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, SelectState, PreparerPhone, Date);
+            nceWC.FillAllRequiredFieldsInWCForm(FirstName, LastName, Address, City, Zip, DOB, SSN, Occupation, Date, AccidentCause, InjuryType, BodyPart, Description, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, SelectState, PreparerPhone, Date);
             nceWC.FillAllNonRequiredFieldsInWCForm(MiddleName, Suffix, Gender, PreparerPhone, Selectdate, MaritalStatus, EmployeeStatus, NumberOfDependents, SideOfBody, NoOfWorkedPerDay, Date, PaymentFrequency, DaysPerWeek, Address, City, SelectState, Zip, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, FirstName, LastName);
             this.TESTREPORT.LogInfo("Entering the claimSubmission Section");
             nceGE.EnterclaimSubmission(OtherRemarks, EMailAdress);
@@ -243,7 +243,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.VerifyRequiredfieldErrorMessage(Convert.ToInt32(RequiredErrorMessageCount));
 
             this.TESTREPORT.LogInfo("Fill the required fields and Click on Save Draft Button");
-            nceWC.FillRequiredFieldsForSaveDraftInWCForm(Location, FirstName, LastName, Date, Description);
+            nceWC.FillRequiredFieldsForSaveDraftInWCForm(FirstName, LastName, Date, Description);
             nceAuto.ClickSaveDraft();
 
             this.TESTREPORT.LogInfo("Verify Draft Saved Successfully. message is displayed");
@@ -290,11 +290,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.VerifyRequiredfieldErrorMessage(Convert.ToInt32(RequiredErrorMessageCount));
 
             this.TESTREPORT.LogInfo("Fill the required fields and Click on Save Draft Button");
-            nceWC.FillAllRequiredFieldsInWCForm(Location, FirstName, LastName, Address, City, Zip, DOB, SSN, Occupation, Date, AccidentCause, InjuryType, BodyPart, Description, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, SelectState, PreparerPhone, Date);
+            nceWC.FillAllRequiredFieldsInWCForm(FirstName, LastName, Address, City, Zip, DOB, SSN, Occupation, Date, AccidentCause, InjuryType, BodyPart, Description, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, SelectState, PreparerPhone, Date);
             nceAuto.ClickSaveDraft();
 
             this.TESTREPORT.LogInfo("Verify Draft Saved Successfully. message is displayed");
             nceAuto.VerifyDataSaveMessage(DraftSaveMessage);
+            string LocationL = nceWC.GetLocationText();
 
             this.TESTREPORT.LogInfo("Click on cancel button");
             nceAuto.ClickCancel();
@@ -306,7 +307,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE.VerifyRowDataingGrid(0, "WC");
             nceGE.VerifyRowDataingGrid(1, DateWSlash);
             nceGE.VerifyRowDataingGrid(2, FirstName + " " + LastName);
-            nceGE.VerifyRowDataingGrid(3, Location);
+            nceGE.VerifyRowDataingGrid(3, LocationL);
             nceGE.VerifyRowDataingGrid(4, Description);
 
             this.TESTREPORT.LogInfo("Click on Delete button");
@@ -350,11 +351,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.VerifyRequiredfieldErrorMessage(Convert.ToInt32(RequiredErrorMessageCount));
 
             this.TESTREPORT.LogInfo("Fill the required fields and Click on Save Draft Button");
-            nceWC.FillRequiredFieldsForSaveDraftInWCForm(Location, FirstName, LastName, Date, Description);
+            nceWC.FillRequiredFieldsForSaveDraftInWCForm( FirstName, LastName, Date, Description);
             nceAuto.ClickSaveDraft();
 
             this.TESTREPORT.LogInfo("Verify Draft Saved Successfully. message is displayed");
             nceAuto.VerifyDataSaveMessage(DraftSaveMessage);
+            string LocationL = nceWC.GetLocationText();
 
             this.TESTREPORT.LogInfo("Click on cancel button");
             nceAuto.ClickCancel();
@@ -366,7 +368,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE.VerifyRowDataingGrid(0, "WC");
             nceGE.VerifyRowDataingGrid(1, DateWSlash);
             nceGE.VerifyRowDataingGrid(2, FirstName + " " + LastName);
-            nceGE.VerifyRowDataingGrid(3, Location);
+            nceGE.VerifyRowDataingGrid(3, LocationL);
             nceGE.VerifyRowDataingGrid(4, Description);
 
             string columnValue = nceGE.GetColumnDataFromRowGrid(1);
@@ -382,7 +384,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceWC.VerifyInvalidFormatErrorMessage(Convert.ToInt32(InvalidFormatMessageCount));
 
             this.TESTREPORT.LogInfo("Fill the required fields and Click on Submit Button");
-            nceWC.FillAllRequiredFieldsInWCForm(Location, FirstName, LastName, Address, City, Zip, DOB, SSN, Occupation, "", AccidentCause, InjuryType, BodyPart, Description, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, SelectState, PreparerPhone, Date);
+            nceWC.FillAllRequiredFieldsInWCForm(FirstName, LastName, Address, City, Zip, DOB, SSN, Occupation, "", AccidentCause, InjuryType, BodyPart, Description, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, SelectState, PreparerPhone, Date);
             nceWC.ClickOnSubmitButton();
 
             this.TESTREPORT.LogInfo("Verify The claim information you entered has been recorded and saved. message is displayed");
@@ -420,11 +422,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.VerifyRequiredfieldErrorMessage(Convert.ToInt32(RequiredErrorMessageCount));
 
             this.TESTREPORT.LogInfo("Fill the required fields and Click on Save Draft Button");
-            nceWC.FillRequiredFieldsForSaveDraftInWCForm(Location, FirstName, LastName, Date, Description);
+            nceWC.FillRequiredFieldsForSaveDraftInWCForm(FirstName, LastName, Date, Description);
             nceAuto.ClickSaveDraft();
 
             this.TESTREPORT.LogInfo("Verify Draft Saved Successfully. message is displayed");
             nceAuto.VerifyDataSaveMessage(DraftSaveMessage);
+            string LocationL = nceWC.GetLocationText();
 
             this.TESTREPORT.LogInfo("Click on cancel button");
             nceAuto.ClickCancel();
@@ -435,7 +438,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE.VerifyRowDataingGrid(0, "WC");
             nceGE.VerifyRowDataingGrid(1, DateWSlash);
             nceGE.VerifyRowDataingGrid(2, FirstName + " " + LastName);
-            nceGE.VerifyRowDataingGrid(3, Location);
+            nceGE.VerifyRowDataingGrid(3, LocationL);
             nceGE.VerifyRowDataingGrid(4, Description);
 
             string columnValue = nceGE.GetColumnDataFromRowGrid(1);
@@ -446,7 +449,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceWC.VerifyDate(columnValue);
 
             this.TESTREPORT.LogInfo("Fill the required fields and Click on Submit Button");
-            nceWC.FillAllRequiredFieldsInWCForm(Location, FirstName, LastName, Address, City, Zip, DOB, SSN, Occupation, "", AccidentCause, InjuryType, BodyPart, Description, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, SelectState, PreparerPhone, Date);
+            nceWC.FillAllRequiredFieldsInWCForm(FirstName, LastName, Address, City, Zip, DOB, SSN, Occupation, "", AccidentCause, InjuryType, BodyPart, Description, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, SelectState, PreparerPhone, Date);
             nceWC.FillAllNonRequiredFieldsInWCForm(MiddleName, Suffix, Gender, PreparerPhone, Selectdate, MaritalStatus, EmployeeStatus, NumberOfDependents, SideOfBody, NoOfWorkedPerDay, Date, PaymentFrequency, DaysPerWeek, Address, City, SelectState, Zip, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, FirstName, LastName);
             this.TESTREPORT.LogInfo("Entering the claimSubmission Section");
             nceGE.EnterclaimSubmission(OtherRemarks, EMailAdress);
@@ -529,7 +532,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceWC.VerifyName(Name);
 
             this.TESTREPORT.LogInfo("Fill the required fields and Click on Submit Button");
-            nceWC.EnterOccuranceInformation(Location, Selectdate, SideOfBody, NoOfWorkedPerDay, Date, PaymentFrequency, DaysPerWeek, Address, City, SelectState, Zip, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, FirstName, LastName, Date, AccidentCause, InjuryType, BodyPart, Description);
+            nceWC.EnterOccuranceInformation(Selectdate, SideOfBody, NoOfWorkedPerDay, Date, PaymentFrequency, DaysPerWeek, Address, City, SelectState, Zip, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, FirstName, LastName, Date, AccidentCause, InjuryType, BodyPart, Description);
             nceWC.EnterContactInformation(PreparerPhone, Address, City, SelectState, Zip, FirstName, LastName);
 
             this.TESTREPORT.LogInfo("Entering the claimSubmission Section");
@@ -582,7 +585,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceWC.VerifyName(Name.Trim());
 
             this.TESTREPORT.LogInfo("Fill the required fields and Click on Submit Button");
-            nceWC.EnterOccuranceInformation(Location, Selectdate, SideOfBody, NoOfWorkedPerDay, Date, PaymentFrequency, DaysPerWeek, Address, City, SelectState, Zip, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, FirstName, LastName, Date, AccidentCause, InjuryType, BodyPart, Description);
+            nceWC.EnterOccuranceInformation(Selectdate, SideOfBody, NoOfWorkedPerDay, Date, PaymentFrequency, DaysPerWeek, Address, City, SelectState, Zip, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, FirstName, LastName, Date, AccidentCause, InjuryType, BodyPart, Description);
             nceWC.EnterContactInformation(PreparerPhone, Address, City, SelectState, Zip, FirstName, LastName);
 
             this.TESTREPORT.LogInfo("Entering the claimSubmission Section");

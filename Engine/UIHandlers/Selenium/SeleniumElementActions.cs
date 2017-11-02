@@ -1317,7 +1317,6 @@ namespace Engine.UIHandlers.Selenium
             IReadOnlyList<IWebElement> rows = driver.FindElements(locator);
             int value = rnd.Next(0, rows.Count-1);
             int j = 0;
-                    
                   
             try
             {
@@ -1326,7 +1325,7 @@ namespace Engine.UIHandlers.Selenium
                    if(value==j)
                     {
                         IReadOnlyList<IWebElement> data = item.FindElements(By.TagName("td"));
-                        for (int i = 1; i <= index; i++)
+                        for (int i = 1; i < data.Count; i++)
                         {
                             listName.Add(data[i].Text);
                         }

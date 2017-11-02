@@ -233,6 +233,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.EnterContactBusinessPhone(ContactBusinessPhone);
             nceGE.ClickOnSavedraft();
             nceAuto.VerifyDataSaveMessage(DraftSaveMessage);
+            string LocationL = nceGE.GetLocationText();
 
             this.TESTREPORT.LogInfo("Click on cancel button");
             nceAuto.ClickCancel();
@@ -241,7 +242,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE.VerifyGridView();
             nceGE.VerifyRowDataingGrid(0, "LIAB");
             nceGE.VerifyRowDataingGrid(1, Date);
-            nceGE.VerifyRowDataingGrid(3, LocationLoss);
+            nceGE.VerifyRowDataingGrid(3, LocationL);
 
             nceAuto.SwitchToDefaultContent();
 
@@ -280,6 +281,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.EnterContactBusinessPhone(ContactBusinessPhone);
             nceGE.ClickOnSavedraft();
             nceAuto.VerifyDataSaveMessage(DraftSaveMessage);
+            string LocationL = nceGE.GetLocationText();
 
             this.TESTREPORT.LogInfo("Click on cancel button");
             nceAuto.ClickCancel();
@@ -288,7 +290,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE.VerifyGridView();
             nceGE.VerifyRowDataingGrid(0, "LIAB");
             nceGE.VerifyRowDataingGrid(1, Date);
-            nceGE.VerifyRowDataingGrid(3, LocationLoss);
+            nceGE.VerifyRowDataingGrid(3, LocationL);
 
             this.TESTREPORT.LogInfo("Click on Delete button");
             nceGE.ClickOnDelete();
@@ -334,6 +336,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             nceGE.ClickOnSavedraft();
             nceAuto.VerifyDataSaveMessage(DraftSaveMessage);
+            string LocationL = nceGE.GetLocationText();
 
             this.TESTREPORT.LogInfo("Click on cancel button");
             nceAuto.ClickCancel();
@@ -344,7 +347,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Verify Accident Date and Location of loss value in Liability Form ");
             nceGE.VerifyRowDataingGrid(1, Date);
-            nceGE.VerifyRowDataingGrid(3, LocationLoss);
+            nceGE.VerifyRowDataingGrid(3, LocationL);
 
             string getAccidentDate = nceGE.GetColumnDataFromRowGrid(1);
             this.TESTREPORT.LogInfo(string.Format("Accident Date in Grid : ", getAccidentDate));

@@ -61,7 +61,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byClaimType = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_ASPxLabel29");
         private By byQuickClaimTypeColumnSearch = By.Id("MainContent_sppage_pnlQuickSearch_gridresult_DXFREditorcol5_I");
         private By byClaimAccidentDate = By.Id("MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrgeneral1_0_FormView1_0_ASPxLabel18");
-       
+        private By bySubjectText = By.XPath("//tr[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrdiary1_0_griddiary_0_DXDataRow0']/td[5]");
+
         //header links
         private By byClaimInquiry = By.LinkText("Claim Inquiry");
         private By byReports = By.LinkText("Reports");
@@ -674,8 +675,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 ArrayList index = ClickonRandomDiaryEntry();
                 Thread.Sleep(3000);
                 VerifyClaimNumber(index[0].ToString());
-                VerifyClaimantName(index[1].ToString());                
-
+                VerifyClaimantName(index[1].ToString());
+                ValidatesubjectTexInDiaryTab(index[3].ToString());
             }
             else
             {
@@ -684,7 +685,20 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
             return results;
         }
-       
+
+        public void ValidatesubjectTexInDiaryTab(string SubjectText)
+        {
+            string subjectTextFromDiaryTab = this.driver.GetElementText(bySubjectText);
+            if (subjectTextFromDiaryTab.Trim().ToLower().Contains(SubjectText.Trim().ToLower()))
+            {
+                this.TESTREPORT.LogSuccess("Verify Text from DiaryTab Grid for column ", string.Format("actual text -<mark>{0}</mark> expected Text {1} is equal", subjectTextFromDiaryTab, SubjectText));
+            }
+            else
+            {
+                this.TESTREPORT.LogSuccess("Verify Text from DiaryTab Grid for column ", string.Format("actual text -<mark>{0}</mark> expected Text {1} is not equal", subjectTextFromDiaryTab, SubjectText), this.SCREENSHOTFILE);
+            }
+        }
+
         public void VerifyFieldsAfterReset()
         {
             string ClaimantName = this.driver.GetElementText(byQuickClaimantNameSearch);

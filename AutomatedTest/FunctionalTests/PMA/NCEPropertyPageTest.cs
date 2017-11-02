@@ -78,7 +78,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify 'The claim information you entered has been recorded and saved' message");
            //Enter Values
             nceAuto.EnterOccurenceDate();
-            nceProperty.SelectLocationLoss(LocationLoss);
+            nceProperty.SelectLocationLoss();
             nceAuto.SelectStateOfLoss(StateofLoss);
             nceAuto.EnterContactBusinessPhone(ContactBusinessPhone);
             //Click on Submit
@@ -132,7 +132,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Enter the data for LossInformation Section");
             nceAuto.EnterOccurenceDate();
             nceAuto.EnterContactBusinessPhone(ContactBusinessPhone);
-            nceProperty.SelectLocationLoss(LocationLoss);
+            nceProperty.SelectLocationLoss();
             nceAuto.SelectStateOfLoss(StateofLoss);            
             nceGE.EnterAddress(Address);
             nceGE.EnterCity(City);
@@ -191,7 +191,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             //To fill the required fields to save draft and save draft
             this.TESTREPORT.LogInfo("To fill the required fields to save Draft");
             nceAuto.EnterOccurenceDate();
-            nceProperty.SelectLocationLoss(LocationLoss);
+            nceProperty.SelectLocationLoss();
             nceAuto.SelectStateOfLoss(StateofLoss);
             nceProperty.EnterDescriptionOfDamage(DescriptionOfDamage);
             //Click save Draft again
@@ -256,7 +256,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             //To fill the required fields to save draft and save draft
             this.TESTREPORT.LogInfo("To fill the required fields to save Draft");
             nceAuto.EnterOccurenceDate();
-            nceProperty.SelectLocationLoss(LocationLoss);
+            nceProperty.SelectLocationLoss();
             nceAuto.SelectStateOfLoss(StateofLoss);
             nceProperty.EnterDescriptionOfDamage(DescriptionOfDamage);
             //Click save Draft again
@@ -337,7 +337,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             //To fill the required fields to save draft
             this.TESTREPORT.LogInfo("To fill the required fields to save Draft");
             nceAuto.EnterOccurenceDate();
-            nceProperty.SelectLocationLoss(LocationLoss);
+            nceProperty.SelectLocationLoss();
             //Click save Draft again
             nceAuto.ClickSaveDraft();
             // Draft Saved Successfully text
@@ -431,7 +431,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             //To fill the required fields to save draft
             this.TESTREPORT.LogInfo("To fill the required fields to save Draft");
             nceAuto.EnterOccurenceDate();
-            nceProperty.SelectLocationLoss(LocationLoss);
+            nceProperty.SelectLocationLoss();
             //Click save Draft again
             nceAuto.ClickSaveDraft();
             // Draft Saved Successfully text
