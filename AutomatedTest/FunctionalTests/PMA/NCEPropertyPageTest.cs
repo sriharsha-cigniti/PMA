@@ -16,18 +16,59 @@ namespace AutomatedTest.FunctionalTests.PMA
     [TestClass]
     public class NCEPropertyPageTest : PMA.TestBaseTemplate
     {
-        //Create Page Objects
-        
+        #region parameters
+        public static string HomePageTitle { get; set; }
+        public static string SelectBusinessvalueDropDown { get; set; }
+        public static string RequiredErrorMessageCount { get; set; }
+        public static string ContactBusinessPhone { get; set; }
+        public static string DataSaveMessage { get; set; }
+        public static string StateofLoss { get; set; }
+        public static string LocationLoss { get; set; }
+        public static string DescriptionOfDamage { get; set; }
+        public static string DescribeLoss { get; set; }
+        public static string Address { get; set; }
+        public static string City { get; set; }
+        public static string ZipCode { get; set; }
+        public static string KindOfLoss { get; set; }
+        public static string EstimatedLossAmount { get; set; }
+        public static string OtherRemarks { get; set; }
+        public static string EMailAdress { get; set; }
+        public static string TextFromDeleteAlert { get; set; }
+        public static string ErrorCount { get; set; }
+        public static string LossInformationText { get; set; }
+        public static string ClaimSubmissionText { get; set; }
+        #endregion
+
+        public NCEPropertyPageTest()
+        {
+            // Read CSV values
+            HomePageTitle = readCSV("HomePageTitle");
+            SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
+            RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
+            ContactBusinessPhone = readCSV("ContactBusinessPhone");
+            DataSaveMessage = readCSV("DataSaveMessage");
+            StateofLoss = readCSV("StateOfLoss");
+            LocationLoss = readCSV("LocationLoss");            
+            DescriptionOfDamage = readCSV("DescriptionOfDamage");
+            DescribeLoss = readCSV("DescribeLoss");           
+            Address = readCSV("Address");
+            City = readCSV("city");
+            ZipCode = readCSV("ZipCode");
+            KindOfLoss = readCSV("KindOfLoss");
+            EstimatedLossAmount = readCSV("EstimatedLossAmount");
+            OtherRemarks = readCSV("OtherRemarks");
+            EMailAdress = readCSV("EMailAdress");
+            TextFromDeleteAlert = readCSV("TextFromDeleteAlert");
+            ErrorCount = readCSV("ErrorCount");            
+            LossInformationText = readCSV("LossInformationText");
+            ClaimSubmissionText = readCSV("ClaimSubmissionText");  
+        }
+
         [TestMethod, Description("Create a new Property claim and cancel"), TestCategory("Regression")]
         public void NCE_P1NCEProperty()
         {            
             this.TESTREPORT.InitTestCase("NCE_P1", "Create a new Property claim and cancel");
-
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            #endregion
-
+            
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
 
@@ -49,16 +90,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         {
 
             this.TESTREPORT.InitTestCase("NCE_P2", "Create a new Property claim, fill out only the required fields and submit");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            #endregion
-
+            
             //verify home page title
             home.VerifyPageTitle(HomePageTitle);
             //verify cinch welcome
@@ -95,28 +127,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         {
 
             this.TESTREPORT.InitTestCase("NCE_P3", "Create a new Property claim, fill out all fields and submit");
-
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-           // string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string DescriptionOfDamage = readCSV("DescriptionOfDamage");
-            string DescribeLoss = readCSV("DescribeLoss");
-            //string Alertmessage = readCSV("Alertmessage");
-            string Address = readCSV("Address");
-            string City = readCSV("city");
-            string ZipCode = readCSV("ZipCode");
-            string KindOfLoss = readCSV("KindOfLoss");
-            string EstimatedLossAmount = readCSV("EstimatedLossAmount");
-            string OtherRemarks = readCSV("OtherRemarks");
-            string EMailAdress = readCSV("EMailAdress");
-
-            #endregion
-
+              
             //verify home page title
             home.VerifyPageTitle(HomePageTitle);
             //verify cinch welcome
@@ -164,17 +175,6 @@ namespace AutomatedTest.FunctionalTests.PMA
         {
 
             this.TESTREPORT.InitTestCase("NCE_P4", "Create a new Property claim and save as draft");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string DescriptionOfDamage = readCSV("DescriptionOfDamage");
-            #endregion
-
             //verify home page title
             home.VerifyPageTitle(HomePageTitle);
             //verify cinch welcome
@@ -226,20 +226,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEPropertyPage-Create a new Property claim, save as draft, return to the saved claim page and delete"), TestCategory("Regression")]
         public void NCE_P5NCEProperty()
         {
-
             this.TESTREPORT.InitTestCase("NCE_P5", "Create a new Property claim, save as draft, return to the saved claim page and delete");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string DescriptionOfDamage = readCSV("DescriptionOfDamage");
-            string TextFromDeleteAlert = readCSV("TextFromDeleteAlert");
-            #endregion
-
             //verify home page title
             home.VerifyPageTitle(HomePageTitle);
             //verify cinch welcome
@@ -307,19 +294,6 @@ namespace AutomatedTest.FunctionalTests.PMA
         public void NCE_P6NCEProperty()
         {
             this.TESTREPORT.InitTestCase("NCE_P6", "Create a new Property claim, save as draft, navigate back to draft and submit claim with only required fields");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string DescriptionOfDamage = readCSV("DescriptionOfDamage");
-            string TextFromDeleteAlert = readCSV("TextFromDeleteAlert");          
-            string ErrorCount = readCSV("ErrorCount");
-            #endregion
-
             //verify home page title
             home.VerifyPageTitle(HomePageTitle);
             //verify cinch welcome
@@ -383,37 +357,10 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.UpdateTestCaseStatus();
         }
-
         [TestMethod, Description("NCEPropertyPage - Create a new Property claim, save as draft, navigate back to draft and submit claim with all fields"), TestCategory("Regression")]
         public void NCE_P7NCEProperty()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEPropertyPage nceProperty = new NCEPropertyPage();
-            NCEGeneralLiability nceGE = new NCEGeneralLiability();
-
             this.TESTREPORT.InitTestCase("NCE_GL7", "Create a new General Liability claim, save as draft, navigate back to draft and submit claim with all fields");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            // string RequiredErrorMessageCount = readCSV("RequiredErrorMessageCount");
-            string ContactBusinessPhone = readCSV("ContactBusinessPhone");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            string StateofLoss = readCSV("StateOfLoss");
-            string LocationLoss = readCSV("LocationLoss");
-            string DescriptionOfDamage = readCSV("DescriptionOfDamage");
-            string DescribeLoss = readCSV("DescribeLoss");           
-            string Address = readCSV("Address");
-            string City = readCSV("city");
-            string ZipCode = readCSV("ZipCode");
-            string KindOfLoss = readCSV("KindOfLoss");
-            string EstimatedLossAmount = readCSV("EstimatedLossAmount");
-            string OtherRemarks = readCSV("OtherRemarks");
-            string EMailAdress = readCSV("EMailAdress");
-            
-
-            #endregion
-
             //verify home page title
             home.VerifyPageTitle(HomePageTitle);
             //verify cinch welcome
@@ -439,11 +386,11 @@ namespace AutomatedTest.FunctionalTests.PMA
             //Get elements text
             string a = nceAuto.GetDateofOccurence();
             string b = nceProperty.GetLocationofLoss();
-
-            //click cancel
+            //Click cancel
             this.TESTREPORT.LogInfo("Verify Cancel");
             //Click on Cancel Button
             nceAuto.ClickCancel();
+            //get the Table Count
             this.TESTREPORT.LogInfo("Verify Data Grid row and row values ");
             int rowCountBeforeDelete = nceGE.GetGridRowCount();
             nceAuto.SwitchToDefaultContent();
@@ -472,10 +419,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             #endregion
             //Click on Submit
             nceAuto.ClickSubmit();
+            //Veify Confirmation message
             this.TESTREPORT.LogInfo("Click on Submit button and Verify 'The claim information you entered has been recorded and saved' as message");           
             nceAuto.VerifyDataSaveMessage(DataSaveMessage);
             //Get claim number
             nceProperty.GetClaimNumber();
+            //Switch to Default Frame
             nceAuto.SwitchToDefaultContent();
             //Click on Exit to close the application
             home.ClickExit();
@@ -485,19 +434,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEPropertyPage - Verify the Tabs/sections present in the Property Claim"), TestCategory("Regression")]
         public void NCE_P8NCEProperty()
         {
-            HomePage home = new HomePage();
-            NCEAutoPage nceAuto = new NCEAutoPage();
-            NCEGeneralLiability nceGE = new NCEGeneralLiability();
-            NCEPropertyPage nceProperty = new NCEPropertyPage();
-
             this.TESTREPORT.InitTestCase("NCE_P8", "Verify the Tabs/sections present in the Property Claim");
-            #region ReadCSV
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
-            string LossInformationText = readCSV("LossInformationText");           
-            string ClaimSubmissionText = readCSV("ClaimSubmissionText");
-            #endregion
-
+           
             //verify home page title
             home.VerifyPageTitle(HomePageTitle);
             //verify cinch welcome
@@ -507,13 +445,14 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.ClickOnNewClaimEntry();
             //Verify Property Text
             this.TESTREPORT.LogInfo("Verify 'Property' text");
+            //Select line of business from dropdown
             nceProperty.VerifyPropertyForm(SelectBusinessvalueDropDown);
-
+            //Verify Text on Page
             nceGE.VerifyTextOnPage(LossInformationText);            
             nceGE.VerifyTextOnPage(ClaimSubmissionText);
-
+            //Switch to Default Frame
             nceAuto.SwitchToDefaultContent();
-           
+            //Click on exit to close the application
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();

@@ -407,11 +407,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         }
 
 
-        public void clickOSHAintheHeader()
-        {
-            this.driver.ClickElement(byOSHALink, "OSHAintheHeader");
-            Thread.Sleep(2000);
-        }
+        //public void clickOSHAintheHeader()
+        //{
+        //    this.driver.ClickElement(byOSHALink, "OSHAintheHeader");
+        //    Thread.Sleep(2000);
+        //}
 
         public void VerifyImportantInformationPleaseReadText()
         {
@@ -426,11 +426,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
-        public void ClickAcceptinOSHA()
-        {
-            this.driver.ClickElement(byClickAcceptinOSHA, "Click accept in OSHA");
-            Thread.Sleep(2000);
-        }
+        //public void ClickAcceptinOSHA()
+        //{
+        //    this.driver.ClickElement(byClickAcceptinOSHA, "Click accept in OSHA");
+        //    Thread.Sleep(2000);
+        //}
 
         public void VerifyOSHATabResultsPageSize(string ExpectedPageSizevalue)
         {
@@ -506,9 +506,5 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             Thread.Sleep(4000);
         }
 
-        public void ClickHomeLink()
-        {
-            this.driver.ClickElement(byHome, "Click Home in the PageHeader");
-        }
-    }
+           }
 }

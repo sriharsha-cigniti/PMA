@@ -15,47 +15,55 @@ namespace AutomatedTest.FunctionalTests.PMA
     [TestClass]
     public class SettingsPageTest : PMA.TestBaseTemplate
     {
+        #region parameters
+        public static string HomePageTitle { get; set; }
+        public static string SettingsPageTitle { get; set; }
+        public static string ClaimInquiryPageTitle { get; set; }
+        public static string DefaultAccountvalue { get; set; }
+        public static string DataSaveMessage { get; set; }      
+        #endregion
+
+        public SettingsPageTest()
+        {
+            // Read CSV values
+            HomePageTitle = readCSV("HomePageTitle");
+            SettingsPageTitle = readCSV("SettingsPageTitle");
+            ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
+            DefaultAccountvalue = readCSV("DefaultAccountvalue");
+            DataSaveMessage = readCSV("DataSaveMessage");   
+
+        }
 
         [TestMethod, Description("Settings-Navigate to the Settings area and set a default account"), TestCategory("Regression")]
         public void Settings_01settingsPage()
         {
-            #region Objects
-            HomePage home = new HomePage();
-            SettingsPage settingsPage = new SettingsPage();
-            LoginPage login = new LoginPage();
-            ClaimInquiry cInquiry = new ClaimInquiry();
-            #endregion
 
             this.TESTREPORT.InitTestCase("Settings_01", "Navigate to the Settings area and set a default account");
-            #region
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SettingsPageTitle = readCSV("SettingsPageTitle");
-            string DefaultAccountvalue = readCSV("DefaultAccountvalue");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            #endregion
-
+            //verify home page title
             home.VerifyPageTitle(HomePageTitle);
+            //verify cinch welcome
             home.VerifyCinchWelome();
-
-            this.TESTREPORT.LogInfo("Verify Settings Click and Page title ");
+            //Click on Setting tab
+            this.TESTREPORT.LogInfo("Verify Settings Page and Click ");
             settingsPage.ClickOnSettings();
+            //Verify Settings page title
             home.VerifyPageTitle(SettingsPageTitle);
-
-            this.TESTREPORT.LogInfo("Verify Text Message- 'Data has been saved successfully'");
-
+            // Select Default value from DropDown        
             settingsPage.SelectDefaultAccount(DefaultAccountvalue);
+            //Click on Save to save the modified settings  
             settingsPage.SaveSettings();
+            //Verify the Confirmation message
             settingsPage.VerifyDataSaveMessage(DataSaveMessage);
             string accountDetails = settingsPage.GetAccountDetails();
+            //Click on EXit to apply the changes
             home.ClickExit();
-
             this.TESTREPORT.LogInfo("Re-Login into application");
+            //Re-Launch the browser to see the applied changes
             login.OpenBrowser();
-
             this.TESTREPORT.LogInfo("Verify Default Account details applied");
+            //Verify applied changes
             settingsPage.VerifyDefaulAccountDetailsIsApplied(accountDetails);
-
-
+            //Click on Exit to close the application
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
 
@@ -65,21 +73,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Settings-Navigate to the Settings, set preferences and confirm settings"), TestCategory("Regression")]
         public void Settings_02settingsPage()
         {
-            #region Objects
-            HomePage home = new HomePage();
-            SettingsPage settingsPage = new SettingsPage();
-            LoginPage login = new LoginPage();
-            ClaimInquiry cInquiry = new ClaimInquiry();
-            #endregion
-
             this.TESTREPORT.InitTestCase("Settings_02", "Navigate to the Settings, set preferences and confirm settings");
-            #region
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SettingsPageTitle = readCSV("SettingsPageTitle");
-            string DefaultAccountvalue = readCSV("DefaultAccountvalue");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            #endregion
-
+            
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
 
@@ -140,39 +135,28 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify Default Account details applied");
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
-
-            //this.TESTREPORT.LogInfo("Verify Default Account details applied");
-            //settingsPage.VerifyDefaulAccountDetailsIsApplied(accountDetails);
-
             //click on settings again
             settingsPage.ClickOnSettings();
             //verify settings page Title
             home.VerifyPageTitle(SettingsPageTitle);
 
             settingsPage.VerifydefaultaccountDetailsonsettings(accountDetails);
-
-            //click on home
-            settingsPage.ClickHomeLink();
-
+            //Click on home
+            diaryNotes.ClickHome();
             //VerifyMyDiaryinHomePage
             settingsPage.VerifyMyDiaryinHomePage();
-
             //VerifyQuickClaimSearchinHomePage
             settingsPage.VerifyQuickClaimSearchinHomePage();
-
             //CLick on ClaimInquiry
             home.ClickClaimInquiry();
+            //Click on Search 
             home.ClickSearch();
-
             //Validate the number of claims populated for Claim Search
             settingsPage.VerifyCLaimInquiryResultsPageSize(ExpectedClaimListvalue);
-
             // verify line of business
             settingsPage.VerifyLineofBusiness(ExpectedLineofBusinessvalue);
             // claim status
             settingsPage.VerifyClaimstatus(ExpectedClaimStatusvalue);
-
-
             //click on Random claim
             settingsPage.ClickonClaim();
             // home.ClickOnRandomClaim();
@@ -195,11 +179,11 @@ namespace AutomatedTest.FunctionalTests.PMA
             settingsPage.VerifyLogNotesTabResultsPageSize(ExpectedLognotesvalue);
 
             //click on OSHA summary
-            settingsPage.clickOSHAintheHeader();
+            osha.ClickOnOsha();
             //verify important information please read text in osha summary
             settingsPage.VerifyImportantInformationPleaseReadText();
             //click accept button in osha summary
-            settingsPage.ClickAcceptinOSHA();
+            osha.ClickAcceptButton();
             //Validate the number of results populated for OSHA Tab
             settingsPage.VerifyOSHATabResultsPageSize(ExpectedOSHASummaryvalue);
 
@@ -218,21 +202,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("Navigate to the Settings, Customize ClaimList Columns, confirm Settings and validate it in the claim inquiry tab"), TestCategory("Regression")]
         public void Settings_03settingsPage()
         {
-            #region Objects
-            HomePage home = new HomePage();
-            SettingsPage settingsPage = new SettingsPage();
-            LoginPage login = new LoginPage();
-            ClaimInquiry cInquiry = new ClaimInquiry();
-            #endregion
-
             this.TESTREPORT.InitTestCase("Settings_03", "Navigate to the Settings, Customize ClaimList Columns, confirm Settings and validate it in the claim inquiry tab");
-            #region
-            string HomePageTitle = readCSV("HomePageTitle");
-            string SettingsPageTitle = readCSV("SettingsPageTitle");
-            string DefaultAccountvalue = readCSV("DefaultAccountvalue");
-            string DataSaveMessage = readCSV("DataSaveMessage");
-            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
-            #endregion
+            
             //verify page title
             home.VerifyPageTitle(HomePageTitle);
             //verify cinch welcome
