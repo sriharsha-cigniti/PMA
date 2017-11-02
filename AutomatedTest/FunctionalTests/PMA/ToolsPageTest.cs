@@ -23,6 +23,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         public static string ConfirmationMsg { get; set; }
         public static string AcctNumberHeader { get; set; }
         public static string FeatureHeader { get; set; }
+        public static string BrokerCode { get; set; }
         #endregion
 
         public ToolsPageTest()
@@ -34,6 +35,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             ConfirmationMsg = readCSV("ConfirmationMsg");
             AcctNumberHeader = readCSV("AcctNumberHeader");
             FeatureHeader = readCSV("FeatureHeader");
+            BrokerCode = readCSV("BrokerCode");
         }
 
         [TestMethod, Description("Tools - Search by user name and add account to the user profile"), TestCategory("Regression")]
@@ -120,7 +122,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.ClickTools();
             home.VerifyPageTitle(ToolsPageTitle);
             Tools.VerifyAdministrationLabel();
-            Tools.VerifyBrokersTab();
+            Tools.VerifyAndClickBrokersTab();
             Tools.VerifySearchByLabel();
             Tools.VerifyAndClickReportsTab();
             Tools.VerifyAccountLevelAndNameLabel();            
@@ -136,16 +138,38 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
-            home.ClickTools();
-            home.VerifyPageTitle(ToolsPageTitle);
-            Tools.VerifyAdministrationLabel();           
-            Tools.VerifyAndClickReportsTab();
-            Tools.VerifyAccountLevelAndNameLabel();
-            Tools.SearchAccount(AccountNumber);
-            string ExpectedLable = "Account Level Opt Out Rule(s) For " + AccountNumber + "";
-            Tools.VerifyAccntMsgLabel(ExpectedLable);
-            Tools.VerifyAccountsTableHeaders("AcctNumberHeader");
-            Tools.VerifyAccountsTableHeaders("FeatureHeader");
+            if (home.ClickTools())
+            {
+                home.VerifyPageTitle(ToolsPageTitle);
+                Tools.VerifyAdministrationLabel();
+                Tools.VerifyAndClickReportsTab();
+                Tools.VerifyAccountLevelAndNameLabel();
+                Tools.SearchAccount(AccountNumber);
+                string ExpectedLable = "Account Level Opt Out Rule(s) For " + AccountNumber + "";
+                Tools.VerifyAccntMsgLabel(ExpectedLable);
+                Tools.VerifyAccountsTableHeaders("AcctNumberHeader");
+                Tools.VerifyAccountsTableHeaders("FeatureHeader");
+            }
+            home.ClickExit();
+            this.TESTREPORT.UpdateTestCaseStatus();
+
+        }
+
+        [TestMethod, Description("Tools - Search Information By Brokers code/Brokers Name"), TestCategory("Regression")]
+        public void TOOL_U6()
+        {
+            this.TESTREPORT.InitTestCase("TOOL_U6", "Search Information By Brokers code/Brokers Name");
+
+            home.VerifyPageTitle(HomePageTitle);
+            home.VerifyCinchWelome();
+            if (home.ClickTools())
+            {
+                home.VerifyPageTitle(ToolsPageTitle);
+                Tools.VerifyAdministrationLabel();
+                Tools.VerifyAndClickBrokersTab();
+                Tools.SearchBrokerCode(BrokerCode);
+                Tools.VerifyBrokerSearchResults();              
+            }
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
 

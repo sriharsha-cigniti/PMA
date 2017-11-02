@@ -50,6 +50,15 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byAccountNumber = By.XPath("//input[@id='MainContent_ASPxPageControl1_OptOutAcctNumTbx_I']");
         private By byAccntMsgLabel = By.Id("MainContent_AcctMsgLbl");
         private By byAccountHeaders = By.XPath("//table[@id='MainContent_gridaccounts']//th");
+        private By byBrokerCodeInput = By.Id("MainContent_ASPxPageControl1_txtbrokercode_I");
+        private By bySearchButtonBroker = By.Id("MainContent_ASPxPageControl1_btnbroker_CD");
+        private By bySearchTableCount = By.XPath("//tr[contains(@id,'MainContent_ASPxPageControl1_gridbroker_DXDataRow')]");
+        private By bySelectBroker = By.XPath("//tr[contains(@id,'MainContent_ASPxPageControl1_gridbroker_DXDataRow')][1]");
+        private By byBrokerInformationHeader = By.XPath("//b[text()='Broker Detail Information']");
+        private By byBrokerCode = By.XPath("//label[@id='MainContent_lblBrkCode']");
+        private By byBrokerName = By.XPath("//label[@id='MainContent_lblBrkName']");
+        private By byGetBrokerName = By.XPath("//tr[contains(@id,'MainContent_ASPxPageControl1_gridbroker_DXDataRow')][1]//td[1]");
+        private By byGetBrokerCode = By.XPath("//tr[contains(@id,'MainContent_ASPxPageControl1_gridbroker_DXDataRow')][1]//td[2]");
         #endregion
 
         //Verify User administration text
@@ -83,7 +92,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         }
 
         //Verify Brokers Tab
-        public void VerifyBrokersTab()
+        public void VerifyAndClickBrokersTab()
         {
             this.TESTREPORT.LogInfo("Verify Broker Tab");
             bool flag = this.driver.IsWebElementDisplayed(byBroker);
@@ -361,6 +370,16 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(bySearchButtonReports, "Search", 60);
         }
 
+        //Enter BrokerCode and Search
+        public void SearchBrokerCode(string BrokerCode)
+        {
+            this.TESTREPORT.LogInfo("Enter BrokerCode");
+            this.driver.SendKeysToElementClearFirst(byBrokerCodeInput, BrokerCode, "BrokerCode");
+            Thread.Sleep(5000);
+            this.TESTREPORT.LogInfo("Click on Search");
+            this.driver.ClickElement(bySearchButtonBroker, "Search", 60);
+        }
+
         // verify Account Level Opt Out Rule(s) for search account
 
         public void VerifyAccntMsgLabel(string ExpectedLabel)
@@ -386,6 +405,35 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
             }
         }
+
+        //Verify Search results
+
+        public int VerifyBrokerSearchResults()
+        {
+            
+            this.TESTREPORT.LogInfo("Verify Brokers Tablerow Count");
+            Thread.Sleep(6000);
+            IReadOnlyList<IWebElement> list = this.driver.FindElements(bySearchTableCount);
+            int TableCount = list.Count;
+            if (TableCount > 0)
+            {
+                this.TESTREPORT.LogSuccess("Verify brokers associated for User ID", String.Format(" Brokers for User -<mark>{0}</mark> are displayed succesfully", "Associated Brokers"));
+                string ExpectedBrokerName = this.driver.GetElementText(byGetBrokerName);
+                string ExpectedBrokerCode = this.driver.GetElementText(byGetBrokerCode);
+                this.driver.ClickElement(bySelectBroker,"ClickBroker",60);
+                this.driver.IsElementPresent(byBrokerInformationHeader);
+                this.driver.AssertTextEqual(byBrokerName, ExpectedBrokerName);
+                this.driver.AssertTextEqual(byBrokerCode, ExpectedBrokerCode);
+
+            }
+            else
+            {
+                this.TESTREPORT.LogInfo("Verify brokers associated for User ID", String.Format("No Brokers associated for this User ", this.SCREENSHOTFILE));
+            }
+            return TableCount;
+
+        }
+
 
     }
 }
