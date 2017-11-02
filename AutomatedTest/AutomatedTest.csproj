@@ -118,7 +118,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestData\PMA\NewClaimEntryPageTest.csv" />
-    <None Include="TestData\PMA\NewClaimEntry.csv" />
     <None Include="TestData\PMA\ToolsPageTest.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
