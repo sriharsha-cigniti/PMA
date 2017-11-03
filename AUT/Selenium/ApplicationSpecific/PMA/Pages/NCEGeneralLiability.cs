@@ -90,6 +90,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void VerifyColorChange()
         {
+            Thread.Sleep(3000);
             string getColor = this.driver.FindElement(byLostInformation).GetAttribute("style");
             getColor = getColor.Replace(" ", "").ToLower();
             if (getColor.Contains(("background-color: rgb(0, 56, 135)").Replace(" ", "").ToLower()) || getColor.Contains(("background - color: red").Replace(" ", "").ToLower()))

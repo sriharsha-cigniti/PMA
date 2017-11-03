@@ -360,7 +360,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         [TestMethod, Description("NCEPropertyPage - Create a new Property claim, save as draft, navigate back to draft and submit claim with all fields"), TestCategory("Regression")]
         public void NCE_P7NCEProperty()
         {
-            this.TESTREPORT.InitTestCase("NCE_GL7", "Create a new General Liability claim, save as draft, navigate back to draft and submit claim with all fields");
+            this.TESTREPORT.InitTestCase("NCE_P7", "Create a new Property claim, save as draft, navigate back to draft and submit claim with all fields");
             //verify home page title
             home.VerifyPageTitle(HomePageTitle);
             //verify cinch welcome

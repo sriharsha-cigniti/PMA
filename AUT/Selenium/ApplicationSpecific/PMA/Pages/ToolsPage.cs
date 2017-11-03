@@ -307,12 +307,13 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //Verify Header Label 
         public void VerifyHeaderLabel()
         {
-            this.driver.WaitElementPresent(byLabelheader);
+            
             string AccountName = this.driver.GetElementText(byAccountName, 60);
-            string AccountNumber = this.driver.GetElementText(byAccountNumber, 60);
+            string AccountNumber = this.driver.GetElementText(byAccountNumberText, 60);
             string UserName = Environment.UserName;
             string ExpectedLabelHeader = "Permissions for " + UserName + " on Account " + AccountNumber + "-" + AccountName + "";
             ClickPermission();
+            this.driver.WaitElementPresent(byLabelheader);
             this.TESTREPORT.LogInfo("Verifying the Header Label");
             this.driver.AssertTextMatching(this.driver.GetElementText(byLabelheader).ToLower(), ExpectedLabelHeader.ToLower());
         }
