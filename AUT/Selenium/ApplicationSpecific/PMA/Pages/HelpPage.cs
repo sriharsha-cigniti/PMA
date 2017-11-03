@@ -23,7 +23,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         #region UI Objects
         private By byHelpTab = By.XPath("//a//span[contains(text(),'Help')]");
         private By byPMACinchSupport = By.XPath("//span[contains(text(),'PMA Cinch® Support')]");
-        private By byHelpLink = By.Id("CinchMenu_DXI7_T");
+        private By byHelpLink = By.XPath("//span[contains(text(),'Help')]/../../../..//a[contains(@id,'CinchMenu_DXI')]");
 
         #endregion
 
@@ -87,9 +87,18 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         }
 
-        public void VerifyHelpTabIsFocus(string HighlightColor)
+        public void VerifyTabIsFocus(string HighlightColor, string TabName)
         {
-            string actualHighlightcolor = this.driver.GetElementAttribute(byHelpLink, "style");
+            string actualHighlightcolor = string.Empty;
+            IReadOnlyList <IWebElement> tabs = this.driver.FindElements(byHelpLink);
+            foreach (IWebElement tab in tabs)
+            {
+                if (tab.Text.ToLower().Contains(TabName.ToLower()))
+                {
+                    actualHighlightcolor = tab.GetAttribute("style");
+                }
+            }
+
             if (actualHighlightcolor.Contains(HighlightColor))
                 this.TESTREPORT.LogSuccess("Verify Help tab is highlighted", string.Format("Help highlighted color is:<Mark>{0}</Mark>", actualHighlightcolor));
             else

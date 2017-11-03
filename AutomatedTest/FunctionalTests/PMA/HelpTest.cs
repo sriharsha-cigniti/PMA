@@ -123,7 +123,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
-            help.VerifyHelpTabIsFocus(HelpLinkHighLightColor);
+            help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
@@ -155,7 +155,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
-            help.VerifyHelpTabIsFocus(HelpLinkHighLightColor);
+            help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
@@ -187,7 +187,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
-            help.VerifyHelpTabIsFocus(HelpLinkHighLightColor);
+            help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
@@ -219,7 +219,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
-            help.VerifyHelpTabIsFocus(HelpLinkHighLightColor);
+            help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
@@ -251,7 +251,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
-            help.VerifyHelpTabIsFocus(HelpLinkHighLightColor);
+            help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
@@ -283,7 +283,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
-            help.VerifyHelpTabIsFocus(HelpLinkHighLightColor);
+            help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
@@ -314,7 +314,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
-            help.VerifyHelpTabIsFocus(HelpLinkHighLightColor);
+            help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
@@ -346,7 +346,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
-            help.VerifyHelpTabIsFocus(HelpLinkHighLightColor);
+            help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
@@ -378,7 +378,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
-            help.VerifyHelpTabIsFocus(HelpLinkHighLightColor);
+            help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
@@ -410,7 +410,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
-            help.VerifyHelpTabIsFocus(HelpLinkHighLightColor);
+            help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
@@ -442,7 +442,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
-            help.VerifyHelpTabIsFocus(HelpLinkHighLightColor);
+            help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
@@ -473,7 +473,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
-            help.VerifyHelpTabIsFocus(HelpLinkHighLightColor);
+            help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
