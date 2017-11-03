@@ -734,6 +734,33 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         {
             return getHeaderPosition(ColumnName, "MainContent_sppage_pnlQuickSearch_gridresult_DXHeadersRow0");
         }
+
+        public string SelectAccountDropDownWithValue(string DropDownText)
+        {
+            this.TESTREPORT.LogInfo("Select account from dropdown");
+            string selectedValue = string.Empty;
+            try
+            {
+                IReadOnlyList<IWebElement> list = this.driver.FindElements(byMyAccountTable);
+                foreach (IWebElement element in list)
+                {
+                    if (element.Text.Replace(" ", "").Contains(DropDownText.Replace(" ", "")))
+                    {
+                        element.Click();
+                        break;
+                    }
+                }
+
+                selectedValue = this.driver.GetElementText(byAccountHeader);
+                this.TESTREPORT.LogSuccess("Select Account from the Account dropdown", String.Format(" Account - {0} is selcted succesfully", selectedValue));
+            }
+            catch
+            {
+                this.TESTREPORT.LogFailure("Select Random Account from the Account dropdown", String.Format("Account not selected", this.SCREENSHOTFILE));
+
+            }
+            return selectedValue;
+        }
     }
 
     #endregion
