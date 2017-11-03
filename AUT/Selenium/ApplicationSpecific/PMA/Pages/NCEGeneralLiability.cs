@@ -77,6 +77,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byLocationDropdOwnimage = By.XPath("//span[@id='MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocation_B-1Img']");
         private By byDateOfOccurence = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_dtOccurrence_I");
         private By byLocationLoss = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocation_I");
+        private By byCustomerSpecialDIalog = By.XPath("//span[contains(text(),'Customer Special Coding')]");
 
         #endregion
 
@@ -89,6 +90,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void VerifyColorChange()
         {
+            Thread.Sleep(3000);
             string getColor = this.driver.FindElement(byLostInformation).GetAttribute("style");
             getColor = getColor.Replace(" ", "").ToLower();
             if (getColor.Contains(("background-color: rgb(0, 56, 135)").Replace(" ", "").ToLower()) || getColor.Contains(("background - color: red").Replace(" ", "").ToLower()))
@@ -103,11 +105,11 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void VerifyErrorMessage(int Count, string InvalidData)
         {
-            this.driver.ClickElement(byContactBusinessPhone, "Business phone textBox");
-            this.driver.SendKeysToElementClearFirst(byContactBusinessPhone, InvalidData, "Business Phone Contact");
-            this.driver.ClickElement(byZipcode, "Zip Code textBox");
-            this.driver.SendKeysToElementClearFirst(byZipcode, InvalidData, "Zip codes Contact");
-            this.driver.ClickElement(bySubmitButton, "Submit Button");
+            //this.driver.ClickElement(byContactBusinessPhone, "Business phone textBox");
+            //this.driver.SendKeysToElementClearFirst(byContactBusinessPhone, InvalidData, "Business Phone Contact");
+            //this.driver.ClickElement(byZipcode, "Zip Code textBox");
+            //this.driver.SendKeysToElementClearFirst(byZipcode, InvalidData, "Zip codes Contact");
+            //this.driver.ClickElement(bySubmitButton, "Submit Button");
             IList<IWebElement> FieldError = driver.FindElements(By.XPath("//td[contains(text(),'Invalid Format')]"));
             if (FieldError.Count > 0 && FieldError.Count == Count)
                 this.TESTREPORT.LogSuccess("Verify InvalidFormat field Error Message", String.Format("InvalidFormat field error with count: <mark>{0}</mark>", FieldError.Count.ToString()));
@@ -241,7 +243,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byTablerow);
 
-            if (list[number].Text.Replace(" ","").ToLower().Contains(value.Replace(" ", "").ToLower()))
+            if (list[number].Text.Replace(" ", "").ToLower().Contains(value.Replace(" ", "").ToLower()))
             {
                 this.TESTREPORT.LogSuccess("Verify Data Grid row data", string.Format("<mark>{0}</mark>", list[number].Text));
             }
@@ -275,10 +277,10 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             switch (columnName)
             {
                 case "LocationOfLoss":
-                    valueToVerify = this.driver.GetElementAttribute(byLocationLoss, "value"); 
+                    valueToVerify = this.driver.GetElementAttribute(byLocationLoss, "value");
                     break;
                 case "DateOccurence":
-                    valueToVerify = this.driver.GetElementAttribute(byDateOfOccurence, "value"); 
+                    valueToVerify = this.driver.GetElementAttribute(byDateOfOccurence, "value");
                     break;
                 default:
                     break;

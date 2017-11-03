@@ -64,6 +64,11 @@ namespace AutomatedTest.FunctionalTests.PMA
         public static string EmployeeSearchText { get; set; }
         public static string LastNameSearch { get; set; }
         public static string IDSearch { get; set; }
+        public static string AccountName { get; set; }
+        public static string LocationSearch { get; set; }
+        public static string LocationNumber { get; set; }
+        public static string LocationName { get; set; }
+        public static string DefaultAccount { get; set; }
 
         #endregion
 
@@ -75,6 +80,10 @@ namespace AutomatedTest.FunctionalTests.PMA
             SelectState = readCSV("SelectState");
             SelectBusinessvalueDropDown = readCSV("SelectBusinessvalueDropDown");
             Location = readCSV("Location");
+            LocationSearch = readCSV("LocationSearch");
+            LocationNumber = readCSV("LocationNumber");
+            LocationName = readCSV("LocationName");
+            DefaultAccount = readCSV("DefaultAccount");
             FirstName = readCSV("FirstName");
             LastName = readCSV("LastName");
             Address = readCSV("Address");
@@ -118,6 +127,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             EmployeeSearchText = readCSV("EmployeeSearchText");
             LastNameSearch = readCSV("LastNameSearch");
             IDSearch = readCSV("IDSearch");
+            AccountName = readCSV("AccountName");
         }
 
         [TestMethod, Description("NCEWorkersCompensation - Create a new Workers' Compensation claim and cancel"), TestCategory("Regression")]
@@ -351,7 +361,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.VerifyRequiredfieldErrorMessage(Convert.ToInt32(RequiredErrorMessageCount));
 
             this.TESTREPORT.LogInfo("Fill the required fields and Click on Save Draft Button");
-            nceWC.FillRequiredFieldsForSaveDraftInWCForm( FirstName, LastName, Date, Description);
+            nceWC.FillRequiredFieldsForSaveDraftInWCForm(FirstName, LastName, Date, Description);
             nceAuto.ClickSaveDraft();
 
             this.TESTREPORT.LogInfo("Verify Draft Saved Successfully. message is displayed");
@@ -596,6 +606,118 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.VerifyDataSaveMessage(DataSaveMessage);
 
             nceAuto.SwitchToDefaultContent();
+
+            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+        }
+
+        [TestMethod, Description("NCEWorkersCompensation - Create a new Workers' Compensation claim from an Account with a Location Search - enter location number"), TestCategory("Regression")]
+        public void NCE_WC11_NCEWorkersCompensation()
+        {
+            this.TESTREPORT.InitTestCase("NCE_WC11", "Create a new Workers' Compensation claim from an Account with a Location Search - enter location number");
+
+            home.VerifyPageTitle(HomePageTitle);
+            home.VerifyCinchWelome();
+
+            this.TESTREPORT.LogInfo("'AGRISURANCE INC. DP&C' account should be selected which contains an HR feed");
+            home.ClickMyAccount();
+            string value = home.SelectAccountDropDownWithValue(AccountName);
+            home.VerifyAccountHeader(value);
+
+            this.TESTREPORT.LogInfo("Click /'New claim Entry/' Tab. Verify New Claim Entry Page is displayed and 'Select Line of Business' text");
+            nceAuto.ClickOnNewClaimEntry();
+
+            this.TESTREPORT.LogInfo("Select Worker's compensation dropdown and Verify State is displayed");
+            nceWC.SelectWorkersCompensationAndVerifyState(SelectBusinessvalueDropDown);
+
+            this.TESTREPORT.LogInfo("Select State from dropdown and Verify Location Search is displayed");
+            nceWC.SelectStateFromDropDown(SelectState);
+            nceGE.VerifyTextOnPage(LocationSearch);
+
+            this.TESTREPORT.LogInfo("Enter the location number and select");
+            nceWC.EnterLocationNumberInField(LocationNumber);
+            nceWC.ClickOnSearchButton();
+            nceWC.ValidateText(BusinessValueText);
+
+            this.TESTREPORT.LogInfo("Verify Location in WC Form");
+            nceWC.VerifyLocation(LocationNumber);
+
+            this.TESTREPORT.LogInfo("Fill the required fields and Click on Submit Button");
+            nceWC.FillAllRequiredFieldsInWCForm(FirstName, LastName, Address, City, Zip, DOB, SSN, Occupation, Date, AccidentCause, InjuryType, BodyPart, Description, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, SelectState, PreparerPhone, Date, false);
+            nceWC.FillAllNonRequiredFieldsInWCForm(MiddleName, Suffix, Gender, PreparerPhone, Selectdate, MaritalStatus, EmployeeStatus, NumberOfDependents, SideOfBody, NoOfWorkedPerDay, Date, PaymentFrequency, DaysPerWeek, Address, City, SelectState, Zip, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, FirstName, LastName);
+            this.TESTREPORT.LogInfo("Entering the claimSubmission Section");
+            nceGE.EnterclaimSubmission(OtherRemarks, EMailAdress);
+            nceWC.EnterCustomerSpecialDialog();
+            nceWC.ClickOnSubmitButton();
+
+            this.TESTREPORT.LogInfo("Verify The claim information you entered has been recorded and saved. message is displayed");
+            nceAuto.VerifyDataSaveMessage(DataSaveMessage);
+
+            nceAuto.SwitchToDefaultContent();
+
+            this.TESTREPORT.LogInfo(string.Format("Set to Default account", DefaultAccount));
+            diaryNotes.ClickHome();
+            home.ClickMyAccount();
+            string defaultAccount = home.SelectAccountDropDownWithValue(DefaultAccount);
+            home.VerifyAccountHeader(defaultAccount);
+
+            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+            home.ClickExit();
+
+            this.TESTREPORT.UpdateTestCaseStatus();
+        }
+
+        [TestMethod, Description("NCEWorkersCompensation - Create a new Workers' Compensation claim from an Account with a Location Search - enter location addres"), TestCategory("Regression")]
+        public void NCE_WC12_NCEWorkersCompensation()
+        {
+            this.TESTREPORT.InitTestCase("NCE_WC12", "Create a new Workers' Compensation claim from an Account with a Location Search - enter location address");
+
+            home.VerifyPageTitle(HomePageTitle);
+            home.VerifyCinchWelome();
+
+            this.TESTREPORT.LogInfo("'AGRISURANCE INC. DP&C' account should be selected which contains an HR feed");
+            home.ClickMyAccount();
+            string value = home.SelectAccountDropDownWithValue(AccountName);
+            home.VerifyAccountHeader(value);
+
+            this.TESTREPORT.LogInfo("Click /'New claim Entry/' Tab. Verify New Claim Entry Page is displayed and 'Select Line of Business' text");
+            nceAuto.ClickOnNewClaimEntry();
+
+            this.TESTREPORT.LogInfo("Select Worker's compensation dropdown and Verify State is displayed");
+            nceWC.SelectWorkersCompensationAndVerifyState(SelectBusinessvalueDropDown);
+
+            this.TESTREPORT.LogInfo("Select State from dropdown and Verify Location Search is displayed");
+            nceWC.SelectStateFromDropDown(SelectState);
+            nceGE.VerifyTextOnPage(LocationSearch);
+
+            this.TESTREPORT.LogInfo("Enter the location number and select");
+            nceWC.EnterLocationNameInField(LocationName);
+            nceWC.ClickOnSearchButton();
+            nceWC.ValidateText(BusinessValueText);
+
+            //this.TESTREPORT.LogInfo("Verify Location in WC Form");
+            //nceWC.VerifyLocation(LocationName);
+
+            this.TESTREPORT.LogInfo("Fill the required fields and Click on Submit Button");
+            nceWC.FillAllRequiredFieldsInWCForm(FirstName, LastName, Address, City, Zip, DOB, SSN, Occupation, Date, AccidentCause, InjuryType, BodyPart, Description, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, SelectState, PreparerPhone, Date, false);
+            nceWC.FillAllNonRequiredFieldsInWCForm(MiddleName, Suffix, Gender, PreparerPhone, Selectdate, MaritalStatus, EmployeeStatus, NumberOfDependents, SideOfBody, NoOfWorkedPerDay, Date, PaymentFrequency, DaysPerWeek, Address, City, SelectState, Zip, IsInjuredWorkerLosingTime, IsInjuredWorkerModifiedShift, FirstName, LastName);
+            this.TESTREPORT.LogInfo("Entering the claimSubmission Section");
+            nceGE.EnterclaimSubmission(OtherRemarks, EMailAdress);
+            nceWC.EnterCustomerSpecialDialog();
+            nceWC.ClickOnSubmitButton();
+
+            this.TESTREPORT.LogInfo("Verify The claim information you entered has been recorded and saved. message is displayed");
+            nceAuto.VerifyDataSaveMessage(DataSaveMessage);
+
+            nceAuto.SwitchToDefaultContent();
+
+            this.TESTREPORT.LogInfo(string.Format("Set to Default account", DefaultAccount));
+            diaryNotes.ClickHome();
+            home.ClickMyAccount();
+            string defaultAccount = home.SelectAccountDropDownWithValue(DefaultAccount);
+            home.VerifyAccountHeader(defaultAccount);
 
             this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();

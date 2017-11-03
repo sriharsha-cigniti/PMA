@@ -319,10 +319,21 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(byOsha, "OSHA", 60);
         }
         // Click on Tools tab in main menu
-        public void ClickTools()
+        public bool ClickTools()
         {
             this.TESTREPORT.LogInfo("Click on Tools menu");
-            this.driver.ClickElement(byTools, "Tools", 60);
+            bool flag = this.driver.IsElementPresent(byTools);
+            if (flag)
+            {
+                this.driver.ClickElement(byTools, "Tools", 60);
+                this.TESTREPORT.LogSuccess("Verify Tools Tab present", String.Format(" Successfully verified <Mark>{0}</Mark>", ""));
+            }
+            else
+            {
+                this.TESTREPORT.LogWarning("Verify Tools Tab present", String.Format("Tools Tab is not present"), this.SCREENSHOTFILE);
+            }
+            return flag;
+
         }
         // Click on Settings tab in main menu
         public void ClickSettings()
@@ -608,7 +619,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
             else
             {
-                this.TESTREPORT.LogFailure("Verify ClaimInquiry search results", String.Format("Results Table is not displayed ", this.SCREENSHOTFILE));
+                this.TESTREPORT.LogFailure("Verify ClaimInquiry search results", String.Format("Data is not displayed for the selected account", this.SCREENSHOTFILE));
             }
             return list.Count;
 
@@ -724,6 +735,33 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public int getColumnPositionInClaimSearch(string ColumnName)
         {
             return getHeaderPosition(ColumnName, "MainContent_sppage_pnlQuickSearch_gridresult_DXHeadersRow0");
+        }
+
+        public string SelectAccountDropDownWithValue(string DropDownText)
+        {
+            this.TESTREPORT.LogInfo("Select account from dropdown");
+            string selectedValue = string.Empty;
+            try
+            {
+                IReadOnlyList<IWebElement> list = this.driver.FindElements(byMyAccountTable);
+                foreach (IWebElement element in list)
+                {
+                    if (element.Text.Replace(" ", "").Contains(DropDownText.Replace(" ", "")))
+                    {
+                        element.Click();
+                        break;
+                    }
+                }
+
+                selectedValue = this.driver.GetElementText(byAccountHeader);
+                this.TESTREPORT.LogSuccess("Select Account from the Account dropdown", String.Format(" Account - {0} is selcted succesfully", selectedValue));
+            }
+            catch
+            {
+                this.TESTREPORT.LogFailure("Select Random Account from the Account dropdown", String.Format("Account not selected", this.SCREENSHOTFILE));
+
+            }
+            return selectedValue;
         }
     }
 

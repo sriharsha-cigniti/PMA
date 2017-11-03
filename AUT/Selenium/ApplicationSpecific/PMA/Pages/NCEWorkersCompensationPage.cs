@@ -118,6 +118,9 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byLocation = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_ddlocation_I");
         private By byDataGridRows = By.XPath("//table[@id='MainContent_griddata_DXMainTable']/tbody/tr[contains(@id,'MainContent_griddata_DXDataRow')]");
         private By byHireDatePMT = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_pnlContent_usremployee_dtemphiredate_DDD_C_PMCImg");
+        private By byLocationNumber = By.Id("MainContent_txtlocnumber_I");
+        private By byLocationName = By.Id("MainContent_txtlocname_I");
+        private By byCustomImg = By.Id("MainContent_CallbackPanel_ASPxRoundPanel4_pnlCustomCodes_ddAnswer1_B-1Img");
 
         #endregion
 
@@ -162,11 +165,14 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(byLocationDropDownD, "Location Dropdown");
         }
 
-        public void FillAllRequiredFieldsInWCForm(string FirstName, string LastName, string Adress, string City, string Zip, string DOB, string SSN, string Occupation, string DateOfInjury, string AccidentCause, string InjuryType, string BodyPart, string Description, string IsInjuredWorkerLosingTime, string IsInjuredWorkerModifiedShift, string State, string PreparerPhone, string date)
+        public void FillAllRequiredFieldsInWCForm(string FirstName, string LastName, string Adress, string City, string Zip, string DOB, string SSN, string Occupation, string DateOfInjury, string AccidentCause, string InjuryType, string BodyPart, string Description, string IsInjuredWorkerLosingTime, string IsInjuredWorkerModifiedShift, string State, string PreparerPhone, string date, bool LocationTobeSelect = true)
         {
             VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel1_CBImg");
 
-            SelectLocationLoss();
+            if (LocationTobeSelect)
+            {
+                SelectLocationLoss();
+            }
             //SelectDropDown(Location, byLocationDropDown);
             this.driver.SendKeysToElementClearFirst(byFirstName, FirstName, "Employee FirstName");
             this.driver.SendKeysToElementClearFirst(byLastName, LastName, "Employee LastName");
@@ -349,6 +355,23 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        public void VerifyLocation(string valueToVerify)
+        {
+            this.driver.SwitchToDefaultFrame();
+            this.driver.SwitchToFrameByLocator(By.XPath("//iframe[@id='MainContent_ASPxSplitter1_0_CC']"));
+
+            string name = GetLocationText();
+            name = name.Replace(" ", "");
+            if (valueToVerify.Trim().ToLower().Equals(name.Trim().ToLower()))
+            {
+                this.TESTREPORT.LogSuccess("Verify Text Location ", string.Format("actual text -<mark>{0}</mark> expected count {1} is equal", name, valueToVerify));
+            }
+            else
+            {
+                this.TESTREPORT.LogSuccess("Verify Text Location s", string.Format("actual text -<mark>{0}</mark> expected count {1} is not equal", name, valueToVerify));
+            }
+        }
+
         public void VerifyDate(string valueToVerify)
         {
             this.driver.SwitchToDefaultFrame();
@@ -390,6 +413,16 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void EnterEmployeeIdInField(string EmployeeID)
         {
             EnterDataInField(EmployeeID, bySearchID);
+        }
+
+        public void EnterLocationNumberInField(string LocationNumber)
+        {
+            EnterDataInField(LocationNumber, byLocationNumber);
+        }
+
+        public void EnterLocationNameInField(string LocationName)
+        {
+            EnterDataInField(LocationName, byLocationName);
         }
 
         public void ValidateColumnDataFromRow(string ColumnValue)
@@ -506,6 +539,16 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ScrollToPageBottom();
             SelectDropDownWithParent(NoText, bydrugsinvolvedImg, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_dddrugsinvolved_DDD_L_LBT");
             SelectDropDownWithParent(NoText, byemployeerepresented, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddemployeerepresented_DDD_L_LBT");
+        }
+
+        public void EnterCustomerSpecialDialog()
+        {
+            By CustomerSpecialDialog = By.XPath("//span[contains(text(),'Customer Special Coding')]");
+            this.driver.ClickElement(CustomerSpecialDialog, "Customer Special Dialog bar");
+
+            this.driver.ClickElement(byCustomImg, "Customer Special Dialog image");
+            By byLocationDropDownD = By.XPath("//td[@id='MainContent_CallbackPanel_ASPxRoundPanel4_pnlCustomCodes_ddAnswer1_DDD_L_LBI1T0']");
+            this.driver.ClickElement(byLocationDropDownD, "Customer Special Dialog value");
         }
 
         public void VerifyAndClickOnMenu(string menuId)

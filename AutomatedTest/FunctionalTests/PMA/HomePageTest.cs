@@ -18,7 +18,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         #region parameters
         public static string HomePageTitle { get; set; }
         public static string ClaimInquiryPageTitle { get; set; }
-        public static string name { get; set; }
+        public static string AccountName { get; set; }
         public static string AccountNumber { get; set; }
         public static string ClaimNumber { get; set; }
         public static string ClaimantName { get; set; }
@@ -34,7 +34,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             // Read CSV values
             HomePageTitle = readCSV("HomePageTitle");
             ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
-            name = readCSV("AccountName");
+            AccountName = readCSV("AccountName");
             AccountNumber = readCSV("AccountNumber");
             ClaimNumber = readCSV("ClaimNumber");
             ClaimantName = readCSV("ClaimantName");
@@ -118,8 +118,10 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyCinchWelome();
             home.ClickMyAccount();
             string AccountName = home.GetMyAccount();
-            home.SearchMyAccout(name, "Name");
-            home.VerifyAccountHeader(name);
+            home.SearchMyAccout(HomePageTests.AccountName, "Name");
+            //home.ClickMyAccount();
+            //home.SelectAccountDropDown();
+            home.VerifyAccountHeader(HomePageTests.AccountName);
             home.ClickClaimInquiry();
             home.VerifyPageTitle(ClaimInquiryPageTitle);
             home.ClickSearch();
