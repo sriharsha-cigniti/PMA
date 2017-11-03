@@ -22,7 +22,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         #region UI Objects
         private By byOshatab = By.XPath("//span[contains(text(),'OSHA')]");
         private By byAcceptButton = By.XPath("//span[contains(text(),'Accept')]");
-        private By byOshaLink = By.Id("CinchMenu_DXI4_T");
+        private By byOshaLink = By.LinkText("OSHA");        
         private By byInformationText = By.XPath("//span[contains(text(),'Important Information Please Read')]");
         private By byClickDropDownArrow = By.Id("MainContent_ddyear_B-1");
         private By byAccountDetails = By.Id("lblAccount1");
@@ -75,7 +75,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void ClickOnOsha()
         {
-            this.driver.ClickElement(byOshatab, "Claim Inquiry Tab");
+            this.driver.ClickElement(byOshaLink, "Claim Inquiry Tab");
             //Switching to frame.......
             // this.driver.SwitchTo().Frame("MainContent_ASPxSplitter1_0_CC");
             this.driver.WaitElementPresent(byAcceptButton);

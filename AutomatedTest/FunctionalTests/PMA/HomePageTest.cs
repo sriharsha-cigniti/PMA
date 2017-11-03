@@ -191,7 +191,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.DragAccountNameInMyDiary();
             int columnPositionAfterDrag = home.getColumnPositionInMYDiary("Account Name");
             nce.VerifySwappingcellsposition("Account Name", columnPositionBeforeDrag, columnPositionAfterDrag);
-
+            home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
         }
 
@@ -211,7 +211,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.DragAccountNameToClaimNumberInQCS();
             int columnPositionAfterDrag = home.getColumnPositionInClaimSearch("Account Name");
             nce.VerifySwappingcellsposition("Account Name", columnPositionBeforeDrag, columnPositionAfterDrag);
-
+            home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
         }
 

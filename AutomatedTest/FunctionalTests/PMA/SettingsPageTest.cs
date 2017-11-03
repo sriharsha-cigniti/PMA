@@ -43,9 +43,8 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyPageTitle(HomePageTitle);
             //verify cinch welcome
             home.VerifyCinchWelome();
-            //Click on Setting tab
-            this.TESTREPORT.LogInfo("Verify Settings Page and Click ");
-            settingsPage.ClickOnSettings();
+            //Click on Setting tab            
+            home.ClickSettings();
             //Verify Settings page title
             home.VerifyPageTitle(SettingsPageTitle);
             // Select Default value from DropDown        
@@ -79,7 +78,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyCinchWelome();
 
             //click on settings
-            settingsPage.ClickOnSettings();
+            home.ClickSettings();
             //verify page title
             home.VerifyPageTitle(SettingsPageTitle);
             //click on ResetSettings in settings page
@@ -136,7 +135,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
             //click on settings again
-            settingsPage.ClickOnSettings();
+            home.ClickSettings();
             //verify settings page Title
             home.VerifyPageTitle(SettingsPageTitle);
 
@@ -152,7 +151,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             //Click on Search 
             home.ClickSearch();
             //Validate the number of claims populated for Claim Search
-            settingsPage.VerifyCLaimInquiryResultsPageSize(ExpectedClaimListvalue);
+            settingsPage.VerifyClaimInquiryResultsPageSize(ExpectedClaimListvalue);
             // verify line of business
             settingsPage.VerifyLineofBusiness(ExpectedLineofBusinessvalue);
             // claim status
@@ -209,7 +208,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             //verify cinch welcome
             home.VerifyCinchWelome();
             //click on settings
-            settingsPage.ClickOnSettings();
+            home.ClickSettings();
             //verify settings page title
             home.VerifyPageTitle(SettingsPageTitle);
             //click on ResetSettings in settings page

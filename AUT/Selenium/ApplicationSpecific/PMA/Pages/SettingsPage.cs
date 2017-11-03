@@ -19,9 +19,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
     public class SettingsPage : AbstractTemplatePage
     {
         #region UI Objects
-        private By byHome = By.Id("CinchMenu_DXI0_T");
-        private By byResetSettings = By.XPath("//div[@id='MainContent_btnreset_CD']");
-        private By bySettingsTab = By.XPath("//a[@id='CinchMenu_DXI7_T']/span[contains(text(),'Settings')]");
+        
+        private By byResetSettings = By.XPath("//div[@id='MainContent_btnreset_CD']");      
         private By byDefaultAccountDropDownspan = By.Id("MainContent_gridaccount_B-1Img");
         private By bySaveSettingsBtn = By.XPath("//span[contains(text(),'Save')]");
         private By byDefaultAccountInput = By.XPath("//input[@id='MainContent_gridaccount_I']");
@@ -77,18 +76,14 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byOSHATabResultsBlankData = By.XPath("//div[contains(text(),'No data to display')]");
 
         //Policy Link
-        private By byPolicyLink = By.Id("CinchMenu_DXI5_T");
+        private By byPolicyLink = By.LinkText("Policy");
         private By byPolicyTabResultsPageSize = By.XPath("//input[@id='MainContent_gridpolicy_DXPagerTop_PSI']");
-        //private By byPolicyTabResultsBlankData = By.XPath("");
+        
 
 
         #endregion
 
-        public void ClickOnSettings()
-        {
-            this.TESTREPORT.LogInfo("Click Settings");
-            this.driver.ClickElement(bySettingsTab, "Settings Tab ");
-        }
+        
         public void VerifyDataSaveMessage(string saveMessage)
         {
             this.TESTREPORT.LogInfo("verify the message after save button is clicked");
@@ -326,7 +321,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
-        public void VerifyCLaimInquiryResultsPageSize(string ExpectedPageSizevalue)
+        public void VerifyClaimInquiryResultsPageSize(string ExpectedPageSizevalue)
         {
             Thread.Sleep(2000);
             this.TESTREPORT.LogInfo("Validate the number of claims populated for Claim Search");
@@ -407,12 +402,6 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         }
 
 
-        //public void clickOSHAintheHeader()
-        //{
-        //    this.driver.ClickElement(byOSHALink, "OSHAintheHeader");
-        //    Thread.Sleep(2000);
-        //}
-
         public void VerifyImportantInformationPleaseReadText()
         {
             Thread.Sleep(2000);
@@ -426,11 +415,6 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
-        //public void ClickAcceptinOSHA()
-        //{
-        //    this.driver.ClickElement(byClickAcceptinOSHA, "Click accept in OSHA");
-        //    Thread.Sleep(2000);
-        //}
 
         public void VerifyOSHATabResultsPageSize(string ExpectedPageSizevalue)
         {
