@@ -407,9 +407,9 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.GetSetAndVerifyTextValues(byEmployeeNameText, "Employee Name Textbox");
         }
 
-        public void VerifyEmployeeJobtitle()
+        public void VerifyEmployeeJobtitle(string jobtitle="")
         {
-            this.driver.GetSetAndVerifyTextValues(byEmployeeJobTitleText, "Employee Job title Textbox");
+            this.driver.GetSetAndVerifyTextValues(byEmployeeJobTitleText, "Employee Job title Textbox", jobtitle);
         }
 
         public void VerifyExclude()
