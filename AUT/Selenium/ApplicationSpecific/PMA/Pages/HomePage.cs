@@ -248,6 +248,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             if (option.ToLower() == "Name".ToLower())
             {
                 this.driver.SendKeysToElement(bySearchName, searchValue, "Search Name");
+                IReadOnlyList<IWebElement> list = this.driver.FindElements(byMyAccountTable);
+                list[1].Click();
             }
             else
             {

@@ -60,8 +60,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         public static string LogNoteTableHeader5 { get; set; }
         public static string DocumentSearchValue { get; set; }
         public static string ClaimantNameSearch { get; set; }
+        public static string name { get; set; }
 
-        
 
         public ClaimInquiryPageTests()
         {
@@ -69,47 +69,48 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             HomePageTitle = readCSV("HomePageTitle");
             ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
-            string ClaimNumber = readCSV("ClaimNumber");
-            string Claimstatus = readCSV("Claimstatus");
-            string Last4SSN = readCSV("Last4SSN");
-            string FirstName = readCSV("FirstName");
-            string LastName = readCSV("LastName");
-            string LocationCodeField = readCSV("LocationCodeField");
-            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
-            string ClaimantName = readCSV("ClaimantName1");
-            string ClaimantName1 = readCSV("ClaimantName");
-            string IncurredFrom = readCSV("IncurredFrom");
-            string IncurredTo = readCSV("IncurredTo");
-            string EmailAddress1 = readCSV("EmailAddress1");
-            string EmailAddress2 = readCSV("EmailAddress2");
-            string Message = readCSV("Message");
-            string DocumentPagetitle = readCSV("documentListPageTitle");
-            string claimNoFordocuments = readCSV("claimNoFordocuments");
-            string LossHeader1 = readCSV("LossLineTableHeader1");
-            string LossHeader2 = readCSV("LossLineTableHeader2");
-            string LossHeader3 = readCSV("LossLineTableHeader3");
-            string LossHeader4 = readCSV("LossLineTableHeader4");
-            string LossHeader5 = readCSV("LossLineTableHeader5");
-            string FinanceHeader1 = readCSV("Header1");
-            string FinanceHeader2 = readCSV("Header2");
-            string FinanceHeader3 = readCSV("Header3");
-            string FinanceHeader4 = readCSV("Header4");
-            string FinanceHeader5 = readCSV("Header5");
-            string FinanceHeader6 = readCSV("Header6");
-            string TableHeader1 = readCSV("TableHeader1");
-            string TableHeader2 = readCSV("TableHeader2");
-            string TableHeader3 = readCSV("TableHeader3");
-            string TableHeader4 = readCSV("TableHeader4");
-            string TableHeader5 = readCSV("TableHeader5");
-            string TableHeader6 = readCSV("TableHeader6");
-            string TableHeader7 = readCSV("TableHeader7");
-            string ClaimantNameSearch = readCSV("ClaimantNameSearch");
-            string LogNoteTableHeader1 = readCSV("LogNoteTableHeader1");
-            string LogNoteTableHeader2 = readCSV("LogNoteTableHeader2");
-            string LogNoteTableHeader3 = readCSV("LogNoteTableHeader3");
-            string LogNoteTableHeader4 = readCSV("LogNoteTableHeader4");
-            string LogNoteTableHeader5 = readCSV("LogNoteTableHeader5");
-            string DocumentSearchValue = readCSV("DocumentSearchValue");
+             ClaimNumber = readCSV("ClaimNumber");
+             Claimstatus = readCSV("Claimstatus");
+             Last4SSN = readCSV("Last4SSN");
+             FirstName = readCSV("FirstName");
+             LastName = readCSV("LastName");
+             LocationCodeField = readCSV("LocationCodeField");
+             DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
+             ClaimantName = readCSV("ClaimantName1");
+             ClaimantName1 = readCSV("ClaimantName");
+             IncurredFrom = readCSV("IncurredFrom");
+             IncurredTo = readCSV("IncurredTo");
+             EmailAddress1 = readCSV("EmailAddress1");
+             EmailAddress2 = readCSV("EmailAddress2");
+             Message = readCSV("Message");
+             DocumentPagetitle = readCSV("documentListPageTitle");
+             claimNoFordocuments = readCSV("claimNoFordocuments");
+             LossHeader1 = readCSV("LossLineTableHeader1");
+             LossHeader2 = readCSV("LossLineTableHeader2");
+             LossHeader3 = readCSV("LossLineTableHeader3");
+             LossHeader4 = readCSV("LossLineTableHeader4");
+             LossHeader5 = readCSV("LossLineTableHeader5");
+             FinanceHeader1 = readCSV("Header1");
+             FinanceHeader2 = readCSV("Header2");
+             FinanceHeader3 = readCSV("Header3");
+             FinanceHeader4 = readCSV("Header4");
+             FinanceHeader5 = readCSV("Header5");
+             FinanceHeader6 = readCSV("Header6");
+             TableHeader1 = readCSV("TableHeader1");
+             TableHeader2 = readCSV("TableHeader2");
+             TableHeader3 = readCSV("TableHeader3");
+             TableHeader4 = readCSV("TableHeader4");
+             TableHeader5 = readCSV("TableHeader5");
+             TableHeader6 = readCSV("TableHeader6");
+             TableHeader7 = readCSV("TableHeader7");
+             ClaimantNameSearch = readCSV("ClaimantNameSearch");
+             LogNoteTableHeader1 = readCSV("LogNoteTableHeader1");
+             LogNoteTableHeader2 = readCSV("LogNoteTableHeader2");
+             LogNoteTableHeader3 = readCSV("LogNoteTableHeader3");
+             LogNoteTableHeader4 = readCSV("LogNoteTableHeader4");
+             LogNoteTableHeader5 = readCSV("LogNoteTableHeader5");
+             DocumentSearchValue = readCSV("DocumentSearchValue");
+             name = readCSV("AccountName");
         }
         #endregion
 
@@ -200,6 +201,11 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
             home.VerifyCinchWelome();
+
+            home.ClickMyAccount();
+            string AccountName = home.GetMyAccount();
+            home.SearchMyAccout(name, "Name");
+            
             //Click on Claiminquiry
             home.ClickClaimInquiry();
             //Verify page Title for Claim Inquiry

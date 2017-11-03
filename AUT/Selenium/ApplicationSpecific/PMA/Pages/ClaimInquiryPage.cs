@@ -2237,7 +2237,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             By byNodata = By.XPath("//div[contains(text(),'There are no available payments for this claim')]");
             if (!this.driver.IsElementPresent(byNodata))
             {
-
+                this.driver.WaitElementPresent(byExpandLossLineBtn);
                 if (this.driver.IsWebElementDisplayed(byExpandLossLineBtn))
                 {
                     this.driver.ClickElement(byExpandLossLineBtn, "ExpandLossLine");
