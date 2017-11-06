@@ -118,17 +118,21 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyCinchWelome();
             home.ClickMyAccount();
             string AccountName = home.GetMyAccount();
-            home.SearchMyAccout(HomePageTests.AccountName, "Name");
-            //home.ClickMyAccount();
-            //home.SelectAccountDropDown();
+            home.SearchMyAccout(HomePageTests.AccountName, "Name");            
             home.VerifyAccountHeader(HomePageTests.AccountName);
-            home.ClickClaimInquiry();
-            home.VerifyPageTitle(ClaimInquiryPageTitle);
-            home.ClickSearch();
-            home.ClaimInquiryResultsCount();
-            ArrayList Index = home.ClickOnRandomClaim();
-            home.VerifyClaimNumber(Index[0].ToString());
-            home.VerifyAccountName(AccountName);
+            if (home.ClickClaimInquiry())
+            {
+                home.ClickClaimInquiry();
+                home.VerifyPageTitle(ClaimInquiryPageTitle);
+                home.ClickSearch();
+                int count = home.ClaimInquiryResultsCount();
+                if (count != 0)
+                {
+                    ArrayList Index = home.ClickOnRandomClaim();
+                    home.VerifyClaimNumber(Index[0].ToString());
+                    home.VerifyAccountName(AccountName);
+                }
+            }
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -146,13 +150,18 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.SearchMyAccout(AccountNumber, "Number");
             string myAccountName = home.GetMyAccount();
             home.VerifyAccountHeader(myAccountName);
-            home.ClickClaimInquiry();
-            home.VerifyPageTitle(ClaimInquiryPageTitle);
-            home.ClickSearch();
-            home.ClaimInquiryResultsCount();
-            ArrayList Index = home.ClickOnRandomClaim();
-            home.VerifyClaimNumber(Index[0].ToString());
-           // home.VerifyClaimantName(Index[1].ToString());
+            if (home.ClickClaimInquiry())
+            {
+                home.VerifyPageTitle(ClaimInquiryPageTitle);
+                home.ClickSearch();
+                int count = home.ClaimInquiryResultsCount();
+                if (count != 0)
+                {
+                    ArrayList Index = home.ClickOnRandomClaim();
+                    home.VerifyClaimNumber(Index[0].ToString());
+                    // home.VerifyClaimantName(Index[1].ToString());
+                }
+            }
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();

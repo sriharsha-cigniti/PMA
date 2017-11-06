@@ -109,8 +109,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Click on Cancel and Verify New Claim Entry Page is displayed and 'Select Line of Business' text");
             nceAuto.ClickCancel();
-
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+           
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -148,8 +147,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.VerifyDataSaveMessage(DataSaveMessage);
 
             nceAuto.SwitchToDefaultContent();
-
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+                       
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -198,7 +196,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             nceAuto.SwitchToDefaultContent();
 
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -246,7 +243,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             nceAuto.SwitchToDefaultContent();
 
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -303,7 +299,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             nceAuto.SwitchToDefaultContent();
 
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -376,8 +371,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.VerifyDataSaveMessage(DataSaveMessage);
 
             nceAuto.SwitchToDefaultContent();
-
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -432,7 +425,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             nceAuto.SwitchToDefaultContent();
 
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -458,7 +450,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceGE.VerifyTextOnPage(ClaimSubmissionText);
 
             nceAuto.SwitchToDefaultContent();
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+          
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
