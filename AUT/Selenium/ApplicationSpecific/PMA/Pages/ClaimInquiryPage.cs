@@ -2237,11 +2237,12 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             By byNodata = By.XPath("//div[contains(text(),'There are no available payments for this claim')]");
             if (!this.driver.IsElementPresent(byNodata))
             {
+                Thread.Sleep(5000);
                 this.driver.WaitElementPresent(byExpandLossLineBtn);
                 if (this.driver.IsWebElementDisplayed(byExpandLossLineBtn))
                 {
                     this.driver.ClickElement(byExpandLossLineBtn, "ExpandLossLine");
-                    Thread.Sleep(5000);
+                    Thread.Sleep(10000);
 
                     this.TESTREPORT.LogInfo("Verify Check Detail Information");
                     this.driver.WaitElementPresent(byCheckDetailInformationText);
@@ -2350,7 +2351,9 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public string VerifyPaymentAmount()
         {
             Thread.Sleep(2000);
-            string value = this.driver.GetElementText(By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_DXMainTable']//tr[contains(@class,'dxgvDataRow')]//td[7]"));
+            By element = By.XPath("//table[@id='MainContent_dvclaims_IT0_usrdetail1_0_ASPxPageControl1_0_usrpayment1_0_gridpayments_0_DXMainTable']//tr[contains(@class,'dxgvDataRow')]//td[7]");
+            this.driver.WaitElementPresent(element);
+            string value = this.driver.GetElementText(element);
             Thread.Sleep(2000);
             string x = this.driver.GetElementText(byPaymentAmountinPaymentDetail);
             string z = "$" + x;
