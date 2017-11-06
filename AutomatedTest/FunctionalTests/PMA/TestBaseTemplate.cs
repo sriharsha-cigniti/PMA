@@ -54,7 +54,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             settingsPage = new SettingsPage();
             Tools = new ToolsPage();
             login = new LoginPage();
-
             nce = new NewClaimEntryPage();
         }
 

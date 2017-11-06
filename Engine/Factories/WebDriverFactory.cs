@@ -10,6 +10,8 @@ using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
+using System.Drawing;
+
 namespace Engine.Factories
 {
     /// <summary>
@@ -52,8 +54,10 @@ namespace Engine.Factories
                             options.AddUserProfilePreference("profile.default_content_settings.popups", 0);
                             options.AddUserProfilePreference("safebrowsing.enabled", "true");
                             options.AddArguments("test-type");
+                            //Added for maximizing the window (Supported for any version of chrome)
+                            options.AddArguments("--window-size=1920,1080");
                             uniqueInstanceWebDriver = new ChromeDriver(System.IO.Directory.GetCurrentDirectory(), options);
-                          
+                           
                             break;
                         case ("ie"):
                             var ieOptions = new InternetExplorerOptions
@@ -98,9 +102,10 @@ namespace Engine.Factories
                             uniqueInstanceWebDriver = new FirefoxDriver();
                             break;
                     }
+                        //commenting because this command is supported from chrome 49-61 version......
+                    //uniqueInstanceWebDriver.Manage().Window.Maximize();
 
-                    uniqueInstanceWebDriver.Manage().Window.Maximize();
-                    
+
                 }
                 return WebDriverFactory.uniqueInstanceWebDriver;
             }
