@@ -1513,7 +1513,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             //Verify Detailed Claim list
             cInquiry.VerifyDetailedClaimList();
             //eNter Claimant name
-            cInquiry.EnterClaimantName(ClaimantName);
+            cInquiry.EnterClaimantName(ClaimantName1);
             ArrayList Index = home.ClickOnRandomClaim();
             home.VerifyClaimNumber(Index[0].ToString());
             // Commenting because bug encountered for l types of loans 

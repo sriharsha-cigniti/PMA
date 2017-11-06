@@ -498,7 +498,7 @@ namespace AutomatedTest.FunctionalTests.PMA
                     osha.VerifyEmployeeName();
 
                     this.TESTREPORT.LogInfo("Modify and Verify changes in Job title ");
-                    osha.VerifyEmployeeJobtitle();
+                    osha.VerifyEmployeeJobtitle("Delivery Helper");
 
                     this.TESTREPORT.LogInfo("Modify and Verify changes in Exclude");
                     osha.VerifyExclude();
