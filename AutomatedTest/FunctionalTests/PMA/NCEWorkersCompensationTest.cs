@@ -516,6 +516,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
 
+            this.TESTREPORT.LogInfo(string.Format("Set to Default account", DefaultAccount));
+            diaryNotes.ClickHome();
+            home.ClickMyAccount();
+            string defaultAccount = home.SelectAccountDropDownWithValue(DefaultAccount);
+            home.VerifyAccountHeader(defaultAccount);
+
             this.TESTREPORT.LogInfo("Click /'New claim Entry/' Tab. Verify New Claim Entry Page is displayed and 'Select Line of Business' text");
             nceAuto.ClickOnNewClaimEntry();
 
@@ -567,6 +573,12 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
+
+            this.TESTREPORT.LogInfo(string.Format("Set to Default account", DefaultAccount));
+            diaryNotes.ClickHome();
+            home.ClickMyAccount();
+            string defaultAccount = home.SelectAccountDropDownWithValue(DefaultAccount);
+            home.VerifyAccountHeader(defaultAccount);
 
             this.TESTREPORT.LogInfo("Click /'New claim Entry/' Tab. Verify New Claim Entry Page is displayed and 'Select Line of Business' text");
             nceAuto.ClickOnNewClaimEntry();
