@@ -219,7 +219,6 @@ namespace Engine.UIHandlers.Selenium
             {
                 elementStatus = driver.FindElement(locator).Displayed;
                 //elementStatus = true;
-
             }
             catch (NoSuchElementException)
             {
@@ -661,6 +660,34 @@ namespace Engine.UIHandlers.Selenium
                         "window.scrollTo(0,document.body.scrollHeight)", "");
 
                 testReport.LogSuccess("ScrollToPageBottom", "ScrollToPageBottom Was Called Successfully");
+                Thread.Sleep(1000);
+
+            }
+            catch (Exception)
+            {
+
+            }
+            return obj;
+
+        }
+
+        /// <summary>
+        /// Scrolls to Specific Element.
+        /// </summary>
+        /// <param name="driver">The driver.</param>
+        /// <returns></returns>
+        public static object ScrollToElement(this IWebDriver driver, By by)
+        {
+
+            testReport.LogInfo("ScrollToElement Will Be Called");
+            object obj = null;
+            try
+            {
+                obj =
+                    ((IJavaScriptExecutor)driver).ExecuteScript(
+                        "arguments[0].scrollIntoView(true);", driver.FindElement(by));
+
+                testReport.LogSuccess("ScrollToElement", "ScrollToElement Was Called Successfully");
                 Thread.Sleep(1000);
 
             }

@@ -37,6 +37,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byOccurenceInformationMenu = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_CBImg");
         private By byEmployeeInformationMenu = By.Id("MainContent_CallbackPanel_ASPxRoundPanel1_CBImg");
         private By byDateOfInjury = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_dtInjury_I");
+        private By byInjuryType = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddinjurytype_I");
+        private By byBodyPart = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddbodypart_I");
         private By byAccidentCauseDD = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddaccidentcause_B-1Img");
         private By byInjuryTypeDD = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddinjurytype_B-1Img");
         private By byBodyPartDD = By.Id("MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddbodypart_B-1Img");
@@ -173,7 +175,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             {
                 SelectLocationLoss();
             }
-            //SelectDropDown(Location, byLocationDropDown);
+            
             this.driver.SendKeysToElementClearFirst(byFirstName, FirstName, "Employee FirstName");
             this.driver.SendKeysToElementClearFirst(byLastName, LastName, "Employee LastName");
             this.driver.SendKeysToElementClearFirst(byAddress, Adress, "Employee Address");
@@ -194,8 +196,18 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(byDateOfInjury, "Date of Injury");
             this.driver.SendKeysToElement(byDateOfInjury, DateOfInjury, "Date of Injury");
             SelectDropDown(AccidentCause, byAccidentCauseDD);
-            SelectDropDown(InjuryType, byInjuryTypeDD);
-            SelectDropDown(BodyPart, byBodyPartDD);
+
+            this.driver.ClickElement(byInjuryType, "Injury Type");
+            this.driver.FindElement(byInjuryType).SendKeys(OpenQA.Selenium.Keys.Control + 'a');
+            this.driver.SendKeysToElement(byInjuryType, InjuryType, "Injury Type");
+            this.driver.FindElement(byInjuryType).SendKeys(OpenQA.Selenium.Keys.Enter);
+
+            this.driver.ClickElement(byBodyPart, "Body Type");
+            this.driver.FindElement(byBodyPart).SendKeys(OpenQA.Selenium.Keys.Control + 'a');
+            this.driver.SendKeysToElement(byBodyPart, BodyPart, "Body Type");
+            this.driver.FindElement(byBodyPart).SendKeys(OpenQA.Selenium.Keys.Enter);
+            //SelectDropDown(InjuryType, byInjuryTypeDD);
+            //SelectDropDown(BodyPart, byBodyPartDD);
             this.driver.SendKeysToElementClearFirst(byAccidentDescription, Description, "Accident Description");
 
             this.driver.ClickElement(byDateEmployerNotified, "Employee Notified");
@@ -243,6 +255,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(byTimeEditOccurenceImg, "Time Edit occurance");
             this.driver.ClickElement(byLstWorkDt, "Last Work Day Image");
             this.driver.SendKeysToElement(byLstWorkDt, Date, "Last Work Day ");
+
+            this.driver.ScrollToElement(byLstWorkDt);
 
             this.driver.ClickElement(byReturnedworkImg, "Return Work Day Img");
             this.driver.ClickElement(byReturnWorkTodayButton, "Today Button in  Return Work Day");
@@ -482,8 +496,19 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(byDateOfInjury, "Date of Injury");
             this.driver.SendKeysToElement(byDateOfInjury, DateOfInjury, "Date of Injury");
             SelectDropDown(AccidentCause, byAccidentCauseDD);
-            SelectDropDown(InjuryType, byInjuryTypeDD);
-            SelectDropDown(BodyPart, byBodyPartDD);
+
+            this.driver.ClickElement(byInjuryType, "Injury Type");
+            this.driver.FindElement(byInjuryType).SendKeys(OpenQA.Selenium.Keys.Control + 'a');
+            this.driver.SendKeysToElement(byInjuryType, InjuryType, "Injury Type");
+            this.driver.FindElement(byInjuryType).SendKeys(OpenQA.Selenium.Keys.Enter);
+
+            this.driver.ClickElement(byBodyPart, "Body Type");
+            this.driver.FindElement(byBodyPart).SendKeys(OpenQA.Selenium.Keys.Control + 'a');
+            this.driver.SendKeysToElement(byBodyPart, BodyPart, "Body Type");
+            this.driver.FindElement(byBodyPart).SendKeys(OpenQA.Selenium.Keys.Enter);
+
+            //SelectDropDown(InjuryType, byInjuryTypeDD);
+            //SelectDropDown(BodyPart, byBodyPartDD);
             SelectDropDown(SideOfBody, bySideOfBody);
             this.driver.SendKeysToElementClearFirst(byAccidentDescription, Description, "Accident Description");
 
@@ -536,7 +561,10 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             SelectDropDownWithParent(NoText, byemployerquestionclaimImg, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddemployerquestionclaim_DDD_L_LBT");
             SelectDropDownWithParent(YesText, bysafeguardsprovidedused, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddsafeguardsprovidedused_DDD_L_LBT");
             this.driver.SendKeysToElementClearFirst(byWorkZip, Zip, "Work Zip");
-            this.driver.ScrollToPageBottom();
+
+            //driver.ScrollToElement(bydrugsinvolvedImg);
+            driver.ScrollToElement(byWorkGroupAdress);
+            Thread.Sleep(1000);
             SelectDropDownWithParent(NoText, bydrugsinvolvedImg, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_dddrugsinvolved_DDD_L_LBT");
             SelectDropDownWithParent(NoText, byemployeerepresented, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddemployeerepresented_DDD_L_LBT");
         }
