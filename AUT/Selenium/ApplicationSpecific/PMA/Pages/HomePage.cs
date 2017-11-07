@@ -171,10 +171,20 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         //Verify Account Header
         public void VerifyAccountHeader(string myAccountValue)
         {
-            this.TESTREPORT.LogInfo("Verify account header");
-            this.driver.AssertTextEqual(byAccountHeader, myAccountValue);
+            this.TESTREPORT.LogInfo("Verify account header");           
+            string AccountHeader = this.driver.GetElementText(byAccountHeader);
+
+            if (AccountHeader.Contains(myAccountValue))
+            {
+                TESTREPORT.LogSuccess("Text Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", AccountHeader, myAccountValue));
+            }
+            else
+            {
+                TESTREPORT.LogFailure("Text Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are not matching", AccountHeader, myAccountValue), this.SCREENSHOTFILE);
+            }                     
 
         }
+
         //Verify CinchWelome text
         public void VerifyCinchWelome()
         {
@@ -248,8 +258,9 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             if (option.ToLower() == "Name".ToLower())
             {
                 this.driver.SendKeysToElement(bySearchName, searchValue, "Search Name");
-                IReadOnlyList<IWebElement> list = this.driver.FindElements(byMyAccountTable);
-                list[1].Click();
+                Thread.Sleep(4000);
+               // IReadOnlyList<IWebElement> list = this.driver.FindElements(byMyAccountTable);
+               // list[1].Click();
             }
             else
             {
@@ -497,7 +508,6 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             try
             {
                 string[] words = ActualRecentClaimName.Split(',');
-
                 //Assert.IsTrue(ActualRecentClaimName.Trim().Contains(RecentClaimantName.Trim()));
                           
                 foreach (var item in words)
@@ -558,7 +568,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             {
                 if (item.Contains(ClaimAccountName))
                 {
-                    TESTREPORT.LogSuccess("Text Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", ClaimAccountName, AccountName));
+                    TESTREPORT.LogSuccess("Text Matching", String.Format("Actual: <mark>{0}</mark>,Expected: <mark>{1}</mark> are matching", AccountName, ClaimAccountName));
 
                     break;
                 }
@@ -664,19 +674,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         }
 
-        //public void VerifyDiarylabel()
-        //{
-        //    if (this.driver.IsElementPresent(byDiaryLink))
-
-        //    {
-        //        this.TESTREPORT.LogSuccess("Verify Diary", String.Format("Dairy text - {0} is  displayed succesfully", "Diary"));
-        //    }
-        //    else
-        //    {
-        //        this.TESTREPORT.LogFailure("Verify Diary", String.Format("Diary text is  not displayed", this.SCREENSHOTFILE));
-        //    }
-        //}
-
+       //Verif my diary label and select the row
         public int VerifyandSelectMyDiary()
         {
             int results = this.driver.FindElements(byMyDiaryResultsTable).Count;
@@ -700,6 +698,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             return results;
         }
 
+        //Validate Subject text in My diary table
         public void ValidatesubjectTexInDiaryTab(string SubjectText)
         {
             string subjectTextFromDiaryTab = this.driver.GetElementText(bySubjectText);
@@ -713,6 +712,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        //Verify Claimant name and claim number fileds after reset
         public void VerifyFieldsAfterReset()
         {
             string ClaimantName = this.driver.GetElementText(byQuickClaimantNameSearch);
@@ -728,16 +728,18 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        //Get the Column positions in mydiary table 
         public int getColumnPositionInMYDiary(string ColumnName)
         {
            return getHeaderPosition(ColumnName, "MainContent_sppage_pnlDiary_griddiary_DXHeadersRow0");
         }
-
+        //Get the Column positions in Quick Claim Search table 
         public int getColumnPositionInClaimSearch(string ColumnName)
         {
             return getHeaderPosition(ColumnName, "MainContent_sppage_pnlQuickSearch_gridresult_DXHeadersRow0");
         }
 
+        //Select account dropdown
         public string SelectAccountDropDownWithValue(string DropDownText)
         {
             this.TESTREPORT.LogInfo("Select account from dropdown");
