@@ -63,6 +63,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Cigniti_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="client_logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
