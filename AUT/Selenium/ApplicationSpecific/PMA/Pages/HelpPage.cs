@@ -96,6 +96,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
                 if (tab.Text.ToLower().Contains(TabName.ToLower()))
                 {
                     actualHighlightcolor = tab.GetAttribute("style");
+                    break;
                 }
             }
 

@@ -261,24 +261,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(bySubmit, "Submit", 60);
         }
 
-        ////  Verify Default options
-
-        //  public void VerifySelectedCheckboxCount(string PermissionChecked)
-        //  {
-        //      IReadOnlyList<IWebElement> listFunctional = this.driver.FindElements(byFunctionalDefault);
-        //      IReadOnlyList<IWebElement> listData = this.driver.FindElements(byDataDefault);
-        //      int BeforeCountFunctional = listFunctional.Count();
-        //      int BeforeCountData = listData.Count();
-
-
-        //      int AfterCountFunctional = listFunctional.Count();
-        //      int AfterCountData = listData.Count();
-
-
-
-        //  }
-
-        //Click on Delete
+       //Click on Delete
         public void ClickDelete()
         {
             int BeforeDelteCount = ToolsResultsCount();

@@ -68,38 +68,33 @@ namespace AutomatedTest.FunctionalTests.PMA
         public void NCE_P1NCEProperty()
         {
             this.TESTREPORT.InitTestCase("NCE_P1", "Create a new Property claim and cancel");
-
+            //Verify Page title and welcome text
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
-
+            //Click on NewClaim Entry and select line of business
             this.TESTREPORT.LogInfo("Verify New Claim Entry Tab and 'Select Line of Business' text");
-            nceAuto.ClickOnNewClaimEntry();
-
+            nceAuto.ClickOnNewClaimEntry();            
             this.TESTREPORT.LogInfo("Verify 'Property' text");
             nceProperty.VerifyPropertyForm(SelectBusinessvalueDropDown);
-
+            //Click on Cancel
             this.TESTREPORT.LogInfo("Verify Cancel");
             nceAuto.ClickCancel();
+            //Click on Exit to close the application
             home.ClickExit();
-
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
         [TestMethod, Description("NCEPropertyPage-Create a new Property claim, fill out only the required fields and submit"), TestCategory("Regression")]
         public void NCE_P2NCEProperty()
         {
-
             this.TESTREPORT.InitTestCase("NCE_P2", "Create a new Property claim, fill out only the required fields and submit");
 
-            //verify home page title
-            home.VerifyPageTitle(HomePageTitle);
-            //verify cinch welcome
+            //Verify Page title and welcome text
+            home.VerifyPageTitle(HomePageTitle);            
             home.VerifyCinchWelome();
-            //click new Claim Entry and verify select line of business text 
-            this.TESTREPORT.LogInfo("Verify New Claim Entry Tab and 'Select Line of Business' text");
-            //Click on New claim Entry
-            nceAuto.ClickOnNewClaimEntry();
-            //Select 'Property' line of business from Loss Line Drop Down
+            //Click on NewClaim Entry and select 'Property' as line of business
+            this.TESTREPORT.LogInfo("Verify New Claim Entry Tab and 'Select Line of Business' text");            
+            nceAuto.ClickOnNewClaimEntry();            
             this.TESTREPORT.LogInfo("Verify 'Property' text");
             nceProperty.VerifyPropertyForm(SelectBusinessvalueDropDown);
             //Without Entering the values click on submit
@@ -113,29 +108,26 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceProperty.SelectLocationLoss();
             nceAuto.SelectStateOfLoss(StateofLoss);
             nceAuto.EnterContactBusinessPhone(ContactBusinessPhone);
-            //Click on Submit
+            //Click on Submit and verify the confirmation message
             nceAuto.ClickSubmit();
             nceAuto.VerifyDataSaveMessage(DataSaveMessage);
             nceAuto.SwitchToDefaultContent();
+            //Click on Exit to close the application
             home.ClickExit();
-
             this.TESTREPORT.UpdateTestCaseStatus();
         }
 
         [TestMethod, Description("NCEPropertyPage-Create a new Property claim, fill out all fields and submit"), TestCategory("Regression")]
         public void NCE_P3NCEProperty()
         {
-
             this.TESTREPORT.InitTestCase("NCE_P3", "Create a new Property claim, fill out all fields and submit");
 
-            //verify home page title
-            home.VerifyPageTitle(HomePageTitle);
-            //verify cinch welcome
+            //Verify Page title and welcome text
+            home.VerifyPageTitle(HomePageTitle);            
             home.VerifyCinchWelome();
-            //click new Claim Entry and verify select line of business text
+            //Click on NewClaim Entry and select 'Property' as line of business
             this.TESTREPORT.LogInfo("click New Claim Entry Tab and verify 'Select Line of Business' text");
-            nceAuto.ClickOnNewClaimEntry();
-            //Select 'Property' from Line of business
+            nceAuto.ClickOnNewClaimEntry();            
             this.TESTREPORT.LogInfo("Verify 'Property' text");
             nceProperty.VerifyPropertyForm(SelectBusinessvalueDropDown);
             #region Enter all values in Loss Information
@@ -154,18 +146,20 @@ namespace AutomatedTest.FunctionalTests.PMA
             string time = DateTime.Now.ToString("HH:mm tt");
             nceGE.EntertimeOccurence(time);
             #endregion
-            #region Fill Claim Submission            
+            #region Fill Claim Submission  
+            //Fill the values for Claim Submission
             this.TESTREPORT.LogInfo("Entering the claimSubmission Section");
             nceProperty.EnterclaimSubmission(OtherRemarks, EMailAdress);
             #endregion
+            //Click on submit and validate the Confirmation message
             this.TESTREPORT.LogInfo("Click on Submit button and Verify 'The claim information you entered has been recorded and saved' as message");
             nceAuto.ClickSubmit();
             nceProperty.GetClaimNumber();
             nceAuto.VerifyDataSaveMessage(DataSaveMessage);
             nceAuto.ClickSubmit();
             nceAuto.SwitchToDefaultContent();
+            //Click on Exit to close the application
             home.ClickExit();
-
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
@@ -175,50 +169,44 @@ namespace AutomatedTest.FunctionalTests.PMA
         {
 
             this.TESTREPORT.InitTestCase("NCE_P4", "Create a new Property claim and save as draft");
-            //verify home page title
-            home.VerifyPageTitle(HomePageTitle);
-            //verify cinch welcome
+            //Verify Page title and welcome text
+            home.VerifyPageTitle(HomePageTitle);            
             home.VerifyCinchWelome();
-            //click new Claim Entry and verify select line of business text            
+            //Click on NewClaim Entry and select 'Property' as line of business            
             this.TESTREPORT.LogInfo("Verify New Claim Entry Tab and 'Select Line of Business' text");
             nceAuto.ClickOnNewClaimEntry();
             this.TESTREPORT.LogInfo("Verify 'Property' text");
             nceProperty.VerifyPropertyForm(SelectBusinessvalueDropDown);
-            //Click save Draft
-            nceAuto.ClickSaveDraft();
-            //verify RequiredField Error message
+            //Click save Draft and verify the required field error message count
+            nceAuto.ClickSaveDraft();            
             nceAuto.VerifyRequiredFieldErrormessage();
+
             //To fill the required fields to save draft and save draft
             this.TESTREPORT.LogInfo("To fill the required fields to save Draft");
             nceAuto.EnterOccurenceDate();
             nceProperty.SelectLocationLoss();
             nceAuto.SelectStateOfLoss(StateofLoss);
             nceProperty.EnterDescriptionOfDamage(DescriptionOfDamage);
-            //Click save Draft again
-            nceAuto.ClickSaveDraft();
-            // Draft Saved Successfully text
+            //Click on save Draft again and verify the confirmation message 
+            nceAuto.ClickSaveDraft();           
             nceAuto.VerifyDraftSavedSuccessfullyText();
             //get elements text
             string a = nceAuto.GetDateofOccurence();
             string b = nceProperty.GetLocationofLoss();
             string d = nceProperty.GetDescriptionOfDamage();
-            //click cancel
+            
             this.TESTREPORT.LogInfo("Verify Cancel");
-            //Click on Cancel Button
+            //Click Cancel and Verify saved draft text in table
             nceAuto.ClickCancel();
-            nceAuto.SwitchToDefaultContent();
-            //verify saved drafts text in table
+            nceAuto.SwitchToDefaultContent();            
             nceAuto.SavedDraftsText();
-            //verify Accident date in table
-            nceAuto.VerifyAccidentDateinTable(a);
-            //verfiy location in table
-            nceAuto.VerifyLocationinTable(b);
-            //verify description in table
+            //Verify Accident date,location,Description in table
+            nceAuto.VerifyAccidentDateinTable(a);            
+            nceAuto.VerifyLocationinTable(b);            
             nceAuto.VerifyDescriptioninTable(d);
             nceAuto.SwitchToDefaultContent();
-            //click Exit
+            //click Exit to close the application
             home.ClickExit();
-
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
@@ -227,65 +215,58 @@ namespace AutomatedTest.FunctionalTests.PMA
         public void NCE_P5NCEProperty()
         {
             this.TESTREPORT.InitTestCase("NCE_P5", "Create a new Property claim, save as draft, return to the saved claim page and delete");
-            //verify home page title
-            home.VerifyPageTitle(HomePageTitle);
-            //verify cinch welcome
+            //Verify Page title and welcome text
+            home.VerifyPageTitle(HomePageTitle);            
             home.VerifyCinchWelome();
-            //click new Claim Entry and verify select line of business text            
+            //Click on NewClaim Entry and select 'Property' as line of business          
             this.TESTREPORT.LogInfo("Verify New Claim Entry Tab and 'Select Line of Business' text");
             nceAuto.ClickOnNewClaimEntry();
+            //Verify 'property' text
             this.TESTREPORT.LogInfo("Verify 'Property' text");
             nceProperty.VerifyPropertyForm(SelectBusinessvalueDropDown);
-            //Click save Draft
-            nceAuto.ClickSaveDraft();
-            //verify RequiredField Error message
+            //Click save Draft and Verify RequiredField Error message
+            nceAuto.ClickSaveDraft();            
             nceAuto.VerifyRequiredFieldErrormessage();
+
             //To fill the required fields to save draft and save draft
             this.TESTREPORT.LogInfo("To fill the required fields to save Draft");
             nceAuto.EnterOccurenceDate();
             nceProperty.SelectLocationLoss();
             nceAuto.SelectStateOfLoss(StateofLoss);
             nceProperty.EnterDescriptionOfDamage(DescriptionOfDamage);
-            //Click save Draft again
-            nceAuto.ClickSaveDraft();
-            // Draft Saved Successfully text
+            //Click save Draft again and Verify the confirmation message
+            nceAuto.ClickSaveDraft();            
             nceAuto.VerifyDraftSavedSuccessfullyText();
             //get elements text
             string a = nceAuto.GetDateofOccurence();
             string b = nceProperty.GetLocationofLoss();
-            string d = nceProperty.GetDescriptionOfDamage();
-            //click cancel
+            string d = nceProperty.GetDescriptionOfDamage();            
             this.TESTREPORT.LogInfo("Verify Cancel");
             //Click on Cancel Button
             nceAuto.ClickCancel();
-            nceGE.SelectPageSizeAll();
-
+            //Select All page size and get the Table count
+            nceGE.SelectPageSizeAll();           
             this.TESTREPORT.LogInfo("Verify Data Grid row and row values ");
             int rowCountBeforeDelete = nceGE.GetGridRowCount();
-
             nceAuto.SwitchToDefaultContent();
-            //verify saved drafts text in table
+            //Verify saved drafts text in table
             nceAuto.SavedDraftsText();
-            //verify Accident date in table
-            nceAuto.VerifyAccidentDateinTable(a);
-            //verfiy location in table
-            nceAuto.VerifyLocationinTable(b);
-            //verify description in table
+            //Verify Accident date,location,description  in table
+            nceAuto.VerifyAccidentDateinTable(a);            
+            nceAuto.VerifyLocationinTable(b);           
             nceAuto.VerifyDescriptioninTable(d);
-            // nceAuto.SwitchToDefaultContent();
-            this.TESTREPORT.LogInfo("Click on Delete button");
-            nceGE.ClickOnDelete();
 
+            //Click on Delete to delete the saved draft
+            this.TESTREPORT.LogInfo("Click on Delete button");
+            nceGE.ClickOnDelete();            
             this.TESTREPORT.LogInfo("Click on Delete Popup and verify text");
             nceGE.HandleDeleteLiabilityAlert(TextFromDeleteAlert);
-
+            //Verify grid results count after delete
             this.TESTREPORT.LogInfo("Verify Grid row count after record is deleted");
             nceGE.VerifyGridRowIsExistsAfterDeletion(rowCountBeforeDelete - 1);
             nceAuto.SwitchToDefaultContent();
-
-            //click Exit
+            //Click on Exit to close the application
             home.ClickExit();
-
             this.TESTREPORT.UpdateTestCaseStatus();
 
         }
@@ -294,46 +275,40 @@ namespace AutomatedTest.FunctionalTests.PMA
         public void NCE_P6NCEProperty()
         {
             this.TESTREPORT.InitTestCase("NCE_P6", "Create a new Property claim, save as draft, navigate back to draft and submit claim with only required fields");
-            //verify home page title
+            //Verify Page title and welcome text
             home.VerifyPageTitle(HomePageTitle);
-            //verify cinch welcome
             home.VerifyCinchWelome();
-            //click new Claim Entry and verify select line of business text            
+            //Click on NewClaim Entry and select 'Property' as line of business          
             this.TESTREPORT.LogInfo("Verify New Claim Entry Tab and 'Select Line of Business' text");
             nceAuto.ClickOnNewClaimEntry();
-            //Verify Property Text
+            //Verify 'Property' Text
             this.TESTREPORT.LogInfo("Verify 'Property' text");
             nceProperty.VerifyPropertyForm(SelectBusinessvalueDropDown);
-            //Click save Draft
-            nceAuto.ClickSaveDraft();
-            //verify RequiredField Error message
+            //Click save Draft and verify RequiredField Error message
+            nceAuto.ClickSaveDraft();            
             nceAuto.VerifyRequiredFieldErrormessage();
+
             //To fill the required fields to save draft
             this.TESTREPORT.LogInfo("To fill the required fields to save Draft");
             nceAuto.EnterOccurenceDate();
             nceProperty.SelectLocationLoss();
-            //Click save Draft again
-            nceAuto.ClickSaveDraft();
-            // Draft Saved Successfully text
+            //Click save Draft again and verify the confirmation message
+            nceAuto.ClickSaveDraft();           
             nceAuto.VerifyDraftSavedSuccessfullyText();
             //Get elements text
             string a = nceAuto.GetDateofOccurence();
             string b = nceProperty.GetLocationofLoss();
-
-            //click cancel
             this.TESTREPORT.LogInfo("Verify Cancel");
             //Click on Cancel Button
             nceAuto.ClickCancel();
-
+            //Verify Data in grid after delete
             this.TESTREPORT.LogInfo("Verify Data Grid row and row values ");
             int rowCountBeforeDelete = nceGE.GetGridRowCount();
-
             nceAuto.SwitchToDefaultContent();
             //verify saved drafts text in table
             nceAuto.SavedDraftsText();
-            //verify Accident date in table
-            nceAuto.VerifyAccidentDateinTable(a);
-            //verfiy location in table
+            //verify Accident date, location,   in table
+            nceAuto.VerifyAccidentDateinTable(a);       
             nceAuto.VerifyLocationinTable(b);
 
             this.TESTREPORT.LogInfo("Click on Saved claim");
@@ -345,14 +320,14 @@ namespace AutomatedTest.FunctionalTests.PMA
             //Provide state and business phone
             nceAuto.SelectStateOfLoss(StateofLoss);
             nceAuto.EnterContactBusinessPhone(ContactBusinessPhone);
-            //Click on Submit
-            nceAuto.ClickSubmit();
-            //Verify Data Save message
+            //Click on Submit and verify the confirmation message
+            nceAuto.ClickSubmit();           
             nceAuto.VerifyDataSaveMessage(DataSaveMessage);
             //Get claim number
             nceProperty.GetClaimNumber();
 
             nceAuto.SwitchToDefaultContent();
+            //Click on Exit to close the application
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -361,34 +336,32 @@ namespace AutomatedTest.FunctionalTests.PMA
         public void NCE_P7NCEProperty()
         {
             this.TESTREPORT.InitTestCase("NCE_P7", "Create a new Property claim, save as draft, navigate back to draft and submit claim with all fields");
-            //verify home page title
+            //Verify Page title and welcome text
             home.VerifyPageTitle(HomePageTitle);
-            //verify cinch welcome
             home.VerifyCinchWelome();
-            //click new Claim Entry and verify select line of business text            
+            //Click on NewClaim Entry and select 'Property' as line of business             
             this.TESTREPORT.LogInfo("Verify New Claim Entry Tab and 'Select Line of Business' text");
             nceAuto.ClickOnNewClaimEntry();
             //Verify Property Text
             this.TESTREPORT.LogInfo("Verify 'Property' text");
             nceProperty.VerifyPropertyForm(SelectBusinessvalueDropDown);
-            //Click save Draft
-            nceAuto.ClickSaveDraft();
-            //verify RequiredField Error message
+            //Click save Draft and Verify RequiredField Error message
+            nceAuto.ClickSaveDraft();           
             nceAuto.VerifyRequiredFieldErrormessage();
+
             //To fill the required fields to save draft
             this.TESTREPORT.LogInfo("To fill the required fields to save Draft");
             nceAuto.EnterOccurenceDate();
             nceProperty.SelectLocationLoss();
-            //Click save Draft again
-            nceAuto.ClickSaveDraft();
-            // Draft Saved Successfully text
+            //Click save Draft again and verify the confirmation message
+            nceAuto.ClickSaveDraft();            
             nceAuto.VerifyDraftSavedSuccessfullyText();
+
             //Get elements text
             string a = nceAuto.GetDateofOccurence();
             string b = nceProperty.GetLocationofLoss();
-            //Click cancel
-            this.TESTREPORT.LogInfo("Verify Cancel");
             //Click on Cancel Button
+            this.TESTREPORT.LogInfo("Verify Cancel");            
             nceAuto.ClickCancel();
             //get the Table Count
             this.TESTREPORT.LogInfo("Verify Data Grid row and row values ");
@@ -396,10 +369,10 @@ namespace AutomatedTest.FunctionalTests.PMA
             nceAuto.SwitchToDefaultContent();
             //verify saved drafts text in table
             nceAuto.SavedDraftsText();
-            //verify Accident date in table
-            nceAuto.VerifyAccidentDateinTable(a);
-            //verfiy location in table
+            //verify Accident date, location in table
+            nceAuto.VerifyAccidentDateinTable(a);            
             nceAuto.VerifyLocationinTable(b);
+
             this.TESTREPORT.LogInfo("Click on Saved claim");
             nceGE.ClickOnSavedClaiminGrid();
             //Provide all fields to fill the form
@@ -417,14 +390,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Entering the claimSubmission Section");
             nceProperty.EnterclaimSubmission(OtherRemarks, EMailAdress);
             #endregion
-            //Click on Submit
-            nceAuto.ClickSubmit();
-            //Veify Confirmation message
+            //Click on Submit and verify the confirmation message
+            nceAuto.ClickSubmit();            
             this.TESTREPORT.LogInfo("Click on Submit button and Verify 'The claim information you entered has been recorded and saved' as message");
             nceAuto.VerifyDataSaveMessage(DataSaveMessage);
             //Get claim number
-            nceProperty.GetClaimNumber();
-            //Switch to Default Frame
+            nceProperty.GetClaimNumber();            
             nceAuto.SwitchToDefaultContent();
             //Click on Exit to close the application
             home.ClickExit();
@@ -436,11 +407,10 @@ namespace AutomatedTest.FunctionalTests.PMA
         {
             this.TESTREPORT.InitTestCase("NCE_P8", "Verify the Tabs/sections present in the Property Claim");
 
-            //verify home page title
+            //Verify Page title and welcome text
             home.VerifyPageTitle(HomePageTitle);
-            //verify cinch welcome
             home.VerifyCinchWelome();
-            //click new Claim Entry and verify select line of business text            
+            //Click on NewClaim Entry and select 'Property' as line of business            
             this.TESTREPORT.LogInfo("Verify New Claim Entry Tab and 'Select Line of Business' text");
             nceAuto.ClickOnNewClaimEntry();
             //Verify Property Text
