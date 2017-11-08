@@ -621,9 +621,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public int ClaimInquiryResultsCount()
         {
             this.TESTREPORT.LogInfo("Verify ClaimInquiry Tablerow COunt");
-            Thread.Sleep(6000);
+            this.driver.WaitElementPresent(byClaimInquirySearchResultsTable);
             IReadOnlyList<IWebElement> list = this.driver.FindElements(byClaimInquirySearchResultsTable);
-            Thread.Sleep(4000);
             if (list.Count!=0)
             {
                 this.TESTREPORT.LogSuccess("Verify ClaimInquiry Search results", String.Format(" Table -<mark>{0}</mark> is displayed succesfully", "ClaimInquiryResults"));

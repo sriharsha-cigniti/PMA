@@ -62,7 +62,6 @@ namespace AutomatedTest.FunctionalTests.PMA
         public static string ClaimantNameSearch { get; set; }
         public static string name { get; set; }
 
-
         public ClaimInquiryPageTests()
         {
             // Read CSV values
@@ -290,9 +289,8 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
-
-
         }
+
         [TestMethod, Description("Claim Inquiry-View all tabs in the claim view (Workers compensation)"), TestCategory("Regression")]
         public void CI_05claimInquiryPage()
         {
@@ -358,10 +356,8 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
-
-
-
         }
+
         [TestMethod, Description("Claim Inquiry-Search the data with Total Incurred amount"), TestCategory("Regression")]
         public void CI_06claimInquiryPage()
         {
@@ -407,10 +403,8 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
-
-
-
         }
+
         [TestMethod, Description("Claim Inquiry-Search the data with Accident date range"), TestCategory("Regression")]
         public void CI_07claimInquiryPage()
         {
@@ -482,26 +476,19 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
 
-            this.TESTREPORT.LogInfo("Verify Cinch Welcome Text");
             home.VerifyCinchWelome();
 
-            this.TESTREPORT.LogInfo("Click on Claiminquiry");
             home.ClickClaimInquiry();
 
-            this.TESTREPORT.LogInfo("Verify page Title for Claim Inquiry");
             home.VerifyPageTitle("Claim Inquiry");
             home.ClickSearch();
 
-            this.TESTREPORT.LogInfo("Verify table row count");
             home.ClaimInquiryResultsCount();
 
-
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
             cInquiry.VerifyDetailedClaimList();
-            this.TESTREPORT.LogInfo("Verify Loss line Summary");
+     
             cInquiry.VerifyLossLineSummary();
 
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
             cInquiry.VerifyDetailedClaimList();
 
             this.TESTREPORT.LogInfo("Verify Export to Spreadsheet");
@@ -517,9 +504,8 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.UpdateTestCaseStatus();
 
-
-
         }
+
         [TestMethod, Description("Claim Inquiry-Export to spreadsheet-Loss line summary"), TestCategory("Regression")]
         public void CI_10claimInquiryPage()
         {
@@ -528,24 +514,18 @@ namespace AutomatedTest.FunctionalTests.PMA
             
             this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
-
-            this.TESTREPORT.LogInfo("Verify Cinch Welcome Text");
+    
             home.VerifyCinchWelome();
 
-            this.TESTREPORT.LogInfo("Click on Claiminquiry");
             home.ClickClaimInquiry();
 
-            this.TESTREPORT.LogInfo("Verify page Title for Claim Inquiry");
             home.VerifyPageTitle("Claim Inquiry");
             home.ClickSearch();
 
-            this.TESTREPORT.LogInfo("Verify table row count");
             home.ClaimInquiryResultsCount();
-
-
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
+            
             cInquiry.VerifyDetailedClaimList();
-            this.TESTREPORT.LogInfo("Verify Loss line Summary");
+          
             cInquiry.VerifyLossLineSummary();
 
             //clicking Loss line description
@@ -557,14 +537,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.ExportFileExists();
             cInquiry.ExportFileDelete();
 
-            this.TESTREPORT.LogInfo("Logout of Application");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
 
-
-
         }
+
         [TestMethod, Description("Claim Inquiry-Search the data with Report date range"), TestCategory("Regression")]
         public void CI_11claimInquiryPage()
         {
@@ -605,9 +583,8 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.UpdateTestCaseStatus();
 
-
-
         }
+
         [TestMethod, Description("Claim Inquiry-Search the data with Activity date range"), TestCategory("Regression")]
         public void CI_12claimInquiryPage()
         {
@@ -645,9 +622,8 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.UpdateTestCaseStatus();
 
-
-
         }
+
         [TestMethod, Description("Claim Inquiry-Email to Claim Adjuster-Send"), TestCategory("Regression")]
         public void CI_13claimInquiryPage()
         {
@@ -740,9 +716,8 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.UpdateTestCaseStatus();
 
-
-
         }
+
         [TestMethod, Description("Claim Inquiry-Email to Claim Adjuster -cancel"), TestCategory("Regression")]
         public void CI_15claimInquiryPage()
         {
@@ -751,7 +726,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
-            //Verify  Cinch WElcome Text
+            //Verify  Cinch Welcome Text
             home.VerifyCinchWelome();
             //Click on Claiminquiry
             home.ClickClaimInquiry();
@@ -797,23 +772,18 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
 
-            this.TESTREPORT.LogInfo("Verify Cinch Welcome Text");
             home.VerifyCinchWelome();
 
-            this.TESTREPORT.LogInfo("Click on Claiminquiry");
             home.ClickClaimInquiry();
 
             this.TESTREPORT.LogInfo("Verify page Title for Claim Inquiry");
             home.VerifyPageTitle("Claim Inquiry");
             home.ClickSearch();
 
-            this.TESTREPORT.LogInfo("Verify table row count");
             home.ClaimInquiryResultsCount();
-
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
+            
             cInquiry.VerifyDetailedClaimList();
 
-            this.TESTREPORT.LogInfo("Verify loss Line Summary");
             cInquiry.VerifyLossLineSummary();
 
             this.TESTREPORT.LogInfo("Click on any random claim");
@@ -839,25 +809,18 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             //this.TESTREPORT.LogInfo("Verify that user lands on Cinch application");
             home.VerifyPageTitle("The PMA Group - Risk Management Information System");
-
-            //this.TESTREPORT.LogInfo("Verify Cinch Welcome Text");
+            
             home.VerifyCinchWelome();
-
-            //this.TESTREPORT.LogInfo("Click on Claiminquiry");
+            
             home.ClickClaimInquiry();
-
-            this.TESTREPORT.LogInfo("Verify page Title for Claim Inquiry");
+            
             home.VerifyPageTitle("Claim Inquiry");
             home.ClickSearch();
 
-            this.TESTREPORT.LogInfo("Verify table row count");
             home.ClaimInquiryResultsCount();
-
-
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
+            
             cInquiry.VerifyDetailedClaimList();
-
-            this.TESTREPORT.LogInfo("Verify loss Line Summary");
+            
             cInquiry.VerifyLossLineSummary();
 
             this.TESTREPORT.LogInfo("Click on any random claim");
@@ -867,8 +830,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             // Commenting because bug encountered for l types of loans 
             // home.VerifyClaimantName(Index[1].ToString());
 
-            this.TESTREPORT.LogInfo("Verify the View EFR button");
-            this.TESTREPORT.LogInfo("Click on View EFR button of the claim page");
+            this.TESTREPORT.LogInfo("Verify and Click on the View EFR button of Claim Page");            
             cInquiry.ClickAndVerifyEFRButton();
             cInquiry.SwitchToChildWindow();
             string PageTitle = "PMA CINCH EFR " + "- " + Index[0].ToString();
@@ -876,7 +838,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.CloseChildWindow();
             cInquiry.SwitchToParentWindow();
 
-            this.TESTREPORT.LogInfo("Logout from Application");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -1065,42 +1026,44 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyCinchWelome();
             home.ClickClaimInquiry();
             home.ClickSearch();
-
-            this.TESTREPORT.LogInfo("Verify table row count");
-            home.ClaimInquiryResultsCount();
             
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
+            home.ClaimInquiryResultsCount();            
+           
             cInquiry.VerifyDetailedClaimList();
-
-            this.TESTREPORT.LogInfo("Verify loss Line Summary");
+            
             cInquiry.VerifyLossLineSummary();
 
             this.TESTREPORT.LogInfo("Click on any random claim");
             cInquiry.EnterClaimantName(claimNoFordocuments);
             ArrayList Index = cInquiry.VerifyClaimantNameColumn(claimNoFordocuments);
-            home.VerifyClaimNumber(Index[0].ToString());
-            // Commenting because bug encountered for l types of loans 
-            // home.VerifyClaimantName(Index[1].ToString());
+            if (Index.Count > 0)
+            {
+                home.VerifyClaimNumber(Index[0].ToString());
+                // Commenting because bug encountered for l types of loans 
+                // home.VerifyClaimantName(Index[1].ToString());
 
-            this.TESTREPORT.LogInfo("Verify the Documents Tab");
-            cInquiry.VerifyDocumentsTab();
-            cInquiry.ClickDocuments();
-            cInquiry.SwitchToChildWindow();
+                this.TESTREPORT.LogInfo("Verify the Documents Tab");
+                cInquiry.VerifyDocumentsTab();
+                cInquiry.ClickDocuments();
+                cInquiry.SwitchToChildWindow();
 
-            this.TESTREPORT.LogInfo("Verify the Open,DeselectAll,CLoseWindow buttons");
-            cInquiry.VerifyOpenButton();
-            cInquiry.VerifyDeselectallButton();
-            cInquiry.VerifyCloseWindow();
+                this.TESTREPORT.LogInfo("Verify the Open,DeselectAll,CLoseWindow buttons");
+                cInquiry.VerifyOpenButton();
+                cInquiry.VerifyDeselectallButton();
+                cInquiry.VerifyCloseWindow();
 
-            this.TESTREPORT.LogInfo("Verify Downloaded .JSP file/ Window ");
-            cInquiry.SelectDocuments();
-            cInquiry.CloseChildWindow();
-            cInquiry.SwitchToParentWindow();
-            cInquiry.GetExportFilePath("jnlpModified.jsp");
-            cInquiry.ExportFileExists();
-            cInquiry.ExportFileDelete();
+                this.TESTREPORT.LogInfo("Verify Downloaded .JSP file/ Window ");
+                cInquiry.SelectDocuments();
+                cInquiry.CloseChildWindow();
+                cInquiry.SwitchToParentWindow();
+                cInquiry.GetExportFilePath("jnlpModified.jsp");
+                cInquiry.ExportFileExists();
+                cInquiry.ExportFileDelete();
+            }
+            else
+                this.TESTREPORT.LogInfo(string.Format("CLAIM NO:<Mark>{0}</Mark> not found", claimNoFordocuments));
 
-            this.TESTREPORT.LogInfo("Logout of Application");
+
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -1117,41 +1080,39 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyCinchWelome();
             home.ClickClaimInquiry();
             home.ClickSearch();
-
-            this.TESTREPORT.LogInfo("Verify table row count");
+            
             home.ClaimInquiryResultsCount();
-
-
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
+            
             cInquiry.VerifyDetailedClaimList();
-
-            this.TESTREPORT.LogInfo("Verify loss Line Summary");
+            
             cInquiry.VerifyLossLineSummary();
 
             this.TESTREPORT.LogInfo("Click on any random claim");
             cInquiry.EnterClaimantName(claimNoFordocuments);
             ArrayList Index = cInquiry.VerifyClaimantNameColumn(claimNoFordocuments);
-            home.VerifyClaimNumber(Index[0].ToString());
-            // Commenting because bug encountered for l types of loans 
-            //home.VerifyClaimantName(Index[1].ToString());
+            if (Index.Count > 0)
+            {
+                home.VerifyClaimNumber(Index[0].ToString());
+                // Commenting because bug encountered for l types of loans 
+                //home.VerifyClaimantName(Index[1].ToString());
 
-            this.TESTREPORT.LogInfo("Verify the Documents Tab");
-            cInquiry.VerifyDocumentsTab();
-            cInquiry.ClickDocuments();
+                cInquiry.VerifyDocumentsTab();
+                cInquiry.ClickDocuments();
 
-            this.TESTREPORT.LogInfo("Verify the Open,DeselectAll,CLoseWindow buttons");
-            cInquiry.VerifyOpenButton();
-            cInquiry.VerifyDeselectallButton();
-            cInquiry.VerifyCloseWindow();
+                this.TESTREPORT.LogInfo("Verify the Open,DeselectAll,CLoseWindow buttons");
+                cInquiry.VerifyOpenButton();
+                cInquiry.VerifyDeselectallButton();
+                cInquiry.VerifyCloseWindow();
 
-            this.TESTREPORT.LogInfo("Verify Entry Number Sorting ");
+                this.TESTREPORT.LogInfo("Verify Entry Number Sorting ");
+                cInquiry.VerifySortingOnDocumentlist();
 
-            cInquiry.VerifySortingOnDocumentlist();
-
-            cInquiry.CloseChildWindow();
-            cInquiry.SwitchToParentWindow();
-           
-            this.TESTREPORT.LogInfo("Logout of Application");
+                cInquiry.CloseChildWindow();
+                cInquiry.SwitchToParentWindow();
+            }
+            else
+            this.TESTREPORT.LogInfo(string.Format("CLAIM NO:<Mark>{0}</Mark> not found", claimNoFordocuments));
+            
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -1168,15 +1129,11 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyCinchWelome();
             home.ClickClaimInquiry();
             home.ClickSearch();
-
-            this.TESTREPORT.LogInfo("Verify table row count");
+            
             home.ClaimInquiryResultsCount();
-
-
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
+          
             cInquiry.VerifyDetailedClaimList();
-
-            this.TESTREPORT.LogInfo("Verify loss Line Summary");
+            
             cInquiry.VerifyLossLineSummary();
 
             this.TESTREPORT.LogInfo("Click on any random claim");
@@ -1197,7 +1154,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify Data in VehicleList");
             cInquiry.VerifyDataInVehicleList();
 
-            this.TESTREPORT.LogInfo("Logout of Application");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -1213,42 +1169,41 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyCinchWelome();
             home.ClickClaimInquiry();
             home.ClickSearch();
-
-            this.TESTREPORT.LogInfo("Verify table row count");
             home.ClaimInquiryResultsCount();
             
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
             cInquiry.VerifyDetailedClaimList();
-
-            this.TESTREPORT.LogInfo("Verify loss Line Summary");
+            
             cInquiry.VerifyLossLineSummary();
 
             this.TESTREPORT.LogInfo("Click on any random claim");
-            cInquiry.EnterClaimantName(ClaimantName);
-            ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
-            home.VerifyClaimNumber(Index[0].ToString());
-            // Commenting because bug encountered for l types of loans 
-          //  home.VerifyClaimantName(Index[1].ToString());
+            if (home.ClaimInquiryResultsCount() > 0)
+            {
+                cInquiry.EnterClaimantName(ClaimantName);
+                ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
+                home.VerifyClaimNumber(Index[0].ToString());
+                // Commenting because bug encountered for l types of loans 
+                //  home.VerifyClaimantName(Index[1].ToString());
 
-            this.TESTREPORT.LogInfo("Verify and Click the Lossline Tab");
-            cInquiry.VerifyAndClickonLossLineTab();
+                this.TESTREPORT.LogInfo("Verify and Click the Lossline Tab");
+                cInquiry.VerifyAndClickonLossLineTab();
 
-            this.TESTREPORT.LogInfo("Verify Claimant name ,LossLine Description, Suffix Code, Loss Line Status, In Suit)");
-            cInquiry.VerifyLossLineTableHeaders(LossHeader1);
-            cInquiry.VerifyLossLineTableHeaders(LossHeader2);
-            cInquiry.VerifyLossLineTableHeaders(LossHeader3);
-            cInquiry.VerifyLossLineTableHeaders(LossHeader4);
-            cInquiry.VerifyLossLineTableHeaders(LossHeader5);
+                this.TESTREPORT.LogInfo("Verify Claimant name ,LossLine Description, Suffix Code, Loss Line Status, In Suit)");
+                cInquiry.VerifyLossLineTableHeaders(LossHeader1);
+                cInquiry.VerifyLossLineTableHeaders(LossHeader2);
+                cInquiry.VerifyLossLineTableHeaders(LossHeader3);
+                cInquiry.VerifyLossLineTableHeaders(LossHeader4);
+                cInquiry.VerifyLossLineTableHeaders(LossHeader5);
 
 
-            this.TESTREPORT.LogInfo("Verify LossLine Detail Information Text,Claimant Detail Information,Other loss line information");
-            cInquiry.CLickLossLineExpand();
-            cInquiry.VerifyLosslineInformationIsDisplayed();
-            cInquiry.VerifyClaimantInformationIsDisplayed();
-            cInquiry.VerifyOtherLossLineIsDisplayed();
-            cInquiry.VerifyOtherClaimantNameIsDisplayed();
-
-            this.TESTREPORT.LogInfo("Logout of Application");
+                this.TESTREPORT.LogInfo("Verify LossLine Detail Information Text,Claimant Detail Information,Other loss line information");
+                cInquiry.CLickLossLineExpand();
+                cInquiry.VerifyLosslineInformationIsDisplayed();
+                cInquiry.VerifyClaimantInformationIsDisplayed();
+                cInquiry.VerifyOtherLossLineIsDisplayed();
+                cInquiry.VerifyOtherClaimantNameIsDisplayed();
+            }
+            else
+                this.TESTREPORT.LogInfo("<Mark>NO DATA TO DISPLAY</Mark>");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -1416,18 +1371,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyCinchWelome();
             home.ClickClaimInquiry();
             home.ClickSearch();
-
-            this.TESTREPORT.LogInfo("Verify table row count");
             home.ClaimInquiryResultsCount();
 
-
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
             cInquiry.VerifyDetailedClaimList();
-
-            this.TESTREPORT.LogInfo("Verify loss Line Summary");
+      
             cInquiry.VerifyLossLineSummary();
 
-            this.TESTREPORT.LogInfo("Click on any random claim");
             cInquiry.EnterClaimantName(ClaimantName);
             ArrayList Index = cInquiry.VerifyClaimantNameColumn(ClaimantName);
             home.VerifyClaimNumber(Index[0].ToString());
@@ -1441,7 +1390,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             cInquiry.SearchByClaimantNameInLossLineTab(ClaimantNameSearch);
             cInquiry.VerifyandClickClearButton(ClaimantNameSearch);
            
-            this.TESTREPORT.LogInfo("Logout of Application");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -1450,13 +1398,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         public void CI_33claimInquiryPage()
         {
             this.TESTREPORT.InitTestCase("CI_33", "Claim Inquiry-Check for tabs present in Worker Accident (Workers claim number)");
-            
-            string HomePageTitle = readCSV("HomePageTitle");
-            string ClaimInquiryPageTitle = readCSV("ClaimInquiryPageTitle");
-            string DocumentsWindowPageTitle = readCSV("DocumentsWindowPageTitle");
-            string ClaimantName = readCSV("ClaimantName");
-
-
+           
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch WElcome Text
@@ -1627,10 +1569,8 @@ namespace AutomatedTest.FunctionalTests.PMA
         public void CI_36claimInquiryPage()
         {
             
-            this.TESTREPORT.InitTestCase("CI_36", "Claim Inquiry-Verify Log Notes tab Group by column");
+            this.TESTREPORT.InitTestCase("CI_36", "Claim Inquiry-Verify Log Notes tab Group by column");         
            
-           
-
             //Verify that user lands on Cinch application
             home.VerifyPageTitle(HomePageTitle);
             //Verify  Cinch Welcome Text
@@ -1690,39 +1630,37 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.VerifyCinchWelome();
             home.ClickClaimInquiry();
             home.ClickSearch();
-
-            this.TESTREPORT.LogInfo("Verify table row count");
+   
             home.ClaimInquiryResultsCount();
 
-
-            this.TESTREPORT.LogInfo("Verify Detailed Claim list");
             cInquiry.VerifyDetailedClaimList();
 
-            this.TESTREPORT.LogInfo("Verify loss Line Summary");
             cInquiry.VerifyLossLineSummary();
 
             this.TESTREPORT.LogInfo("Click on any random claim");
             cInquiry.EnterClaimantName(claimNoFordocuments);
             ArrayList Index = cInquiry.VerifyClaimantNameColumn(claimNoFordocuments);
-            home.VerifyClaimNumber(Index[0].ToString());
+            if (Index.Count > 0)
+            {
+                home.VerifyClaimNumber(Index[0].ToString());
 
-            //home.VerifyClaimantName(Index[1].ToString());
+                //home.VerifyClaimantName(Index[1].ToString());
 
-            this.TESTREPORT.LogInfo("Verify the Documents Tab");
-            cInquiry.VerifyDocumentsTab();
-            cInquiry.ClickDocuments();
+                cInquiry.VerifyDocumentsTab();
+                cInquiry.ClickDocuments();
 
-            this.TESTREPORT.LogInfo("Verify Count of the results ");
-            cInquiry.EnterDocumentSearchText(DocumentSearchValue);
-            cInquiry.VerifyDocumentsCountOnSearch(DocumentSearchValue);
-            cInquiry.CloseChildWindow();
-            cInquiry.SwitchToParentWindow();
+                this.TESTREPORT.LogInfo("Verify Count of the results ");
+                cInquiry.EnterDocumentSearchText(DocumentSearchValue);
+                cInquiry.VerifyDocumentsCountOnSearch(DocumentSearchValue);
+                cInquiry.CloseChildWindow();
+                cInquiry.SwitchToParentWindow();
 
-            this.TESTREPORT.LogInfo("Verify CLaim Inquiry Page Title ");
-            home.ClickClaimInquiry();
-            home.VerifyPageTitle(ClaimInquiryPageTitle);
+                home.ClickClaimInquiry();
+                home.VerifyPageTitle(ClaimInquiryPageTitle);
+            }
+            else
+            this.TESTREPORT.LogInfo(string.Format("CLAIM NO:<Mark>{0}</Mark> not found", claimNoFordocuments));
 
-            this.TESTREPORT.LogInfo("Logout of Application");
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -1741,27 +1679,32 @@ namespace AutomatedTest.FunctionalTests.PMA
             home.ClaimInquiryResultsCount();
             cInquiry.VerifyDetailedClaimList();
             cInquiry.VerifyLossLineSummary();
-            cInquiry.EnterClaimantName(ClaimantName);
+            if (home.ClaimInquiryResultsCount() > 0)
+            {
+                cInquiry.EnterClaimantName(ClaimantName);
 
-            ArrayList Index = cInquiry.ClickOnRandomClaimInquiryResults();
-            home.VerifyClaimNumber(Index[0].ToString());
-            // Commenting because bug encountered for l types of loans 
-            //home.VerifyClaimantName(Index[1].ToString());
+                ArrayList Index = cInquiry.ClickOnRandomClaimInquiryResults();
+                home.VerifyClaimNumber(Index[0].ToString());
+                // Commenting because bug encountered for l types of loans 
+                //home.VerifyClaimantName(Index[1].ToString());
 
-            this.TESTREPORT.LogInfo("Verify Log Notes");
-            cInquiry.VerifyAndClickLogNotes();
+                this.TESTREPORT.LogInfo("Verify Log Notes");
+                cInquiry.VerifyAndClickLogNotes();
 
-            this.TESTREPORT.LogInfo("Verify Show Notes ,Hide Notes Tab");
-            cInquiry.VerifyShortNotesIsDisplayed();
-            cInquiry.VerifyHideNotesIsDisplayed();
+                this.TESTREPORT.LogInfo("Verify Show Notes ,Hide Notes Tab");
+                cInquiry.VerifyShortNotesIsDisplayed();
+                cInquiry.VerifyHideNotesIsDisplayed();
 
-            this.TESTREPORT.LogInfo("Verify Note,Category,Date Created,Created By,Note Description");
-            cInquiry.VerifyLogNotesTableHeaders(LogNoteTableHeader1);
-            cInquiry.VerifyLogNotesTableHeaders(LogNoteTableHeader2);
-            cInquiry.VerifyLogNotesTableHeaders(LogNoteTableHeader3);
-            cInquiry.VerifyLogNotesTableHeaders(LogNoteTableHeader4);
-            cInquiry.VerifyLogNotesTableHeaders(LogNoteTableHeader5);
-            
+                this.TESTREPORT.LogInfo("Verify Note,Category,Date Created,Created By,Note Description");
+                cInquiry.VerifyLogNotesTableHeaders(LogNoteTableHeader1);
+                cInquiry.VerifyLogNotesTableHeaders(LogNoteTableHeader2);
+                cInquiry.VerifyLogNotesTableHeaders(LogNoteTableHeader3);
+                cInquiry.VerifyLogNotesTableHeaders(LogNoteTableHeader4);
+                cInquiry.VerifyLogNotesTableHeaders(LogNoteTableHeader5);
+            }
+            else
+            this.TESTREPORT.LogInfo(string.Format("<Mark>NO DATA FOUND</Mark>"));
+
             //logout of Application
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();

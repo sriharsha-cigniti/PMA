@@ -58,8 +58,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
-
-            this.TESTREPORT.LogInfo("Verify Page Title");
             home.VerifyPageTitle(OshaPageTitle);
 
             if (osha.SelectYearFromDropdown(Year))
@@ -124,7 +122,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             //osha.ClickAcceptButton();
 
-            this.TESTREPORT.LogInfo("Verify Page Title");
             home.VerifyPageTitle(OshaPageTitle);
 
             this.TESTREPORT.LogInfo("Verify results in the Injury date column");
@@ -191,8 +188,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
-
-            this.TESTREPORT.LogInfo("Verify Page Title");
             home.VerifyPageTitle(OshaPageTitle);
 
             if (osha.SelectYearFromDropdown(Year))
@@ -266,8 +261,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
-
-            this.TESTREPORT.LogInfo("Verify Page Title");
             home.VerifyPageTitle(OshaPageTitle);
 
             if (osha.SelectYearFromDropdown(Year))
@@ -341,8 +334,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
-
-            this.TESTREPORT.LogInfo("Verify Page Title");
             home.VerifyPageTitle(OshaPageTitle);
 
             if (osha.SelectYearFromDropdown(Year))
@@ -460,8 +451,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
-
-            this.TESTREPORT.LogInfo("Verify Page Title");
             home.VerifyPageTitle(OshaPageTitle);
 
             if (osha.SelectYearFromDropdown(Year))
@@ -472,8 +461,6 @@ namespace AutomatedTest.FunctionalTests.PMA
                 ArrayList claimdetails = osha.ClickOnClaimnumber();
                 if (claimdetails.Count > 0)
                 {
-
-                    this.TESTREPORT.LogInfo("Verify Page Title");
                     home.VerifyPageTitle(OshaPageTitle2);
 
                     this.TESTREPORT.LogInfo("Verify Claim Number");
@@ -505,8 +492,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
                     this.TESTREPORT.LogInfo("Modify and Verify changes in Privacy");
                     osha.VerifyPrivacy();
-
-
 
                     this.TESTREPORT.LogInfo("Modify and Verify changes in Injury/Illness");
                     osha.VerifyInjuryorIllness("Slipped on ice");
@@ -587,8 +572,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
-
-            this.TESTREPORT.LogInfo("Verify Page Title");
             home.VerifyPageTitle(OshaPageTitle);
 
             if (osha.SelectYearFromDropdown(Year))
@@ -616,8 +599,6 @@ namespace AutomatedTest.FunctionalTests.PMA
                     ArrayList claimdetails = osha.ClickOnClaimnumber();
                     if (claimdetails.Count > 0)
                     {
-
-                        this.TESTREPORT.LogInfo("Verify Page Title");
                         home.VerifyPageTitle(OshaPageTitle2);
 
                         this.TESTREPORT.LogInfo("Verify Claim Number");
@@ -667,8 +648,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
-
-            this.TESTREPORT.LogInfo("Verify Page Title");
             home.VerifyPageTitle(OshaPageTitle);
 
             if (osha.SelectYearFromDropdown(Year))
@@ -706,8 +685,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
-
-            this.TESTREPORT.LogInfo("Verify Page Title");
             home.VerifyPageTitle(OshaPageTitle);
 
             if (osha.SelectYearFromDropdown(Year))
@@ -725,9 +702,6 @@ namespace AutomatedTest.FunctionalTests.PMA
                     osha.VerifyClaimTextAfterClear(claimdetails[0].ToString());
                     osha.VerifySearchResultsAfterClear("1");
 
-
-
-
                 }
                 else
                     this.TESTREPORT.LogInfo(string.Format("<mark> NO DATA FOUND</mark>"));
@@ -740,13 +714,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.UpdateTestCaseStatus();
         }
 
-
-
-
-
-
-
-
-
+        
     }
 }
