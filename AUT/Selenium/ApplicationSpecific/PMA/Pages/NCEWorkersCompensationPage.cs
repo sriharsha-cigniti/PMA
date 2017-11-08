@@ -194,6 +194,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.SendKeysToElementClearFirst(byIsInjuryWorkedLosingTimeText, IsInjuredWorkerLosingTime, "IsInjuredWorkerLosingTime");
 
             this.driver.ClickElement(byDateOfInjury, "Date of Injury");
+            this.driver.FindElement(byDateOfInjury).SendKeys(OpenQA.Selenium.Keys.Control + 'a');
             this.driver.SendKeysToElement(byDateOfInjury, DateOfInjury, "Date of Injury");
             SelectDropDown(AccidentCause, byAccidentCauseDD);
 
@@ -230,6 +231,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             SelectDropDownWithParent(State, byWorkState, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddWorkState_DDD_L_LBT");
 
             VerifyAndClickOnMenu("MainContent_CallbackPanel_ASPxRoundPanel3_CBImg");
+            this.driver.ScrollToElement(byhospitalzip);
             this.driver.ClickElement(byContactTelePhone, "TelePhones textBox");
             this.driver.SendKeysToElementClearFirst(byContactTelePhone, PreparerPhone, "TelePhone");
         }
@@ -277,6 +279,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(byModifiedDutyBeganTB, "Today Button in Modified Duty Date Began");
             this.driver.SendKeysToElementClearFirst(byinjuryoccur, State, "Injury Location");
             this.driver.SendKeysToElementClearFirst(byWorkZip, Zip, "Work Zip");
+            this.driver.ScrollToElement(byWorkZip);
             SelectDropDownWithParent(YesText, byemployeeinjuredImg, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddemployeeinjured_DDD_L_LBT");
             SelectDropDownWithParent(YesText, byinjurypremisesImg, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddinjurypremises_DDD_L_LBT");
             SelectDropDownWithParent(YesText, bysafeguardsprovidedImg, "MainContent_CallbackPanel_ASPxRoundPanel2_ASPxPanel1_ddsafeguardsprovided_DDD_L_LBT");
@@ -475,6 +478,10 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             SelectDropDownWithParent(State, byhospitalstateImg, "MainContent_CallbackPanel_ASPxRoundPanel3_ASPxPanel2_ddhospitalstate_DDD_L_LBT");
             this.driver.SendKeysToElementClearFirst(byhospitalzip, Zip, "Hospital Zip");
 
+            this.driver.ClickElement(byContactTelePhone, "TelePhones textBox");
+            this.driver.FindElement(byContactTelePhone).SendKeys(OpenQA.Selenium.Keys.Control + 'a');
+            this.driver.SendKeysToElementClearFirst(byContactTelePhone, TelePhone, "TelePhone");
+
             this.driver.SendKeysToElementClearFirst(byemployerfirstname, "EMP" + fname, "Employer first Name");
             this.driver.SendKeysToElementClearFirst(byemployerlastname, "EMP" + lname, "Employer last Name");
             this.driver.SendKeysToElementClearFirst(byemployerphone, TelePhone, "Employer telephone");
@@ -494,6 +501,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.SendKeysToElementClearFirst(byIsInjuryWorkedLosingTimeText, YesText, "IsInjuredWorkerLosingTime");
 
             this.driver.ClickElement(byDateOfInjury, "Date of Injury");
+            this.driver.FindElement(byDateOfInjury).SendKeys(OpenQA.Selenium.Keys.Control + 'a');
             this.driver.SendKeysToElement(byDateOfInjury, DateOfInjury, "Date of Injury");
             SelectDropDown(AccidentCause, byAccidentCauseDD);
 
