@@ -440,7 +440,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             if (FieldError.Count > 0 && FieldError.Count == Count)
                 this.TESTREPORT.LogSuccess("Verify Required field Error Message", String.Format("Required field error with count: <mark>{0}</mark>", FieldError.Count.ToString()));
             else
-                this.TESTREPORT.LogFailure("Verify Required field Error Message", String.Format("Required field error with count: <mark>{0}</mark>", FieldError.Count.ToString()));
+                this.TESTREPORT.LogFailure("Verify Required field Error Message", String.Format("Required field error with count: <mark>{0}</mark>", FieldError.Count.ToString()), this.SCREENSHOTFILE);
         }
 
         public void EnterOccurenceDate()
