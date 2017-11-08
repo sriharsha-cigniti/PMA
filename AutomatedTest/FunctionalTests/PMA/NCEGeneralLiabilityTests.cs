@@ -135,7 +135,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify Loss Information(Colour change) and Required Field, Invalid Format error message");
             nceAuto.VerifyRequiredfieldErrorMessage(Convert.ToInt32(RequiredErrorMessageCount));
             nceGE.VerifyColorChange();
-            nceGE.VerifyErrorMessage(Convert.ToInt32(InvalidDataFormatcount), InvalidData);
+            //nceGE.VerifyErrorMessage(Convert.ToInt32(InvalidDataFormatcount), InvalidData);
 
             this.TESTREPORT.LogInfo("Verify 'The claim information you entered has been recorded and saved' message");
             nceAuto.EnterOccurenceDate();
@@ -360,7 +360,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.LogInfo("Verify Required Field, Invalid Format error message");
             nceAuto.VerifyRequiredfieldErrorMessage(Convert.ToInt32(ErrorCount));
-            nceGE.VerifyErrorMessage(Convert.ToInt32(InvalidDataFormatcount), InvalidData);
+            //nceGE.VerifyErrorMessage(Convert.ToInt32(InvalidDataFormatcount), InvalidData);
 
             nceAuto.SelectStateOfLoss(StateofLoss);
             nceAuto.EnterContactBusinessPhone(ContactBusinessPhone);
