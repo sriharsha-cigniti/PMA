@@ -86,7 +86,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         public static void AfterAllTestsExecution()
         {
 
-            //after execution, update extent report with gallop logo 
+            //after execution, update extent report with cigniti logo 
             /*driver can not be initialized in static method as driver is instance variable*/
             //driver.Close();
             driver.Quit();
@@ -175,7 +175,7 @@ namespace AutomatedTest.FunctionalTests.PMA
         {
             get { return EngineSetup.GetScreenShotPath(); }
         }
-        /*To update extentReport to have Gallop Logo*/
+        /*To update extentReport to have Cigniti Logo*/
         protected static void UpdateTestReport()
         {
             /*Dictionary should contain
@@ -202,7 +202,7 @@ namespace AutomatedTest.FunctionalTests.PMA
 
 
                 //Text1ToReplace
-                str = "<div class='logo-container' style='height:50px;width:200px;'>\r\n                                    <a href='http://www.gallop.net/'>\r\n                                        <img border='0' alt='Gallop' src='gallop_logo.png' width='200' height='35'>\r\n                                    </a>\r\n                                    <a href='#' data-activates='slide-out' class='button-collapse hide-on-large-only'><i class='mdi-navigation-apps'></i></a>\r\n                                </div>";
+                str = "<div class='logo-container' style='height:50px;width:200px;'>\r\n                                    <a href='http://www.cigniti.com//'>\r\n                                        <img border='0' alt='Cigniti' src='Cigniti_logo.png' width='200' height='35'>\r\n                                    </a>\r\n                                    <a href='#' data-activates='slide-out' class='button-collapse hide-on-large-only'><i class='mdi-navigation-apps'></i></a>\r\n                                </div>";
 
                 keyValuePair["Text1ToReplace"] = str;
 

@@ -19,7 +19,7 @@ namespace TestReporter
     public class ExtentReporter : IReporter
     {
         private string filePath = null;
-        private bool isGallopLogoRequired = false;
+        private bool isCignitiLogoRequired = false;
         private ExtentReports objExtentReport = null;
         private ExtentTest objExtentTest = null;
 
@@ -28,11 +28,11 @@ namespace TestReporter
         /// </summary>
         /// <param name="filePath">The file path.</param>
         /// <param name="replaceExisting">if set to <c>true</c> [replace existing].</param>
-        /// <param name="isGallopLogoRequired">if set to <c>true</c> [is gallop logo required].</param>
-        public ExtentReporter(string filePath, bool replaceExisting, bool isGallopLogoRequired)
+        /// <param name="isCignitiLogoRequired">if set to <c>true</c> [is Cigniti logo required].</param>
+        public ExtentReporter(string filePath, bool replaceExisting, bool isCignitiLogoRequired)
         {
             this.filePath = filePath;
-            this.isGallopLogoRequired = isGallopLogoRequired;
+            this.isCignitiLogoRequired = isCignitiLogoRequired;
             this.objExtentReport = new ExtentReports(this.filePath, replaceExisting);
             this.objExtentReport.LoadConfig("extentConfig.xml");
             FileInfo fileInfo = new FileInfo(this.filePath);
@@ -48,11 +48,11 @@ namespace TestReporter
                 Console.WriteLine(String.Format("Exception Encountered - {0}", ex.Message));
                 Environment.Exit(0);
             }
-            if(this.isGallopLogoRequired == true)
+            if(this.isCignitiLogoRequired == true)
             {
-                //copy gallop logo
-                string sourceGallopLogo = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "gallop_logo.png";
-                string destGallopLogo = new FileInfo(this.filePath).Directory.ToString() + Path.DirectorySeparatorChar + "gallop_logo.png";
+                //copy cigniti logo
+                string sourceCignitiLogo = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Cigniti_logo.png";
+                string destCignitiLogo = new FileInfo(this.filePath).Directory.ToString() + Path.DirectorySeparatorChar + "Cigniti_logo.png";
 
                 //copy client logo
                 string sourceClientLogo = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "client_logo.png";
@@ -60,7 +60,7 @@ namespace TestReporter
                 
                 try
                 {   
-                    File.Copy(sourceGallopLogo, destGallopLogo, true);
+                    File.Copy(sourceCignitiLogo, destCignitiLogo, true);
                     File.Copy(sourceClientLogo, destClientLogo, true);
                 }
                 catch(Exception ex)

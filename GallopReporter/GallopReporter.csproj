@@ -89,10 +89,10 @@
     <Compile Include="TestResult.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="logos\failed.ico">
+    <Content Include="logos\Cigniti_logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="logos\gallop_logo.png">
+    <Content Include="logos\failed.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="logos\logo.png">

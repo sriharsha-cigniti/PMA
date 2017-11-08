@@ -10,7 +10,7 @@
     <DeploymentItem filename="TestReporter\client_logo.png" />
     <DeploymentItem filename="Engine\SeleniumDrivers\IEDriverServer.exe" />
     <DeploymentItem filename="GallopReporter\logos\" />
-    <DeploymentItem filename="TestReporter\gallop_logo.png" />
+    <DeploymentItem filename="TestReporter\Cigniti_logo.png" />
   </Deployment>
   <Execution>
     <Timeouts testTimeout="0" />
