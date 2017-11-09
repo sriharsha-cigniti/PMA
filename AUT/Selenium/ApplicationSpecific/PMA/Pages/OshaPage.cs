@@ -65,6 +65,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         private By byClaimNoSearchText = By.Id("MainContent_gridresult_DXFREditorcol1_I");
         private By byClearButton = By.XPath("//span[contains(text(),'Clear')]");
         private double timeoutInSeconds;
+        private By byInputYearText = By.XPath("//table[@id='MainContent_ddyear']//input[@id='MainContent_ddyear_I']");
 
 
         #endregion
@@ -88,7 +89,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public void VerifyOshaTabHighLightColor(string HighlightColor)
         {
             this.driver.WaitElementPresent(byOshaLink);
-            this.driver.ClickElement(byOshaLink, "Claim Inquiry link");
+          this.driver.ClickElement(byOshaLink, "Claim Inquiry link");
             string actualHighlightcolor = this.driver.GetElementAttribute(byOshaLink, "style");
             string color = actualHighlightcolor.Split(':')[1];
             if (actualHighlightcolor.Equals(HighlightColor))
@@ -147,11 +148,15 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
         public bool SelectYearFromDropdown(string Year)
         {
             bool yearPresent = true;
-            this.driver.ClickElement(byClickDropDownArrow, "Drop Down Arrow");
-            By ByYear = By.XPath(string.Format("//td[contains(text(),'{0}')]", Year));
-            this.driver.WaitElementPresent(ByYear);
-            if (this.driver.IsElementPresent(ByYear))
-                this.driver.ClickElement(ByYear, "DropDown Year");
+            if (!string.IsNullOrEmpty(this.driver.GetElementAttribute(byInputYearText, "value")))
+            {
+                this.driver.ClickElement(byClickDropDownArrow, "Drop Down Arrow");
+
+                By ByYear = By.XPath(string.Format("//td[contains(text(),'{0}')]", Year));
+                this.driver.WaitElementPresent(ByYear);
+                if (this.driver.IsElementPresent(ByYear))
+                    this.driver.ClickElement(ByYear, "DropDown Year");
+            }
             else
                 yearPresent = false;
 
@@ -665,6 +670,8 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
 
         public void VerifyClaimTextAfterClear(string beforesetText)
         {
+            Thread.Sleep(10000);
+
             string actual = this.driver.GetElementAttribute(byClaimNoSearchText, "value");
             if (!actual.Equals(beforesetText))
             {

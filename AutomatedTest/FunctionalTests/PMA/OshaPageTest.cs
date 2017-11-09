@@ -55,17 +55,17 @@ namespace AutomatedTest.FunctionalTests.PMA
             osha.VerifyInformation();
 
             osha.ClickAcceptButton();
-            this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
-            osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
-
-            home.VerifyPageTitle(OshaPageTitle);
-
             if (osha.SelectYearFromDropdown(Year))
             {
+             this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+            osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
+            home.VerifyPageTitle(OshaPageTitle);
+
+           
                 ArrayList claimdetails = osha.ClickOnClaimnumber();
                 if (claimdetails.Count > 0)
                 {
-                    this.TESTREPORT.LogInfo("Verify Page Title");
+                    
                     home.VerifyPageTitle(OshaPageTitle2);
 
                     this.TESTREPORT.LogInfo("Verify Claim Number");
@@ -103,7 +103,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
             this.TESTREPORT.InitTestCase("Osha_02", "Click reset clears all Claim Inquiry fields");
 
-
             home.VerifyPageTitle(HomePageTitle);
             home.VerifyCinchWelome();
 
@@ -117,47 +116,48 @@ namespace AutomatedTest.FunctionalTests.PMA
             osha.VerifyInformation();
 
             osha.ClickAcceptButton();
-            this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
-            osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
-
-            //osha.ClickAcceptButton();
-
-            home.VerifyPageTitle(OshaPageTitle);
-
-            this.TESTREPORT.LogInfo("Verify results in the Injury date column");
-            osha.SelectYearFromDropdown(Year);
-            osha.SelectPageSizeAll(PageSize);
-            osha.VerifyInjuryDateColoumn(Year);
-
             if (osha.SelectYearFromDropdown(Year))
             {
-                ArrayList claimdetails = osha.ClickOnClaimnumber();
-                if (claimdetails.Count > 0)
-                {
-                    this.TESTREPORT.LogInfo("Verify Page Title");
-                    home.VerifyPageTitle(OshaPageTitle2);
-
-                    this.TESTREPORT.LogInfo("Verify Claim Number");
-                    osha.VerifyOshaClaimDetail(claimdetails[0].ToString(), osha.GetClaimno());
-
-                    this.TESTREPORT.LogInfo("Verify  Account number");
-                    osha.VerifyOshaClaimDetail(osha.GetAccountNoFromPageHeader(), osha.GetClaimAccountNo());
-
-                    this.TESTREPORT.LogInfo("Verify Name");
-                    osha.VerifyOshaClaimDetail(claimdetails[2].ToString(), osha.GetEstablishmentName());
-
-                    this.TESTREPORT.LogInfo("Verify Job Title ");
-                    osha.VerifyOshaClaimDetail(claimdetails[1].ToString(), osha.GetJobtitle());
-                }
-                else
-                    this.TESTREPORT.LogInfo(string.Format("<mark> NO DATA TO DISPLAY </mark>"));
-
-                osha.ClickOnExitDetail();
                 this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
                 osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
-                this.TESTREPORT.LogInfo("Verify  Default/Selected year from drop down");
-                osha.VerifyDropDownValue(Year);
+                home.VerifyPageTitle(OshaPageTitle);
+
+                this.TESTREPORT.LogInfo("Verify results in the Injury date column");
+                osha.SelectYearFromDropdown(Year);
+                osha.SelectPageSizeAll(PageSize);
+                osha.VerifyInjuryDateColoumn(Year);
+
+                if (osha.SelectYearFromDropdown(Year))
+                {
+                    ArrayList claimdetails = osha.ClickOnClaimnumber();
+                    if (claimdetails.Count > 0)
+                    {
+
+                        home.VerifyPageTitle(OshaPageTitle2);
+
+                        this.TESTREPORT.LogInfo("Verify Claim Number");
+                        osha.VerifyOshaClaimDetail(claimdetails[0].ToString(), osha.GetClaimno());
+
+                        this.TESTREPORT.LogInfo("Verify  Account number");
+                        osha.VerifyOshaClaimDetail(osha.GetAccountNoFromPageHeader(), osha.GetClaimAccountNo());
+
+                        this.TESTREPORT.LogInfo("Verify Name");
+                        osha.VerifyOshaClaimDetail(claimdetails[2].ToString(), osha.GetEstablishmentName());
+
+                        this.TESTREPORT.LogInfo("Verify Job Title ");
+                        osha.VerifyOshaClaimDetail(claimdetails[1].ToString(), osha.GetJobtitle());
+                    }
+                    else
+                        this.TESTREPORT.LogInfo(string.Format("<mark> NO DATA TO DISPLAY </mark>"));
+
+                    osha.ClickOnExitDetail();
+                    this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+                    osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
+
+                    this.TESTREPORT.LogInfo("Verify  Default/Selected year from drop down");
+                    osha.VerifyDropDownValue(Year);
+                }
             }
             else
                 this.TESTREPORT.LogInfo(string.Format("<mark> NO DATA/YEAR FOUND</mark>"));
@@ -185,17 +185,17 @@ namespace AutomatedTest.FunctionalTests.PMA
             osha.VerifyInformation();
 
             osha.ClickAcceptButton();
-            this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
-            osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
-
-            home.VerifyPageTitle(OshaPageTitle);
-
             if (osha.SelectYearFromDropdown(Year))
             {
+                this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+                osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
+
+                home.VerifyPageTitle(OshaPageTitle);
+
+
                 ArrayList claimdetails = osha.ClickOnClaimnumber();
                 if (claimdetails.Count > 0)
                 {
-                    this.TESTREPORT.LogInfo("Verify Page Title");
                     home.VerifyPageTitle(OshaPageTitle2);
 
                     this.TESTREPORT.LogInfo("Verify Claim Number");
@@ -227,8 +227,6 @@ namespace AutomatedTest.FunctionalTests.PMA
                 else
                     this.TESTREPORT.LogInfo(string.Format("<mark> NO DATA TO DISPLAY </mark>"));
 
-
-
                 osha.ClickOnExitDetail();
                 this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
                 osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
@@ -258,17 +256,17 @@ namespace AutomatedTest.FunctionalTests.PMA
             osha.VerifyInformation();
 
             osha.ClickAcceptButton();
-            this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+            if (osha.SelectYearFromDropdown(Year))
+            {
+                this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
             home.VerifyPageTitle(OshaPageTitle);
 
-            if (osha.SelectYearFromDropdown(Year))
-            {
+            
                 ArrayList claimdetails = osha.ClickOnClaimnumber();
                 if (claimdetails.Count > 0)
                 {
-                    this.TESTREPORT.LogInfo("Verify Page Title");
                     home.VerifyPageTitle(OshaPageTitle2);
 
                     this.TESTREPORT.LogInfo("Verify Claim Number");
@@ -299,9 +297,7 @@ namespace AutomatedTest.FunctionalTests.PMA
                 }
                 else
                     this.TESTREPORT.LogInfo(string.Format("<mark> NO DATA TO DISPLAY </mark>"));
-
-
-
+                
                 osha.ClickOnExitDetail();
                 this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
                 osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
@@ -331,19 +327,20 @@ namespace AutomatedTest.FunctionalTests.PMA
             osha.VerifyInformation();
 
             osha.ClickAcceptButton();
-            this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+            if (osha.SelectYearFromDropdown(Year))
+            {
+                this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
             home.VerifyPageTitle(OshaPageTitle);
 
-            if (osha.SelectYearFromDropdown(Year))
-            {
+            
                 osha.ClickOnModifySortLink();
                 osha.ClickOnModifySortLink();
                 ArrayList claimdetails = osha.ClickOnClaimnumber();
                 if (claimdetails.Count > 0)
                 {
-                    this.TESTREPORT.LogInfo("Verify Page Title");
+                    
                     home.VerifyPageTitle(OshaPageTitle2);
 
                     this.TESTREPORT.LogInfo("Verify Claim Number");
@@ -448,14 +445,13 @@ namespace AutomatedTest.FunctionalTests.PMA
             osha.VerifyInformation();
 
             osha.ClickAcceptButton();
-            this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+            if (osha.SelectYearFromDropdown(Year))
+            {
+                this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
             home.VerifyPageTitle(OshaPageTitle);
-
-            if (osha.SelectYearFromDropdown(Year))
-            {
-
+                
                 osha.ClickOnModifySortLink();
                 osha.ClickOnModifySortLink();
                 ArrayList claimdetails = osha.ClickOnClaimnumber();
@@ -569,13 +565,13 @@ namespace AutomatedTest.FunctionalTests.PMA
             osha.VerifyInformation();
 
             osha.ClickAcceptButton();
-            this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+            if (osha.SelectYearFromDropdown(Year))
+            {
+                this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
             home.VerifyPageTitle(OshaPageTitle);
 
-            if (osha.SelectYearFromDropdown(Year))
-            {
                 osha.ClickOnModifySortLink();
                 osha.ClickOnModifySortLink();
 
@@ -645,13 +641,14 @@ namespace AutomatedTest.FunctionalTests.PMA
             osha.VerifyInformation();
 
             osha.ClickAcceptButton();
-            this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+
+            if (osha.SelectYearFromDropdown(Year))
+            {
+                this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
             home.VerifyPageTitle(OshaPageTitle);
 
-            if (osha.SelectYearFromDropdown(Year))
-            {
                 osha.ClickOnExportSpreadsheet();
                 cInquiry.GetExportFilePath("gridresult.csv");
                 cInquiry.ExportFileExists();
@@ -682,13 +679,13 @@ namespace AutomatedTest.FunctionalTests.PMA
             osha.VerifyInformation();
 
             osha.ClickAcceptButton();
-            this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
+            if (osha.SelectYearFromDropdown(Year))
+            {
+                this.TESTREPORT.LogInfo("Verify OSHA Tab should be highlighted(focused) in the Main Menu");
             osha.VerifyOshaTabHighLightColor(NewOshaTabHighlightcolor);
 
             home.VerifyPageTitle(OshaPageTitle);
-
-            if (osha.SelectYearFromDropdown(Year))
-            {
+                
                 osha.ClickOnModifySortLink();
                 osha.ClickOnModifySortLink();
 
