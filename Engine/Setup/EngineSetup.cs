@@ -16,8 +16,9 @@ namespace Engine.Setup
         private static string randomString = null;
         private const string FILETESTCONFIGURATION = "TestConfiguration.properties";
         private static string executablePath = StandardUtilities.FileUtilities.readPropertyFile(FILETESTCONFIGURATION, "executablePath");
-        private static string reportType = StandardUtilities.FileUtilities.readPropertyFile(FILETESTCONFIGURATION, "reportType"); 
-        private static string testReportFile = StandardUtilities.FileUtilities.readPropertyFile(FILETESTCONFIGURATION, "testReportFile");
+        private static string reportType = StandardUtilities.FileUtilities.readPropertyFile(FILETESTCONFIGURATION, "reportType");
+        private static string testReportFolder = StandardUtilities.FileUtilities.readPropertyFile(FILETESTCONFIGURATION, "testReportFolder");
+        private static string testReportFile = testReportFolder + "-"+DateTime.Now.ToString("ddmmssff") + StandardUtilities.FileUtilities.readPropertyFile(FILETESTCONFIGURATION, "testReportFile");
         private static IReporter testReportInternal = null;
         private static string screenShotFolder = new FileInfo(testReportFile).Directory.FullName + Path.DirectorySeparatorChar + "ScreenShots";
         private static int lastScreenShotCount = 1;
