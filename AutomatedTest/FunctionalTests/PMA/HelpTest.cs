@@ -119,7 +119,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             help.VerifyPdfFile(ClaimInquiryUserGuideText);
             help.VerifyTextInPDFFile(1, ClaimInquiryTextInPdf);
 
-            this.TESTREPORT.LogInfo("Close ClaimInquiryUserGuide.pdf ,Verify pdf is closed and Cinch application is diaplayed");
+            this.TESTREPORT.LogInfo("Close ClaimInquiryUserGuide.pdf ,Verify pdf is closed and Cinch application is displayed");
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
@@ -151,7 +151,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             help.VerifyPdfFile(ReportsUserGuideText);
             help.VerifyTextInPDFFile(1, ReportsUserGuideTextInPdf);
 
-            this.TESTREPORT.LogInfo("Close ReportsUserGuide.pdf ,Verify pdf is closed and Cinch application is diaplayed");
+            this.TESTREPORT.LogInfo("Close ReportsUserGuide.pdf ,Verify pdf is closed and Cinch application is displayed");
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
@@ -183,7 +183,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             help.VerifyPdfFile(ReportsQuickReferenceGuideText);
             help.VerifyTextInPDFFile(1, ReportsQuickReferenceGuideTextInPdf);
 
-            this.TESTREPORT.LogInfo("Close ReportsUserGuide.pdf ,Verify pdf is closed and Cinch application is diaplayed");
+            this.TESTREPORT.LogInfo("Close ReportsUserGuide.pdf ,Verify pdf is closed and Cinch application is displayed");
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
@@ -215,7 +215,7 @@ namespace AutomatedTest.FunctionalTests.PMA
             help.VerifyPdfFile(AnalysisToolUserGuideText);
             help.VerifyTextInPDFFile(1, AnalysisToolUserGuideTextInPdf);
 
-            this.TESTREPORT.LogInfo("Close AnalysisToolUserGuide.pdf ,Verify pdf is closed and Cinch application is diaplayed");
+            this.TESTREPORT.LogInfo("Close AnalysisToolUserGuide.pdf ,Verify pdf is closed and Cinch application is displayed");
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
@@ -247,13 +247,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             help.VerifyPdfFile(AMPSUserGuideText);
             help.VerifyTextInPDFFile(1, AMPSUserGuideTextInPdf);
 
-            this.TESTREPORT.LogInfo("Close AMPSUserGuide.pdf ,Verify pdf is closed and Cinch application is diaplayed");
+            this.TESTREPORT.LogInfo("Close AMPSUserGuide.pdf ,Verify pdf is closed and Cinch application is displayed");
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
             help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
-
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+           
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -279,13 +278,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             help.VerifyPdfFile(OSHAUserGuideText);
             help.VerifyTextInPDFFile(1, OSHAUserGuideTextInPdf);
 
-            this.TESTREPORT.LogInfo("Close OSHAUserGuide.pdf ,Verify pdf is closed and Cinch application is diaplayed");
+            this.TESTREPORT.LogInfo("Close OSHAUserGuide.pdf ,Verify pdf is closed and Cinch application is displayed");
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
             help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
-
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+            
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -310,13 +308,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify OSHA-PrintToLetterSize.pdf should download in new tab, Page Title");
             help.VerifyPdfFile(OSHAPrinttoLetterSizeText);
 
-            this.TESTREPORT.LogInfo("Close OSHA-PrintToLetterSize.pdf ,Verify pdf is closed and Cinch application is diaplayed");
+            this.TESTREPORT.LogInfo("Close OSHA-PrintToLetterSize.pdf ,Verify pdf is closed and Cinch application is displayed");
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
             help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
-
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+            
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -342,13 +339,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             help.VerifyPdfFile(SettingsQuickReferenceGuideText);
             help.VerifyTextInPDFFile(1, SettingsQuickReferenceGuideTextInPdf);
 
-            this.TESTREPORT.LogInfo("Close SettingsQuickReferenceGuide.pdf ,Verify pdf is closed and Cinch application is diaplayed");
+            this.TESTREPORT.LogInfo("Close SettingsQuickReferenceGuide.pdf ,Verify pdf is closed and Cinch application is displayed");
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
             help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
-
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+            
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -374,13 +370,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             help.VerifyPdfFile(NewClaimEntryAutomobileText);
             help.VerifyTextInPDFFile(1, NewClaimEntryAutomobileTextInPdf);
 
-            this.TESTREPORT.LogInfo("Close New Claim Entry - Automobile.pdf ,Verify pdf is closed and Cinch application is diaplayed");
+            this.TESTREPORT.LogInfo("Close New Claim Entry - Automobile.pdf ,Verify pdf is closed and Cinch application is displayed");
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
             help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
-
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+            
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -406,13 +401,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             help.VerifyPdfFile(NewClaimEntryPropertyText);
             help.VerifyTextInPDFFile(1, NewClaimEntryPropertyTextInPdf);
 
-            this.TESTREPORT.LogInfo("Close New Claim Entry - Property.pdf ,Verify pdf is closed and Cinch application is diaplayed");
+            this.TESTREPORT.LogInfo("Close New Claim Entry - Property.pdf ,Verify pdf is closed and Cinch application is displayed");
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
             help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
-
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+            
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -438,13 +432,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             help.VerifyPdfFile(NewClaimEntryGeneralLiabilityText);
             help.VerifyTextInPDFFile(1, NewClaimEntryGeneralLiabilityTextInPdf);
 
-            this.TESTREPORT.LogInfo("Close New Claim Entry - General Liability.pdf ,Verify pdf is closed and Cinch application is diaplayed");
+            this.TESTREPORT.LogInfo("Close New Claim Entry - General Liability.pdf ,Verify pdf is closed and Cinch application is displayed");
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
             help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
-
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+            
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
@@ -469,13 +462,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             this.TESTREPORT.LogInfo("Verify New Claim Entry - Workers' Compensation.pdf should download in new tab, Page Title");
             help.VerifyPdfFile(NewClaimEntryWorkersCompensationText);
 
-            this.TESTREPORT.LogInfo("Close New Claim Entry - Workers' Compensation.pdf ,Verify pdf is closed and Cinch application is diaplayed");
+            this.TESTREPORT.LogInfo("Close New Claim Entry - Workers' Compensation.pdf ,Verify pdf is closed and Cinch application is displayed");
             cInquiry.CloseChildWindow();
             help.VerifyPdfClose();
             cInquiry.SwitchToParentWindow();
             help.VerifyTabIsFocus(HelpLinkHighLightColor, "Help");
-
-            this.TESTREPORT.LogInfo("Click on Exit and Verify User should logout Successfully");
+            
             home.ClickExit();
 
             this.TESTREPORT.UpdateTestCaseStatus();
