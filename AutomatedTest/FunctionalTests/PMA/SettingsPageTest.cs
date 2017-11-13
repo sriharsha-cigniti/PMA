@@ -68,7 +68,6 @@ namespace AutomatedTest.FunctionalTests.PMA
 
         }
 
-
         [TestMethod, Description("Settings-Navigate to the Settings, set preferences and confirm settings"), TestCategory("Regression")]
         public void Settings_02settingsPage()
         {
@@ -191,12 +190,9 @@ namespace AutomatedTest.FunctionalTests.PMA
             //Validate the number of results populated for policy Tab
             settingsPage.VerifyPolicyTabResultsPageSize(ExpectedPolicyvalue);
 
-
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
-
         }
-
 
         [TestMethod, Description("Navigate to the Settings, Customize ClaimList Columns, confirm Settings and validate it in the claim inquiry tab"), TestCategory("Regression")]
         public void Settings_03settingsPage()
@@ -230,7 +226,6 @@ namespace AutomatedTest.FunctionalTests.PMA
             //verify the message after save button is clicked
             settingsPage.VerifyDataSaveMessage(DataSaveMessage);
 
-
             home.ClickExit();
 
             this.TESTREPORT.LogInfo("Re-Login into application");
@@ -246,6 +241,12 @@ namespace AutomatedTest.FunctionalTests.PMA
             settingsPage.CheckClaimInquiryTableHeaders(Dragitems[1].ToString());
             settingsPage.CheckClaimInquiryTableHeaders(Dragitems[2].ToString());
 
+            //click on settings
+            home.ClickSettings();
+            
+            //click on ResetSettings in settings page
+            settingsPage.ClickResetSettings();
+            settingsPage.SaveSettings();
 
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();

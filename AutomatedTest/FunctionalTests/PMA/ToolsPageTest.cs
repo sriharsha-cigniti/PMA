@@ -122,10 +122,10 @@ namespace AutomatedTest.FunctionalTests.PMA
 
         }
 
-        [TestMethod, Description("Tools - Search by user name and add account to the user profile"), TestCategory("Regression")]
+        [TestMethod, Description("Tools - Delete an assigned account"), TestCategory("Regression")]
         public void TOOL_U3()
         {
-            this.TESTREPORT.InitTestCase("TOOL_U3", "Search by user name and add account to the user profile");
+            this.TESTREPORT.InitTestCase("TOOL_U3", "Delete an assigned account");
 
             //Verify Home page Title
             home.VerifyPageTitle(HomePageTitle);
@@ -143,13 +143,20 @@ namespace AutomatedTest.FunctionalTests.PMA
             Tools.EnterLoginID(Environment.UserName);
             //Click on Search
             Tools.ClickSearch();
+            string accountNumber = Tools.GetColumnTextForDeleteAccount(1, false);
             //Click on Delete
             Tools.ClickDelete();
+            Tools.AddAccount(accountNumber);
+
+            Tools.GetColumnTextForDeleteAccount(9, true);
+            Tools.ClickFunctionCheckAll();
+            Tools.ClickDataCheckAll();
+            //Click on Submit
+            Tools.ClickSubmit();
+
             //Click on Exit 
             home.ClickExit();
             this.TESTREPORT.UpdateTestCaseStatus();
-
-
         }
 
         [TestMethod, Description("Tools - Verify available Tab present in Tools"), TestCategory("Regression")]

@@ -287,6 +287,20 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             }
         }
 
+        public string GetColumnTextForDeleteAccount(int columnNumber, bool isClickable)
+        {
+            Thread.Sleep(5000);
+            string columnText = string.Empty;
+            IReadOnlyList<IWebElement> columns = this.driver.FindElements(By.XPath("//tr[@id='MainContent_gridaccounts_DXDataRow0']/td"));
+            columnText = columns[columnNumber].Text;
+            if (isClickable)
+            {
+                columns[columnNumber].Click();
+            }
+
+            return columnText;
+        }
+
         //Verify Header Label 
         public void VerifyHeaderLabel()
         {
