@@ -336,6 +336,7 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(byStateDropdownBtn, "state Dropdown Btn");
             this.driver.ClickElement(byStateSelection, "State Value");
             this.driver.ClickElement(byifdriverisownercheckbox, "ifdriverisowner");
+            
             this.driver.SendKeysToElementClearFirst(byDriverFirstName, DriverFirstName, "DriverFirstName");
             this.driver.SendKeysToElementClearFirst(byDriverLastName, DriverLastName, "DriverLastName");
             this.driver.SendKeysToElementClearFirst(byAddress, Address, "Address");
@@ -366,8 +367,9 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.ClickElement(byBirthDate, "selecte birthdate");
 
             this.driver.SendKeysToElementClearFirst(byDriversLicense, DriversLicense, "DriversLicense");
-            Actions a = new Actions(driver);
-            a.SendKeys(OpenQA.Selenium.Keys.PageDown).Build().Perform();
+            
+            this.driver.ScrollToElement(byDriversLicense);
+
             this.driver.ClickElement(byLicensedstateDropdownBtn, "LicensedstateDropdownBtn");
             this.driver.ClickElement(byLicensedstateSelect, "Licensedstate value");
             this.driver.ClickElement(byPurposeofUsedropdown, "PurposeofUseDropdownBtn");
@@ -381,8 +383,6 @@ namespace AUT.Selenium.ApplicationSpecific.PMA.Pages
             this.driver.SendKeysToElementClearFirst(byWhencanVehiclebeseeen, WhencanVehiclebeseen, "WhencanVehiclebeseeen");
             this.driver.SendKeysToElementClearFirst(byOtherInsuranceonVehicle, OtherInsuranceonVehicle, "OtherInsuranceonVehicle");
             this.driver.ClickElement(byInsuredVehicleInformationDropdownBtn, "InsuredVehicleInformation dropdown");
-
-
         }
 
 
